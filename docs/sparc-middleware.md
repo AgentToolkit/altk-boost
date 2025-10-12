@@ -1,1 +1,0 @@
---8<-- "./pre-tool-reflection-toolkit/pre_tool_reflection_toolkit/sparc/README.md"

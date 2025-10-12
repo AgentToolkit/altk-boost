@@ -8,6 +8,8 @@
 
 SpotLight enables users to emphasize important spans within their prompt and steers the LLMs attention towards those spans. Expect to see between 5 and 40 point improvement on accuracy.
 
+<img src="../../docs/assets/img_lifecycle_prellm.png" />
+
 
 ## Table of Contents
 - [When to Use This Component](#when-to-use-this-component)
@@ -83,4 +85,4 @@ print(prediction)
 Apache 2.0 - see LICENSE file for details.
 
 ## Under the Hood
-For more details on how the technology behind this component, the architecture and experimental results, refer to our documentation website (Coming soon).
+For more details on how the technology behind this component, the architecture and experimental results, refer to our [documentation](https://altk.ai).

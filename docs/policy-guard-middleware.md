@@ -1,1 +1,0 @@
---8<-- "./policy-guard-toolkit/README.md"

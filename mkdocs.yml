@@ -1,5 +1,5 @@
 site_name: Agent Lifecycle Toolkit Documentation
-site_url: https://pages.github.ibm.com/AI4BA/agent-lifecycle-toolkit/
+site_url: https://pages.github.com/AgentToolkit/agent-lifecycle-toolkit/
 
 
 theme:
@@ -31,10 +31,28 @@ theme:
       primary: teal
       accent: lime
 
+
+nav:
+  - Home: index.md
+  - Getting started: getting_started.md
+  - Under the hood:
+    - 'Lifecycle': components/lifecycle.md
+    - 'ALTK components': components/altk-components-summary.md
+    - 'Components':
+        - 'Spotlight': components/spotlight.md
+        - 'Refraction': components/refraction.md
+        - 'SPARC': components/sparc.md
+        - 'Silent Review': components/silent-review.md
+        - 'JSON Processor': components/json-processor.md
+        - 'RAG Repair': components/rag-repair.md
+        - 'Policy Guard': components/policy-guard.md
+  - Examples: examples.md
+  - Integrations: integrations.md
+
 extra:
   social:
     - icon: fontawesome/brands/github-alt
-      link: https://github.ibm.com/AI4BA/agent-lifecycle-toolkit
+      link: https://github.com/AgentToolkit/agent-lifecycle-toolkit/
 markdown_extensions:
   - toc:
       permalink: true
@@ -52,13 +70,9 @@ markdown_extensions:
   - pymdownx.mark
   - attr_list
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
 
-
-
-docs: .
 plugins:
   - include-markdown
   - search
-  - enumerate-headings

@@ -93,4 +93,4 @@ else:
 Apache 2.0 - see LICENSE file for details.
 
 ## Under the Hood
-For more details on how the technology behind this component, the architecture and experimental results, refer to our documentation website (Coming soon).
+For more details on how the technology behind this component, the architecture and experimental results, refer to our [documentation](https://altk.ai).

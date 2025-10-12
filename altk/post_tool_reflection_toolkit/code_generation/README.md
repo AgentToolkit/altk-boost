@@ -1,4 +1,4 @@
-# Code Generation for Tool Response (JSON) Processing
+# JSON Processor: Code Generation for JSON Tool Response Processing
 If the agent calls tools which generate complex JSON objects as responses, this component will use LLM-based Python code generation to process those responses and extract relevant information from them. See up to 20% improvement in accuracy on some queries even when using frontier models like GPT-4o.
 
 ## Table of Contents
@@ -104,4 +104,4 @@ uv run pytest tests/post-tool-reflection/codegen_test.py
 Apache 2.0 - see LICENSE file for details.
 
 ## Under the Hood
-For more details on how the technology behind this component, the architecture and experimental results, refer to our documentation website (Coming soon).
+For more details on how the technology behind this component, the architecture and experimental results, refer to our [documentation](https://altk.ai).
