@@ -50,7 +50,7 @@ spotlight = SpotLightComponent(config=config)
 
 ```python
 from langchain_core.messages import HumanMessage, AIMessage
-from altk.toolkit_core.toolkit import AgentPhase
+from altk.core.toolkit import AgentPhase
 from altk.pre_llm.core.config import SpotLightMetadata, SpotLightRunInput
 
 messages = [HumanMessage(
