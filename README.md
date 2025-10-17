@@ -80,15 +80,16 @@ print(result["messages"][-1].content)
 <!--
 [TODO: move up in the order of sections?] -->
 
-| Lifecycle Stage | Component                                                              | Purpose |
-|-----------------|------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Pre-LLM         | [Spotlight](altk/spotlight_toolkit)                                    | Does your agent not follow instructions? Emphasize important spans in prompts to steer LLM attention. |
-| Pre-tool        | [Refraction](altk/pre_tool_reflection_toolkit/refraction)              | Does your agent generate inconsistent tool sequences? Validate and repair tool call syntax to prevent execution failures. |
-| Pre-tool        | [SPARC](altk/pre_tool_reflection_toolkit/sparc)                        | Is your agent calling tools with hallucinated arguments? Make sure arguments match the tool specs and request semantics. |
-| Post-tool       | [JSON Processor](altk/post_tool_reflection_toolkit/code_generation)                                                       | Is your agent overwhelmed with large JSON payloads in its context? Generate code on the fly to extract relevant data in JSON tool responses. |
-| Post-tool       | [Silent Error Review](altk/post_tool_reflection_toolkit/silent_review) | Is your agent ignoring subtle semantic tool errors? Detect silent errors in tool responses and assess relevance, accuracy, and completeness. |
-| Post-tool       | [RAG Repair](altk/post_tool_reflection_toolkit/rag_repair)             | Is your agent not able to recover from tool call failures? Repair failed tool calls using domain-specific documents via Retrieval-Augmented Generation. |
-| Pre-response    | [Policy Guard](altk/policy_guard_toolkit)                              | Does your agent return responses that violate policies or instructions? Ensure agent outputs comply with defined policies and repairs them if needed. |
+| Lifecycle Step | Component                        | Description                                                                                                                                                                                                                                          |
+|----------------|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Reasoning      | [Spotlight](altk/spotlight_toolkit)  | SpotLight enables users to emphasize important spans within their prompt and steers the LLMs attention towards those spans. It is an inference-time hook and does not involve any training or changes to model weights.                              |
+| Pre-tool       | [Refraction](altk/pre_tool_reflection_toolkit/refraction)   | Verify the syntax of tool call sequences and repair any errors that will result in execution failures                                                                                                                                                |
+| Pre-tool       | [SPARC](altk/pre_tool_reflection_toolkit/sparc)      | Evaluates tool calls before execution, identifying potential issues and suggesting corrections or transformations across multiple validation layers.                                                                                                 |
+| Post-tool      | [Code Generation for JSON Processing](altk/post_tool_reflection_toolkit/code_generation) | If the agent calls tools which generate complex JSON objects as responses, this component will use LLM based Python code generation to process those responses and extract relevant information from them.                                           |
+| Post-tool      | [Silent Error Review](altk/post_tool_reflection_toolkit/silent_review)     | A prompt-based approach to identify silent errors in tool calls (errors that do not produce any visible or explicit error message); Determines whether the tool response is relevant, accurate and complete based on the user's query                |
+| Post-tool      | [RAG Repair](altk/post_tool_reflection_toolkit/rag_repair)  | Given a failing tool call, this component attempts to use an LLM to repair the call while making use of domain documents such as documentation or troubleshooting examples via RAG. This component will require a set of related documents to ingest |
+| Output Check   | [Policy Guard](altk/pre_response/policy_guard)     | Checks to see if the output from the agent adheres to the policy statement & repair the output if it doesn’t |
+
 
 
 ## Documentation
