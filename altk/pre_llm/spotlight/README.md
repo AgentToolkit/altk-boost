@@ -49,12 +49,15 @@ spotlight = SpotLightComponent(config=config)
 > To maintain consistency with the rest of this framework, we use LangChain's message format. SpotLight does support the traditional HF chat format as well.
 
 ```python
-from langchain_core.messages import HumanMessage, AIMessage
 from altk.core.toolkit import AgentPhase
 from altk.pre_llm.core.config import SpotLightMetadata, SpotLightRunInput
 
-messages = [HumanMessage(
-    content="List the capitals of the following countries - USA, Italy, Greece. Always give me the answer in JSON format.")]
+messages = [
+  {
+    "role": "user",
+    "content": "List the capitals of the following countries - USA, Italy, Greece. Always give me the answer in JSON format."
+  }
+]
 emph_span = ["Always give me the answer in JSON format."]
 
 run_input = SpotLightRunInput(
