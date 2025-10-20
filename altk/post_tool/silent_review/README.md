@@ -23,10 +23,10 @@ from altk.core.toolkit import AgentPhase
 
 input_data = SilentReviewRunInput(
     messages=[
-        HumanMessage(content="Tell me the weather"),
-        AIMessage(content="Calling the weather tool now")
+        {"role": "user", "content": "Tell me the weather"},
+        {"role": "assistant", "content": "Calling the weather tool now"}
     ],
-    toolspec={
+    tool_spec={
         "name": "get_weather",
         "description": "Gets weather for a city",
         "parameters": {
