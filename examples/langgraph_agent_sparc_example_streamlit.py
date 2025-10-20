@@ -18,7 +18,7 @@ import operator
 from typing import TypedDict, List
 import streamlit as st
 
-from altk.pre_tool.reflection.core import (
+from altk.pre_tool.core import (
     SPARCReflectionRunInput,
     Track,
 )

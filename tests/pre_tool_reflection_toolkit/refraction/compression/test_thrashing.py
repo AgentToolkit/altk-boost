@@ -1,5 +1,5 @@
-from altk.pre_tool.reflection.refraction.src import compress
-from altk.pre_tool.reflection.refraction.src.schemas import Mapping
+from altk.pre_tool.refraction.src import compress
+from altk.pre_tool.refraction.src.schemas import Mapping
 from nestful.data_handlers import get_nestful_catalog
 from nl2flow.compile.options import BasicOperations
 

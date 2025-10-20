@@ -1,5 +1,5 @@
 from typing import List
-from altk.pre_tool.reflection.refraction.src.integration import Refractor
+from altk.pre_tool.refraction.src.integration import Refractor
 from nestful.data_handlers import get_nestful_catalog
 
 try:

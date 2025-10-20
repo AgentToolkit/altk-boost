@@ -16,7 +16,7 @@ from langchain_core.messages import BaseMessage, HumanMessage
 import operator
 from typing import TypedDict, List
 
-from altk.pre_tool.reflection.core import (
+from altk.pre_tool.core import (
     SPARCReflectionRunInput,
     Track,
 )

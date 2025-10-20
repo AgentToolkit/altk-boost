@@ -5,10 +5,10 @@ import pytest
 
 from langchain_core.tools import tool
 
-# from altk.pre_tool_guard_toolkit.pre_tool_guard.pre_tool_guard import PreToolGuardComponent
+# from altk.pre_tool.pre_tool_guard.pre_tool_guard import PreToolGuardComponent
 
 # NOTE: ToolGuard broken until internal repo fixed
-# from altk.pre_tool_guard_toolkit.pre_tool_guard import PreToolGuardComponent
+# from altk.pre_tool.pre_tool_guard import PreToolGuardComponent
 
 dotenv.load_dotenv()
 
