@@ -31,9 +31,9 @@ from langchain_core.tools import tool
 from typing_extensions import Annotated
 from langgraph.prebuilt import InjectedState
 
-from altk.post_tool_reflection_toolkit.silent_review.silent_review import SilentReviewForJSONDataComponent
-from altk.post_tool_reflection_toolkit.core.toolkit import SilentReviewRunInput, Outcome
-from altk.toolkit_core.core.toolkit import AgentPhase
+from altk.post_tool.silent_review.silent_review import SilentReviewForJSONDataComponent
+from altk.post_tool.core.toolkit import SilentReviewRunInput, Outcome
+from altk.core.toolkit import AgentPhase
 
 # Ensure that the following environment variables are set:
 # ANTHROPIC_API_KEY = *** anthropic api key ***
@@ -82,18 +82,18 @@ print(result["messages"][-1].content)
 
 | Lifecycle Stage | Component                                                              | Purpose |
 |-----------------|------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Pre-LLM         | [Spotlight](altk/spotlight_toolkit)                                    | Does your agent not follow instructions? Emphasize important spans in prompts to steer LLM attention. |
-| Pre-tool        | [Refraction](altk/pre_tool_reflection_toolkit/refraction)              | Does your agent generate inconsistent tool sequences? Validate and repair tool call syntax to prevent execution failures. |
-| Pre-tool        | [SPARC](altk/pre_tool_reflection_toolkit/sparc)                        | Is your agent calling tools with hallucinated arguments? Make sure arguments match the tool specs and request semantics. |
-| Post-tool       | [JSON Processor](altk/post_tool_reflection_toolkit/code_generation)                                                       | Is your agent overwhelmed with large JSON payloads in its context? Generate code on the fly to extract relevant data in JSON tool responses. |
-| Post-tool       | [Silent Error Review](altk/post_tool_reflection_toolkit/silent_review) | Is your agent ignoring subtle semantic tool errors? Detect silent errors in tool responses and assess relevance, accuracy, and completeness. |
-| Post-tool       | [RAG Repair](altk/post_tool_reflection_toolkit/rag_repair)             | Is your agent not able to recover from tool call failures? Repair failed tool calls using domain-specific documents via Retrieval-Augmented Generation. |
-| Pre-response    | [Policy Guard](altk/policy_guard_toolkit)                              | Does your agent return responses that violate policies or instructions? Ensure agent outputs comply with defined policies and repairs them if needed. |
+| Pre-LLM         | [Spotlight](altk/pre_llm/spotlight)                                    | Does your agent not follow instructions? Emphasize important spans in prompts to steer LLM attention. |
+| Pre-tool        | [Refraction](altk/pre_tool/refraction)              | Does your agent generate inconsistent tool sequences? Validate and repair tool call syntax to prevent execution failures. |
+| Pre-tool        | [SPARC](altk/pre_tool/sparc)                        | Is your agent calling tools with hallucinated arguments? Make sure arguments match the tool specs and request semantics. |
+| Post-tool       | [JSON Processor](altk/post_tool/code_generation)                                                       | Is your agent overwhelmed with large JSON payloads in its context? Generate code on the fly to extract relevant data in JSON tool responses. |
+| Post-tool       | [Silent Error Review](altk/post_tool/silent_review) | Is your agent ignoring subtle semantic tool errors? Detect silent errors in tool responses and assess relevance, accuracy, and completeness. |
+| Post-tool       | [RAG Repair](altk/post_tool/rag_repair)             | Is your agent not able to recover from tool call failures? Repair failed tool calls using domain-specific documents via Retrieval-Augmented Generation. |
+| Pre-response    | [Policy Guard](altk/pre_response/policy_guard)                              | Does your agent return responses that violate policies or instructions? Ensure agent outputs comply with defined policies and repairs them if needed. |
 
 
 ## Documentation
 
-Check out ALTK's [documentation](https://pages.github.ibm.com/AI4BA/agent-lifecycle-toolkit/), for details on
+Check out ALTK's [documentation](https://pages.github.com/AgentToolkit/agent-lifecycle-toolkit/), for details on
 installation, usage, concepts, and more.
 
 The ALTK supports multiple LLM providers and two methods of configuring the providers. For more information, see the [LLMClient documentation](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/toolkit_core/llm/README.md).
