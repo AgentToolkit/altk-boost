@@ -1,4 +1,4 @@
-name: Run Docs CI
+name: CI - Docs
 
 on:
   pull_request:
