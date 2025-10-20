@@ -34,8 +34,6 @@ A simple use case can be found under pre-tool-guard-toolkit/examples/calculator_
 ```python
 import dotenv
 
-from langchain_core.messages import HumanMessage
-
 from altk.pre_tool.core.types import (
   ToolGuardBuildInput,
   ToolGuardBuildInputMetaData,
@@ -71,7 +69,7 @@ class ToolGuardExample:
     """
     Runs a single example through ToolGuard and checks if the result matches the expectation.
     """
-    conversation_context = [HumanMessage(content=user_message)]
+    conversation_context = [{"role": "user", "content": user_message}]
 
     run_input = ToolGuardRunInput(
       messages=conversation_context,
