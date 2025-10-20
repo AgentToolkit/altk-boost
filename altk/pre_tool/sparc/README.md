@@ -63,7 +63,7 @@ from altk.pre_tool.core import (
     Track,
     SPARCExecutionMode,
 )
-from altk.pre_tool.reflection import SPARCReflectionComponent
+from altk.pre_tool.sparc.sparc import SPARCReflectionComponent
 from altk.core.toolkit import AgentPhase, ComponentConfig
 from langchain_core.messages import HumanMessage, AIMessage
 from altk.core.llm import get_llm
@@ -589,7 +589,7 @@ Transformation: 50 miles → 80.47 km, 60 mph → 96.56 km/h
 ```python
 # examples/static_issues_example.py
 from altk.pre_tool.core import Track, SPARCExecutionMode
-from altk.pre_tool.reflection import SPARCReflectionComponent
+from altk.pre_tool.sparc.sparc import SPARCReflectionComponent
 
 
 def run_static_validation():
@@ -618,8 +618,7 @@ def run_static_validation():
 ```python
 # examples/semantic_issues_example.py
 from altk.pre_tool.core import Track, SPARCExecutionMode
-from altk.pre_tool.reflection import SPARCReflectionComponent
-from langchain_core.messages import HumanMessage, AIMessage
+from altk.pre_tool.sparc.sparc import SPARCReflectionComponent
 
 
 def run_semantic_validation():
@@ -632,8 +631,8 @@ def run_semantic_validation():
 
     # Example: Function selection misalignment
     conversation = [
-        HumanMessage("What's the weather in New York?"),
-        AIMessage("I'll check the weather for you.")
+        {"role": "user", "content": "What's the weather in New York?"},
+        {"role": "assistant", "content": "I'll check the weather for you."}
     ]
 
     tool_call = {
@@ -653,8 +652,7 @@ def run_semantic_validation():
 ```python
 # examples/units_conversion_error_example.py
 from altk.pre_tool.core import Track, SPARCExecutionMode
-from altk.pre_tool.reflection import SPARCReflectionComponent
-from langchain_core.messages import HumanMessage, AIMessage
+from altk.pre_tool.sparc.sparc import SPARCReflectionComponent
 
 
 def run_transformation_validation():
@@ -666,8 +664,8 @@ def run_transformation_validation():
 
     # Example: Temperature unit conversion
     conversation = [
-        HumanMessage("Set thermostat to 75 degrees Fahrenheit"),
-        AIMessage("I'll set the thermostat.")
+        {"role": "user", "content": "Set thermostat to 75 degrees Fahrenheit"},
+        {"role": "assistant", "content": "I'll set the thermostat"}
     ]
 
     tool_call = {
@@ -776,12 +774,12 @@ The component includes comprehensive test suites:
 ### Running Tests
 ```bash
 # Run all tests
-uv run pytest tests/pre_tool_reflection_toolkit/
+uv run pytest tests/pre_tool/sparc
 
 # Run specific test categories
-uv run pytest tests/pre_tool_reflection_toolkit/sparc/semantic_validation_test.py
-uv run pytest tests/pre_tool_reflection_toolkit/semantic_validation_test.py
-uv run pytest tests/pre_tool_reflection_toolkit/units_conversion_test.py
+uv run pytest tests/pre_tool/sparc/semantic_validation_test.py
+uv run pytest tests/pre_tool/sparc/semantic_validation_test.py
+uv run pytest tests/pre_tool/sparc/units_conversion_test.py
 ```
 
 ### Test Categories
