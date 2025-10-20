@@ -20,8 +20,8 @@ You can use refraction API to fix individual tool calls and tool call sequences,
 ```python
 import os
 from altk.pre_tool.refraction.refraction import RefractionComponent
-from altk.pre_tool.core import RefractionBuildInput, RefractionRunInput
-from altk.pre_tool.core import RefractionConfig, RefractionMode
+from altk.pre_tool.core.types import RefractionBuildInput, RefractionRunInput
+from altk.pre_tool.core.config import RefractionConfig, RefractionMode
 from altk.core.toolkit import AgentPhase
 
 config = RefractionConfig(
