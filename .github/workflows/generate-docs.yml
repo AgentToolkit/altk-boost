@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/setup-python-uv
+      - name: Install docs dependencies
+        run: uv sync --extra docs
       - name: Build docs
         run: uv run mkdocs build --verbose --clean
       - name: Build and publish docs
