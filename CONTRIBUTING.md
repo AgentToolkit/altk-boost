@@ -42,6 +42,21 @@ uv add <package_name>
 
 The option to use `uv pip install` is there, but please be aware that this doesn't automatically update the `pyproject.toml` dependencies nor the `uv.lock` file. That will have to be done manually. Please refer to the [documentation](https://docs.astral.sh/uv/concepts/projects/dependencies/#adding-dependencies) for more details.
 
+### Coding style guidelines
+
+We use [pre-commit](https://pre-commit.com) for making sure the codebase remains consistent across commits and PRs. The checks will handle linting, formatting, type checks and some other minor enhancements.
+
+Ensure it is installed (preferred):
+```bash
+pre-commit install
+```
+
+Or run it manually:
+```bash
+pre-commit run --all-files
+```
+
+
 ### Adding new components to a lifecycle stage
 
 The `altk` module is divided into lifecycle stages of an agent's exeuction. Each lifecycle stage has a set of components that are designed to be reusable building blocks for solving common problems in that lifecycle stage. This section will describe adding a new component to a lifecycle stage.
