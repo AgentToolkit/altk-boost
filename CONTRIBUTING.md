@@ -4,13 +4,12 @@ Our project welcomes external contributions of all sorts, including:
 
 ### Did you find a bug?
 
-* Please file an [Issue](https://github.com/AgentToolkit/agent-lifecycle-toolkit/issues)
+* Please file an [issue](https://github.com/AgentToolkit/agent-lifecycle-toolkit/issues).
 
 ### Types of contributions:
 
-* Fixing bugs or otherwise improving the existing toolkit
-* Adding new components into the toolkit
-* New agents for usage or benchmarking by the toolkit
+* Fixing bugs or otherwise improving the existing toolkit.
+* Adding new components to a lifecycle stage.
 
 ### Setting up for development:
 
