@@ -119,9 +119,6 @@ We use GitHub Issues to manage bugs. Before filing a new issue, please check to 
 ## Code of Conduct
 This project and everyone participating in it are governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please read the [full text](CODE_OF_CONDUCT.md) so that you know which actions may or may not be tolerated.
 
-## Legal notice
-All content in these repositories including code has been provided by IBM under the associated open source software license and IBM is under no obligation to provide enhancements, updates, or support.
-
 ## License
 The ALTK codebase is under Apache 2.0 license.
 For individual model usage, please refer to the model licenses in the original packages.
