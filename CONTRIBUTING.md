@@ -24,14 +24,6 @@ We use [uv](https://docs.astral.sh/uv/) as package and project manager. To insta
 
 `uv pip install . --group dev`
 
-#### Environment variables
-
-We use `.env` to manage expected environment variables. We have a template in `.env.example`
-
-`cp .env.example .env`
-
-Not all environment variables need to be set, but the main ones are: (TODO)
-
 ### Adding new components into the toolkit
 
 The repository is divided into toolkits that consist of one or more components. This section will describe adding a new toolkit and its components. If adding to an existing toolkit, skip to [Adding components to a toolkit](adding-components-to-a-toolkit).
