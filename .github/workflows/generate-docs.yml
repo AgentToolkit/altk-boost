@@ -1,6 +1,11 @@
 name: Generate Docs
 on:
   workflow_dispatch:
+    inputs:
+      deploy:
+        type: boolean
+        description: "If true, the docs will be deployed"
+        default: false
   workflow_call:
     inputs:
       deploy:
