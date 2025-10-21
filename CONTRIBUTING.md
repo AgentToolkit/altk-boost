@@ -8,20 +8,39 @@ Our project welcomes external contributions of all sorts, including:
 
 ### Types of contributions:
 
-* Fixing bugs or otherwise improving the existing toolkit.
-* Adding new components to a lifecycle stage.
+* Fixing bugs
+* Improving existing components in the toolkit.
+* Adding new components to the toolkit.
 
 ### Setting up for development:
 
 We use [uv](https://docs.astral.sh/uv/) as package and project manager. To install, please check the following documentation page [Installing uv](https://docs.astral.sh/uv/getting-started/installation/).
 
-#### Set up environment
 
-`uv venv`
+#### Create a virtual environment
+You can use `uv sync` to create a virtual environment (if it doesn't already exist) and install all the project's dependencies in that environment:
+```bash
+uv venv
+```
 
-`source .venv/bin/activate`
+#### Using a specific python version
+If you want to use a specific version of python, then you can create a virtual environment first and then run the sync command as follows:
 
-`uv pip install . --group dev`
+```bash
+uv venv --python 3.12
+uv sync
+```
+
+For more details refer to the [documentation](https://docs.astral.sh/uv/concepts/python-versions/) on python versions for `uv`.
+
+#### Adding a new dependency
+While developing you may want to add a new depdendency. Use `uv add` to automatically update the `pyproject.toml` dependencies and the `uv.lock` file:
+
+```bash
+uv add <package_name>
+```
+
+The option to use `uv pip install` is there, but please be aware that this doesn't automatically update the `pyproject.toml` dependencies nor the `uv.lock` file. That will have to be done manually. Please refer to the [documentation](https://docs.astral.sh/uv/concepts/projects/dependencies/#adding-dependencies) for more details.
 
 ### Adding new components into the toolkit
 
