@@ -1,4 +1,7 @@
 name: Generate Docs
+
+permissions:
+  contents: write
 on:
   workflow_dispatch:
     inputs:
@@ -15,8 +18,6 @@ on:
 
 jobs:
   generate-docs:
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
