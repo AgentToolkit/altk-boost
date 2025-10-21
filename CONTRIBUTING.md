@@ -42,36 +42,23 @@ uv add <package_name>
 
 The option to use `uv pip install` is there, but please be aware that this doesn't automatically update the `pyproject.toml` dependencies nor the `uv.lock` file. That will have to be done manually. Please refer to the [documentation](https://docs.astral.sh/uv/concepts/projects/dependencies/#adding-dependencies) for more details.
 
-### Adding new components into the toolkit
+### Adding new components to a lifecycle stage
 
-The repository is divided into toolkits that consist of one or more components. This section will describe adding a new toolkit and its components. If adding to an existing toolkit, skip to [Adding components to a toolkit](adding-components-to-a-toolkit).
+The `altk` module is divided into lifecycle stages of an agent's exeuction. Each lifecycle stage has a set of components that are designed to be reusable building blocks for solving common problems in that lifecycle stage. This section will describe adding a new component to a lifecycle stage.
 
-#### Adding new toolkit
-
-1. Create a new directory in the root (ex: `myawesome-toolkit`)
-2. Create a `pyproject.toml` in this directory and be sure to add `toolkit-core` as a dependency
-3. Also create a `README.md` in this directory
-4. In this directory, will need a module directory as well (ex: `myawesome_toolkit`)
-   1. Create a `__init__.py` in this module directory
-5. In this module directory, create a `core` directory with `__init__.py` and `toolkit.py`
-   1. `toolkit.py` should extend the base classes from `toolkit_core.core.toolkit` for usage by the actual components
-6. In the top-level `pyproject.toml` , add your new toolkit in the following places:
-   1. `[project] dependencies`
-   2. `[tool.uv.sources]`
-   3. `[tool.uv.workspace] members`
-7. Add a directory with the toolkit name in `tests` for test cases.
-
-#### Adding components to a toolkit
-
-1. Be sure to update the top-level `pyproject.toml` with any required dependencies for your component.
-   1. Also, be careful about dependency versions, in general aim for the widest range of applicable versions.
-2. Code should be placed in the module directory, with each component in its own directory.
-3. Each component should also have its own `README.md` to describe its usage
-4. The LLM provider is in `toolkit-core/llm`, please use LLMClient to call LLMs. Refer to its README for more information.
-5. A component should have a class that extends the base class defined in `core` along with:
-   1. `supported_phases()` that returns `AgentPhase.RUNTIME` and/or `AgentPhase.BUILDTIME` depending on how the component is intended to be used
-   2. `_run()` and/or `_build()` depending on the above
-6. Add a corresponding test case in the appropriate folder in `tests`.
+1. Determine which lifecycle stage your component belongs. Ask yourself what problem it solves and where it's likely to be most useful for an agent.
+1. Once you've selected a lifecycle stage, create a new package under the associated lifecycle package in the `altk` folder.
+1. Ensure the `pyproject.toml` is updated with new dependencies and that the `uv.lock` file is up to date.
+1. Each component should also have its own `README.md` to outline 3 main things:
+   * When to use the component
+   * How to use the component
+   * Proof (benchmarks, tests, etc.) that the approach works better compared to some baseline performance on the task
+1. If your component makes use of LLMs, please use the LLM provider in `altk/core/llm`. You can refer to the [README.md](altk/core/llm/README.md) for more details.
+1. A component should have a class that extends the [ComponentBase](altk/core/toolkit.py#L48) class defined in `core` along with the following:
+   * `supported_phases()` that returns `AgentPhase.RUNTIME` and/or `AgentPhase.BUILDTIME` depending on how the component is intended to be used.
+   * `_run()` if your agent supports the `AgentPhase.RUNTIME` phase.
+   * `_build()` if your agent supports the `AgentPhase.BUILDTIME` phase.
+1. The component should be accompanied by a set of tests demonstrating that it works. Tests should be placed alongside the `tests` folder.
 
 ## Detecting Secrets
 
