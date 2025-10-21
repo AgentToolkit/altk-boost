@@ -103,3 +103,19 @@ detect-secrets audit .secrets.baseline
 ```
 
 The above command will start detecting one secret at a time. You will be prompted to "accept" or "reject" detections accordingly.
+
+## Developer Certificate of Origin (DCO)
+
+The Developer Certificate of Origin (DCO) is a per-commit sign-off made by a contributor stating that they agree to the terms published at https://developercertificate.org/ for that particular contribution.
+
+To be DCO compliant, ensure each commit that you contribute is signed off. This can be done by adding the `-s` option when making a commit. For example:
+
+```bash
+git commit -s -m <msg>
+```
+
+The sign-off will be stored as part of the commit message itself as a line of the format:
+
+```txt
+Signed-off-by: Full Name <email>
+```
