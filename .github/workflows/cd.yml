@@ -71,7 +71,7 @@ jobs:
         # You may consider moving this to a repo script and call it from this step instead
         # of writing it in-line.
         shell: bash
-        run: bash .github/workflows/scripts/verify_upstream.sh
+        run: bash .github/scripts/verify_upstream.sh
       - name: Run semantic version release
         id: release
         # Adjust tag with desired version if applicable.
