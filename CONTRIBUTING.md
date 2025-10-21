@@ -56,7 +56,6 @@ Or run it manually:
 pre-commit run --all-files
 ```
 
-
 ### Adding new components to a lifecycle stage
 
 The `altk` module is divided into lifecycle stages of an agent's exeuction. Each lifecycle stage has a set of components that are designed to be reusable building blocks for solving common problems in that lifecycle stage. This section will describe adding a new component to a lifecycle stage.
@@ -77,31 +76,30 @@ The `altk` module is divided into lifecycle stages of an agent's exeuction. Each
 
 ## Detecting Secrets
 
-CI requires a "no secrets detected check" to pass. If your CI fails, please try the following.
-
-ofcourse, it is better to do the below check before submitting a PR - that way, you don't accidentally commit a secret!
+We don't want secrets to be leaked so we the CI requires a "no secrets detected check" to pass. If your CI check fails, please try the following. If you run the `pre-commit` checks then this would be detected before the CI has a chance to fail.
 
 Easy route to detect secrets
 
-`make detect-secrets`
-
-(Make sure you have Make!)
-
-OR
-
-
+```bash
+make detect-secrets
 ```
+
+If you have `make` then you can make use of the existing utility to scan for secrets.
+
+Alternatively,
+
+
+```bash
 uv pip install --upgrade "git+https://github.com/ibm/detect-secrets.git@master#egg=detect-secrets"
 ```
 
-```
+```bash
 detect-secrets scan --update .secrets.baseline
 ```
 
-
 Audit using the following
-```
+```bash
 detect-secrets audit .secrets.baseline
 ```
 
-The above command will start detecting one secret at a time. You could "accept" or "reject" accordingly.
+The above command will start detecting one secret at a time. You will be prompted to "accept" or "reject" detections accordingly.
