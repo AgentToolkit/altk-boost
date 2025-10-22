@@ -142,4 +142,4 @@ These results demonstrate the reflector's strong ability to accurately identify 
 
 
 ## Getting Started
-Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/pre_tool_reflection_toolkit/sparc/README.md) for instructions on how to get started with the code. See an example in action [here]( https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/examples/langgraph_agent_sparc_example.py)
+Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/pre_tool/sparc/README.md) for instructions on how to get started with the code. See an example in action [here]( https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/examples/langgraph_agent_sparc_example.py)

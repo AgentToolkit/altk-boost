@@ -2,7 +2,7 @@
 
 ![refraction_fig_1](refraction/assets/01115a12-5433-4a39-a970-9f33ffc13a67.png)
 
-[//]: # (<img src="https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/pre_tool_reflection_toolkit/refraction/docs/assets/01115a12-5433-4a39-a970-9f33ffc13a67.png"/>)
+[//]: # (<img src="https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/docs/components/refraction/assets/01115a12-5433-4a39-a970-9f33ffc13a67.png"/>)
 
 Refraction is a low-cost (no LLMs!), low-latency, domain-agnostic, data-agnostic, model-agnostic
 approach towards validation and repair for a sequence of tool calls, based on classical AI planning techniques.
@@ -99,7 +99,7 @@ For scaling characteristics, see [here](refraction/05.-Scaling.md).
 5. Scaling characteristics [[link](refraction/05.-Scaling.md)]
 6. Offline API [[link](refraction/07.-Offline-Analysis.md)]
 
-Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/pre_tool_reflection_toolkit/refraction/README.md) for instructions on how to get started with the code.
+Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/pre_tool/refraction/README.md) for instructions on how to get started with the code.
 
 ## References
 

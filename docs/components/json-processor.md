@@ -100,7 +100,7 @@ Additional results are reported in [1].
 
 
 ## Getting Started
-Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/post_tool_reflection_toolkit/code_generation/README.md) for instructions on how to get started with the code.
+Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/post_tool/code_generation/README.md) for instructions on how to get started with the code.
 See an example in action [here](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/examples/json_processor_getting_started.ipynb).
 
 ## References

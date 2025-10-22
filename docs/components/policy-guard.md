@@ -43,7 +43,7 @@ The above figure shows the achieved instruction following (IF) rates for the fou
 Additional results are reported in [1].
 
 ## Getting Started
-Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/policy_guard_toolkit/README.md) for instructions on how to get started with the code.
+Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/pre_response/policy_guard/README.md) for instructions on how to get started with the code.
 
 ## References
 [1] Elder, B., et al., "Boosting Instruction Following at Scale," arXiv preprint arXiv: (2025).  https://arxiv.org/abs/2510.14842

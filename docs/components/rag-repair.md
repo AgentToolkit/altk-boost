@@ -17,7 +17,7 @@ For now, the default retrieval method is using sentence embeddings along with Ch
 #### Input format
 This component expects documents to be provided in a local path. Optionally, documents can be divided into manual pages/documentation in a `man` folder and other documents such as troubleshooting documents in a `doc` folder. If these folders are not provided, then all documents are considered non-documentation. Nested folders are supported for ingesting. Supported files are: `pdf`, `html`, `json`, `jsonl`.
 
-The class `post_tool_reflection_toolkit.core.toolkit.RAGRepairRunInput` expects three main inputs as follows:
+The class `post_tool.core.toolkit.RAGRepairRunInput` expects three main inputs as follows:
 
 1. `messages`: List[BaseMessages], a list of messages from the agent, this is optional but will be used to infer the task at hand if `nl_query` is not provided.
 
@@ -47,7 +47,7 @@ Additional results are reported in [1].
 ![rag_results](../assets/img_ragrepair_eval.png)
 
 ## Getting Started
-Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/post_tool_reflection_toolkit/rag_repair/README.md) for instructions on how to get started with the code.
+Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/post_tool/rag_repair/README.md) for instructions on how to get started with the code.
 
 See an example in action [here](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/examples/rag_repair.ipynb).
 

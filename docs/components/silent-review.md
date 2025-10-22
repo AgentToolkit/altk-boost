@@ -56,5 +56,5 @@ For more details, refer to the paper: [Invocable APIs derived from NL2SQL datase
 - Average loop counts decrease slightly, showing that fewer iterations are needed to reach successful query completion.
 
 ## Getting Started
-Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/post_tool_reflection_toolkit/silent_review/README.md) for instructions on how to get started with the code.
+Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/post_tool/silent_review/README.md) for instructions on how to get started with the code.
 See an example in action [here]( https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/examples/silent_review.ipynb).
