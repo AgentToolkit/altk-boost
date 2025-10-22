@@ -40,6 +40,10 @@ We used a derivative of the popular [IFEval](https://huggingface.co/datasets/goo
 In the above figure baseline refers to only adding the instructions to the prompt and Detect+Repair refers to the Batch repairer above.
 The above figure shows the achieved instruction following (IF) rates for the four strategies using Llama 3.1 70B. The IF rate achieved by only adding the instructions to the prompt is shown as the baseline. Detect+Repair in the figure above refers to the Batch repairer.  All repair strategies lead to IF rate improvements over the baseline. Even at two instructions, policy guards lead to small improvements and the benefits generally increase with the number of instructions. Best-of-N policy guards consistently provide the largest improvements, up to 4 percentage points at ten instructions, increasing the IF rate to 0.70 from 0.66. Best-of-N Oracle refers to a version where we used an oracle detector to select the best of the N generated version to illustrate the potential IF rate achievable through Best-of-N policy guards. Even at two instructions, the model is capable of generating repaired responses with an IF rate of 0.89, a 2 percentage point increase. The boost grows as instructions are increased to ten, when the IF rate reaches 0.75, an 8.5 percentage point increase.
 
+Additional results are reported in [1].
 
 ## Getting Started
 Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/policy_guard_toolkit/README.md) for instructions on how to get started with the code.
+
+## References
+[1] Elder, B., et al., "Boosting Instruction Following at Scale," arXiv preprint arXiv: (2025).  https://arxiv.org/abs/2510.14842
