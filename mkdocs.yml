@@ -1,6 +1,7 @@
-site_name: Agent Lifecycle Toolkit Documentation
-site_url: https://pages.github.com/AgentToolkit/agent-lifecycle-toolkit/
-
+site_name: Agent Lifecycle Toolkit
+site_url: https://altk.ai
+repo_name: AgentToolkit/agent-lifecycle-toolkit
+repo_url: https://github.com/AgentToolkit/agent-lifecycle-toolkit
 
 theme:
   name: material
