@@ -13,6 +13,9 @@ env:
 
 jobs:
   generate-docs:
+    permissions:
+      contents:
+        write
     uses: ./.github/workflows/generate-docs.yml
     with:
       deploy: false
