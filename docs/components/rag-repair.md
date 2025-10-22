@@ -42,9 +42,14 @@ The output is a `RAGRepairRunOutput` object with the following three properties:
 ## Results
 This component has been evaluated on a set of kubectl commands. The table below details a manual evaluation on how often this component correctly repairs failing kubectl commands.
 
+Additional results are reported in [1].
+
 ![rag_results](../assets/img_ragrepair_eval.png)
 
 ## Getting Started
 Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/post_tool_reflection_toolkit/rag_repair/README.md) for instructions on how to get started with the code.
 
 See an example in action [here](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/examples/rag_repair.ipynb).
+
+## References
+[1] Tsay, J., et al., "Repairing Tool Calls Using Post-tool Execution Reflection and RAG," arXiv preprint arXiv: (2025).  https://arxiv.org/abs/2510.17874

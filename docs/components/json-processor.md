@@ -104,7 +104,6 @@ Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/b
 See an example in action [here](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/examples/json_processor_getting_started.ipynb).
 
 ## References
-[1] Kate, K., et al., "How Good Are LLMs at Processing Tool Outputs?," arXiv preprint arXiv: (2025).
-<!-- TODO: add link to arxiv paper -->
+[1] Kate, K., et al., "How Good Are LLMs at Processing Tool Outputs?," arXiv preprint arXiv: (2025).  https://arxiv.org/pdf/2510.15955
 
 [2] Kate, K., et al. "LongFuncEval: Measuring the effectiveness of long context models for function calling." arXiv preprint arXiv:2505.10570 (2025). https://arxiv.org/pdf/2505.10570
