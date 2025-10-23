@@ -1,37 +1,71 @@
+# Project information
 site_name: Agent Lifecycle Toolkit
 site_url: https://agenttoolkit.github.io/agent-lifecycle-toolkit
+site_description: >-
+  The Agent Lifecycle Toolkit (ALTK) is a library of components to help agent builders improve their agent with minimal integration effort and setup.
+
+# Repository
 repo_name: AgentToolkit/agent-lifecycle-toolkit
 repo_url: https://github.com/AgentToolkit/agent-lifecycle-toolkit
 
+# Copyright
+copyright: >
+  Copyright &copy; 2025 Agent Lifecycle Toolkit (ALTK) project –
+  <a href="#__consent">Change cookie settings</a>
+
+# Configuration
 theme:
   name: material
-  docs_dir: docs
   features:
-    - admonition
-    - pymdownx.details
-    - pymdownx.superfences
+    - announce.dismiss
     - toc.integrate
     - navigation.top
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.tabs
     - search.suggest
     - search.highlight
     - content.tabs.link
-    - content.code.annotation
+    - content.code.annotate
     - content.code.copy
+    - toc.follow
   language: en
   palette:
-    - scheme: default
-      toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to dark mode
-      primary: teal
-      accent: purple
+    # Default dark mode
     - scheme: slate
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to light mode
       primary: teal
-      accent: lime
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
 
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+
+    # System preference (dark)
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to system preference
+
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon-32x32.png
+  logo: assets/logo-512x512.png
+  icon:
+    repo: fontawesome/brands/github
 
 nav:
   - Home: index.md
@@ -50,10 +84,23 @@ nav:
   - Examples: examples.md
   - Integrations: integrations.md
 
+extra_css:
+  - stylesheets/extra.css
+
 extra:
   social:
     - icon: fontawesome/brands/github-alt
       link: https://github.com/AgentToolkit/agent-lifecycle-toolkit/
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
 markdown_extensions:
   - toc:
       permalink: true
