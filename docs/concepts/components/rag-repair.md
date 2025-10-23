@@ -10,7 +10,7 @@ The figure below shows how the RAGRepair component creates a repair context from
 
 For now, the default retrieval method is using sentence embeddings along with Chroma with an option to use BM25 instead. Other storage methods may be considered in the future.
 
-![rag_architecture](../assets/img_ragrepair_architecture.png)
+![rag_architecture](../../assets/img_ragrepair_architecture.png)
 
 ### Interface
 
@@ -44,7 +44,7 @@ This component has been evaluated on a set of kubectl commands. The table below 
 
 Additional results are reported in [1].
 
-![rag_results](../assets/img_ragrepair_eval.png)
+![rag_results](../../assets/img_ragrepair_eval.png)
 
 ## Getting Started
 Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/post_tool/rag_repair/README.md) for instructions on how to get started with the code.
