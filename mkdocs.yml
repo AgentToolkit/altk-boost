@@ -17,20 +17,22 @@ copyright: >
 theme:
   name: material
   features:
-    - announce.dismiss
-    - navigation.top
-    - navigation.sections
-    - navigation.footer
-    - navigation.indexes
-    - navigation.instant
-    - navigation.instant.prefetch
-    - navigation.tracking
-    - navigation.tabs
-    - search.suggest
-    - search.highlight
     - content.tabs.link
     - content.code.annotate
     - content.code.copy
+    - content.tooltips
+    - announce.dismiss
+    - navigation.footer
+    - navigation.tabs
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - search.suggest
     - toc.follow
   language: en
   palette:
@@ -59,18 +61,23 @@ theme:
       toggle:
         icon: material/brightness-auto
         name: Switch to system preference
-
   font:
     text: Roboto
     code: Roboto Mono
-  favicon: assets/favicon-32x32.png
+  favicon: assets/logo-32x32.png
   logo: assets/logo-512x512.png
   icon:
     repo: fontawesome/brands/github
 
 nav:
-  - Home: index.md
-  - Getting started: getting_started.md
+  - Home:
+    - ALTK: index.md
+    - Installation:
+      - Installation: installation/index.md
+    - Getting started:
+      - Getting started: getting_started/index.md
+    - Usage:
+      - Usage: usage/index.md
   - Under the hood:
     - 'Lifecycle': components/lifecycle.md
     - 'ALTK components': components/altk-components-summary.md
@@ -82,8 +89,10 @@ nav:
         - 'JSON Processor': components/json-processor.md
         - 'RAG Repair': components/rag-repair.md
         - 'Policy Guard': components/policy-guard.md
-  - Examples: examples.md
-  - Integrations: integrations.md
+  - Examples:
+      Examples: examples/index.md
+  - Integrations:
+      Integrations: integrations/index.md
 
 extra_css:
   - stylesheets/extra.css
@@ -102,10 +111,10 @@ extra:
   analytics:
     provider: google
     property: !ENV GOOGLE_ANALYTICS_KEY
+
 markdown_extensions:
   - toc:
       permalink: true
-
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite

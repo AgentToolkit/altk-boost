@@ -1,5 +1,3 @@
-
-
 #### Pre-LLM
   - [Spotlight](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/pre_llm/spotlight/README.md)
 #### Pre-tool
