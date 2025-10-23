@@ -62,10 +62,6 @@ In order to achieve this, we use your favorite [NL2Flow package](https://pypi.or
 check the extracted tokens for soundness i.e. if the tokens represent a valid sequence of API calls.
 Check the [validator API of NL2Flow](https://github.com/IBM/nl2flow/wiki/14.-Validator-API) for more details on this.
 
-![refraction_fig_3](refraction/assets/e1b6f532-4ceb-440f-865e-3bc3d3184b13.png)
-
-[//]: # (<img src="refraction/assets/e1b6f532-4ceb-440f-865e-3bc3d3184b13.png" />)
-
 ## Results
 
 As mentioned before, since this is a validator with guarantees, if there is a structural issue in a sequence of
