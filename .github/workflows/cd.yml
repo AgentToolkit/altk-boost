@@ -1,4 +1,4 @@
-name: CD
+name: Tag and release to Github
 
 env:
   UV_FROZEN: "1"

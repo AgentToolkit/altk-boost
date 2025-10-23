@@ -1,14 +1,4 @@
-name: Generate Docs
-
-permissions:
-  contents: write
 on:
-  workflow_dispatch:
-    inputs:
-      deploy:
-        type: boolean
-        description: "If true, the docs will be deployed"
-        default: false
   workflow_call:
     inputs:
       deploy:
@@ -17,7 +7,7 @@ on:
         default: false
 
 jobs:
-  generate-docs:
+  run-docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

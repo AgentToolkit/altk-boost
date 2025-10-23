@@ -12,10 +12,7 @@ env:
   UV_FROZEN: "1"
 
 jobs:
-  generate-docs:
-    permissions:
-      contents:
-        write
+  build-docs:
     uses: ./.github/workflows/generate-docs.yml
     with:
       deploy: false
