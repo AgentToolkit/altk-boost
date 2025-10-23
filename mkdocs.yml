@@ -18,8 +18,9 @@ theme:
   name: material
   features:
     - announce.dismiss
-    - toc.integrate
     - navigation.top
+    - navigation.sections
+    - navigation.footer
     - navigation.indexes
     - navigation.instant
     - navigation.instant.prefetch
