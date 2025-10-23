@@ -93,10 +93,10 @@ print(result["messages"][-1].content)
 
 ## Documentation
 
-Check out ALTK's [documentation](https://pages.github.com/AgentToolkit/agent-lifecycle-toolkit/), for details on
+Check out ALTK's [documentation](https://agenttoolkit.github.io/agent-lifecycle-toolkit/), for details on
 installation, usage, concepts, and more.
 
-The ALTK supports multiple LLM providers and two methods of configuring the providers. For more information, see the [LLMClient documentation](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/toolkit_core/llm/README.md).
+The ALTK supports multiple LLM providers and two methods of configuring the providers. For more information, see the [LLMClient documentation](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/core/llm/README.md).
 
 ## Examples
 Go hands-on with our [examples](examples).
