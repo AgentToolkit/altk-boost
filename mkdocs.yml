@@ -82,7 +82,7 @@ nav:
     - Lifecycle:
       - Lifecycle: concepts/lifecycle.md
     - ALTK components:
-      - Summary: concepts/components/altk-components-summary.md
+      - Summary: concepts/components/summary.md
     - Components:
         - Spotlight: concepts/components/spotlight.md
         - Refraction: concepts/components/refraction.md
