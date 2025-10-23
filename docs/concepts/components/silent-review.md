@@ -6,10 +6,12 @@ It evaluates whether a tool's response is relevant, accurate, and complete relat
 ## Overview
 
 Silent Review is designed to be integrated into agent pipelines to assess tool outputs, particularly for:
+
 - Verbose outputs: Responses that are long or complex.
 - Tabular outputs: Structured data that requires context-aware evaluation.
 
 The component analyzes the tool response based on:
+
 1. User query
 2. Tool response
 3. Tool specification (Optional)
@@ -17,6 +19,7 @@ The component analyzes the tool response based on:
 5. Tool type
 
 It returns one of three outcomes:
+
 1. Accomplished – The tool fully satisfies the user query.
 2. Partially Accomplished – The tool partially satisfies the user query.
 3. Not Accomplished – The tool fails to satisfy the query.
@@ -26,7 +29,7 @@ Silent Review works by prompting a large language model (LLM) to evaluate the to
 
 Integration into an agent pipeline is straightforward:
 
-![Architecture Diagram](../assets/img_silent_error_review.png)
+![Architecture Diagram](../../assets/img_silent_error_review.png)
 
 **Key points:**
 - Works for any structured or JSON-like tool response.
