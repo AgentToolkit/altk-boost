@@ -10,6 +10,7 @@ on:
 
 env:
   UV_FROZEN: "1"
+  GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
 
 jobs:
   build-docs:
