@@ -78,7 +78,7 @@ nav:
       - Getting started: getting_started/index.md
     - Usage:
       - Usage: usage/index.md
-  - Under the hood:
+  - Concepts:
     - 'Lifecycle': components/lifecycle.md
     - 'ALTK components': components/altk-components-summary.md
     - 'Components':
