@@ -2,16 +2,16 @@
 
 If the agent calls tools which generate complex JSON objects as responses, this component will use LLM based Python code generation to process those responses and extract relevant information from them.
 
-See a demo of this component in action [here](https://ibm.box.com/v/altk-json-processor-demo)
+See a demo of this component in action [here](https://ibm.box.com/v/altk-json-processor-demo).
 
 ## Overview
 The most common pattern for tool calling is to call a tool that returns some information. The agent then needs to process the tool response and extract the information from it. This information may be required either to respond back to the user or for the next step of the agent. When the tool responses are in JSON format, and the agent knows what information is needed from it, the code generation component prompts a LLM to generate Python code for parsing the JSON and extracting the required information. It executes the generated code and returns back the extracted content if the code execution succeeds.
 
 The figures below show the flow of tool calling with the code generation based JSON processor component:
 
-![json_processor_agent_flow](../assets/img_json_processor_agent_flow.png)
+![json_processor_agent_flow](../../assets/img_json_processor_agent_flow.png)
 
-![json_processor_solution](../assets/img_json_processor_high_level.png)
+![json_processor_solution](../../assets/img_json_processor_high_level.png)
 
 ## Architecture
 The figure below shows how the JSON processor component processes the tool response to get the answer i.e. the information from the JSON object by calling an LLM using a prompt that includes the JSON response and a natural language query.
@@ -23,7 +23,7 @@ Given a user query and a tool response (as a JSON object), we
 
 We construct the prompt with the above inputs and pass it to an LLM that generates Python code to process the JSON object (see example below). The generated code is executed by a Python interpreter in a sandbox (for security reasons) to generate the final answer to the user's query.
 
-![json_processor_architecture](../assets/img_json_processor_architecture.png)
+![json_processor_architecture](../../assets/img_json_processor_architecture.png)
 
 #### Sample Schema
     ```python
@@ -90,13 +90,13 @@ We evaluate our approach on a question-answer (QA) dataset containing 1298 sampl
 
 Models' performance degraded as the JSON response increased in length, as shown in the figure below.
 
-![long_resp_results](../assets/img_json_long_results.png)
+![long_resp_results](../../assets/img_json_long_results.png)
 
 Across model families and sizes, adopting our JSON processor (red bars in the figure below) approach leads to accuracy gains ranging from +3% to +50% depending on the model compared to adopting a direct prompting approach that prompts the model to generate answer directly.
 
 Additional results are reported in [1].
 
-![json_processor_results](../assets/img_json_processor_results.png)
+![json_processor_results](../../assets/img_json_processor_results.png)
 
 
 ## Getting Started
