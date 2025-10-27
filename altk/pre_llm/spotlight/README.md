@@ -8,7 +8,7 @@
 
 SpotLight enables users to emphasize important spans within their prompt and steers the LLMs attention towards those spans. Expect to see between 5 and 40 point improvement on accuracy.
 
-<img src="../../docs/assets/img_lifecycle_prellm.png" />
+<img src="../../../docs/assets/img_lifecycle_prellm.png" />
 
 
 ## Table of Contents

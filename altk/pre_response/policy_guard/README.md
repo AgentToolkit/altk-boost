@@ -1,7 +1,7 @@
 # Policy Guard - Add policy guardrails to your agent's response
 Agent lifecycle components to guard and enforce policies (or instructions) in LLM responses. See as much as 10 point improvement in accuracy (under certain circumstances).
 
-<img src="../../docs/assets/img_lifecycle_preresponse.png" />
+<img src="../../../docs/assets/img_lifecycle_preresponse.png" />
 
 ## Table of Contents
 - [When to Use This Component](#when-to-use-this-component)
