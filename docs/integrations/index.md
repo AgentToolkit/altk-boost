@@ -13,4 +13,4 @@ ALTK also works well with [Langflow](http://langflow.org), a visual programming 
 
 See an agent with ALTK components in Langflow here: https://github.com/langflow-ai/langflow/blob/main/src/lfx/src/lfx/components/agents/altk_agent.py
 
-See a demo here: https://www.youtube.com/@AgentToolkit
+See a demo here: https://www.youtube.com/watch?v=YNwPBK_KxXY
