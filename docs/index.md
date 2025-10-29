@@ -29,7 +29,7 @@ To use ALTK, simply install agent-lifecycle-toolkit from your package manager, e
 pip install agent-lifecycle-toolkit
 ```
 
-More [detailed installation instructions](./getting_started.md) are available in the docs.
+More [detailed installation instructions](./getting_started) are available in the docs.
 
 
 ## Features
