@@ -1,5 +1,6 @@
+<!-- NOTE: All links must be absolute in this README in order to not break pypi -->
 <h1 align="center" >
-    <img alt="Agent Lifecycle Toolkit (ALTK) logo" src="docs/assets/logo.png" height="120">
+    <img alt="Agent Lifecycle Toolkit (ALTK) logo" src="https://github.com/AgentToolkit/agent-lifecycle-toolkit/raw/main/docs/assets/logo.png" height="120">
 </h1>
 
 <h4 align="center">Delivering plug-and-play, framework-agnostic technology to boost agents' performance</h4>
@@ -7,7 +8,7 @@
 ## What is ALTK?
 The Agent Lifecycle Toolkit helps agent builders create better performing agents by easily integrating our components into agent pipelines. The components help improve the performance of agents by addressing key gaps in various stages of the agent lifecycle, such as in reasoning, or tool calling errors, or output guardrails.
 
-![lifecycle.png](docs/assets/lifecycle.png)
+![lifecycle.png](https://github.com/AgentToolkit/agent-lifecycle-toolkit/raw/main/docs/assets/lifecycle.png)
 
 
 ## Installation
@@ -21,7 +22,7 @@ More [detailed installation instructions](https://agenttoolkit.github.io/agent-l
 <!-- [TODO: add link] -->
 
 ## Getting Started
-Below is an end-to-end example that you can quickly get your hands dirty with. The example has a langgraph agent, a weather tool, and a component that checks for silent errors. Refer to the [examples](examples) folder for this example and others. The below example will additionally require the `langgraph` and `langchain-anthropic` packages along with setting two environment variables.
+Below is an end-to-end example that you can quickly get your hands dirty with. The example has a langgraph agent, a weather tool, and a component that checks for silent errors. Refer to the [examples](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/examples) folder for this example and others. The below example will additionally require the `langgraph` and `langchain-anthropic` packages along with setting two environment variables.
 
 ```python
 import random
@@ -82,13 +83,13 @@ print(result["messages"][-1].content)
 
 | Lifecycle Stage | Component                                                              | Purpose                                                                                                                                                                                                                                                                                                                   |
 |-----------------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Pre-LLM         | [Spotlight](altk/pre_llm/spotlight)                                    | *Does your agent not follow instructions?* Emphasize important spans in prompts to steer LLM attention.                                                                                                                                                                                                                   |
-| Pre-tool        | [Refraction](altk/pre_tool/refraction)              | *Does your agent generate inconsistent tool sequences?* Validate and repair tool call syntax to prevent execution failures.                                                                                                                                                                                               |
-| Pre-tool        | [SPARC](altk/pre_tool/sparc)                        | *Is your agent calling tools with hallucinated arguments or struggling to choose the correct tools in the right order?* Make sure tool calls match the tool specifications and request semantics, and are generated correctly based on the conversation. |
-| Post-tool       | [JSON Processor](altk/post_tool/code_generation)                                                       | *Is your agent overwhelmed with large JSON payloads in its context?* Generate code on the fly to extract relevant data in JSON tool responses.                                                                                                                                                                            |
-| Post-tool       | [Silent Error Review](altk/post_tool/silent_review) | *Is your agent ignoring subtle semantic tool errors?* Detect silent errors in tool responses and assess relevance, accuracy, and completeness.                                                                                                                                                                            |
-| Post-tool       | [RAG Repair](altk/post_tool/rag_repair)             | *Is your agent not able to recover from tool call failures?* Repair failed tool calls using domain-specific documents via Retrieval-Augmented Generation.                                                                                                                                                                 |
-| Pre-response    | [Policy Guard](altk/pre_response/policy_guard)                              | *Does your agent return responses that violate policies or instructions?* Ensure agent outputs comply with defined policies and repair them if needed.                                                                                                                                                                    |
+| Pre-LLM         | [Spotlight](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/pre_llm/spotlight)                                    | *Does your agent not follow instructions?* Emphasize important spans in prompts to steer LLM attention.                                                                                                                                                                                                                   |
+| Pre-tool        | [Refraction](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/pre_tool/refraction)              | *Does your agent generate inconsistent tool sequences?* Validate and repair tool call syntax to prevent execution failures.                                                                                                                                                                                               |
+| Pre-tool        | [SPARC](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/pre_tool/sparc)                        | *Is your agent calling tools with hallucinated arguments or struggling to choose the correct tools in the right order?* Make sure tool calls match the tool specifications and request semantics, and are generated correctly based on the conversation. |
+| Post-tool       | [JSON Processor](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/post_tool/code_generation)                                                       | *Is your agent overwhelmed with large JSON payloads in its context?* Generate code on the fly to extract relevant data in JSON tool responses.                                                                                                                                                                            |
+| Post-tool       | [Silent Error Review](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/post_tool/silent_review) | *Is your agent ignoring subtle semantic tool errors?* Detect silent errors in tool responses and assess relevance, accuracy, and completeness.                                                                                                                                                                            |
+| Post-tool       | [RAG Repair](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/post_tool/rag_repair)             | *Is your agent not able to recover from tool call failures?* Repair failed tool calls using domain-specific documents via Retrieval-Augmented Generation.                                                                                                                                                                 |
+| Pre-response    | [Policy Guard](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/pre_response/policy_guard)                              | *Does your agent return responses that violate policies or instructions?* Ensure agent outputs comply with defined policies and repair them if needed.                                                                                                                                                                    |
 
 
 ## Documentation
@@ -99,11 +100,11 @@ installation, usage, concepts, and more.
 The ALTK supports multiple LLM providers and two methods of configuring the providers. For more information, see the [LLMClient documentation](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/core/llm/README.md).
 
 ## Examples
-Go hands-on with our [examples](examples).
+Go hands-on with our [examples](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/examples).
 
 ## Integrations
 To further accelerate your AI application development, check out ALTK's native
-[integrations](./docs/integrations.md) with popular frameworks and tools.
+[integrations](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/docs/integrations/index.md) with popular frameworks and tools.
 
 ## Get Help and Support
 Please feel free to connect with us using the [discussion section](https://github.com/AgentToolkit/agent-lifecycle-toolkit).
@@ -111,13 +112,13 @@ Please feel free to connect with us using the [discussion section](https://githu
 ## Contributing Guidelines
 ALTK is open-source and we ❤️ contributions.<br>
 
-To help build ALTK, take a look at our: [Contribution guidelines](CONTRIBUTING.md)
+To help build ALTK, take a look at our: [Contribution guidelines](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/CONTRIBUTING.md)
 
 ## Bugs
 We use GitHub Issues to manage bugs. Before filing a new issue, please check to make sure it hasn't already been logged.
 
 ## Code of Conduct
-This project and everyone participating in it are governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please read the [full text](CODE_OF_CONDUCT.md) so that you know which actions may or may not be tolerated.
+This project and everyone participating in it are governed by the [Code of Conduct](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please read the [full text](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/CODE_OF_CONDUCT.md) so that you know which actions may or may not be tolerated.
 
 ## License
 The ALTK codebase is under Apache 2.0 license.

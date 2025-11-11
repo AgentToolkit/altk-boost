@@ -49,6 +49,13 @@ keywords = [
     "agent",
 ]
 
+[project.urls]
+homepage = "https://altk.ai/"
+documentation = "https://agenttoolkit.github.io/agent-lifecycle-toolkit/"
+source = "https://github.com/AgentToolkit/agent-lifecycle-toolkit"
+download = "https://pypi.org/project/agent-lifecycle-toolkit/#files"
+tracker = "https://github.com/AgentToolkit/agent-lifecycle-toolkit/issues"
+
 [build-system]
 build-backend = "hatchling.build"
 requires = ["hatchling"]
