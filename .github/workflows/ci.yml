@@ -22,6 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       should-run-tests: ${{ github.event_name == 'merge_group' }} # we only want to run tests when the PR is in a merge queue
+    steps:
+      # A job must have a `steps` or `uses` entry to make sure it can be executed
+      - run: echo "Debugging CI condition"
+      - run: echo "Should run tests? -> $ {{ $github.event_name == 'merge_group' }}"
   check-code:
     uses: ./.github/workflows/check-code.yml
   run-tests:
