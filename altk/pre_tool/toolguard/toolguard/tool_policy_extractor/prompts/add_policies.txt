@@ -1,0 +1,57 @@
+Task:
+Given the extracted TPTD (Tool Policy Text Description) for the given target tool (ToolX) , verify completeness and identify any additional policies that were missed. Only return newly identified policies.
+
+Instructions:
+
+1. Identify Missing Policies:
+    * Reanalyze the Policy Document to check if any relevant policies for ToolX were overlooked in previous stage.
+
+2. Extract and format any missing policies following these criteria:
+    * Must be specific to ToolX.
+    * Must be actionable and enforceable based on ToolX’s parameters, chat history, and data access.
+    * Must be self-contained with all necessary details.
+    * Must have exact verbatim references from the Policy Document (not inferred from tool descriptions).
+
+3. Validate Policy References:
+    * Verify that each reference is a verbatim excerpt from the Policy Document and not inferred from tool descriptions.
+    * If a policy is supported by multiple passages, list them separately in the "references" array.
+
+4. Output Only New Policies:
+    * If a policy was already extracted in Stage 1, do not include it in the output.
+    * If no additional policies are found, return an empty "policies" array.
+
+Input Format:
+Policy Document – A text containing policies, rules, or constraints governing tool usage.
+Tools Descriptions – A list of tools with descriptions explaining their functionality and constraints.
+Target Tool (ToolX) – The specific tool for which relevant policies need to be identified.
+TPTD (Tool Policy Text Description) – A JSON object containing extracted policies from previous stages.
+
+Output Format (JSON):
+{
+  "policies": [
+    {
+      "policy_name": "<Policy 1 Name>",
+      "description": "<Policy 1 Description>",
+      "references": [
+        "<Exact Passage 1 from Policy Document>",
+         "<Exact Passage 2 from Policy Document>",
+         ...
+      ]
+    },
+    ...
+    {
+      "policy_name": "<Policy n Name>",
+      "description": "<Policy n Description>",
+      "references": [
+        "<Exact Passage 1 from Policy Document>"
+         ...
+      ]
+    }
+  ]
+}
+
+
+If no additional relevant policies exist, return:
+{
+  "policies": []
+}

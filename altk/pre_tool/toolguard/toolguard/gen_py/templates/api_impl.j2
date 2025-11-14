@@ -1,0 +1,11 @@
+from typing import Any, Dict, List
+from datetime import date, datetime
+from {{ types_module }} import *
+from {{ api_module }} import *
+
+class {{ class_name }}({{ api_cls_name }}):
+{% for method in methods %}
+    def {{ method.name }}{{ method.signature }}:
+        {% if method.doc %}"""{{ method.doc }}"""{% endif %}
+        {{ method.body }}
+{% endfor %}

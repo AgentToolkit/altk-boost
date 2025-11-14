@@ -1,4 +1,4 @@
-from altk.toolkit_core.core.toolkit import AgentPhase
+from altk.core.toolkit import AgentPhase
 import os
 from altk.post_request.tool_validation_toolkit.core.toolkit import ToolValidationInput
 from altk.post_request.tool_validation_toolkit.core.config import ToolValidationConfig

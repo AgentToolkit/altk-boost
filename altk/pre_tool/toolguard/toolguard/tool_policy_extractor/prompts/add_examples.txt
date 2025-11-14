@@ -1,0 +1,49 @@
+Task:
+For the given policy, check if any examples (violating or compliance) are missing. If so, generate additional examples and return only the newly created examples, without modifying or repeating the existing ones.
+
+Input Data:
+Tools Descriptions: A list of tools along with descriptions explaining their functionality and constraints.
+Target Tool (ToolX): The specific tool for which relevant policies need to be identified.
+Policy: The policy to write additional the examples for with extracted examples from previous stages
+
+Steps:
+1.Identify Missing Examples:
+Locate the examples under "examples".
+If the "examples" array is missing or empty, generate new examples in natural text, both violating and compliance examples.
+If only one type of example is missing (violating or compliance), generate only the missing type.
+Do not repeat or modify existing examples—only add new ones.
+
+2. Generate Violating Examples (if missing):
+Provide new violating examples that highlight different ways the policy could be breached.
+Cover common mistakes, edge cases, and boundary conditions.
+Clearly state why each example violates the policy.
+
+3. Generate Compliance Examples (if missing):
+Provide new compliance examples demonstrating correct adherence to the policy.
+Ensure compliance cases clearly illustrate why they meet the policy’s requirements.
+
+4. Ensure Full Coverage:
+If the policy has multiple conditions, generate examples covering each condition separately.
+Consider numeric limits, timing constraints, and optional parameters where relevant.
+
+5. Format the Output in JSON:
+Only include newly generated examples. Make sure examples are written in natural text.
+Maintain the correct structure:
+
+Output Format (JSON):
+{
+    "violating_examples": [
+        "Violating example 1",
+        "Violating example 2,
+        "Violating example 3"
+    ],
+    "compliance_examples": [
+       "Compliance example 1",
+       "Compliance example 2",
+       "Compliance example 3"
+    ]
+}
+
+If no new examples are needed, return an empty object:
+
+{}

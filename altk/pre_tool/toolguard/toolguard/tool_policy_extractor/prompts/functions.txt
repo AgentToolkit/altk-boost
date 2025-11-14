@@ -1,0 +1,56 @@
+Given an OpenAPI Specification (OAS) file and a selected operation (such as GET /items/{item_id}), follow these steps to create a Python function and sample input/output examples.
+
+Step 1: Identify Operation Components
+From the operation, extract:
+* Operation ID (or generate a function name using HTTP method + path)
+* HTTP method and path
+* Parameters:
+    * Path, query, header, and cookie parameters
+* Request body (if defined)
+* Response schema (focus on HTTP 200 or default response)
+
+Step 2: Write the Python Function Signature
+Create a Python function named after the operation. Follow these rules:
+* Use snake_case for function names.
+* Each parameter should become a function argument:
+    * Required parameters have no default.
+    * Optional parameters have default values (e.g., None, False, "").
+* Use basic type hints: str, int, float, bool, dict, List[str], etc.
+
+
+Step 3: Generate 3 Diverse Parameter Examples
+Write three different function calls that showcase a variety of:
+* Simple vs. complex values
+* Optional vs. required parameters
+* Empty, large, or edge-case values
+* Realistic business logic (e.g., filters, limits)
+
+Example variations:
+* Empty query strings
+* Lists or dicts as input
+* Special characters
+* Boundary numbers
+
+Step 4: Generate 3 Diverse Return Value Examples
+Create three realistic return values in Python dict format, based on the operation's response schema. The examples should vary in:
+* Field presence (e.g., missing optional fields)
+* Field types (e.g., one returns a list, one returns a dict)
+* Structure (nested vs. flat)
+* Value range (small, large, edge cases)
+
+Step 5: Return in JSON Format
+Return the following in a single JSON object:
+
+{
+  "function_signature": "Python function definition as a string",
+  "input_examples": [
+    "Function call as string #1",
+    "Function call as string #2",
+    "Function call as string #3"
+  ],
+  "output_examples": [
+    { "example_response_1": "..." },
+    { "example_response_2": "..." },
+    { "example_response_3": "..." }
+  ]
+}

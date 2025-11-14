@@ -1,0 +1,108 @@
+import os
+import asyncio
+import dotenv
+import pytest
+
+from altk.pre_tool.toolguard.pre_tool_guard import PreToolGuardComponent
+from altk.core.llm.base import get_llm
+from altk.pre_tool.toolguard.core import (
+    ToolGuardBuildInput,
+    ToolGuardBuildInputMetaData,
+    ToolGuardRunInput,
+    ToolGuardRunInputMetaData,
+)
+
+import tempfile
+import shutil
+
+dotenv.load_dotenv()
+
+
+def divide_tool(g: float, h: float) -> float:
+    """
+    Divide one number by another.
+
+    Parameters
+    ----------
+    g : float
+            The dividend.
+    h : float
+            The divisor (must not be zero).
+
+    Returns
+    -------
+    float
+            The result of a divided by b.
+    """
+    return g / h
+
+
+WATSONX_CREDS_AVAILABLE = all([os.getenv("WX_API_KEY"), os.getenv("WX_PROJECT_ID")])
+
+
+@pytest.mark.asyncio
+@pytest.mark.skipif(not WATSONX_CREDS_AVAILABLE, reason="WatsonX credentials not set")
+async def test_tool_guard_calculator_policy(monkeypatch):
+    # sets the genpy env variables necessary for toolguard
+    monkeypatch.setenv("TOOLGUARD_GENPY_BACKEND_NAME", "litellm")
+    monkeypatch.setenv(
+        "TOOLGUARD_GENPY_MODEL_ID", "watsonx/mistralai/mistral-medium-2505"
+    )
+
+    work_dir = tempfile.mkdtemp()
+    tools = [divide_tool]
+    policy_text = "The calculator must not allow division by zero."
+
+    # OPENAILiteLLMClientOutputVal = get_llm("watsonx.output_val")
+    # validating_llm_client = OPENAILiteLLMClientOutputVal(
+    #     model="gpt-4o-2024-08-06"
+    # )
+    WatsonXClientOutputVal = get_llm("watsonx.output_val")
+    validating_llm_client = WatsonXClientOutputVal(
+        model_name="mistralai/mistral-medium-2505",
+        api_key=os.getenv("WX_API_KEY"),
+        project_id=os.getenv("WX_PROJECT_ID"),
+        url=os.getenv("WX_URL", "https://us-south.ml.cloud.ibm.com"),
+    )
+
+    tool_guard_altk = PreToolGuardComponent(
+        tools=tools, workdir=work_dir, app_name="calculator"
+    )
+    build_input = ToolGuardBuildInput(
+        metadata=ToolGuardBuildInputMetaData(
+            policy_text=policy_text,
+            short1=True,
+            validating_llm_client=validating_llm_client,
+        )
+    )
+
+    await tool_guard_altk._build(build_input)
+
+    test_options = [
+        (
+            "Can you please calculate how much is 3/4?",
+            "divide_tool",
+            {"g": 3, "h": 4},
+            True,
+        ),
+        (
+            "Can you please calculate how much is 5/0?",
+            "divide_tool",
+            {"g": 5, "h": 0},
+            False,
+        ),
+    ]
+    for user_query, tool_name, tool_params, expected in test_options:  # noqa: B007
+        run_input = ToolGuardRunInput(
+            metadata=ToolGuardRunInputMetaData(
+                tool_name=tool_name,
+                tool_parms=tool_params,
+            )
+        )
+
+        run_output = tool_guard_altk._run(run_input)
+        print(run_output)
+        passed = not run_output.output.error_message
+        assert passed == expected
+
+    shutil.rmtree(work_dir)

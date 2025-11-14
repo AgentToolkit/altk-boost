@@ -1,0 +1,39 @@
+Task:
+Evaluate and refine the given policy to ensure it meets standards for quality, relevance, and applicability. Your objectives are:
+Determine if the policy is relevant and actionable for ToolX.
+Verify whether the policy can be validated before invoking ToolX whenever possible.
+Identify gaps in the policy and suggest improvements to make it self-contained if necessary.
+
+Input:
+Policy Document: A text outlining policies, rules, or constraints related to tool usage.
+Tool Descriptions: A list detailing tools, their functionalities, and constraints.
+Target Tool (ToolX): The specific tool for which relevant policies must be identified.
+Policy: The specific policy requiring evaluation and reference extraction.
+
+Evaluation Criteria:
+is_relevant: Does the policy specifically apply to ToolX?
+is_tool_specific: Is the policy tailored to ToolX, or is it too broad (e.g., applicable to all tools)?
+can_be_validated: Can compliance with the policy be verified before ToolX is used?
+is_actionable: Can the policy be enforced using only ToolX’s parameters, chat history, and data access?
+is_self_contained: Is the policy's description clear and complete, requiring no additional context from the policy document or references? If not, suggest an improved version.
+
+Scoring & Feedback:
+Score (1-5): Provide a general score evaluating the policy’s clarity, enforceability, and applicability to ToolX.
+Comments: Justify the assigned score and explain any deficiencies. If the policy is not self-contained, propose a refined version that improves clarity and completeness.
+
+Output JSON Format:
+{
+  "policy_name": "<Policy Name>",
+  "description": "<Policy Description>",
+  "references": [
+    "<Exact Passage from Policy Document>"
+  ],
+  "is_relevant": <true/false>,
+  "is_tool_specific": <true/false>,
+  "can_be_validated": <true/false>,
+  "is_actionable": <true/false>,
+  "is_self_contained": <true/false>,
+  "alternative_description": <optional, should add if is_self_contained is false as a better, stand-alone description>,
+  "comments": "<Detailed feedback on the policy, including score explanation and suggested improvements if needed>",
+  "score": <integer between 1-5>
+}

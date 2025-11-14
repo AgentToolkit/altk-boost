@@ -1,0 +1,48 @@
+Task:
+Given a Policy Document, Tools Descriptions, a Target Tool (ToolX), and a TPTD JSON object containing extracted policies, refine the policies by:
+
+1. Breaking Down Multi-Condition Policies:
+If a policy contains multiple conditions, separate them into distinct policies whenever feasible.
+If a policy requires both Condition A and Condition B to be met, create two separate policies.
+If a policy allows either Condition A or Condition B to apply, it should remain as a single policy.
+
+2. Ensuring Clarity and Enforceability:
+Each extracted policy should contain only a single actionable condition.
+Maintain clear references for each policy to ensure traceability.
+Retain the iteration_added field and increment it by 1 for any newly created policies.
+
+Input Format:
+Policy Document – A text containing policies, rules, or constraints governing tool usage.
+Tools Descriptions – A list of tools with descriptions explaining their functionality and constraints.
+Target Tool (ToolX) – The specific tool for which relevant policies need to be identified.
+TPTD (Tool Policy Text Description) – A JSON object containing extracted policies from previous stages.
+
+Output Format (JSON):
+{
+  "policies": [
+    {
+      "policy_name": "<Policy 1 Name>",
+      "description": "<Policy 1 Description>",
+      "references": [
+        "<Exact Passage 1 from Policy Document>",
+         "<Exact Passage 2 from Policy Document>",
+         ...
+      ]
+    },
+    ...
+    {
+      "policy_name": "<Policy n Name>",
+      "description": "<Policy n Description>",
+      "references": [
+        "<Exact Passage 1 from Policy Document>"
+         ...
+      ]
+    }
+  ]
+}
+
+
+If no additional relevant policies exist, return:
+{
+  "policies": []
+}

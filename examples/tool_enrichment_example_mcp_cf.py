@@ -1,6 +1,6 @@
 import json
-from altk.toolkit_core.core.toolkit import AgentPhase
-from altk.toolkit_core.llm import get_llm, GenerationMode
+from altk.core.toolkit import AgentPhase
+from altk.core.llm import get_llm, GenerationMode
 import os
 from altk.post_request.tool_enrichment_toolkit.core.toolkit import (
     MCPCFToolEnrichBuildInput,

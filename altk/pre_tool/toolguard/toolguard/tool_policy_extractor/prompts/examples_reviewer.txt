@@ -1,0 +1,41 @@
+Objective:
+You are a reviewer. Your job is to check if a given example correctly shows a good __EXAMPLE_TYPE__ example of a specific rule (policy) for using a tool called ToolX.
+
+Input:
+Tools Descriptions: A list of tools and their functions and constraints.
+The Target Tool (ToolX): The tool for which the policy applies.
+The Policy Name and Description: Specifies the specific policy under evaluation.
+A __EXAMPLE_TYPE__ Example: A natural language use-case for __EXAMPLE_TYPE__ the policy.
+
+What You Need to Do
+For the __EXAMPLE_TYPE__ example, answer these four questions:
+    * Does this example is indeed a valid __EXAMPLE_TYPE__ example of the policy? or the opposite? (complience or violating example)
+    * Is the example clear and detailed enough to understand?
+    * Can someone write a test case based on this example?
+    * Can a validation function catch this problem before ToolX runs?
+
+For each question:
+    * First, explain why you think the example passes or fails.
+    * Then return a true or false value.
+
+Format the Output in JSON:
+```
+{
+  "is_valid": {
+    "justification": "Explain whether this example actually is a __EXAMPLE_TYPE__ example , and why.",
+    "value": true or false
+  },
+  "clarity_and_detail": {
+    "justification": "Explain if the example is clear, specific, and detailed enough to understand the problem.",
+    "value": true or false
+  },
+  "actionability": {
+    "justification": "Explain if someone could write a test case based on this example.",
+    "value": true or false
+  },
+  "verifiability": {
+    "justification": "Explain if a validation function could detect this problem before ToolX is used.",
+    "value": true or false
+  }
+}
+```

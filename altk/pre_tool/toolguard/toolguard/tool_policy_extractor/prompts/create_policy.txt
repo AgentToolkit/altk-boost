@@ -1,0 +1,57 @@
+Task:
+Given a Policy Document, Tools Descriptions, and a Target Tool (ToolX), extract and format all relevant policies that should be verified before invoking ToolX.
+
+Instructions:
+1. Identify policies from the Policy Document that are relevant to ToolX.
+2. Ensure that extracted policies:
+    * Are specifically applicable to ToolX (not general for all tools).
+    * Can be validated before calling ToolX.
+    * Are actionable, meaning they can be enforced based on ToolX’s parameters, chat history, and data access.
+    * Are self-contained, meaning the description should contain all necessary details without requiring access to external references.
+3. Split policies into the smallest reasonable parts so that:
+    * Each extracted policy contains only one condition.
+    * If a policy includes multiple conditions, split it into separate policies whenever possible.
+4. Provide exact references to the Policy Document for each extracted policy.
+    * Locate the exact passage(s) in the Policy Document that fully support the policy statement.
+    * The corrected reference must be a contiguous, verbatim excerpt from the Policy Document, ensuring it can be precisely highlighted.
+    * If no single passage fully supports the policy, replace the incorrect reference with multiple distinct references.
+    * Each reference must be a verbatim excerpt that appears exactly as written in the Policy Document.
+    * Each supporting passage should be listed separately within the "references" array.
+    * Make sure to extract only from the Policy Document and not from other input information like the tool description
+5. If no policies are applicable, return:
+"There are no relevant policies to validate before calling ToolX."
+
+Input Format:
+Policy Document – A text containing policies, rules, or constraints governing tool usage.
+Tools Descriptions – A list of tools with descriptions explaining their functionality and constraints.
+Target Tool (ToolX) – The specific tool for which relevant policies need to be identified.
+
+Output Format (JSON):
+{
+  "policies": [
+    {
+      "policy_name": "<Policy 1 Name>",
+      "description": "<Policy 1 Description>",
+      "references": [
+        "<Exact Passage 1 from Policy Document>",
+         "<Exact Passage 2 from Policy Document>",
+         ...
+      ],
+       "iteration_added": 0
+    },
+    ...
+    {
+      "policy_name": "<Policy n Name>",
+      "description": "<Policy n Description>",
+      "references": [
+        "<Exact Passage 1 from Policy Document>"
+         ...
+      ],
+       "iteration_added": 0
+    }
+  ]
+}
+If no relevant policies exist, return:
+{
+  "policies": []
+}

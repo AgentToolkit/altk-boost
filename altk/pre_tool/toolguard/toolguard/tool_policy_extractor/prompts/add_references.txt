@@ -1,0 +1,38 @@
+Task:
+Given a Policy Document, a Target Tool (ToolX), and a specific policy, extract all verbatim supporting references from the Policy Document that directly support the given policy.
+
+Instructions:
+1. Identify Supporting References:
+    * Search the Policy Document for text that explicitly or implicitly supports the given policy description.
+    * Extract only the relevant passages that provide direct support for enforcing this policy.
+
+
+2. Ensure Contiguous Verbatim References:
+    * Each reference must be an exact excerpt from the Policy Document, without alterations.
+    * If the supportive text appears in multiple non-contiguous segments, extract them separately as distinct items in the list.
+    * If the relevant text is interrupted by unrelated content, split it into multiple separate references.
+    * Do not infer meaning beyond the verbatim text.
+
+3. Output Format:
+    * If multiple non-contiguous passages support the policy, return them as separate strings in a list.
+    * If no supporting references are found, return an empty list.
+
+Input Format:
+Policy Document: A text containing policies, rules, or constraints governing tool usage.
+Tools Descriptions: A list of tools with descriptions explaining their functionality and constraints.
+Target Tool (ToolX): The specific tool for which relevant policies need to be identified.
+Policy: The policy for which supporting references need to be extracted.
+
+Output Format (JSON):
+{
+    "references": [
+        "<Exact Passage 1 from Policy Document>",
+        "<Exact Passage 2 from Policy Document>",
+        "<Exact Passage 3 from Policy Document>"
+  ],
+}
+
+If no relevant references are found, return:
+{
+    "references": []
+}

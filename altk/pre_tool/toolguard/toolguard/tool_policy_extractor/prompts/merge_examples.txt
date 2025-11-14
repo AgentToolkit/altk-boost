@@ -1,0 +1,58 @@
+Task: Deduplicate Examples in Policy Evaluation Context
+
+You are given the following inputs:
+* Policy Document: A text outlining rules, constraints, or usage policies for various tools.
+* Tools Descriptions: A list of tools along with explanations of their capabilities and constraints.
+* Target Tool (ToolX): The specific tool for which the policy is being analyzed.
+* Policy Name: The name of the policy
+* Policy Description: The description of the policy
+* Violating Examples: A list of example scenarios that violate the policy.
+* Compliance Examples: A list of example scenarios that are compliant with the policy.
+
+Your task is to refine both sets of examples (violating and compliance) by merging identical or semantically duplicate examples:
+Instructions:
+1. Review the examples in each set independently (i.e., review violating examples separately from compliance examples).
+2. Identify duplicates:
+    * If two or more examples describe the same scenario (identical or paraphrased), merge them into one clear and representative example.
+    * Examples are considered duplicates if they involve the same conditions and policy points being violated or followed.
+3. Do not merge examples that:
+    * Refer to different scenarios, distinct edge cases, or variations of policy application.
+    * Provide unique value in understanding how the policy is applied or violated.
+
+Output JSON Format:
+{
+  "violating_examples": [ ... ],
+  "compliance_examples": [ ... ]
+}
+
+Example:
+Input (Before Merging):
+{
+  "violating_examples": [
+    "ToolX is used without an authentication token.",
+    "A request is sent to ToolX without the required authentication token.",
+    "Input exceeds the character limit for ToolX.",
+    "ToolX request has input of more than 500 characters.",
+    "A restricted keyword is used in ToolX query."
+  ],
+  "compliance_examples": [
+    "A valid authentication token is used when calling ToolX.",
+    "The input for ToolX is within the allowed character limit.",
+    "No restricted keywords are present in the ToolX request.",
+    "ToolX is accessed with proper credentials and policy-compliant query."
+  ]
+}
+
+Output (After Merging):
+{
+  "violating_examples": [
+    "A request is sent to ToolX without the required authentication token, violating the policy that mandates authentication.",
+    "The input parameters for ToolX exceed the allowed 500-character limit, which violates input size constraints.",
+    "A restricted keyword is used in the ToolX request, which the policy explicitly disallows."
+  ],
+  "compliance_examples": [
+    "A user provides a valid authentication token when calling ToolX, following the authentication requirement.",
+    "The input parameters for ToolX are within the allowed character limit, meeting the policy criteria.",
+    "ToolX is accessed with valid credentials and a policy-compliant query containing no restricted keywords."
+  ]
+}

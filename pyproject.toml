@@ -39,6 +39,12 @@ dependencies = [
     "transformers>=4.53.3",
     "trl>=0.12.2",
     "typing-extensions>=4.0.0",
+    "pytest>=8.2.1",
+    "pytest-json-report>=1.5.0",
+    "pyright>=1.1.406",
+    "datamodel-code-generator>=0.34.0",
+    "mellea>=0.0.6",
+    "starlette>=0.49.1",
 ]
 
 description = "The Agent Lifecycle Toolkit (ALTK) is a library of components to help agent builders improve their agent with minimal integration effort and setup."
@@ -151,6 +157,11 @@ post_tool_reflection = [
 
 pre_tool_guard = [
     "pydantic>=2.0.0",
+    "pytest>=8.2.1",
+    "pytest-json-report>=1.5.0",
+    "pyright>=1.1.406",
+    "datamodel-code-generator>=0.34.0",
+    "mellea>=0.0.6",
 ]
 
 pre_tool_reflection = [

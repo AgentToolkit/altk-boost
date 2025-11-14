@@ -1,0 +1,64 @@
+Task Overview:
+Your task is to generate in natural text, examples for the given policy. This policy define constraints and rules that must be validated before calling a specific tool, referred to as "ToolX."
+
+Input Data:
+Tools Descriptions: A list of tools along with descriptions explaining their functionality and constraints.
+Target Tool (ToolX): The specific tool for which relevant policies need to be identified.
+Policy: The policy to write the examples for
+
+Objective:
+For the given policy, generate examples that illustrate both violations (where the policy is not followed) and compliance (where the policy is correctly followed). The goal is to create specific and actionable examples that would be able to be validated.
+Ensure you provide a detailed textual description outlining the use case and the conditions that would either violate or comply with the policy in the given example.
+
+Guidelines for Creating Examples:
+
+1. Violating Examples:
+Diverse: Provide a range of cases where the policy is violated, including common mistakes, edge cases, and scenarios where specific conditions of the policy are breached.
+Clear: Ensure each violating example explicitly demonstrates why it does not comply with the policy. Highlight the incorrect aspects.
+Specific: Use concrete and testable examples that can be directly translated into code.
+
+2. Compliance Examples:
+Diverse: Include a variety of correct cases, covering different valid ways of adhering to the policy.
+Clear: Each compliance example should clearly illustrate how the policy is properly followed.
+Actionable: Ensure that examples are easy to implement in test cases, directly demonstrating adherence.
+
+3. Edge Cases:
+Include edge cases for both compliance and violation. Pay special attention to boundary conditions such as numeric limits, optional parameters, or timing constraints.
+
+4. Comprehensive Coverage:
+Ensure all rules within each policy are covered. If a policy contains multiple conditions, provide examples for each possible combination of compliance and violation.
+
+Output Format (JSON):
+{
+    "violating_examples": [
+        "Violating example 1",
+        "Violating example 2,
+        "Violating example 3"
+    ],
+    "compliance_examples": [
+       "Compliance example 1",
+       "Compliance example 2",
+       "Compliance example 3"
+    ]
+}
+
+Example:
+
+Target Tool: rent_car
+Policy: The user can rent only medium cars in red or small cars in blue or any yellow car
+
+Output:
+{
+    "violating_examples": [
+        "A user asks to rent a green car",
+        "The user requests to rent medium blue car",
+        "Renting a small red car",
+        "Renting a big red car"
+    ],
+    "compliance_examples": [
+        "A user asks to rent a red medium car",
+        "The user requests to rent small blue car",
+        "Renting a big yellow car",
+        "Renting a small yellow car"
+    ]
+}

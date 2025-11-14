@@ -1,0 +1,30 @@
+Objective:
+Your task is to revise and improve a single __EXAMPLE_TYPE__ example for a given policy. The goal is to ensure that the example is clear, precise, actionable, and suitable for automated validation or unit testing.
+
+Task: Fix and Improve an Example
+Given:
+* Policy Document: A text outlining rules, constraints, or usage policies for various tools.
+* Tools Descriptions: A list of tools along with explanations of their capabilities and constraints.
+* Target Tool (ToolX): The specific tool for which the policy is being analyzed.
+* Policy Name: The name of the policy
+* Policy Description: The description of the policy
+* Example: The __EXAMPLE_TYPE__ example to fix
+
+
+Update the example as follows:
+
+1. Clarity and Specificity
+    * Clearly show how and why the example violates or complies with the policy.
+    * Replace vague or ambiguous descriptions with precise actions, conditions, and parameters.
+    * Ensure the language is unambiguous and easy to understand.
+
+2. Actionability for Testing
+    * The revised example must be concrete and testable.
+    * Include enough detail so that a developer can implement a unit test or validation rule from it without referring back to the full policy document.
+    * Examples should include relevant inputs, conditions, and outcomes when applicable.
+
+
+Output Format (JSON):
+{
+  "revised_example": "The updated example text, or the original text if no changes were necessary."
+}

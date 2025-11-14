@@ -1,0 +1,25 @@
+from typing import *
+{% for imp in extra_imports %}{{ imp }}
+{% endfor %}
+import {{to_snake_case(domain.app_name)}}
+from {{path_to_module(domain.toolguard_common.file_name)}} import PolicyViolationException
+from {{ path_to_module(domain.app_types.file_name) }} import *
+from {{ path_to_module(domain.app_api.file_name) }} import {{ domain.app_api_class_name }}
+
+{% for item in items %}from {{ path_to_module(item.file_name) }} import {{ item.guard_fn }}
+{% endfor %}
+
+def {{ method.name }}(api: {{ domain.app_api_class_name }}, {{ method.signature}}):
+    """
+    Checks that a tool call complies to the policies.
+
+    Args:
+        api ({{ domain.app_api_class_name }}): api to access other tools.
+{{method.args_doc_str}}
+
+    Raises:
+        PolicyViolationException: If the tool call does not comply to the policy.
+    """
+
+{% for item in items %}    {{ item.guard_fn }}(api, {{method.args_call}})
+{% endfor %}
