@@ -1,0 +1,7 @@
+[default]
+max_new_tokens = 500
+stop_sequences = ["###STOP###", "\n\n", "\n\n\n", "<|endoftext|>"]
+
+[default.tool_example_generation]
+max_new_tokens = 1000
+stop_sequences = ["\n\n\n"]
