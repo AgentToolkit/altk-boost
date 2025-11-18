@@ -94,6 +94,8 @@ def data_using_LLM(prompt, client, gen_mode):
 
 
 def post_process_testcase(response_from_LLM):
+    if isinstance(response_from_LLM, dict):
+        response_from_LLM = json.dumps(response_from_LLM)
     response_from_LLM = response_from_LLM.replace("\_", "_")
     response_from_LLM = response_from_LLM.replace("\n", "")
     response_from_LLM = response_from_LLM.replace("\t", "")
