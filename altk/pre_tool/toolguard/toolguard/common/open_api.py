@@ -1,4 +1,4 @@
-from enum import StrEnum
+from enum import Enum
 from pydantic import BaseModel, Field, HttpUrl
 from typing import List, Dict, Optional, Any, TypeVar, Union
 import json
@@ -80,6 +80,12 @@ class Response(BaseModel):
     def content_json(self):
         if self.content:
             return self.content.get(MEDIA_TYPE_APP_JSON)
+
+
+class StrEnum(str, Enum):
+    """An abstract base class for string-based enums."""
+
+    pass
 
 
 class ParameterIn(StrEnum):

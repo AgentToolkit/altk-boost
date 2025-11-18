@@ -1,8 +1,14 @@
-from enum import StrEnum
+from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
 
 from altk.pre_tool.toolguard.toolguard.common.ref import DocumentWithRef, Reference
+
+
+class StrEnum(str, Enum):
+    """An abstract base class for string-based enums."""
+
+    pass
 
 
 class JSONSchemaTypes(StrEnum):

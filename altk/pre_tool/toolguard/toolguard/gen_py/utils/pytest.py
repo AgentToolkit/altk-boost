@@ -1,4 +1,4 @@
-from enum import StrEnum
+from enum import Enum
 import json
 import os
 from os.path import join
@@ -9,6 +9,12 @@ from pydantic import BaseModel, Field
 from contextlib import contextmanager
 
 from altk.pre_tool.toolguard.toolguard.data_types import FileTwin
+
+
+class StrEnum(str, Enum):
+    """An abstract base class for string-based enums."""
+
+    pass
 
 
 class TestOutcome(StrEnum):

@@ -1,6 +1,4 @@
-# from enum import StrEnum
-
-from enum import StrEnum
+from enum import Enum
 from functools import cache
 from typing import List
 
@@ -8,6 +6,12 @@ from typing import List
 MEDIA_TYPE_APP_JSON = "application/json"
 MEDIA_TYPE_MULTIPART_FORM = "multipart/form-data"
 MEDIA_TYPE_APP_FORM = "application/x-www-form-urlencoded"
+
+
+class StrEnum(str, Enum):
+    """An abstract base class for string-based enums."""
+
+    pass
 
 
 class HttpMethod(StrEnum):
