@@ -21,11 +21,11 @@ jobs:
     name: Should Run CI tests
     runs-on: ubuntu-latest
     outputs:
-      should-run-tests: ${{ github.event_name == 'merge_group' }} # we only want to run tests when the PR is in a merge queue
+      should-run-tests: ${{ github.repository == 'AgentToolkit/agent-lifecycle-toolkit' || github.event_name == 'merge_group' }} # we only want to run tests when the PR is in a merge queue or the current repository
     steps:
       # A job must have a `steps` or `uses` entry to make sure it can be executed
       - run: echo "Debugging CI condition"
-      - run: echo "Should run tests? -> $ {{ $github.event_name == 'merge_group' }}"
+      - run: echo "Should run tests? -> ${{ github.event_name == 'merge_group' }}"
   check-code:
     uses: ./.github/workflows/check-code.yml
   run-tests:
