@@ -1,8 +1,8 @@
 from altk.core.toolkit import AgentPhase
 import os
-from altk.post_request.tool_validation_toolkit.core.toolkit import ToolValidationInput
-from altk.post_request.tool_validation_toolkit.core.config import ToolValidationConfig
-from altk.post_request.tool_validation_toolkit.utils.tool_validation import (
+from altk.build_time.tool_validation_toolkit.core.toolkit import ToolValidationInput
+from altk.build_time.tool_validation_toolkit.core.config import ToolValidationConfig
+from altk.build_time.tool_validation_toolkit.utils.tool_validation import (
     PythonToolValidationComponent,
 )
 

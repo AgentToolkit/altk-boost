@@ -81,7 +81,7 @@ This component expects three inputs 1) tool name, 2) tool test cases, 3) ReAct a
 ### Configuration
 This component supports configuring the tool test report level and by default `detailed` report is generated as output.
 ```python
-from altk.post_request.tool_validation_toolkit.core.config import ToolValidationConfig
+from altk.build_time.tool_validation_toolkit.core.config import ToolValidationConfig
 config = ToolValidationConfig(report_level='detailed')
 ```
 
@@ -227,9 +227,9 @@ config = ToolValidationConfig(report_level='detailed')
 * Running tool validation module with required inputs,configuration and obtaining the tool test report
     ```python
     from altk.core.toolkit import AgentPhase
-    from altk.post_request.tool_validation_toolkit.core.toolkit import ToolValidationInput
-    from altk.post_request.tool_validation_toolkit.core.config import ToolValidationConfig
-    from altk.post_request.tool_validation_toolkit.utils.tool_validation import ToolValidationComponent,PythonToolValidationComponent
+    from altk.build_time.tool_validation_toolkit.core.toolkit import ToolValidationInput
+    from altk.build_time.tool_validation_toolkit.core.config import ToolValidationConfig
+    from altk.build_time.tool_validation_toolkit.utils.tool_validation import ToolValidationComponent,PythonToolValidationComponent
     tool_validation_input = ToolValidationInput(python_tool_name=python_tool_name,
                                                     tool_test_cases=tool_test_cases,
                                                     agent_with_tools=agent_with_tools)

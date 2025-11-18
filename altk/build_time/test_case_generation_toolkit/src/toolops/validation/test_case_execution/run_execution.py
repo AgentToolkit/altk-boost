@@ -77,8 +77,8 @@ class ToolNLTestCaseExecution:
 
 # if __name__=="__main__":
 #     # create agents and create tools modules below are not required if the react agent with binded tools is provided
-#     from altk.post_request.test_case_generation_toolkit.src.toolops.validation.test_case_execution.test_case_execution_utils.agentenv.fr_langgraph.create_agents import get_react_agent,get_agent_llm
-#     from altk.post_request.test_case_generation_toolkit.src.toolops.validation.test_case_execution.test_case_execution_utils.agentenv.fr_langgraph.create_tools import get_tools
+#     from altk.build_time.test_case_generation_toolkit.src.toolops.validation.test_case_execution.test_case_execution_utils.agentenv.fr_langgraph.create_agents import get_react_agent,get_agent_llm
+#     from altk.build_time.test_case_generation_toolkit.src.toolops.validation.test_case_execution.test_case_execution_utils.agentenv.fr_langgraph.create_tools import get_tools
 #     test_data_path = os.path.join(pwd,"test_data","test_case_execution")
 #     output_report_path = os.path.join(pwd,"test_data","test_case_execution")
 #     test_tool_def_str = open(os.path.join(test_data_path,'getApiV2Tickets_tool.py')).read()

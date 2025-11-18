@@ -1,20 +1,20 @@
 from typing import Set
 from altk.core.toolkit import AgentPhase
-from altk.post_request.tool_enrichment_toolkit.core.toolkit import (
+from altk.build_time.tool_enrichment_toolkit.core.toolkit import (
     ToolEnrichComponent,
     PythonToolEnrichBuildInput,
     PythonToolEnrichBuildOutput,
     MCPCFToolEnrichBuildInput,
     MCPCFToolEnrichBuildOutput,
 )
-from altk.post_request.tool_enrichment_toolkit.core.config import (
+from altk.build_time.tool_enrichment_toolkit.core.config import (
     PythonToolEnrichConfig,
     MCPCFToolEnrichConfig,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment import (
     PythonToolOpsEnrichment,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.mcp_cf_tool_enrichment.enrichment import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.enrichment.mcp_cf_tool_enrichment.enrichment import (
     ToolOpsMCPCFToolEnrichment,
 )
 

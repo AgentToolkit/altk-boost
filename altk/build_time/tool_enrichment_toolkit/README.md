@@ -25,7 +25,7 @@ Initialize the Python Tool Enrichment config.
 
 Note: Only TEXT Generation mode is supported (CHAT support coming soon).
 ```python
-from altk.post_request.tool_enrichment_toolkit.core.config import PythonToolEnrichConfig
+from altk.build_time.tool_enrichment_toolkit.core.config import PythonToolEnrichConfig
 from altk.core.llm import get_llm, GenerationMode
 import os
 
@@ -51,8 +51,8 @@ config = PythonToolEnrichConfig(llm_client=get_llm_client_obj(model_id='mistrala
 ### Examples
 ```python
 from altk.core.toolkit import AgentPhase
-from altk.post_request.tool_enrichment_toolkit.core.toolkit import PythonToolEnrichBuildInput
-from altk.post_request.tool_enrichment_toolkit.utils.tool_enrichment import PythonToolEnrichComponent
+from altk.build_time.tool_enrichment_toolkit.core.toolkit import PythonToolEnrichBuildInput
+from altk.build_time.tool_enrichment_toolkit.utils.tool_enrichment import PythonToolEnrichComponent
 
 def test_tool_enrichment_with_new_middleware_interface():
     tool_enrich_input = PythonToolEnrichBuildInput(

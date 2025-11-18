@@ -1,5 +1,5 @@
 import json
-from altk.post_request.test_case_generation_toolkit.src.toolops.generation.nl_utterance_generation.nl_utterance_generation_utils import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.generation.nl_utterance_generation.nl_utterance_generation_utils import (
     nlg_util,
 )
 

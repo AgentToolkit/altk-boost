@@ -1,7 +1,7 @@
-from altk.post_request.test_case_generation_toolkit.src.toolops.toolspec.populate_toolspec_from_toolinfo import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.toolspec.populate_toolspec_from_toolinfo import (
     populate_toolspec,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.toolspec.populate_tool_info import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.toolspec.populate_tool_info import (
     parse_python_tool,
 )
 import logging

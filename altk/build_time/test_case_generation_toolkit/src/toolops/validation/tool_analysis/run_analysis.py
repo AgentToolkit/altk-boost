@@ -2,10 +2,10 @@ import os
 import json
 import logging
 
-from altk.post_request.test_case_generation_toolkit.src.toolops.validation.tool_analysis.tool_analysis_utils.analyse_events.error_processing import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.validation.tool_analysis.tool_analysis_utils.analyse_events.error_processing import (
     get_error_taxonomy_recommendations,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.validation.tool_analysis.tool_analysis_utils.report_utils.report_processing import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.validation.tool_analysis.tool_analysis_utils.report_utils.report_processing import (
     get_final_report,
 )
 

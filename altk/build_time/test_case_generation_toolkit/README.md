@@ -27,7 +27,7 @@ Initialize the Test Case Generation config.
 
 Note: Only TEXT Generation mode is supported (CHAT support coming soon).
 ```python
-from altk.post_request.test_case_generation_toolkit.core.config import TestCaseGenConfig
+from altk.build_time.test_case_generation_toolkit.core.config import TestCaseGenConfig
 from altk.core.llm import GenerationMode, get_llm
 import os
 
@@ -54,8 +54,8 @@ config = TestCaseGenConfig(
 
 ```python
 from altk.core.toolkit import AgentPhase
-from altk.post_request.test_case_generation_toolkit.core.toolkit import TestCaseGenBuildInput
-from altk.post_request.test_case_generation_toolkit.utils.test_case_generation import NLTestCaseGenComponent
+from altk.build_time.test_case_generation_toolkit.core.toolkit import TestCaseGenBuildInput
+from altk.build_time.test_case_generation_toolkit.utils.test_case_generation import NLTestCaseGenComponent
 
 def test_case_generation_with_toolkit_interface():
     test_case_gen_input = TestCaseGenBuildInput(
@@ -92,8 +92,8 @@ def listIssues(owner: str, repo: str, requestBody: Optional[Dict[str, Any]] = No
 
 ```python
 from altk.core.toolkit import AgentPhase
-from altk.post_request.test_case_generation_toolkit.core.toolkit import TestCaseGenBuildInput
-from altk.post_request.test_case_generation_toolkit.utils.test_case_generation import NLTestCaseGenComponent
+from altk.build_time.test_case_generation_toolkit.core.toolkit import TestCaseGenBuildInput
+from altk.build_time.test_case_generation_toolkit.utils.test_case_generation import NLTestCaseGenComponent
 
 
 def test_case_generation_values_with_toolkit_interface():

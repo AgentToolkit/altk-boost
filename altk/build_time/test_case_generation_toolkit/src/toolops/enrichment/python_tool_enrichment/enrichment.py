@@ -5,10 +5,10 @@ import aiofiles
 import yaml
 import tomli as tomllib
 
-from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.service import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.service import (
     enrich_tool,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.utils import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.utils import (
     ToolEnrichmentConfig,
     ToolEnrichmentOptions,
     ToolInputDetails,

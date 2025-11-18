@@ -1,13 +1,13 @@
 from altk.core.toolkit import AgentPhase
 from altk.core.llm import get_llm, GenerationMode
 import os
-from altk.post_request.tool_enrichment_toolkit.core.toolkit import (
+from altk.build_time.tool_enrichment_toolkit.core.toolkit import (
     PythonToolEnrichBuildInput,
 )
-from altk.post_request.tool_enrichment_toolkit.utils.tool_enrichment import (
+from altk.build_time.tool_enrichment_toolkit.utils.tool_enrichment import (
     PythonToolEnrichComponent,
 )
-from altk.post_request.tool_enrichment_toolkit.core.config import PythonToolEnrichConfig
+from altk.build_time.tool_enrichment_toolkit.core.config import PythonToolEnrichConfig
 
 
 def get_llm_client_obj(model_name="mistralai/mistral-medium-2505"):

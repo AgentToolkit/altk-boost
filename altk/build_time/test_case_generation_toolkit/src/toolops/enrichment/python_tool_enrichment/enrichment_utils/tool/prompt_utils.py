@@ -5,13 +5,13 @@ import re
 from typing import Any
 from langchain_core.utils.json import parse_json_markdown
 
-from altk.post_request.test_case_generation_toolkit.src.toolops.utils.llm_util import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.utils.llm_util import (
     execute_prompt,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool import (
     constants as cnst,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.utils import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.utils import (
     ToolElements,
     ToolEnrichmentConfig,
 )

@@ -1,11 +1,11 @@
 from altk.core.toolkit import AgentPhase
-from altk.post_request.test_case_generation_toolkit.core.toolkit import (
+from altk.build_time.test_case_generation_toolkit.core.toolkit import (
     TestCaseGenBuildInput,
 )
-from altk.post_request.test_case_generation_toolkit.utils.test_case_generation import (
+from altk.build_time.test_case_generation_toolkit.utils.test_case_generation import (
     NLTestCaseGenComponent,
 )
-from altk.post_request.test_case_generation_toolkit.core.config import TestCaseGenConfig
+from altk.build_time.test_case_generation_toolkit.core.config import TestCaseGenConfig
 from altk.core.llm import get_llm, GenerationMode
 import os
 

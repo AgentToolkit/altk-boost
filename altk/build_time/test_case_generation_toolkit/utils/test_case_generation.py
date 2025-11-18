@@ -1,20 +1,20 @@
 from typing import Set
 from altk.core.toolkit import AgentPhase
-from altk.post_request.test_case_generation_toolkit.core.toolkit import (
+from altk.build_time.test_case_generation_toolkit.core.toolkit import (
     TestCaseGenComponent,
     TestCaseGenBuildInput,
     TestCaseGenBuildOutput,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation import (
     TestcaseGeneration,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.generation.nl_utterance_generation.nl_utterance_generation import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.generation.nl_utterance_generation.nl_utterance_generation import (
     NlUtteranceGeneration,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.toolspec.generate_toolspec import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.toolspec.generate_toolspec import (
     get_toolspec,
 )
-from altk.post_request.test_case_generation_toolkit.core.config import TestCaseGenConfig
+from altk.build_time.test_case_generation_toolkit.core.config import TestCaseGenConfig
 
 
 class NLTestCaseGenComponent(TestCaseGenComponent):

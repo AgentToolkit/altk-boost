@@ -1,4 +1,4 @@
-from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.utils import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.utils import (
     CustomException,
 )
 

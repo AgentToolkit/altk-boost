@@ -4,11 +4,11 @@ from ast import literal_eval
 from pathlib import Path
 from typing import Any
 
-from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool import (
     constants as cnst,
     prompt_utils,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.docstring_utils import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.docstring_utils import (
     compose_google_docstring,
     convert_google_to_sphinx,
     convert_sphinx_to_google,
@@ -22,7 +22,7 @@ from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.pytho
     parse_google_docstring,
     replace_docstring,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.utils import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.enrichment.python_tool_enrichment.enrichment_utils.tool.utils import (
     CustomException,
     ToolDocstringElements,
     ToolElements,

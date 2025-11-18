@@ -1,6 +1,6 @@
 import json
 import logging
-from altk.post_request.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.prompt_execution import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.prompt_execution import (
     data_using_LLM,
     post_process_testcase,
 )

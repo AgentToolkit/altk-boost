@@ -1,22 +1,22 @@
 import yaml
 import json
-from altk.post_request.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.utils import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.utils import (
     tool_spec_post_process,
     check_for_duplicate,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.combination_modules.all_param_generation import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.combination_modules.all_param_generation import (
     all_param_testcase,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.combination_modules.mandatory_optional_param_generation import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.combination_modules.mandatory_optional_param_generation import (
     mandatory_optional_param_testcase,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.combination_modules.mandatory_param_generation import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.combination_modules.mandatory_param_generation import (
     mandatory_param_testcase,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.using_optionally_provided_data.testcase_optional_data import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.using_optionally_provided_data.testcase_optional_data import (
     generate_testcases_optional_data,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.all_testcase_post_process import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.all_testcase_post_process import (
     all_testcase_postprocess,
 )
 import logging

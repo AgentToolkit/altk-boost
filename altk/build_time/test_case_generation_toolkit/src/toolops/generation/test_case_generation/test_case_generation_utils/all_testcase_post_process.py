@@ -1,4 +1,4 @@
-from altk.post_request.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.utils import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.generation.test_case_generation.test_case_generation_utils.utils import (
     generated_testcase_to_nl_template,
 )
 

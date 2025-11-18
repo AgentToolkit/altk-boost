@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-from altk.post_request.test_case_generation_toolkit.src.toolops.utils.llm_util import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.utils.llm_util import (
     execute_prompt,
 )
 import numpy as np

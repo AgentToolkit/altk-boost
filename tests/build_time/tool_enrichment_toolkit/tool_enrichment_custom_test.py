@@ -18,13 +18,13 @@ def get_llm_client_obj(model_name="mistralai/mistral-medium-2505"):
 
 def test_tool_enrichment_with_toolkit_interface():
     # tool_enrichment is broken if <3.12, needs patch
-    from altk.post_request.tool_enrichment_toolkit.core.toolkit import (
+    from altk.build_time.tool_enrichment_toolkit.core.toolkit import (
         PythonToolEnrichBuildInput,
     )
-    from altk.post_request.tool_enrichment_toolkit.utils.tool_enrichment import (
+    from altk.build_time.tool_enrichment_toolkit.utils.tool_enrichment import (
         PythonToolEnrichComponent,
     )
-    from altk.post_request.tool_enrichment_toolkit.core.config import (
+    from altk.build_time.tool_enrichment_toolkit.core.config import (
         PythonToolEnrichConfig,
     )
 

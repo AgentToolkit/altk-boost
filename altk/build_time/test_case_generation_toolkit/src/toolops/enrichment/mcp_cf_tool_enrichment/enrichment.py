@@ -5,10 +5,10 @@ import datetime
 import os
 import tomli as tomllib
 from typing import Any
-from altk.post_request.test_case_generation_toolkit.src.toolops.exceptions import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.exceptions import (
     ToolEnrichmentError,
 )
-from altk.post_request.test_case_generation_toolkit.src.toolops.enrichment.mcp_cf_tool_enrichment.prompt_utils import (
+from altk.build_time.test_case_generation_toolkit.src.toolops.enrichment.mcp_cf_tool_enrichment.prompt_utils import (
     generate_enriched_tool_description,
 )
 
