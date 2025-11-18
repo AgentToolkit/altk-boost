@@ -2,7 +2,7 @@
 *.pyc
 .env
 agent_lifecycle_toolkit.egg-info/
-./build
+build
 dist
 .DS_Store
 *.whl
