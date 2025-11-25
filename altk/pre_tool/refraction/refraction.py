@@ -117,6 +117,10 @@ class RefractionComponent(ComponentBase):
         return current_result
 
     def _build(self, data: RefractionBuildInput) -> Refractor:
+        if data.tool_specs is None:
+            raise ImportError(
+                "nestful-wrapper needs to be installed. Please run `pip install nestful-wrapper`"
+            )
         logger.info("Starting build phase ...")
         self._refractor.catalog = data.tool_specs
 

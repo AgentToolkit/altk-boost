@@ -16,7 +16,6 @@ dependencies = [
     "jsonschema>=4.0.0",
     "langchain-core>=0.3.72",
     "litellm<2.0.0",
-    "nestful-wrapper>=0.1.4", # FIXME: this is only used in pre-tool but is tied to code in the core module.
     "openai>=1.0.0",
     "pydantic>=2.0.0",
     "smolagents>=1.21.3",
@@ -151,6 +150,7 @@ pre_tool = [
     "pyright>=1.1.406",
     "datamodel-code-generator>=0.34.0",
     "mellea~=0.0.6",
+    "nestful-wrapper>=0.1.4",
 ]
 
 [[tool.uv.index]]

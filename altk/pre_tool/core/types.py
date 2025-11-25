@@ -8,7 +8,11 @@ from altk.pre_tool.refraction.src.schemas.results import (
     DebuggingResult,
 )
 from altk.pre_tool.refraction.src.schemas.mappings import Mapping
-from nestful.schemas.api import Catalog
+
+try:
+    from nestful.schemas.api import Catalog
+except ImportError:
+    Catalog = None
 
 
 class SPARCReflectionDecision(str, Enum):
