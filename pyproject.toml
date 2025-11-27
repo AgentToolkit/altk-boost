@@ -141,7 +141,7 @@ pre_llm = [
 pre_response = []
 
 pre_tool = [
-    { version = ">=0.1.2", name = "nl2flow", markers = "sys_platform != 'win32'" },
+    "nl2flow>=0.1.2; sys_platform != 'win32'",
     "nltk>=3.9.1",
     "scipy>=1.15.3",
     "sentence-transformers>=5.0.0",
