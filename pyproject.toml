@@ -141,7 +141,6 @@ pre_llm = [
 pre_response = []
 
 pre_tool = [
-    "nl2flow>=0.1.2",
     "nltk>=3.9.1",
     "scipy>=1.15.3",
     "sentence-transformers>=5.0.0",
