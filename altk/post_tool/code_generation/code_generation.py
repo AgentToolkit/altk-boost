@@ -1,4 +1,3 @@
-from llm_sandbox import SandboxSession
 import logging
 from altk.core.toolkit import AgentPhase, ComponentConfig
 from typing import Set, Any
@@ -80,6 +79,12 @@ result = {function_name}({tool_response})
 print(result)
 """.strip()
         if self.config.use_docker_sandbox:
+            try:
+                from llm_sandbox import SandboxSession
+            except ImportError:
+                raise RuntimeError(
+                    "llm_sandbox is not installed to execute code in sandbox. Please install it by the command pip install llm_sandbox."
+                ) from None
             with SandboxSession(lang="python") as session:  # type: ignore
                 execution_result = session.run(script)
                 return execution_result.stdout
