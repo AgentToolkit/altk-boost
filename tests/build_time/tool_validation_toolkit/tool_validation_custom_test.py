@@ -33,6 +33,8 @@ def get_agent_llm(agent_llm_model_id="mistralai/mistral-medium-2505"):
 
     # set "WATSONX_API_KEY" env variable as required by ChatWatsonx Model
     os.environ["WATSONX_APIKEY"] = WATSONX_API_KEY
+    # also set "WATSONX_URL" env variable for ChatWatsonx
+    os.environ["WATSONX_URL"] = WATSONX_URL
     credentials = wx_credentials(url=WATSONX_URL, api_key=WATSONX_API_KEY)
     project_id = WATSONX_PROJECT
     try:
