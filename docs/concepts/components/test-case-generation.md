@@ -15,7 +15,7 @@ formats and any internal parameter dependencies. This component is designed to p
 ## Architecture
 The figure below shows the flow of test case generation.
 
-<img src="../../assets/img_test_case.png" width="50%">
+<img src="https://raw.githubusercontent.com/AgentToolkit/agent-lifecycle-toolkit/refs/heads/main/docs/assets/img_test_case.png" width="50%"/>
 
 ### Interface
 This component expects the following inputs and generates the following output.

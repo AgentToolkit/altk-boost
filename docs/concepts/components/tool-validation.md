@@ -21,12 +21,12 @@ This component performs tool validation and provide test report with the followi
 | Tool back-end server issue                             | Tool server is down, try after some time                                                                                                                                                                                                         |
 | Issue with the inputs provided to the tool             | Tool input malformed, please provide tool inputs in correct format                                                                                                                                                                               |
 | No results found in the tool output                    | Please provide relevant tool input values                                                                                                                                                                                                        |
- 
+
 
 ## Architecture
 The figure below shows the flow of tool validation.
 
-<img src="../../assets/img_tool_val.png" width="50%">
+<img src="https://raw.githubusercontent.com/AgentToolkit/agent-lifecycle-toolkit/refs/heads/main/docs/assets/img_tool_val.png" width="50%"/>
 
 ## Benchmarking
 Tool Validation is benchmarked on more than 180 tools related to enterprise applications with 2400 test cases. Following is the benchmarking results show that tool failures happen due to various errors and approximately 30 percent of test cases are passed with out any errors and only 36 percent of tools are working without any failures.
@@ -34,15 +34,15 @@ Tool Validation is benchmarked on more than 180 tools related to enterprise appl
 ![img_tool_validation_benchmark.png](../../assets/img_tool_validation_benchmark.png)
 
 ### Interface
-This component expects the following input and generates the following output. 
+This component expects the following input and generates the following output.
 
 #### Input
 1. `python_tool_name` - tool that is used of validation.
-2. `tool_test_cases` - multiple tool test cases used for testing the tool with an agent. 
+2. `tool_test_cases` - multiple tool test cases used for testing the tool with an agent.
 3. `agent_with_tools` - We use langgraph type react agent bounded to the necessary tools to execute tool test cases.
 #### Output
 `test_report`: Tool test report with identified tool error taxonomy, recommendations for each test case (additionally tool execution logs can be added).
 
 ## Getting Started
-Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/build_time/tool_validation_toolkit/README.md) for instructions on how to get started with the code. 
+Refer to this [README](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/altk/build_time/tool_validation_toolkit/README.md) for instructions on how to get started with the code.
 See an example in action [here](https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/examples/tool_validation_single_tool_example.py).

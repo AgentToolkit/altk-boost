@@ -15,7 +15,7 @@ This component accepts as input the tool definition python file as string (consi
 
 The figure below shows the flow of tool enrichment.
 
-<img src="../../assets/img_tool_enrich.png" width="600">
+<img src="https://raw.githubusercontent.com/AgentToolkit/agent-lifecycle-toolkit/refs/heads/main/docs/assets/img_tool_enrich.png" width="600"/>
 
 ### Interface
 This component expects the following input and generates the following output.
