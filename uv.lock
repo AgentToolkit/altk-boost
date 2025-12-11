@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.10"
 resolution-markers = [
     "python_full_version >= '3.13' and platform_machine == 'x86_64' and sys_platform == 'darwin'",
@@ -49,30 +49,43 @@ name = "agent-lifecycle-toolkit"
 version = "0.9.0"
 source = { editable = "." }
 dependencies = [
+    { name = "aiofiles" },
+    { name = "black" },
+    { name = "datamodel-code-generator" },
+    { name = "docstring-parser" },
+    { name = "genson" },
     { name = "ibm-watsonx-ai", version = "1.3.42", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "ibm-watsonx-ai", version = "1.4.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "jinja2" },
     { name = "jsonschema" },
+    { name = "langchain-chroma" },
+    { name = "langchain-community" },
     { name = "langchain-core" },
+    { name = "langchain-huggingface" },
+    { name = "langchain-text-splitters" },
     { name = "litellm" },
+    { name = "llm-sandbox", extra = ["docker", "podman"] },
+    { name = "mellea" },
+    { name = "nltk" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "openai" },
     { name = "pydantic" },
+    { name = "pydash" },
+    { name = "pymilvus", extra = ["milvus-lite", "model"] },
+    { name = "pyright" },
+    { name = "pytest" },
+    { name = "pytest-json-report" },
+    { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "scipy", version = "1.16.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "smolagents" },
+    { name = "tomli" },
     { name = "typing-extensions" },
 ]
 
 [package.optional-dependencies]
 build = [
     { name = "uv" },
-]
-build-time = [
-    { name = "aiofiles" },
-    { name = "black" },
-    { name = "docstring-parser" },
-    { name = "langchain-core" },
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "tomli" },
 ]
 docs = [
     { name = "griffe-inherited-docstrings" },
@@ -84,31 +97,6 @@ docs = [
     { name = "mkdocs-jupyter" },
     { name = "mkdocs-material" },
     { name = "mkdocstrings", extra = ["python"] },
-]
-post-tool = [
-    { name = "genson" },
-    { name = "langchain-chroma" },
-    { name = "langchain-community" },
-    { name = "langchain-huggingface" },
-    { name = "langchain-text-splitters" },
-    { name = "llm-sandbox", extra = ["docker", "podman"] },
-]
-pre-llm = [
-    { name = "pydash" },
-    { name = "pymilvus", extra = ["milvus-lite", "model"] },
-    { name = "torch", version = "2.2.2", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine == 'x86_64' and sys_platform == 'darwin'" },
-    { name = "torch", version = "2.9.1", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine != 'x86_64' or sys_platform != 'darwin'" },
-    { name = "transformers" },
-]
-pre-tool = [
-    { name = "datamodel-code-generator" },
-    { name = "mellea" },
-    { name = "nltk" },
-    { name = "pyright" },
-    { name = "pytest" },
-    { name = "pytest-json-report" },
-    { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "scipy", version = "1.16.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
 ]
 refraction = [
     { name = "nestful-wrapper" },
@@ -155,25 +143,24 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "aiofiles", marker = "extra == 'build-time'", specifier = "==24.1.0" },
-    { name = "black", marker = "extra == 'build-time'", specifier = ">=25.1.0" },
-    { name = "datamodel-code-generator", marker = "extra == 'pre-tool'", specifier = ">=0.34.0" },
-    { name = "docstring-parser", marker = "extra == 'build-time'", specifier = ">=0.16" },
-    { name = "genson", marker = "extra == 'post-tool'", specifier = ">=1.3.0" },
+    { name = "aiofiles", specifier = "==24.1.0" },
+    { name = "black", specifier = ">=25.1.0" },
+    { name = "datamodel-code-generator", specifier = ">=0.34.0" },
+    { name = "docstring-parser", specifier = ">=0.16" },
+    { name = "genson", specifier = ">=1.3.0" },
     { name = "griffe-inherited-docstrings", marker = "extra == 'docs'" },
     { name = "griffe-pydantic", marker = "extra == 'docs'" },
     { name = "ibm-watsonx-ai", specifier = ">=1.0.0" },
     { name = "jinja2", specifier = ">=3.1.6" },
     { name = "jsonschema", specifier = ">=4.0.0" },
-    { name = "langchain-chroma", marker = "extra == 'post-tool'", specifier = ">=0.1.4" },
-    { name = "langchain-community", marker = "extra == 'post-tool'", specifier = ">=0.3.21" },
+    { name = "langchain-chroma", specifier = ">=0.1.4" },
+    { name = "langchain-community", specifier = ">=0.3.21" },
     { name = "langchain-core", specifier = ">=0.3.72" },
-    { name = "langchain-core", marker = "extra == 'build-time'", specifier = ">=0.3.72" },
-    { name = "langchain-huggingface", marker = "extra == 'post-tool'", specifier = ">=0.3.0" },
-    { name = "langchain-text-splitters", marker = "extra == 'post-tool'", specifier = ">=1.0.0" },
+    { name = "langchain-huggingface", specifier = ">=0.3.0" },
+    { name = "langchain-text-splitters", specifier = ">=1.0.0" },
     { name = "litellm", specifier = "<2.0.0" },
-    { name = "llm-sandbox", extras = ["docker", "podman"], marker = "extra == 'post-tool'", specifier = ">=0.2.5" },
-    { name = "mellea", marker = "extra == 'pre-tool'", specifier = "~=0.0.6" },
+    { name = "llm-sandbox", extras = ["docker", "podman"], specifier = ">=0.2.5" },
+    { name = "mellea", specifier = "~=0.0.6" },
     { name = "mkdocs-awesome-nav", marker = "extra == 'docs'" },
     { name = "mkdocs-click", marker = "extra == 'docs'" },
     { name = "mkdocs-enumerate-headings-plugin", marker = "extra == 'docs'" },
@@ -183,26 +170,26 @@ requires-dist = [
     { name = "mkdocstrings", extras = ["python"], marker = "extra == 'docs'" },
     { name = "nestful-wrapper", marker = "extra == 'refraction'", specifier = ">=0.1.4" },
     { name = "nl2flow", marker = "sys_platform != 'win32' and extra == 'refraction'", specifier = ">=0.1.2" },
-    { name = "nltk", marker = "extra == 'pre-tool'", specifier = ">=3.9.1" },
-    { name = "numpy", marker = "extra == 'build-time'", specifier = ">=2.2.6" },
+    { name = "nltk", specifier = ">=3.9.1" },
+    { name = "numpy", specifier = ">=2.2.6" },
     { name = "openai", specifier = ">=1.0.0" },
     { name = "pydantic", specifier = ">=2.0.0" },
-    { name = "pydash", marker = "extra == 'pre-llm'", specifier = ">=8.0.5" },
-    { name = "pymilvus", extras = ["milvus-lite", "model"], marker = "extra == 'pre-llm'", specifier = ">=2.6.2" },
-    { name = "pyright", marker = "extra == 'pre-tool'", specifier = ">=1.1.406" },
-    { name = "pytest", marker = "extra == 'pre-tool'", specifier = ">=8.2.1" },
-    { name = "pytest-json-report", marker = "extra == 'pre-tool'", specifier = ">=1.5.0" },
-    { name = "scipy", marker = "extra == 'pre-tool'", specifier = ">=1.15.3" },
+    { name = "pydash", specifier = ">=8.0.5" },
+    { name = "pymilvus", extras = ["milvus-lite", "model"], specifier = ">=2.6.2" },
+    { name = "pyright", specifier = ">=1.1.406" },
+    { name = "pytest", specifier = ">=8.2.1" },
+    { name = "pytest-json-report", specifier = ">=1.5.0" },
+    { name = "scipy", specifier = ">=1.15.3" },
     { name = "sentence-transformers", marker = "extra == 'refraction'", specifier = ">=5.0.0" },
     { name = "smolagents", specifier = ">=1.21.3" },
-    { name = "tomli", marker = "extra == 'build-time'", specifier = "==2.2.1" },
+    { name = "tomli", specifier = "==2.2.1" },
     { name = "torch", marker = "platform_machine == 'x86_64' and sys_platform == 'darwin' and extra == 'spotlight'", specifier = "==2.2.2" },
     { name = "torch", marker = "(platform_machine != 'x86_64' and extra == 'spotlight') or (sys_platform != 'darwin' and extra == 'spotlight')", specifier = ">=2.5.1" },
     { name = "transformers", marker = "extra == 'spotlight'", specifier = ">=4.53.3" },
     { name = "typing-extensions", specifier = ">=4.0.0" },
     { name = "uv", marker = "extra == 'build'", specifier = "~=0.8.22" },
 ]
-provides-extras = ["docs", "build", "build-time", "post-tool", "pre-llm", "pre-response", "pre-tool", "spotlight", "refraction"]
+provides-extras = ["docs", "build", "spotlight", "refraction"]
 
 [package.metadata.requires-dev]
 dev = [
