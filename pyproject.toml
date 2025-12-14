@@ -20,7 +20,7 @@ dependencies = [
     "pydantic>=2.0.0",
     "smolagents>=1.21.3",
     "typing-extensions>=4.0.0",
-    "toolguard>=0.1.3"
+    "toolguard>=0.1.6"
 ]
 
 description = "The Agent Lifecycle Toolkit (ALTK) is a library of components to help agent builders improve their agent with minimal integration effort and setup."

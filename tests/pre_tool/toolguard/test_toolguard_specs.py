@@ -66,19 +66,19 @@ async def test_tool_guard_calculator_policy(out_dir: str):
     """
 
     # Example alternative LLM:
-    LLMClient = get_llm("litellm.output_val")
-    llm_client = LLMClient(
-        model_name="gpt-4o-2024-08-06",
-        custom_llm_provider="azure",
-    )
-
-    # LLMClient = get_llm("watsonx.output_val")
+    # LLMClient = get_llm("litellm.output_val")
     # llm_client = LLMClient(
-    #     model_name="mistralai/mistral-medium-2505",
-    #     api_key=os.getenv("WX_API_KEY"),
-    #     project_id=os.getenv("WX_PROJECT_ID"),
-    #     url=os.getenv("WX_URL", "https://us-south.ml.cloud.ibm.com"),
+    #     model_name="gpt-4o-2024-08-06",
+    #     custom_llm_provider="azure",
     # )
+
+    LLMClient = get_llm("watsonx.output_val")
+    llm_client = LLMClient(
+        model_name="mistralai/mistral-medium-2505",
+        api_key=os.getenv("WX_API_KEY"),
+        project_id=os.getenv("WX_PROJECT_ID"),
+        url=os.getenv("WX_URL", "https://us-south.ml.cloud.ibm.com"),
+    )
 
     toolguard_spec = ToolGuardSpecComponent(
         ToolGuardSpecComponentConfig(llm_client=llm_client)

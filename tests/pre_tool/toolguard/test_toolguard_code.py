@@ -23,7 +23,7 @@ from altk.pre_tool.toolguard import (
     ToolGuardCodeBuildInput,
 )
 from toolguard.data_types import (
-    MeleaSessionData,
+    MelleaSessionData,
     load_tool_policy,
 )
 from toolguard.runtime import (
@@ -51,6 +51,7 @@ from .inputs.tool_functions import (
 # Load environment variables
 dotenv.load_dotenv()
 
+WATSONX_CREDS_AVAILABLE = all([os.getenv("WX_API_KEY"), os.getenv("WX_PROJECT_ID")])
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -74,11 +75,12 @@ def work_dir():
 # ---------------------------------------------------------------------------
 
 @pytest.mark.asyncio
+@pytest.mark.skipif(not WATSONX_CREDS_AVAILABLE, reason="WatsonX credentials not set")
 async def test_tool_guard_calculator_policy(work_dir: str):
     # Tools to be guarded
     funcs = [divide_tool, add_tool, multiply_tool, subtract_tool, map_kdi_number]
 
-    # Configure Melea session used in ToolGuard LLM
+    # Configure Mellea session used in ToolGuard LLM
     # see https://docs.mellea.ai/api-reference/core-library/stdlib/mellea-stdlib-session#start-session
     backend_name = "openai" #"ollama", "hf", "openai", "watsonx", "litellm"
     model_id = "GCP/claude-4-sonnet"
@@ -90,7 +92,7 @@ async def test_tool_guard_calculator_policy(work_dir: str):
     # Build ToolGuard component
     toolguard_code = ToolGuardCodeComponent(
         ToolGuardCodeComponentConfig(
-            llm_config=MeleaSessionData(
+            llm_config=MelleaSessionData(
                 backend_name=backend_name,
                 model_id=model_id,
                 kw_args=kw_args,

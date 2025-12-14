@@ -6,14 +6,14 @@ from typing import Set
 from langchain.tools import BaseTool
 
 from altk.core.toolkit import ComponentConfig, ComponentInput, AgentPhase, ComponentBase
-from toolguard.data_types import MeleaSessionData
+from toolguard.data_types import MelleaSessionData
 from toolguard import generate_guards_from_specs, ToolGuardSpec, ToolGuardsCodeGenerationResult, load_toolguards
 from toolguard.runtime import IToolInvoker, ToolGuardsCodeGenerationResult
 
 logger = logging.getLogger(__name__)
 
 class ToolGuardCodeComponentConfig(ComponentConfig):
-    llm_config: MeleaSessionData | None = None 
+    llm_config: MelleaSessionData | None = None 
 
 class ToolGuardCodeBuildInput(ComponentInput):
     tools: List[Callable] | List[BaseTool] | str
