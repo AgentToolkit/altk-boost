@@ -2,6 +2,10 @@
 
 A component that detects if the last message in a conversation between a user and an AI agent is a follow up question, thus the conversation should remain in the current route, or a new topic that requires re-routing.
 
+## Installation
+
+Make sure the dependencies for the Routing components are included by running `pip install "agent-lifecycle-toolkit[routing]"`.
+
 ## Why this component is helpful
 AI Agents often use routers or manager agents to identify which collaborators or tools are best to handle a given input.  These approaches work well for the first utterance in a conversation, or complete utterances that contain all the information needed to route. However agent interaction is often multi-turn, with multiple back-and-forth questions and answers from the user and AI Agent. The user may say things like "why", "shorter", or "convert it to metric". These scenarios require examining the conversation history to decide which route should be taken.
 

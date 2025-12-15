@@ -6,11 +6,16 @@ A middleware solution to improve routing accuracy for manager agents that contai
 ## Table of Contents
 
 - [Overview](#overview)
+- [Installation](#installation)
 - [When to Use This Component](#when-to-use-this-component)
 - [How it Works](#how-it-works)
 - [Quick Start](#quick-start)
 - [License](#license)
 - [Under the Hood](#under-the-hood)
+
+## Installation
+
+Make sure the dependencies for the Routing components are included by running `pip install "agent-lifecycle-toolkit[routing]"`.
 
 ## Overview
 
