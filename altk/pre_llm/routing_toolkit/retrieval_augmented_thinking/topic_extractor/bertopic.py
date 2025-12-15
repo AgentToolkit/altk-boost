@@ -1,6 +1,17 @@
 from typing import Dict, List, Literal
-from bertopic import BERTopic
+
 from pydantic import BaseModel
+
+try:
+    from bertopic import BERTopic
+    from sklearn.feature_extraction.text import CountVectorizer
+    from sentence_transformers import SentenceTransformer
+    from hdbscan import HDBSCAN
+except ImportError as err:
+    raise ImportError(
+        'You need to install the routing dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[routing]"`'
+    ) from err
+
 from altk.pre_llm.core.types import TopicExtractionBuildOutput, TopicInfo
 from altk.pre_llm.core.types import (
     TopicExtractionInput,
@@ -8,9 +19,6 @@ from altk.pre_llm.core.types import (
 from altk.pre_llm.routing_toolkit.retrieval_augmented_thinking.topic_extractor.tfidf_words import (
     CountVectorizerSettings,
 )
-from sklearn.feature_extraction.text import CountVectorizer
-from sentence_transformers import SentenceTransformer
-from hdbscan import HDBSCAN
 
 
 class HDBSCANSettings(BaseModel):

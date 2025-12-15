@@ -1,22 +1,28 @@
-from nl2flow.compile.flow import Flow
-from nl2flow.compile.operators import ClassicalOperator as Operator
-from nl2flow.compile.options import TypeOptions, BasicOperations, GoalOptions
-from nl2flow.compile.schemas import (
-    SignatureItem,
-    Parameter,
-    MemoryItem,
-    MemoryState,
-    Step,
-    GoalItems,
-    GoalItem,
-    GoalType,
-    SlotProperty,
-    MappingItem,
-)
+try:
+    from nl2flow.compile.flow import Flow
+    from nl2flow.compile.operators import ClassicalOperator as Operator
+    from nl2flow.compile.options import TypeOptions, BasicOperations, GoalOptions
+    from nl2flow.compile.schemas import (
+        SignatureItem,
+        Parameter,
+        MemoryItem,
+        MemoryState,
+        Step,
+        GoalItems,
+        GoalItem,
+        GoalType,
+        SlotProperty,
+        MappingItem,
+    )
 
-from nestful import Catalog, API, SequencingData, SequenceStep
-from nestful.schemas.api import QueryParameter
-from nestful.utils import get_token, extract_label
+    from nestful import Catalog, API, SequencingData, SequenceStep
+    from nestful.schemas.api import QueryParameter
+    from nestful.utils import get_token, extract_label
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from altk.pre_tool.refraction.src.schemas import Mapping
 from altk.pre_tool.refraction.src.utils import num_references
 from altk.pre_tool.refraction.src.printer import CustomPrint

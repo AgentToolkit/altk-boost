@@ -1,5 +1,12 @@
 from typing import List, Dict
-from nestful import Catalog, API
+
+try:
+    from nestful import Catalog, API
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from altk.pre_tool.refraction.src.schemas.mappings import (
     Mapping,
     MappingCandidate,

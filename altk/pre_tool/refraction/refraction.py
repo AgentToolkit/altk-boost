@@ -2,7 +2,14 @@ import re
 import json
 import logging
 from typing import Optional, Set
-from nestful.schemas.sequences import SequenceStep, SequencingData
+
+try:
+    from nestful.schemas.sequences import SequenceStep, SequencingData
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from altk.core.toolkit import AgentPhase, ComponentBase
 from altk.pre_tool.core.config import (
     RefractionConfig,

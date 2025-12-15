@@ -4,7 +4,14 @@ from altk.pre_tool.refraction.src.schemas.mappings import Mapping
 from altk.pre_tool.refraction.src.schemas.results import (
     DebuggingResult,
 )
-from nestful import Catalog, SequencingData, SequenceStep
+
+try:
+    from nestful import Catalog, SequencingData, SequenceStep
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from typing import List, Dict, Optional, Any, Union
 
 PRINTER = CustomPrint()

@@ -4,7 +4,14 @@ from altk.pre_llm.core.types import TopicExtractionBuildOutput, TopicInfo
 from altk.pre_llm.core.types import (
     TopicExtractionInput,
 )
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+try:
+    from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+except ImportError as err:
+    raise ImportError(
+        'You need to install the routing dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[routing]"`'
+    ) from err
+
 import numpy as np
 
 

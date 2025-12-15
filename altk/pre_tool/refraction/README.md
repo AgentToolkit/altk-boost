@@ -17,6 +17,8 @@ You can use refraction API to fix individual tool calls and tool call sequences,
 
 ## Quick Start
 
+Make sure the dependencies for Refraction are included by running `pip install "agent-lifecycle-toolkit[refraction]"`.
+
 ```python
 import os
 from altk.pre_tool.refraction.refraction import RefractionComponent

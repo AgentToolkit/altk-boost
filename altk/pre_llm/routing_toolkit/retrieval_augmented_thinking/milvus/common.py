@@ -1,7 +1,13 @@
 from typing import Any, Dict, Literal
 from pydantic import BaseModel, Field
-from pymilvus import model
-from pymilvus.model.base import BaseEmbeddingFunction
+
+try:
+    from pymilvus import model
+    from pymilvus.model.base import BaseEmbeddingFunction
+except ImportError as err:
+    raise ImportError(
+        'You need to install the routing dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[routing]"`'
+    ) from err
 
 
 class MilvusConfig(BaseModel):

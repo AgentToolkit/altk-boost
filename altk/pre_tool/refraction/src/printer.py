@@ -1,13 +1,19 @@
-from nl2flow.printers.driver import Printer
-from nl2flow.plan.schemas import ClassicalPlan as Plan, Action
-from nl2flow.compile.schemas import Step, ClassicalPlanReference
-from nl2flow.compile.options import BasicOperations
-from nl2flow.compile.basic_compilations.compile_references.utils import (
-    get_token_predicate_name,
-)
+try:
+    from nl2flow.printers.driver import Printer
+    from nl2flow.plan.schemas import ClassicalPlan as Plan, Action
+    from nl2flow.compile.schemas import Step, ClassicalPlanReference
+    from nl2flow.compile.options import BasicOperations
+    from nl2flow.compile.basic_compilations.compile_references.utils import (
+        get_token_predicate_name,
+    )
 
-from nestful import SequencingData, API, Catalog
-from nestful.utils import extract_label, parse_parameters
+    from nestful import SequencingData, API, Catalog
+    from nestful.utils import extract_label, parse_parameters
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from altk.pre_tool.refraction.src.schemas.mappings import (
     MappingLabel,
 )

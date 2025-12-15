@@ -1,6 +1,12 @@
-from nestful import Catalog, SequencingData, SequenceStep
-from nl2flow.debug.schemas import SolutionQuality
-from nl2flow.compile.schemas import MemoryItem, Step, PartialOrder
+try:
+    from nestful import Catalog, SequencingData, SequenceStep
+    from nl2flow.debug.schemas import SolutionQuality
+    from nl2flow.compile.schemas import MemoryItem, Step, PartialOrder
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from altk.pre_tool.refraction.src import refract, compress
 from altk.pre_tool.refraction.src.main import (
     parse_catalog_input,

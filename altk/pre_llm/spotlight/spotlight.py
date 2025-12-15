@@ -3,17 +3,29 @@ import warnings
 from contextlib import contextmanager
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
-import torch
-import torch.nn.functional as F
+try:
+    import torch
+    import torch.nn.functional as F
+except ImportError as err:
+    raise ImportError(
+        'You need to install the spotlight dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[spotlight]"`'
+    ) from err
+
 from altk.core.toolkit import AgentPhase, ComponentBase
 from pydantic import ConfigDict
-from transformers import (
-    AutoModelForCausalLM,
-    AutoTokenizer,
-    BatchEncoding,
-    PreTrainedModel,
-    PreTrainedTokenizerBase,
-)
+
+try:
+    from transformers import (
+        AutoModelForCausalLM,
+        AutoTokenizer,
+        BatchEncoding,
+        PreTrainedModel,
+        PreTrainedTokenizerBase,
+    )
+except ImportError as err:
+    raise ImportError(
+        'You need to install the spotlight dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[spotlight]"`'
+    ) from err
 
 from altk.pre_llm.core.config import (
     SpotLightConfig,

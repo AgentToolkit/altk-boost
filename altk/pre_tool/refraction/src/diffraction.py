@@ -1,14 +1,20 @@
-from nl2flow.plan.planners.kstar import Kstar
-from nl2flow.plan.schemas import PlannerResponse
-from nl2flow.compile.flow import Flow
-from nl2flow.compile.schemas import MappingItem, MemoryItem, Step
-from nl2flow.compile.options import (
-    NL2FlowOptions,
-    LifeCycleOptions,
-    SlotOptions,
-)
+try:
+    from nl2flow.plan.planners.kstar import Kstar
+    from nl2flow.plan.schemas import PlannerResponse
+    from nl2flow.compile.flow import Flow
+    from nl2flow.compile.schemas import MappingItem, MemoryItem, Step
+    from nl2flow.compile.options import (
+        NL2FlowOptions,
+        LifeCycleOptions,
+        SlotOptions,
+    )
 
-from nestful import Catalog
+    from nestful import Catalog
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from typing import List, Dict, Union, Any
 from altk.pre_tool.refraction.src.printer import CustomPrint
 from altk.pre_tool.refraction.src.compiler import (

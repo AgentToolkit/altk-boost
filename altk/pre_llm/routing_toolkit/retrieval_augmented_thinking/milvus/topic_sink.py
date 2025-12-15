@@ -3,8 +3,13 @@ import os
 from typing import Any, Dict, List
 from warnings import warn
 
-from pymilvus import DataType, Function, FunctionType, MilvusClient
-from pymilvus.model.base import BaseEmbeddingFunction
+try:
+    from pymilvus import DataType, Function, FunctionType, MilvusClient
+    from pymilvus.model.base import BaseEmbeddingFunction
+except ImportError as err:
+    raise ImportError(
+        'You need to install the routing dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[routing]"`'
+    ) from err
 
 from altk.pre_llm.core.types import TopicInfo
 from altk.pre_llm.routing_toolkit.elapsed_time_logger import processing_time_logger

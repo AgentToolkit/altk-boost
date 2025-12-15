@@ -102,8 +102,12 @@ refraction = [
     { name = "sentence-transformers" },
 ]
 routing = [
+    { name = "bertopic" },
+    { name = "docling" },
     { name = "pydash" },
     { name = "pymilvus", extra = ["milvus-lite", "model"] },
+    { name = "scikit-learn" },
+    { name = "sentence-transformers" },
 ]
 spotlight = [
     { name = "torch", version = "2.2.2", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine == 'x86_64' and sys_platform == 'darwin'" },
@@ -113,8 +117,6 @@ spotlight = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "bertopic" },
-    { name = "docling" },
     { name = "langchain-ibm" },
     { name = "langgraph" },
     { name = "mellea" },
@@ -127,7 +129,6 @@ dev = [
     { name = "pytest-mock" },
     { name = "python-semantic-release" },
     { name = "ruff" },
-    { name = "scikit-learn" },
     { name = "types-cachetools" },
     { name = "types-cffi" },
     { name = "types-grpcio" },
@@ -146,8 +147,10 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "aiofiles", specifier = "==24.1.0" },
+    { name = "bertopic", marker = "extra == 'routing'", specifier = ">=0.17.3" },
     { name = "black", specifier = ">=25.1.0" },
     { name = "datamodel-code-generator", specifier = ">=0.34.0" },
+    { name = "docling", marker = "extra == 'routing'", specifier = ">=2.38.1" },
     { name = "docstring-parser", specifier = ">=0.16" },
     { name = "genson", specifier = ">=1.3.0" },
     { name = "griffe-inherited-docstrings", marker = "extra == 'docs'" },
@@ -181,8 +184,10 @@ requires-dist = [
     { name = "pyright", specifier = ">=1.1.406" },
     { name = "pytest", specifier = ">=8.2.1" },
     { name = "pytest-json-report", specifier = ">=1.5.0" },
+    { name = "scikit-learn", marker = "extra == 'routing'", specifier = ">=1.7.1" },
     { name = "scipy", specifier = ">=1.15.3" },
     { name = "sentence-transformers", marker = "extra == 'refraction'", specifier = ">=5.0.0" },
+    { name = "sentence-transformers", marker = "extra == 'routing'", specifier = ">=5.0.0" },
     { name = "smolagents", specifier = ">=1.21.3" },
     { name = "tomli", specifier = "==2.2.1" },
     { name = "torch", marker = "platform_machine == 'x86_64' and sys_platform == 'darwin' and extra == 'spotlight'", specifier = "==2.2.2" },
@@ -195,8 +200,6 @@ provides-extras = ["docs", "build", "spotlight", "refraction", "routing"]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "bertopic", specifier = ">=0.17.3" },
-    { name = "docling", specifier = ">=2.38.1" },
     { name = "langchain-ibm", specifier = ">=0.3.6" },
     { name = "langgraph", specifier = ">=0.2.74" },
     { name = "mellea", specifier = "~=0.0.6" },
@@ -209,7 +212,6 @@ dev = [
     { name = "pytest-mock", specifier = ">=3.14.1" },
     { name = "python-semantic-release", specifier = "~=10.4.1" },
     { name = "ruff", specifier = ">=0.13.2" },
-    { name = "scikit-learn", specifier = ">=1.7.1" },
     { name = "types-cachetools", specifier = ">=6.2.0.20250827" },
     { name = "types-cffi", specifier = ">=1.17.0.20250915" },
     { name = "types-grpcio", specifier = ">=1.0.0.20251009" },

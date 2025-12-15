@@ -1,13 +1,18 @@
-from nl2flow.compile.flow import Flow
-from nl2flow.debug.schemas import SolutionQuality, DebugFlag
-from nl2flow.debug.debug import BasicDebugger
-from nl2flow.compile.schemas import MemoryItem, Step, PartialOrder
-from nl2flow.compile.options import (
-    SlotOptions,
-    NL2FlowOptions,
-    LifeCycleOptions,
-    BasicOperations,
-)
+try:
+    from nl2flow.compile.flow import Flow
+    from nl2flow.debug.schemas import SolutionQuality, DebugFlag
+    from nl2flow.debug.debug import BasicDebugger
+    from nl2flow.compile.schemas import MemoryItem, Step, PartialOrder
+    from nl2flow.compile.options import (
+        SlotOptions,
+        NL2FlowOptions,
+        LifeCycleOptions,
+        BasicOperations,
+    )
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
 
 from altk.pre_tool.refraction.src.mappings.utils import filter_maps
 from altk.pre_tool.refraction.src.utils import (
@@ -34,8 +39,14 @@ from altk.pre_tool.refraction.src.compiler import (
     add_episodes,
 )
 
-from nestful import Catalog, SequencingData, SequenceStep
-from nestful.schemas.tools import Tool, OpenAITool, ToolCall, OpenAIToolCall
+try:
+    from nestful import Catalog, SequencingData, SequenceStep
+    from nestful.schemas.tools import Tool, OpenAITool, ToolCall, OpenAIToolCall
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from multiprocessing import Process, Queue
 from queue import Queue as TQueue
 from typing import List, Dict, Optional, Union, Any

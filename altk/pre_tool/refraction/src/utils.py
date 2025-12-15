@@ -3,10 +3,16 @@ from altk.pre_tool.refraction.src.schemas import ResultTags, Mapping
 from altk.pre_tool.refraction.src.schemas.results import (
     DebuggingResult,
 )
-from nl2flow.debug.schemas import Report, DiffAction, SolutionQuality
-from nl2flow.compile.schemas import Step, MemoryItem
-from nl2flow.compile.flow import Flow
-from nestful import Catalog, SequencingData
+
+try:
+    from nl2flow.debug.schemas import Report, DiffAction, SolutionQuality
+    from nl2flow.compile.schemas import Step, MemoryItem
+    from nl2flow.compile.flow import Flow
+    from nestful import Catalog, SequencingData
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
 
 
 def pprint(ip: Union[str, List[str]]) -> None:

@@ -2,12 +2,26 @@ from __future__ import annotations
 from pydantic import BaseModel, computed_field
 from typing import List, Optional, Dict, Any
 from enum import Enum, auto
-from nl2flow.debug.schemas import Report
-from nestful import SequencingData, SequenceStep, Catalog
-from nl2flow.debug.schemas import DiffAction
+
+try:
+    from nl2flow.debug.schemas import Report
+    from nestful import SequencingData, SequenceStep, Catalog
+    from nl2flow.debug.schemas import DiffAction
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from altk.pre_tool.refraction.src.schemas.utils import open_mean
-from nl2flow.plan.schemas import ClassicalPlan as Plan, Action
-from nl2flow.compile.options import BasicOperations
+
+try:
+    from nl2flow.plan.schemas import ClassicalPlan as Plan, Action
+    from nl2flow.compile.options import BasicOperations
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from altk.pre_tool.refraction.src.printer import CustomPrint
 
 TIMEOUT = 5.0

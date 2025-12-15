@@ -86,14 +86,11 @@ exclude = [
 
 [dependency-groups]
 dev = [
-    "docling>=2.38.1",
     "pre-commit>=4.2.0",
     "pytest>=8.2.1",
     "pytest-asyncio>=0.23.0",
     "pytest-cov>=4.1.0",
     "pytest-mock>=3.14.1",
-    "bertopic>=0.17.3",
-    "scikit-learn>=1.7.1",
     "ruff>=0.13.2",
     "mellea~=0.0.6",
     "mypy>=1.18.2",
@@ -146,6 +143,10 @@ refraction = [
 routing = [
     "pymilvus[milvus-lite,model]>=2.6.2",
     "pydash>=8.0.5",
+    "bertopic>=0.17.3",
+    "scikit-learn>=1.7.1",
+    "sentence-transformers>=5.0.0",
+    "docling>=2.38.1",
 ]
 
 [[tool.uv.index]]

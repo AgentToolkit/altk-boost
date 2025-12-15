@@ -1,5 +1,11 @@
-from nestful import Catalog, API
-from nl2flow.compile.flow import Flow
+try:
+    from nestful import Catalog, API
+    from nl2flow.compile.flow import Flow
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from typing import Set, Dict
 from scipy.sparse import csr_array
 from scipy.sparse.csgraph import connected_components
