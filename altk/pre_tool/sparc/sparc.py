@@ -422,7 +422,7 @@ class SPARCReflectionComponent(ComponentBase):
                                 correction=metric_result.raw_response.get("correction"),
                             )
                         )
-            
+
             if not function_selection_issues:
                 # General metrics - check for errors and issues
                 if pipeline_result.semantic.general:
@@ -548,4 +548,3 @@ class SPARCReflectionComponent(ComponentBase):
             decision=decision,
             issues=issues,
         )
-

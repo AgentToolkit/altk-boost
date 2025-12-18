@@ -208,7 +208,7 @@ class SemanticChecker:
         tools_inventory_summary = adapter.get_tools_inventory_summary()
         call_dict = adapter.get_call_dict()
         fn_name = adapter.get_function_name()
-        
+
         # Handle empty inventory for tool-spec-free metrics
         cur_tool_spec = adapter.get_tool_spec(fn_name) if apis_specs else {}
         params = self._collect_params(adapter) if apis_specs else {}

@@ -113,14 +113,16 @@ def tool_pre_hook(state):
         tool_calls = state["messages"][-1].tool_calls
         formatted_tool_calls = []
         for call in tool_calls:
-            formatted_tool_calls.append({
-                "id": call["id"],
-                "type": "function",
-                "function": {
-                    "name": call["name"],
-                    "arguments": json.dumps(call["args"]),
+            formatted_tool_calls.append(
+                {
+                    "id": call["id"],
+                    "type": "function",
+                    "function": {
+                        "name": call["name"],
+                        "arguments": json.dumps(call["args"]),
+                    },
                 }
-            })
+            )
         reflect_input = SPARCReflectionRunInput(
             messages=messages_to_dict(state["messages"]),
             tool_specs=tool_specs,
@@ -133,12 +135,18 @@ def tool_pre_hook(state):
         elif reflect_result.output.reflection_result.decision == "error":
             print("⚠️  ERROR: Validation encountered errors")
             error_msg = "Validation failed due to system errors:\n"
-            error_issues = [i for i in reflect_result.output.reflection_result.issues 
-                           if i.issue_type == "error"]
+            error_issues = [
+                i
+                for i in reflect_result.output.reflection_result.issues
+                if i.issue_type == "error"
+            ]
             for issue in error_issues:
                 error_msg += f"\n  - {issue.metric_name}: {issue.explanation}"
             print(error_msg)
-            return {"next": "final_message", "messages": [HumanMessage(content=error_msg)]}
+            return {
+                "next": "final_message",
+                "messages": [HumanMessage(content=error_msg)],
+            }
         else:  # reject
             print("❌ Tool call rejected")
             issues = "Tool call rejected for the following reasons:"

@@ -162,7 +162,7 @@ def load_prompts_from_list(
             metric.description = description
         except Exception as e:
             raise LoaderError(f"Record {idx} invalid schema: {e}") from e
-        
+
         # Detect tool-spec-free metrics and use appropriate prompt class
         metric_name = rec.get("name", "")
         from altk.pre_tool.core.consts import TOOL_SPEC_FREE_METRICS

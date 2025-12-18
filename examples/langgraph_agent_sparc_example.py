@@ -111,14 +111,16 @@ def tool_pre_hook(state):
     tool_calls = state["messages"][-1].tool_calls
     formatted_tool_calls = []
     for call in tool_calls:
-        formatted_tool_calls.append({
-            "id": call["id"],
-            "type": "function",
-            "function": {
-                "name": call["name"],
-                "arguments": json.dumps(call["args"]),
+        formatted_tool_calls.append(
+            {
+                "id": call["id"],
+                "type": "function",
+                "function": {
+                    "name": call["name"],
+                    "arguments": json.dumps(call["args"]),
+                },
             }
-        })
+        )
     reflect_input = SPARCReflectionRunInput(
         messages=messages_to_dict(state["messages"]),
         tool_specs=tool_specs,

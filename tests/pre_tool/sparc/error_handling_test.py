@@ -156,7 +156,8 @@ class TestErrorHandling:
         error_issues = [
             issue
             for issue in result.output.reflection_result.issues
-            if "LLM timeout" in issue.explanation or "error" in issue.explanation.lower()
+            if "LLM timeout" in issue.explanation
+            or "error" in issue.explanation.lower()
         ]
         assert len(error_issues) > 0
 

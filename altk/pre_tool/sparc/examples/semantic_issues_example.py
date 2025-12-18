@@ -281,7 +281,7 @@ async def run_value_grounding_example(middleware: SPARCReflectionComponent):
     print(
         "User mentions specific location and phone number, but tool call uses different values\n"
     )
-    
+
     conversation_context = [
         {
             "role": "user",
@@ -328,7 +328,7 @@ async def run_parameter_hallucination_example(middleware: SPARCReflectionCompone
         {
             "role": "assistant",
             "content": "I'll check the current weather in Miami for you.",
-        }
+        },
     ]
 
     # Tool call adds details not mentioned by user (hallucinated parameters)

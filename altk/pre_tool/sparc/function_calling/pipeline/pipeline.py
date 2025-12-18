@@ -160,7 +160,7 @@ class ReflectionPipeline:
             codegen_client=self.codegen_client,
             transform_enabled=transform_enabled,
         )
-        
+
         # 4) Auto-detect if we should skip static checks
         # Skip if: only tool-spec-free metrics are used and no function/parameter metrics
         if not self.skip_static_checks:
