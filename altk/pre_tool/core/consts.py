@@ -2,6 +2,9 @@
 ## General metrics
 METRIC_GENERAL_HALLUCINATION_CHECK = "general_hallucination_check"
 METRIC_GENERAL_VALUE_FORMAT_ALIGNMENT = "general_value_format_alignment"
+METRIC_GENERAL_CONVERSATION_GROUNDED_CORRECTNESS = (
+    "general_conversation_grounded_correctness"
+)
 
 ## Function selection metrics
 METRIC_FUNCTION_SELECTION_APPROPRIATENESS = "function_selection_appropriateness"
@@ -15,6 +18,11 @@ METRIC_PARAMETER_HALLUCINATION_CHECK = "parameter_hallucination_check"
 GENERAL_METRICS = [
     METRIC_GENERAL_HALLUCINATION_CHECK,
     METRIC_GENERAL_VALUE_FORMAT_ALIGNMENT,
+]
+
+## Tool-spec-free metrics (can run without tool specifications)
+TOOL_SPEC_FREE_METRICS = [
+    METRIC_GENERAL_CONVERSATION_GROUNDED_CORRECTNESS,
 ]
 
 FUNCTION_SELECTION_METRICS = [

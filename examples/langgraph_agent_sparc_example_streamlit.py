@@ -130,7 +130,16 @@ def tool_pre_hook(state):
         if reflect_result.output.reflection_result.decision == "approve":
             print("✅ Tool call approved")
             return {"next": "call_tool"}
-        else:
+        elif reflect_result.output.reflection_result.decision == "error":
+            print("⚠️  ERROR: Validation encountered errors")
+            error_msg = "Validation failed due to system errors:\n"
+            error_issues = [i for i in reflect_result.output.reflection_result.issues 
+                           if i.issue_type == "error"]
+            for issue in error_issues:
+                error_msg += f"\n  - {issue.metric_name}: {issue.explanation}"
+            print(error_msg)
+            return {"next": "final_message", "messages": [HumanMessage(content=error_msg)]}
+        else:  # reject
             print("❌ Tool call rejected")
             issues = "Tool call rejected for the following reasons:"
             for issue in reflect_result.output.reflection_result.issues:

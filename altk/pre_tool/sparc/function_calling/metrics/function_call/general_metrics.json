@@ -94,36 +94,34 @@
                 },
                 "actionable_recommendations": {
                     "type": "array",
-                    "description": "Provide actionable recommendations to help the agent developer prevent parameter hallucinations and similar mistakes in future tool calls. Include multiple detailed suggestions only when there is a mistake and the recommendation can genuinely help. Recommend only items that are important and can significantly improve the agent, such as:\n\n1. PARAMETER_DOCUMENTATION: Update the API parameter specification to clarify parameter requirements, formats, units, edge cases, and other relevant information. Suggest the exact fix—addition, deletion, or adjustment.\n2. PARAMETER_EXAMPLES: Add examples to the parameter documentation that will help prevent similar mistakes in the future.\n3. INSTRUCTIONS_ADDITIONS: Add general instructions that can help the agent handle such mistakes - DO NOT include the specific parameter name, but give a general instruction for this specific mistake. Only include instructions that are essential for the agent and do not repeat existing ones. If an existing instruction (usually in the system prompt) can be improved, recommend updating it. Use this recommendation only if a clear, general instruction will significantly improve the agent in this kind of specific mistake.\n4. OTHER: Any other relevant recommendations that can help improve the agent's performance in future tool calls.",
+                    "description": "Provide clear, actionable recommendations that can be automatically applied to prevent similar issues. Only include recommendations when there are actual issues (output <= 3). Focus on:\n\n1. PARAMETER_DOCUMENTATION: Add or update parameter documentation to clarify requirements, formats, or defaults.\n2. PARAMETER_EXAMPLES: Add concrete examples showing correct parameter usage.\n3. SYSTEM_PROMPT_INSTRUCTION: Add a general instruction to the system prompt (do not mention specific parameter names).",
                     "items": {
                         "type": "object",
                         "properties": {
                             "recommendation": {
                                 "type": "string",
-                                "description": "A specific, actionable recommendation to reduce parameter hallucinations.",
                                 "enum": [
                                     "PARAMETER_DOCUMENTATION",
                                     "PARAMETER_EXAMPLES",
-                                    "INSTRUCTIONS_ADDITIONS",
-                                    "OTHER"
-                                ]
+                                    "SYSTEM_PROMPT_INSTRUCTION"
+                                ],
+                                "description": "The type of recommendation being made."
                             },
                             "parameter_name": {
                                 "type": "string",
-                                "description": "The name of the parameter to which the recommendation applies."
+                                "description": "The name of the parameter to which the recommendation applies. Omit for SYSTEM_PROMPT_INSTRUCTION."
                             },
                             "details": {
                                 "type": "string",
-                                "description": "An explanation of the recommendation, including what specific changes should be made, how they will prevent parameter hallucinations, and any relevant examples or best practices."
+                                "description": "Brief explanation of what should be changed and why."
                             },
                             "quote": {
                                 "type": "string",
-                                "description": "The specific quote of the additions made to the parameter documentation (description in the tool specification), examples (that will be added to the tool parameter documentation), or instructions that will be added to the system prompt of the agent."
+                                "description": "Exact text to add to documentation or system prompt. Must be directly usable without modification."
                             }
                         },
                         "required": [
                             "recommendation",
-                            "parameter_name",
                             "details",
                             "quote"
                         ]
@@ -260,14 +258,13 @@
                     {
                         "recommendation": "PARAMETER_DOCUMENTATION",
                         "parameter_name": "user_id",
-                        "details": "Add to the documentation of the user_id parameter to clarify its required nature.",
-                        "quote": "user_id must be explicitly provided by the user or derived from authentication tool response. No default should ever be assumed."
+                        "details": "Clarify that user_id must come from conversation or authentication, never assumed.",
+                        "quote": "Required. Must be explicitly provided by the user or obtained from a prior authentication tool call. Never assume or fabricate this value."
                     },
                     {
-                        "recommendation": "INSTRUCTIONS_ADDITIONS",
-                        "parameter_name": "user_id",
-                        "details": "Add instructions to never invent parameter values, and if needed, ask the user for clarification.",
-                        "quote": "Never invent parameter values. If missing, explicitly ask the user to provide it."
+                        "recommendation": "SYSTEM_PROMPT_INSTRUCTION",
+                        "details": "Add instruction to never fabricate parameter values.",
+                        "quote": "Never invent or fabricate parameter values. If required information is missing from the conversation, ask the user to provide it before making tool calls."
                     }
                     ]
                 }
@@ -342,14 +339,13 @@
                     {
                         "recommendation": "PARAMETER_DOCUMENTATION",
                         "parameter_name": "seat_class",
-                        "details": "Add to the documentation of seat_class to clarify that it is a required parameter.",
-                        "quote": "Required. Must be explicitly provided by user. No default assumed."
+                        "details": "Clarify that seat_class is required and has no default value.",
+                        "quote": "Required. Must be explicitly provided by the user. Valid values: economy, business, first. No default value."
                     },
                     {
-                        "recommendation": "INSTRUCTIONS_ADDITIONS",
-                        "parameter_name": "seat_class",
-                        "details": "Add instructions to always confirm required parameters with the user if not provided.",
-                        "quote": "Always confirm all required details with the user before calling tools."
+                        "recommendation": "SYSTEM_PROMPT_INSTRUCTION",
+                        "details": "Add instruction to confirm required parameters before tool calls.",
+                        "quote": "Before making tool calls, ensure all required parameters have been provided by the user. If any required information is missing, ask the user for it."
                     }
                     ]
                 }
@@ -415,20 +411,19 @@
                     {
                         "recommendation": "PARAMETER_DOCUMENTATION",
                         "parameter_name": "departure_date",
-                        "details": "Clarify the required date format in the parameter documentation.",
-                        "quote": "YYYY-MM-DD only. No other formats accepted. If a different format is given in the conversation, reformat it to the required format before calling the tool."
+                        "details": "Specify exact date format requirement.",
+                        "quote": "Required format: YYYY-MM-DD (e.g., 2025-09-15). Always convert user-provided dates to this format before making the tool call."
                     },
                     {
                         "recommendation": "PARAMETER_EXAMPLES",
                         "parameter_name": "departure_date",
-                        "details": "Add an example of a departure date that was reformatted correctly from 'DD/MM/YYYY' to 'YYYY-MM-DD'.",
-                        "quote": "Example: given a user input with a departure date of '15/09/2025', it should be reformatted to '2025-09-15' before calling the tool."
+                        "details": "Show example of date format conversion.",
+                        "quote": "Example: User says '15/09/2025' → convert to '2025-09-15' before calling the tool."
                     },
                     {
-                        "recommendation": "INSTRUCTIONS_ADDITIONS",
-                        "parameter_name": "departure_date",
-                        "details": "Add instructions to always reformat dates to the required format before calling the tool.",
-                        "quote": "Make sure you adhere to the required formats and units as specified in the API documentation, and if a different format is given in the conversation, reformat it to the required format before calling the tool."
+                        "recommendation": "SYSTEM_PROMPT_INSTRUCTION",
+                        "details": "Add instruction to convert dates to required formats.",
+                        "quote": "Always convert dates and times to the exact format specified in the API documentation before making tool calls, regardless of how the user provides them."
                     }
                     ]
                 }
@@ -774,6 +769,316 @@
                             "parameter_name": "timer_duration",
                             "details": "Implement pre-call validation to check timer_duration pattern, date format compliance, and time format before making tool calls.",
                             "quote": "Validate 'timer_duration' matches pattern '^\\d+\\s+(minutes?|seconds?|hours?)$', 'meeting_date' is in 'YYYY-MM-DD', and 'meeting_time' is in 'HH:MM' 24-hour format before calling the tool."
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "name": "general_conversation_grounded_correctness",
+        "task_description": "Evaluate the overall correctness and appropriateness of the tool call based SOLELY on the conversation context, WITHOUT requiring explicit tool specifications. This metric assesses whether the tool call is a logical, non-redundant action that is fully grounded in the conversation history.\n\n**IMPORTANT**: If tool specifications appear in the conversation (e.g., in system prompts or assistant messages), you MAY use them to enhance your assessment. However, your primary focus should be on conversation grounding.\n\n---\n\n### 1. Tool Call Appropriateness\n\nAssess whether the tool call makes sense given the conversation flow:\n\n- **Intent Alignment**: Does the tool call directly address the user's request or a logical next step?\n- **Non-Redundancy**: Is this tool call necessary, or has equivalent information already been obtained?\n- **Timing**: Are there prerequisite actions that should have been completed first?\n- **Relevance**: Is the chosen function appropriate for the current conversation context?\n\n---\n\n### 2. Conversation Grounding Hierarchy\n\nParameter values should be grounded in the following priority order:\n\n1. **Tool Outputs** (highest priority): Values from previous tool call results\n2. **Explicit User Statements**: Direct mentions in user messages\n3. **Confirmed Assistant Statements**: Information the assistant provided that the user acknowledged\n4. **Logical Inference**: Values that can be reasonably inferred from context (use cautiously)\n\n**Key Principle**: When there's a conflict between sources, tool outputs take precedence over user/assistant statements, as they represent ground truth from the system.\n\n---\n\n### 3. Parameter Value Assessment\n\nFor each parameter in the tool call:\n\n- **Explicit Grounding**: Is the value directly stated in the conversation?\n- **Implicit Grounding**: Can the value be reasonably inferred from context?\n- **Assumption Detection**: Is the value assumed without any conversational basis?\n- **Conflict Resolution**: If multiple sources provide different values, is the most authoritative source used?\n\n---\n\n### 4. Format and Consistency (Conversation-Based)\n\nEven without formal specifications:\n\n- **Internal Consistency**: Do parameter values make logical sense together (e.g., end_date after start_date)?\n- **Observable Patterns**: If tool specifications are mentioned in the conversation, do values conform to described patterns?\n- **Common Sense Validation**: Do values follow basic logical constraints (e.g., no negative quantities for counts)?\n\n---\n\n### 5. Prerequisite Satisfaction\n\nCheck if the tool call has all necessary preconditions:\n\n- **Dependent Information**: Is all required information available from the conversation or prior tool calls?\n- **State Requirements**: Based on conversation context, is the system in the right state for this call?\n- **Missing Steps**: Are there obvious gaps in the conversation that should be addressed first?\n\n---\n\n### Correctness Rating Scale\n\n- **5 - Fully Correct**: Tool call is perfectly appropriate, all parameters are explicitly or clearly inferably grounded in conversation, no redundancy, all prerequisites satisfied\n- **4 - Mostly Correct**: Tool call is appropriate and well-grounded, with only minor implicit inferences that are very reasonable\n- **3 - Partially Correct**: Tool call is generally appropriate but has some parameters with weak grounding or minor timing/relevance issues\n- **2 - Problematic**: Tool call has significant issues—multiple ungrounded parameters, questionable relevance, or missing prerequisites\n- **1 - Incorrect**: Tool call is inappropriate, redundant, or has parameters that are clearly fabricated or contradict conversation context\n\n---\n\n### Evaluation Guidelines\n\n- **Conservative Assessment**: When grounding is unclear, prefer lower scores\n- **Prioritize Tool Outputs**: Always favor values from tool results over human statements\n- **Consider Conversation Flow**: Assess whether the tool call makes sense in the sequence of events\n- **Watch for Hallucinations**: Flag any parameters that appear without conversational basis\n- **Use Available Specs**: If tool specifications appear in the conversation, incorporate them into your assessment\n\nYour evaluation should reflect a holistic view of whether a human reviewing the conversation would consider this tool call to be correct, appropriate, and fully justified by the available information.",
+        "jsonschema": {
+            "title": "general_conversation_grounded_correctness",
+            "description": "Holistic assessment of tool call correctness based on conversation grounding, appropriateness, and logical consistency without requiring explicit tool specifications.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "evidence": {
+                    "type": "string",
+                    "description": "Provide EXACT quotes from the conversation that support or contradict the tool call. Include: (1) relevant user messages, (2) assistant messages, (3) prior tool outputs, and (4) any tool specifications mentioned in the conversation. Organize evidence by parameter and by aspect (appropriateness, grounding, prerequisites)."
+                },
+                "explanation": {
+                    "type": "string",
+                    "description": "Provide an analysis covering: (1) Tool Call Appropriateness - why this tool call makes sense (or doesn't) in the conversation flow, (2) Parameter Grounding - for EACH parameter, explain its grounding source and quality, noting conflicts between sources and resolution, (3) Prerequisites - whether all necessary preconditions are satisfied, (4) Format and Consistency - whether parameters make logical sense together, (5) Overall Correctness - summary judgment on whether the tool call is fully justified by the conversation."
+                },
+                "output": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5,
+                    "threshold_low": 4,
+                    "threshold_high": 5,
+                    "description": "Overall Correctness Score (1-5):\n\n5 - Fully Correct: Tool call is the right action at the right time. All parameters are explicitly grounded in conversation (user messages, confirmed assistant statements, or tool outputs). No redundancy. All prerequisites satisfied. If tool specs are in conversation, the call aligns with them.\nExample: User asks \"What's the weather in Boston?\", assistant calls get_weather(location=\"Boston\") with no prior weather call for Boston.\n\n4 - Mostly Correct: Tool call is appropriate and timely. Most parameters are explicitly grounded, a few may be reasonably inferred from clear context. No significant issues. Prerequisites satisfied.\nExample: User says \"Book a table for dinner tonight\", assistant calls book_restaurant(date=\"2025-12-17\", time=\"19:00\", party_size=2) where date is inferred from 'tonight' and party_size from typical default.\n\n3 - Partially Correct: Tool call is generally appropriate but has noticeable issues—some parameters are weakly grounded, minor relevance concerns, or unclear if prerequisites are met. The call might work but has questionable elements.\nExample: User says \"I need a hotel\", assistant calls book_hotel(location=\"New York\", check_in=\"2025-12-20\") where location and dates aren't mentioned in conversation.\n\n2 - Problematic: Tool call has significant correctness issues—multiple parameters lack grounding, the timing is questionable, important prerequisites are missing, or the call seems partially redundant. Likely to fail or produce incorrect results.\nExample: User asks \"What flights are available?\", but assistant calls book_flight(...) with specific dates and destinations not discussed, skipping the search step.\n\n1 - Incorrect: Tool call is inappropriate, clearly redundant, or fundamentally misaligned with conversation. Parameters are fabricated or contradict known information. Missing critical prerequisites. The call should not be made.\nExample: User asks about restaurant recommendations, assistant calls cancel_reservation(reservation_id=\"12345\") with no prior discussion of cancellations or that ID."
+                },
+                "confidence": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "threshold_low": 0,
+                    "threshold_high": 1,
+                    "description": "Confidence in the accuracy of this assessment (range: 0.0-1.0). Higher confidence when conversation context is clear and complete. Lower confidence when context is ambiguous, conversation is incomplete, or tool specifications are not available."
+                },
+                "correction": {
+                    "type": "object",
+                    "description": "Corrections for the tool call. For correct calls (output >= 4), return {}. For problematic calls (output <= 3), provide either need_more_information OR corrected_tool_call.\n\nCRITICAL FORMAT REQUIREMENT: When providing corrected_tool_call, the 'arguments' field MUST be a JSON object/dict (e.g., {\"key\": \"value\"}), NOT a JSON string (e.g., NOT \"{\\\"key\\\": \\\"value\\\"}\").",
+                    "properties": {
+                        "need_more_information": {
+                            "type": "array",
+                            "description": "List of questions to ask the user if information is missing. Each question should be specific and actionable.",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "corrected_tool_call": {
+                            "type": "object",
+                            "description": "Complete corrected tool call with all issues addressed. Only provide if correction is possible without additional user input. IMPORTANT: The 'arguments' field must be a JSON object (dict), not a JSON string.",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "Name of the function to call."
+                                },
+                                "arguments": {
+                                    "type": "object",
+                                    "description": "Corrected arguments for the function call as a JSON object (not a string). Example: {\"param1\": \"value1\", \"param2\": 123}",
+                                    "additionalProperties": true
+                                }
+                            },
+                            "required": ["name", "arguments"]
+                        }
+                    },
+                    "required": []
+                },
+                "actionable_recommendations": {
+                    "type": "array",
+                    "description": "Provide clear, actionable recommendations that can be automatically applied to improve conversation grounding. Only include recommendations when there are actual issues (output <= 3). Focus on:\n\n1. SYSTEM_PROMPT_INSTRUCTION: Add a general instruction to the system prompt about grounding, prerequisites, or clarification (do not mention specific parameter names).",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "recommendation": {
+                                "type": "string",
+                                "enum": [
+                                    "SYSTEM_PROMPT_INSTRUCTION"
+                                ],
+                                "description": "The type of recommendation being made."
+                            },
+                            "details": {
+                                "type": "string",
+                                "description": "Brief explanation of what should be changed and why."
+                            },
+                            "quote": {
+                                "type": "string",
+                                "description": "Exact text to add to documentation or system prompt. Must be directly usable without modification."
+                            }
+                        },
+                        "required": [
+                            "recommendation",
+                            "details",
+                            "quote"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "evidence",
+                "explanation",
+                "output",
+                "confidence",
+                "correction",
+                "actionable_recommendations"
+            ]
+        },
+        "examples": [
+            {
+                "user_kwargs": {
+                    "conversation_context": [
+                        {
+                            "role": "user",
+                            "content": "What's the weather like in Boston?"
+                        }
+                    ],
+                    "tool_call": {
+                        "id": "call_001",
+                        "type": "function",
+                        "function": {
+                            "name": "get_weather",
+                            "arguments": "{\"location\": \"Boston\"}"
+                        }
+                    }
+                },
+                "output": {
+                    "evidence": "User message: \"What's the weather like in Boston?\"\nTool call parameter: location=\"Boston\"\nNo prior tool calls in conversation.",
+                    "explanation": "Tool Call Appropriateness: The tool call directly addresses the user's explicit request for weather information. It's timely, relevant, and non-redundant.\n\nParameter Grounding: The 'location' parameter value \"Boston\" is explicitly mentioned in the user's question, providing perfect grounding.\n\nPrerequisites: No prerequisites are needed for a weather query beyond having the location, which is provided.\n\nFormat and Consistency: The location parameter is a simple string matching the user's input, internally consistent.\n\nOverall Correctness: This tool call is perfectly appropriate and fully grounded in the conversation.",
+                    "output": 5,
+                    "confidence": 0.98,
+                    "correction": {},
+                    "actionable_recommendations": []
+                }
+            },
+            {
+                "user_kwargs": {
+                    "conversation_context": [
+                        {
+                            "role": "user",
+                            "content": "I want to book a flight."
+                        },
+                        {
+                            "role": "assistant",
+                            "content": "I'd be happy to help you book a flight. Could you please provide the departure city, destination, and travel dates?"
+                        }
+                    ],
+                    "tool_call": {
+                        "id": "call_002",
+                        "type": "function",
+                        "function": {
+                            "name": "book_flight",
+                            "arguments": "{\"departure\": \"New York\", \"destination\": \"Los Angeles\", \"date\": \"2025-12-25\"}"
+                        }
+                    }
+                },
+                "output": {
+                    "evidence": "User message: \"I want to book a flight.\"\nAssistant message: \"Could you please provide the departure city, destination, and travel dates?\"\nTool call parameters: departure=\"New York\", destination=\"Los Angeles\", date=\"2025-12-25\"\nNo user response providing the requested information.",
+                    "explanation": "Tool Call Appropriateness: The tool call is premature and inappropriate. The assistant explicitly asked the user for departure city, destination, and dates, but the user has not yet provided this information. Making the booking call now is incorrect.\n\nParameter Grounding: All three parameters (departure, destination, date) are completely ungrounded. They do not appear anywhere in the conversation and represent pure hallucination. The user only expressed a general intent to book a flight.\n\nPrerequisites: The critical prerequisite—obtaining the necessary booking information from the user—has not been satisfied. The assistant asked for this information but didn't wait for the response.\n\nFormat and Consistency: While the parameters themselves are internally consistent (valid city names and date format), they have no basis in reality for this conversation.\n\nOverall Correctness: This tool call is fundamentally incorrect and should not be made. The system should wait for user input before proceeding.",
+                    "output": 1,
+                    "confidence": 0.95,
+                    "correction": {
+                        "need_more_information": [
+                            "What city will you be departing from?",
+                            "What is your destination?",
+                            "What date would you like to travel?"
+                        ]
+                    },
+                    "actionable_recommendations": [
+                        {
+                            "recommendation": "SYSTEM_PROMPT_INSTRUCTION",
+                            "details": "Add instruction to wait for user responses before making tool calls.",
+                            "quote": "If you ask the user for information, you must wait for their response before making any tool calls that require that information. Never fabricate or assume parameter values."
+                        },
+                        {
+                            "recommendation": "SYSTEM_PROMPT_INSTRUCTION",
+                            "details": "Add instruction about prerequisite checking.",
+                            "quote": "Before making tool calls, verify that all required information is available in the conversation. If any required parameter is missing, ask the user to provide it first."
+                        }
+                    ]
+                }
+            },
+            {
+                "user_kwargs": {
+                    "conversation_context": [
+                        {
+                            "role": "user",
+                            "content": "Get me the user profile for the logged-in user."
+                        },
+                        {
+                            "role": "assistant",
+                            "content": null,
+                            "tool_calls": [
+                                {
+                                    "id": "call_001",
+                                    "type": "function",
+                                    "function": {
+                                        "name": "get_current_user_id",
+                                        "arguments": "{}"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "role": "tool",
+                            "tool_call_id": "call_001",
+                            "content": "{\"user_id\": 42, \"username\": \"john_doe\"}"
+                        },
+                        {
+                            "role": "assistant",
+                            "content": "I found that you're logged in as john_doe (user ID: 42). Let me get your full profile now."
+                        }
+                    ],
+                    "tool_call": {
+                        "id": "call_002",
+                        "type": "function",
+                        "function": {
+                            "name": "get_user_profile",
+                            "arguments": "{\"user_id\": 42}"
+                        }
+                    }
+                },
+                "output": {
+                    "evidence": "User message: \"Get me the user profile for the logged-in user.\"\nPrior tool call: get_current_user_id()\nTool output: {\"user_id\": 42, \"username\": \"john_doe\"}\nAssistant confirmation: \"you're logged in as john_doe (user ID: 42)\"\nCurrent tool call: get_user_profile(user_id=42)",
+                    "explanation": "Tool Call Appropriateness: The tool call is perfectly appropriate and represents the logical next step. The user requested the profile for the logged-in user. The assistant first identified the user (ID: 42) via a tool call, confirmed this with the user, and is now proceeding to fetch the full profile.\n\nParameter Grounding: The 'user_id' parameter value of 42 is grounded in the tool output from get_current_user_id. This is the highest-quality grounding source (tool output), taking precedence over any human statements.\n\nPrerequisites: All prerequisites are satisfied—the user ID was obtained through a prior tool call, which is the proper way to get this information before fetching the profile.\n\nFormat and Consistency: The user_id is an integer (42) which is appropriate for an ID field. It's consistent with the value returned from the authentication check.\n\nOverall Correctness: This tool call demonstrates excellent conversation flow—proper sequencing, authoritative grounding from tool output, and clear alignment with user intent.",
+                    "output": 5,
+                    "confidence": 0.97,
+                    "correction": {},
+                    "actionable_recommendations": []
+                }
+            },
+            {
+                "user_kwargs": {
+                    "conversation_context": [
+                        {
+                            "role": "user",
+                            "content": "Book a table for dinner tonight at 7 PM."
+                        }
+                    ],
+                    "tool_call": {
+                        "id": "call_003",
+                        "type": "function",
+                        "function": {
+                            "name": "book_restaurant",
+                            "arguments": "{\"date\": \"2025-12-17\", \"time\": \"19:00\", \"party_size\": 2}"
+                        }
+                    }
+                },
+                "output": {
+                    "evidence": "User message: \"Book a table for dinner tonight at 7 PM.\"\nTool call parameters: date=\"2025-12-17\", time=\"19:00\", party_size=2\nCurrent date context: December 17, 2025\nNo mention of restaurant name or party size in conversation.",
+                    "explanation": "Tool Call Appropriateness: The tool call is generally appropriate as it responds to the user's booking request. However, it's missing a critical piece of information—which restaurant to book.\n\nParameter Grounding:\n- 'date': The value \"2025-12-17\" is a reasonable inference from \"tonight\" given the current date context. This is a clear implicit inference (score: 4 level).\n- 'time': The value \"19:00\" (7 PM in 24-hour format) is explicitly grounded in the user's statement \"7 PM\". This is well-grounded.\n- 'party_size': The value 2 is an assumption with no basis in the conversation. The user didn't mention how many people. This is a hallucination.\n\nPrerequisites: The restaurant name/location is missing, which is typically a required prerequisite for booking. The user should specify which restaurant.\n\nFormat and Consistency: The parameters are internally consistent (date is today, time is evening, party size is positive), but the party_size lacks grounding.\n\nOverall Correctness: The tool call has mixed quality—some parameters are well-grounded while others are assumed. The missing restaurant information is also problematic.",
+                    "output": 3,
+                    "confidence": 0.85,
+                    "correction": {
+                        "need_more_information": [
+                            "Which restaurant would you like to book?",
+                            "How many people will be dining?"
+                        ]
+                    },
+                    "actionable_recommendations": [
+                        {
+                            "recommendation": "SYSTEM_PROMPT_INSTRUCTION",
+                            "details": "Add instruction about when inference is acceptable vs. when to ask.",
+                            "quote": "Temporal references like 'tonight' or 'tomorrow' can be inferred from the current date. However, user-specific values like party size, number of travelers, or personal preferences must never be assumed—always ask the user if not explicitly provided."
+                        }
+                    ]
+                }
+            },
+            {
+                "user_kwargs": {
+                    "conversation_context": [
+                        {
+                            "role": "user",
+                            "content": "I need a reservation at The French Bistro for 2 people tomorrow at 7 PM."
+                        },
+                        {
+                            "role": "assistant",
+                            "content": "I'll book a table for you at The French Bistro."
+                        }
+                    ],
+                    "tool_call": {
+                        "id": "call_004",
+                        "type": "function",
+                        "function": {
+                            "name": "book_restaurant",
+                            "arguments": "{\"restaurant_name\": \"The French Bistro\", \"date\": \"2025-12-18\", \"time\": \"19:00\", \"party_size\": 4, \"dietary_restrictions\": [\"vegetarian\"]}"
+                        }
+                    }
+                },
+                "output": {
+                    "evidence": "User message: \"I need a reservation at The French Bistro for 2 people tomorrow at 7 PM.\"\nTool call parameters: restaurant_name=\"The French Bistro\", date=\"2025-12-18\", time=\"19:00\", party_size=4, dietary_restrictions=[\"vegetarian\"]\nCurrent date context: December 17, 2025",
+                    "explanation": "Tool Call Appropriateness: The tool call is appropriate in intent but has parameter errors.\n\nParameter Grounding:\n- 'restaurant_name': \"The French Bistro\" is explicitly grounded.\n- 'date': \"2025-12-18\" is correctly inferred from \"tomorrow\".\n- 'time': \"19:00\" is explicitly grounded in \"7 PM\".\n- 'party_size': Value is 4, but user explicitly said \"2 people\" - this is a contradiction.\n- 'dietary_restrictions': [\"vegetarian\"] is completely ungrounded - user never mentioned dietary restrictions.\n\nOverall Correctness: Significant issues with party_size contradiction and hallucinated dietary_restrictions.",
+                    "output": 2,
+                    "confidence": 0.9,
+                    "correction": {
+                        "corrected_tool_call": {
+                            "name": "book_restaurant",
+                            "arguments": {
+                                "restaurant_name": "The French Bistro",
+                                "date": "2025-12-18",
+                                "time": "19:00",
+                                "party_size": 2
+                            }
+                        }
+                    },
+                    "actionable_recommendations": [
+                        {
+                            "recommendation": "SYSTEM_PROMPT_INSTRUCTION",
+                            "details": "Add instruction to verify numbers carefully.",
+                            "quote": "When users provide specific quantities (party size, number of guests, passenger count, etc.), use the exact number stated. Never modify or assume different quantities unless explicitly confirmed by the user."
                         }
                     ]
                 }

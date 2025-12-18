@@ -1,8 +1,13 @@
 """General function-call metrics."""
 
-from altk.pre_tool.sparc.function_calling.metrics.function_call.general import (
+from .general import (
     GeneralMetricsPrompt,
+    GeneralMetricsPromptNoSpec,
     get_general_metrics_prompt,
 )
 
-__all__ = ["GeneralMetricsPrompt", "get_general_metrics_prompt"]
+__all__ = [
+    "GeneralMetricsPrompt",
+    "GeneralMetricsPromptNoSpec",
+    "get_general_metrics_prompt",
+]

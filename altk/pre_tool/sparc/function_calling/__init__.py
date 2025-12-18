@@ -1,5 +1,6 @@
 from altk.pre_tool.sparc.function_calling.metrics import (
     GeneralMetricsPrompt,
+    GeneralMetricsPromptNoSpec,
     FunctionSelectionPrompt,
     ParameterMetricsPrompt,
     get_general_metrics_prompt,
@@ -12,6 +13,7 @@ from altk.pre_tool.sparc.function_calling.metrics import (
 
 __all__ = [
     "GeneralMetricsPrompt",
+    "GeneralMetricsPromptNoSpec",
     "FunctionSelectionPrompt",
     "ParameterMetricsPrompt",
     "get_general_metrics_prompt",

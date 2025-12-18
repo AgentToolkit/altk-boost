@@ -69,8 +69,14 @@ def run_custom_config_examples():
 
     # Test with function selection misalignment
     conversation_context = [
-        HumanMessage(content="What's the weather like in New York today?"),
-        AIMessage(content="I'll check the weather for you."),
+        {
+            "role": "user",
+            "content": "What's the weather like in New York today?",
+        },
+        {
+            "role": "assistant",
+            "content": "I'll check the weather for you.",
+        },
     ]
 
     tool_specs = [
