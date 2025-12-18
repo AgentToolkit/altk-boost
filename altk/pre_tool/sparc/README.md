@@ -816,8 +816,6 @@ uv run pytest tests/pre_tool/sparc/units_conversion_test.py
 - **Semantic Validation Tests**: Intent alignment, parameter grounding, hallucination detection
 - **Units Conversion Tests**: Temperature, distance, and format transformation validation
 
-
-
 ## License
 Apache 2.0 - see LICENSE file for details.
 
