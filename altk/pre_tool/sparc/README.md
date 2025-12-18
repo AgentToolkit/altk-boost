@@ -65,7 +65,6 @@ from altk.pre_tool.core import (
 )
 from altk.pre_tool.sparc.sparc import SPARCReflectionComponent
 from altk.core.toolkit import AgentPhase, ComponentConfig
-from langchain_core.messages import HumanMessage, AIMessage
 from altk.core.llm import get_llm
 
 
@@ -115,8 +114,14 @@ tool_specs = [{
 
 # Prepare conversation context
 messages = [
-    HumanMessage(content="Send an email to team@company.com about the meeting"),
-    AIMessage(content="I'll send that email for you.")
+    {
+        "role": "user",
+        "content": "Send an email to team@company.com about the meeting"
+    },
+    {
+        "role": "assistant",
+        "content": "I'll send that email for you."
+    }
 ]
 
 # Tool call to validate (OpenAI format)
