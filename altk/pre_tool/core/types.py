@@ -4,15 +4,6 @@ from enum import Enum
 
 from altk.core.llm import LLMClient
 from altk.core.toolkit import ComponentInput, ComponentOutput
-from altk.pre_tool.refraction.src.schemas.results import (
-    DebuggingResult,
-)
-from altk.pre_tool.refraction.src.schemas.mappings import Mapping
-
-try:
-    from nestful.schemas.api import Catalog
-except ImportError:
-    Catalog = None
 
 
 class SPARCReflectionDecision(str, Enum):
@@ -100,23 +91,6 @@ class SPARCReflectionRunOutput(PreToolReflectionRunOutput):
     output: SPARCReflectionRunOutputSchema = Field(
         default_factory=lambda: SPARCReflectionRunOutputSchema()
     )
-
-
-class RefractionRunInput(PreToolReflectionRunInput):
-    mappings: Optional[list[Mapping]] = None
-    memory_objects: Optional[dict[str, Any]] = None
-    use_given_operators_only: bool = False
-
-
-class RefractionBuildInput(PreToolReflectionBuildInput):
-    tool_specs: list[dict[str, Any]] | Catalog
-    top_k: int = 5
-    threshold: float = 0.8
-    compute_maps: bool = True
-
-
-class RefractionRunOutput(PreToolReflectionRunOutput):
-    result: Optional[DebuggingResult] = None
 
 
 class ToolGuardBuildInputMetaData(BaseModel):

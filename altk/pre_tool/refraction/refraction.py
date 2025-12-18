@@ -15,7 +15,7 @@ from altk.pre_tool.core.config import (
     RefractionConfig,
     RefractionMode,
 )
-from altk.pre_tool.core.types import (
+from altk.pre_tool.refraction.types import (
     RefractionBuildInput,
     RefractionRunInput,
     RefractionRunOutput,
