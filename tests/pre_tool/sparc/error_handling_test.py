@@ -1,5 +1,4 @@
 import json
-import logging
 import os
 import pytest
 from unittest.mock import patch
@@ -7,7 +6,6 @@ from unittest.mock import patch
 from altk.pre_tool.core import (
     SPARCReflectionRunInput,
     SPARCReflectionDecision,
-    SPARCReflectionIssueType,
     SPARCExecutionMode,
     Track,
 )
@@ -19,11 +17,9 @@ from altk.core.llm import get_llm
 from altk.pre_tool.sparc.function_calling.pipeline.types import (
     PipelineResult,
     FunctionCallInput,
-    ToolCall,
     SemanticResult,
     SemanticCategoryResult,
     SemanticMetricResult,
-    StaticResult,
     TransformResult,
 )
 from dotenv import load_dotenv
@@ -37,11 +33,14 @@ class TestErrorHandling:
     @pytest.fixture
     def middleware(self):
         """Create middleware instance for testing."""
-        # Build ComponentConfig with OpenAI ValidatingLLMClient
-        OPENAI_CLIENT = get_llm("openai.sync.output_val")
+        # Build ComponentConfig with WatsonX ValidatingLLMClient
+        WATSONX_CLIENT = get_llm("watsonx.output_val")
         config = ComponentConfig(
-            llm_client=OPENAI_CLIENT(
-                model_name="gpt-4o-mini",
+            llm_client=WATSONX_CLIENT(
+                model_id="meta-llama/llama-3-3-70b-instruct",
+                api_key=os.getenv("WX_API_KEY"),
+                project_id=os.getenv("WX_PROJECT_ID"),
+                url=os.getenv("WX_URL", "https://us-south.ml.cloud.ibm.com"),
             )
         )
         return SPARCReflectionComponent(
