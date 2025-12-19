@@ -422,8 +422,7 @@ For advanced users who need specific combinations of validation metrics, you can
 from llmevalkit.function_calling.consts import (
     METRIC_GENERAL_HALLUCINATION_CHECK,        # Detects hallucinated parameter values
     METRIC_GENERAL_VALUE_FORMAT_ALIGNMENT,     # Validates parameter format requirements
-    METRIC_GENERAL_CONVERSATION_GROUNDED_CORRECTNESS,
-      # Validate tool call correctness (spec-free)
+    METRIC_GENERAL_CONVERSATION_GROUNDED_CORRECTNESS,  # Validate tool call correctness (spec-free)
     METRIC_FUNCTION_SELECTION_APPROPRIATENESS, # Validates function choice matches intent
     METRIC_AGENTIC_CONSTRAINTS_SATISFACTION,   # Validates agentic conversation constraints
     METRIC_PARAMETER_VALUE_FORMAT_ALIGNMENT,   # Validates parameter format requirements
