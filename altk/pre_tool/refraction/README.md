@@ -2,10 +2,12 @@
 Refraction is a low-cost (no LLMs!), low-latency, domain-agnostic, data-agnostic, model-agnostic approach towards validation and repair for a sequence of tool calls, based on classical AI planning techniques. We have seen as much as 48% error correction in certain scenarios.
 
 ## Table of Contents
-- [When it is recommended to use this component](#when-it-is-recommended-to-use-this-component)
-- [Quick Start](#quick-start)
-- [License](#license)
-- [Under the Hood](#under-the-hood)
+- [Refraction - Syntactic Validation of Tool Calls](#refraction---syntactic-validation-of-tool-calls)
+  - [Table of Contents](#table-of-contents)
+  - [When it is recommended to use this component](#when-it-is-recommended-to-use-this-component)
+  - [Quick Start](#quick-start)
+  - [License](#license)
+  - [Under the Hood](#under-the-hood)
 
 ## When it is recommended to use this component
 
@@ -22,7 +24,7 @@ Make sure the dependencies for Refraction are included by running `pip install "
 ```python
 import os
 from altk.pre_tool.refraction.refraction import RefractionComponent
-from altk.pre_tool.core.types import RefractionBuildInput, RefractionRunInput
+from altk.pre_tool.refraction.types import RefractionBuildInput, RefractionRunInput
 from altk.pre_tool.core.config import RefractionConfig, RefractionMode
 from altk.core.toolkit import AgentPhase
 
