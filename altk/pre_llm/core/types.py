@@ -126,3 +126,4 @@ class TopicRetriever(Protocol):
         query_kwargs: Dict[str, Any] | None = None,
         distance_threshold: float | None = None,
     ) -> List[RetrievedTopic]: ...
+    
