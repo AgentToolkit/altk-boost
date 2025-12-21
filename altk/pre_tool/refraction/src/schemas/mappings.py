@@ -1,5 +1,12 @@
 from __future__ import annotations
-from nl2flow.compile.schemas import MappingItem
+
+try:
+    from nl2flow.compile.schemas import MappingItem
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from pydantic import BaseModel
 from typing import Optional
 

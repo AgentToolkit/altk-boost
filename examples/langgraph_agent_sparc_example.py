@@ -6,6 +6,7 @@ OPENAI_API_KEY = *** openai api key ***
 Note that this example will require installing langgraph and langchain-openai
 """
 
+import json
 import re
 from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph, START, END
@@ -13,6 +14,7 @@ from langchain_core.tools import tool
 from typing_extensions import Annotated
 from langgraph.prebuilt import ToolNode
 from langchain_core.messages import BaseMessage, HumanMessage
+from langchain_core.messages.base import messages_to_dict
 import operator
 from typing import TypedDict, List
 
@@ -106,10 +108,23 @@ class AgentState(TypedDict):
 
 def tool_pre_hook(state):
     # Creates a pre-tool node that runs the reflector, blocks and explains if the input is faulty
+    tool_calls = state["messages"][-1].tool_calls
+    formatted_tool_calls = []
+    for call in tool_calls:
+        formatted_tool_calls.append(
+            {
+                "id": call["id"],
+                "type": "function",
+                "function": {
+                    "name": call["name"],
+                    "arguments": json.dumps(call["args"]),
+                },
+            }
+        )
     reflect_input = SPARCReflectionRunInput(
-        messages=state["messages"],
+        messages=messages_to_dict(state["messages"]),
         tool_specs=tool_specs,
-        tool_calls=state["messages"][-1].additional_kwargs["tool_calls"],
+        tool_calls=formatted_tool_calls,
     )
     reflect_result = reflector.process(reflect_input, AgentPhase.RUNTIME)
     if reflect_result.output.reflection_result.decision == "approve":

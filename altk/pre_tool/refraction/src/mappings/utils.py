@@ -1,12 +1,18 @@
 from typing import List, Dict
 from altk.pre_tool.refraction.src.schemas import Mapping
-from nestful.utils import extract_label
-from nestful import (
-    Catalog,
-    SequencingDataset,
-    SequencingData,
-    SequenceStep,
-)
+
+try:
+    from nestful.utils import extract_label
+    from nestful import (
+        Catalog,
+        SequencingDataset,
+        SequencingData,
+        SequenceStep,
+    )
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
 
 
 def cache_maps(

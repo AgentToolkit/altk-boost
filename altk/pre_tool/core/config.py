@@ -3,12 +3,11 @@ from pydantic import BaseModel, Field
 from enum import Enum
 from altk.core.toolkit import ComponentConfig
 from altk.pre_tool.core.consts import (
+    METRIC_GENERAL_CONVERSATION_GROUNDED_CORRECTNESS,
     METRIC_GENERAL_HALLUCINATION_CHECK,
     METRIC_GENERAL_VALUE_FORMAT_ALIGNMENT,
     METRIC_FUNCTION_SELECTION_APPROPRIATENESS,
     METRIC_AGENTIC_CONSTRAINTS_SATISFACTION,
-    METRIC_PARAMETER_VALUE_FORMAT_ALIGNMENT,
-    METRIC_PARAMETER_HALLUCINATION_CHECK,
 )
 
 
@@ -23,6 +22,7 @@ class Track(str, Enum):
     """Predefined configuration tracks for the reflection pipeline."""
 
     SYNTAX = "syntax"
+    SPEC_FREE = "spec_free"
     FAST_TRACK = "fast_track"
     SLOW_TRACK = "slow_track"
     TRANSFORMATIONS_ONLY = "transformations_only"
@@ -70,22 +70,17 @@ class SPARCReflectionConfig(BaseModel):
     general_metrics: Optional[List[str]] = Field(
         default=[
             METRIC_GENERAL_HALLUCINATION_CHECK,
-            METRIC_GENERAL_VALUE_FORMAT_ALIGNMENT,
         ],
         description="List of general metrics to evaluate",
     )
     function_metrics: Optional[List[str]] = Field(
         default=[
             METRIC_FUNCTION_SELECTION_APPROPRIATENESS,
-            METRIC_AGENTIC_CONSTRAINTS_SATISFACTION,
         ],
         description="List of function-specific metrics to evaluate",
     )
     parameter_metrics: Optional[List[str]] = Field(
-        default=[
-            METRIC_PARAMETER_HALLUCINATION_CHECK,
-            METRIC_PARAMETER_VALUE_FORMAT_ALIGNMENT,
-        ],
+        default=[],
         description="List of parameter-specific metrics to evaluate",
     )
 
@@ -110,6 +105,11 @@ class SPARCReflectionConfig(BaseModel):
 DEFAULT_CONFIGS = {
     "syntax": SPARCReflectionConfig(
         general_metrics=None,
+        function_metrics=None,
+        parameter_metrics=None,
+    ),
+    "spec_free": SPARCReflectionConfig(
+        general_metrics=[METRIC_GENERAL_CONVERSATION_GROUNDED_CORRECTNESS],
         function_metrics=None,
         parameter_metrics=None,
     ),

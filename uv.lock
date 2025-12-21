@@ -49,30 +49,41 @@ name = "agent-lifecycle-toolkit"
 version = "0.9.0"
 source = { editable = "." }
 dependencies = [
+    { name = "aiofiles" },
+    { name = "black" },
+    { name = "datamodel-code-generator" },
+    { name = "docstring-parser" },
+    { name = "genson" },
     { name = "ibm-watsonx-ai", version = "1.3.42", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "ibm-watsonx-ai", version = "1.4.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "jinja2" },
     { name = "jsonschema" },
+    { name = "langchain-chroma" },
+    { name = "langchain-community" },
     { name = "langchain-core" },
+    { name = "langchain-huggingface" },
+    { name = "langchain-text-splitters" },
     { name = "litellm" },
+    { name = "llm-sandbox", extra = ["docker", "podman"] },
+    { name = "mellea" },
+    { name = "nltk" },
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "openai" },
     { name = "pydantic" },
+    { name = "pyright" },
+    { name = "pytest" },
+    { name = "pytest-json-report" },
+    { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "scipy", version = "1.16.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "smolagents" },
+    { name = "tomli" },
     { name = "typing-extensions" },
 ]
 
 [package.optional-dependencies]
 build = [
     { name = "uv" },
-]
-build-time = [
-    { name = "aiofiles" },
-    { name = "black" },
-    { name = "docstring-parser" },
-    { name = "langchain-core" },
-    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "tomli" },
 ]
 docs = [
     { name = "griffe-inherited-docstrings" },
@@ -85,37 +96,27 @@ docs = [
     { name = "mkdocs-material" },
     { name = "mkdocstrings", extra = ["python"] },
 ]
-post-tool = [
-    { name = "genson" },
-    { name = "langchain-chroma" },
-    { name = "langchain-community" },
-    { name = "langchain-huggingface" },
-    { name = "langchain-text-splitters" },
-    { name = "llm-sandbox", extra = ["docker", "podman"] },
+refraction = [
+    { name = "nestful-wrapper" },
+    { name = "nl2flow", marker = "sys_platform != 'win32'" },
+    { name = "sentence-transformers" },
 ]
-pre-llm = [
+routing = [
+    { name = "bertopic" },
+    { name = "docling" },
+    { name = "pydash" },
+    { name = "pymilvus", extra = ["milvus-lite", "model"] },
+    { name = "scikit-learn" },
+    { name = "sentence-transformers" },
+]
+spotlight = [
     { name = "torch", version = "2.2.2", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine == 'x86_64' and sys_platform == 'darwin'" },
     { name = "torch", version = "2.9.1", source = { registry = "https://pypi.org/simple" }, marker = "platform_machine != 'x86_64' or sys_platform != 'darwin'" },
     { name = "transformers" },
 ]
-pre-tool = [
-    { name = "datamodel-code-generator" },
-    { name = "mellea" },
-    { name = "nestful-wrapper" },
-    { name = "nl2flow", marker = "sys_platform != 'win32'" },
-    { name = "nltk" },
-    { name = "pyright" },
-    { name = "pytest" },
-    { name = "pytest-json-report" },
-    { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "scipy", version = "1.16.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "sentence-transformers" },
-]
 
 [package.dev-dependencies]
 dev = [
-    { name = "bertopic" },
-    { name = "docling" },
     { name = "langchain-ibm" },
     { name = "langgraph" },
     { name = "mellea" },
@@ -128,7 +129,6 @@ dev = [
     { name = "pytest-mock" },
     { name = "python-semantic-release" },
     { name = "ruff" },
-    { name = "scikit-learn" },
     { name = "types-cachetools" },
     { name = "types-cffi" },
     { name = "types-grpcio" },
@@ -146,25 +146,26 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "aiofiles", marker = "extra == 'build-time'", specifier = "==24.1.0" },
-    { name = "black", marker = "extra == 'build-time'", specifier = ">=25.1.0" },
-    { name = "datamodel-code-generator", marker = "extra == 'pre-tool'", specifier = ">=0.34.0" },
-    { name = "docstring-parser", marker = "extra == 'build-time'", specifier = ">=0.16" },
-    { name = "genson", marker = "extra == 'post-tool'", specifier = ">=1.3.0" },
+    { name = "aiofiles", specifier = "==24.1.0" },
+    { name = "bertopic", marker = "extra == 'routing'", specifier = ">=0.17.3" },
+    { name = "black", specifier = ">=25.1.0" },
+    { name = "datamodel-code-generator", specifier = ">=0.34.0" },
+    { name = "docling", marker = "extra == 'routing'", specifier = ">=2.38.1" },
+    { name = "docstring-parser", specifier = ">=0.16" },
+    { name = "genson", specifier = ">=1.3.0" },
     { name = "griffe-inherited-docstrings", marker = "extra == 'docs'" },
     { name = "griffe-pydantic", marker = "extra == 'docs'" },
     { name = "ibm-watsonx-ai", specifier = ">=1.0.0" },
     { name = "jinja2", specifier = ">=3.1.6" },
     { name = "jsonschema", specifier = ">=4.0.0" },
-    { name = "langchain-chroma", marker = "extra == 'post-tool'", specifier = ">=0.1.4" },
-    { name = "langchain-community", marker = "extra == 'post-tool'", specifier = ">=0.3.21" },
+    { name = "langchain-chroma", specifier = ">=0.1.4" },
+    { name = "langchain-community", specifier = ">=0.3.21" },
     { name = "langchain-core", specifier = ">=0.3.72" },
-    { name = "langchain-core", marker = "extra == 'build-time'", specifier = ">=0.3.72" },
-    { name = "langchain-huggingface", marker = "extra == 'post-tool'", specifier = ">=0.3.0" },
-    { name = "langchain-text-splitters", marker = "extra == 'post-tool'", specifier = ">=1.0.0" },
+    { name = "langchain-huggingface", specifier = ">=0.3.0" },
+    { name = "langchain-text-splitters", specifier = ">=1.0.0" },
     { name = "litellm", specifier = "<2.0.0" },
-    { name = "llm-sandbox", extras = ["docker", "podman"], marker = "extra == 'post-tool'", specifier = ">=0.2.5" },
-    { name = "mellea", marker = "extra == 'pre-tool'", specifier = "~=0.0.6" },
+    { name = "llm-sandbox", extras = ["docker", "podman"], specifier = ">=0.2.5" },
+    { name = "mellea", specifier = "~=0.0.6" },
     { name = "mkdocs-awesome-nav", marker = "extra == 'docs'" },
     { name = "mkdocs-click", marker = "extra == 'docs'" },
     { name = "mkdocs-enumerate-headings-plugin", marker = "extra == 'docs'" },
@@ -172,31 +173,33 @@ requires-dist = [
     { name = "mkdocs-jupyter", marker = "extra == 'docs'" },
     { name = "mkdocs-material", marker = "extra == 'docs'" },
     { name = "mkdocstrings", extras = ["python"], marker = "extra == 'docs'" },
-    { name = "nestful-wrapper", marker = "extra == 'pre-tool'", specifier = ">=0.1.4" },
-    { name = "nl2flow", marker = "sys_platform != 'win32' and extra == 'pre-tool'", specifier = ">=0.1.2" },
-    { name = "nltk", marker = "extra == 'pre-tool'", specifier = ">=3.9.1" },
-    { name = "numpy", marker = "extra == 'build-time'", specifier = ">=2.2.6" },
+    { name = "nestful-wrapper", marker = "extra == 'refraction'", specifier = ">=0.1.4" },
+    { name = "nl2flow", marker = "sys_platform != 'win32' and extra == 'refraction'", specifier = ">=0.1.2" },
+    { name = "nltk", specifier = ">=3.9.1" },
+    { name = "numpy", specifier = ">=2.2.6" },
     { name = "openai", specifier = ">=1.0.0" },
     { name = "pydantic", specifier = ">=2.0.0" },
-    { name = "pyright", marker = "extra == 'pre-tool'", specifier = ">=1.1.406" },
-    { name = "pytest", marker = "extra == 'pre-tool'", specifier = ">=8.2.1" },
-    { name = "pytest-json-report", marker = "extra == 'pre-tool'", specifier = ">=1.5.0" },
-    { name = "scipy", marker = "extra == 'pre-tool'", specifier = ">=1.15.3" },
-    { name = "sentence-transformers", marker = "extra == 'pre-tool'", specifier = ">=5.0.0" },
+    { name = "pydash", marker = "extra == 'routing'", specifier = ">=8.0.5" },
+    { name = "pymilvus", extras = ["milvus-lite", "model"], marker = "extra == 'routing'", specifier = ">=2.6.2" },
+    { name = "pyright", specifier = ">=1.1.406" },
+    { name = "pytest", specifier = ">=8.2.1" },
+    { name = "pytest-json-report", specifier = ">=1.5.0" },
+    { name = "scikit-learn", marker = "extra == 'routing'", specifier = ">=1.7.1" },
+    { name = "scipy", specifier = ">=1.15.3" },
+    { name = "sentence-transformers", marker = "extra == 'refraction'", specifier = ">=5.0.0" },
+    { name = "sentence-transformers", marker = "extra == 'routing'", specifier = ">=5.0.0" },
     { name = "smolagents", specifier = ">=1.21.3" },
-    { name = "tomli", marker = "extra == 'build-time'", specifier = "==2.2.1" },
-    { name = "torch", marker = "platform_machine == 'x86_64' and sys_platform == 'darwin' and extra == 'pre-llm'", specifier = "==2.2.2" },
-    { name = "torch", marker = "(platform_machine != 'x86_64' and extra == 'pre-llm') or (sys_platform != 'darwin' and extra == 'pre-llm')", specifier = ">=2.5.1" },
-    { name = "transformers", marker = "extra == 'pre-llm'", specifier = ">=4.53.3" },
+    { name = "tomli", specifier = "==2.2.1" },
+    { name = "torch", marker = "platform_machine == 'x86_64' and sys_platform == 'darwin' and extra == 'spotlight'", specifier = "==2.2.2" },
+    { name = "torch", marker = "(platform_machine != 'x86_64' and extra == 'spotlight') or (sys_platform != 'darwin' and extra == 'spotlight')", specifier = ">=2.5.1" },
+    { name = "transformers", marker = "extra == 'spotlight'", specifier = ">=4.53.3" },
     { name = "typing-extensions", specifier = ">=4.0.0" },
     { name = "uv", marker = "extra == 'build'", specifier = "~=0.8.22" },
 ]
-provides-extras = ["docs", "build", "build-time", "post-tool", "pre-llm", "pre-response", "pre-tool"]
+provides-extras = ["docs", "build", "spotlight", "refraction", "routing"]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "bertopic", specifier = ">=0.17.3" },
-    { name = "docling", specifier = ">=2.38.1" },
     { name = "langchain-ibm", specifier = ">=0.3.6" },
     { name = "langgraph", specifier = ">=0.2.74" },
     { name = "mellea", specifier = "~=0.0.6" },
@@ -209,7 +212,6 @@ dev = [
     { name = "pytest-mock", specifier = ">=3.14.1" },
     { name = "python-semantic-release", specifier = "~=10.4.1" },
     { name = "ruff", specifier = ">=0.13.2" },
-    { name = "scikit-learn", specifier = ">=1.7.1" },
     { name = "types-cachetools", specifier = ">=6.2.0.20250827" },
     { name = "types-cffi", specifier = ">=1.17.0.20250915" },
     { name = "types-grpcio", specifier = ">=1.0.0.20251009" },
@@ -2129,52 +2131,15 @@ wheels = [
 
 [[package]]
 name = "hypothesis"
-version = "6.148.1"
+version = "6.148.7"
 source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version < '3.10.2' and platform_machine == 'x86_64' and sys_platform == 'darwin'",
-    "python_full_version < '3.10.2' and platform_machine != 'x86_64' and sys_platform == 'darwin'",
-    "python_full_version < '3.10.2' and platform_machine == 'aarch64' and sys_platform == 'linux'",
-    "(python_full_version < '3.10.2' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version < '3.10.2' and sys_platform != 'darwin' and sys_platform != 'linux')",
-]
 dependencies = [
-    { name = "exceptiongroup", marker = "python_full_version < '3.10.2'" },
-    { name = "sortedcontainers", marker = "python_full_version < '3.10.2'" },
+    { name = "exceptiongroup", marker = "python_full_version < '3.11'" },
+    { name = "sortedcontainers" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fd/5f/b08ad8dc0a79c3828dd137b4f55243f5d0342b02e963f5298dcb3bec7021/hypothesis-6.148.1.tar.gz", hash = "sha256:98851429bd89b0c8835e8ebca6705c28dec56517576e5606fc3b841ddb0dc1c7", size = 468664, upload-time = "2025-11-16T07:58:37.959Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/09/5e/6a506e81d4dfefed2e838b6beaaae87b2e411dda3da0a3abf94099f194ae/hypothesis-6.148.7.tar.gz", hash = "sha256:b96e817e715c5b1a278411e3b9baf6d599d5b12207ba25e41a8f066929f6c2a6", size = 471199, upload-time = "2025-12-05T02:12:38.068Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a4/39/a4f6a711970e6c23be35b967907f766064e27945f5b44855a00fa14af3bb/hypothesis-6.148.1-py3-none-any.whl", hash = "sha256:2cca1a20e8fcd230da86bb6d9f3e940a052caef0d4327c12b5694d164ea0f89e", size = 535684, upload-time = "2025-11-16T07:58:36.175Z" },
-]
-
-[[package]]
-name = "hypothesis"
-version = "6.148.2"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.13' and platform_machine == 'x86_64' and sys_platform == 'darwin'",
-    "python_full_version == '3.12.*' and platform_machine == 'x86_64' and sys_platform == 'darwin'",
-    "python_full_version == '3.11.*' and platform_machine == 'x86_64' and sys_platform == 'darwin'",
-    "python_full_version >= '3.10.2' and python_full_version < '3.11' and platform_machine == 'x86_64' and sys_platform == 'darwin'",
-    "python_full_version >= '3.13' and platform_machine != 'x86_64' and sys_platform == 'darwin'",
-    "python_full_version >= '3.13' and platform_machine == 'aarch64' and sys_platform == 'linux'",
-    "(python_full_version >= '3.13' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.13' and sys_platform != 'darwin' and sys_platform != 'linux')",
-    "python_full_version == '3.12.*' and platform_machine != 'x86_64' and sys_platform == 'darwin'",
-    "python_full_version == '3.12.*' and platform_machine == 'aarch64' and sys_platform == 'linux'",
-    "(python_full_version == '3.12.*' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version == '3.12.*' and sys_platform != 'darwin' and sys_platform != 'linux')",
-    "python_full_version == '3.11.*' and platform_machine != 'x86_64' and sys_platform == 'darwin'",
-    "python_full_version == '3.11.*' and platform_machine == 'aarch64' and sys_platform == 'linux'",
-    "(python_full_version == '3.11.*' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version == '3.11.*' and sys_platform != 'darwin' and sys_platform != 'linux')",
-    "python_full_version >= '3.10.2' and python_full_version < '3.11' and platform_machine != 'x86_64' and sys_platform == 'darwin'",
-    "python_full_version >= '3.10.2' and python_full_version < '3.11' and platform_machine == 'aarch64' and sys_platform == 'linux'",
-    "(python_full_version >= '3.10.2' and python_full_version < '3.11' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.10.2' and python_full_version < '3.11' and sys_platform != 'darwin' and sys_platform != 'linux')",
-]
-dependencies = [
-    { name = "exceptiongroup", marker = "python_full_version >= '3.10.2' and python_full_version < '3.11'" },
-    { name = "sortedcontainers", marker = "python_full_version >= '3.10.2'" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/4a/99/a3c6eb3fdd6bfa01433d674b0f12cd9102aa99630689427422d920aea9c6/hypothesis-6.148.2.tar.gz", hash = "sha256:07e65d34d687ddff3e92a3ac6b43966c193356896813aec79f0a611c5018f4b1", size = 469984, upload-time = "2025-11-18T20:21:17.047Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/b1/d2/c2673aca0127e204965e0e9b3b7a0e91e9b12993859ac8758abd22669b89/hypothesis-6.148.2-py3-none-any.whl", hash = "sha256:bf8ddc829009da73b321994b902b1964bcc3e5c3f0ed9a1c1e6a1631ab97c5fa", size = 536986, upload-time = "2025-11-18T20:21:15.212Z" },
+    { url = "https://files.pythonhosted.org/packages/e9/55/fa5607e4a4af96dfa0e7efd81bbd130735cedd21aac70b25e06191bff92f/hypothesis-6.148.7-py3-none-any.whl", hash = "sha256:94dbd58ebf259afa3bafb1d3bf5761ac1bde6f1477de494798cbf7960aabbdee", size = 538127, upload-time = "2025-12-05T02:12:35.54Z" },
 ]
 
 [[package]]
@@ -2182,8 +2147,7 @@ name = "hypothesis-jsonschema"
 version = "0.23.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "hypothesis", version = "6.148.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10.2'" },
-    { name = "hypothesis", version = "6.148.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10.2'" },
+    { name = "hypothesis" },
     { name = "jsonschema" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/4f/ad/2073dd29d8463a92c243d0c298370e50e0d4082bc67f156dc613634d0ec4/hypothesis-jsonschema-0.23.1.tar.gz", hash = "sha256:f4ac032024342a4149a10253984f5a5736b82b3fe2afb0888f3834a31153f215", size = 42896, upload-time = "2024-02-28T20:33:50.209Z" }
@@ -3386,6 +3350,20 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/3a/41/580bb4006e3ed0361b8151a01d324fb03f420815446c7def45d02f74c270/mergedeep-1.3.4.tar.gz", hash = "sha256:0096d52e9dad9939c3d975a774666af186eda617e6ca84df4c94dec30004f2a8", size = 4661, upload-time = "2021-02-05T18:55:30.623Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/2c/19/04f9b178c2d8a15b076c8b5140708fa6ffc5601fb6f1e975537072df5b2a/mergedeep-1.3.4-py3-none-any.whl", hash = "sha256:70775750742b25c0d8f36c55aed03d24c3384d17c951b3175d898bd778ef0307", size = 6354, upload-time = "2021-02-05T18:55:29.583Z" },
+]
+
+[[package]]
+name = "milvus-lite"
+version = "2.5.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "tqdm" },
+]
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a9/b2/acc5024c8e8b6a0b034670b8e8af306ebd633ede777dcbf557eac4785937/milvus_lite-2.5.1-py3-none-macosx_10_9_x86_64.whl", hash = "sha256:6b014453200ba977be37ba660cb2d021030375fa6a35bc53c2e1d92980a0c512", size = 27934713, upload-time = "2025-06-30T04:23:37.028Z" },
+    { url = "https://files.pythonhosted.org/packages/9b/2e/746f5bb1d6facd1e73eb4af6dd5efda11125b0f29d7908a097485ca6cad9/milvus_lite-2.5.1-py3-none-macosx_11_0_arm64.whl", hash = "sha256:a2e031088bf308afe5f8567850412d618cfb05a65238ed1a6117f60decccc95a", size = 24421451, upload-time = "2025-06-30T04:23:51.747Z" },
+    { url = "https://files.pythonhosted.org/packages/2e/cf/3d1fee5c16c7661cf53977067a34820f7269ed8ba99fe9cf35efc1700866/milvus_lite-2.5.1-py3-none-manylinux2014_aarch64.whl", hash = "sha256:a13277e9bacc6933dea172e42231f7e6135bd3bdb073dd2688ee180418abd8d9", size = 45337093, upload-time = "2025-06-30T04:24:06.706Z" },
+    { url = "https://files.pythonhosted.org/packages/d3/82/41d9b80f09b82e066894d9b508af07b7b0fa325ce0322980674de49106a0/milvus_lite-2.5.1-py3-none-manylinux2014_x86_64.whl", hash = "sha256:25ce13f4b8d46876dd2b7ac8563d7d8306da7ff3999bb0d14b116b30f71d706c", size = 55263911, upload-time = "2025-06-30T04:24:19.434Z" },
 ]
 
 [[package]]
@@ -5732,6 +5710,18 @@ wheels = [
 ]
 
 [[package]]
+name = "pydash"
+version = "8.0.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/2f/24/91c037f47e434172c2112d65c00c84d475a6715425e3315ba2cbb7a87e66/pydash-8.0.5.tar.gz", hash = "sha256:7cc44ebfe5d362f4f5f06c74c8684143c5ac481376b059ff02570705523f9e2e", size = 164861, upload-time = "2025-01-17T16:08:50.562Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2c/86/e74c978800131c657fc5145f2c1c63e0cea01a49b6216f729cf77a2e1edf/pydash-8.0.5-py3-none-any.whl", hash = "sha256:b2625f8981862e19911daa07f80ed47b315ce20d9b5eb57aaf97aaf570c3892f", size = 102077, upload-time = "2025-01-17T16:08:47.91Z" },
+]
+
+[[package]]
 name = "pygments"
 version = "2.19.2"
 source = { registry = "https://pypi.org/simple" }
@@ -5757,6 +5747,49 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/e7/d9/a987e4d549c6c82353fce5fa5f650229bb60ea4c0d1684a2714a509aef58/pymdown_extensions-10.17.1.tar.gz", hash = "sha256:60d05fe55e7fb5a1e4740fc575facad20dc6ee3a748e8d3d36ba44142e75ce03", size = 845207, upload-time = "2025-11-11T21:44:58.815Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/81/40/b2d7b9fdccc63e48ae4dbd363b6b89eb7ac346ea49ed667bb71f92af3021/pymdown_extensions-10.17.1-py3-none-any.whl", hash = "sha256:1f160209c82eecbb5d8a0d8f89a4d9bd6bdcbde9a8537761844cfc57ad5cd8a6", size = 266310, upload-time = "2025-11-11T21:44:56.809Z" },
+]
+
+[[package]]
+name = "pymilvus"
+version = "2.6.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "grpcio" },
+    { name = "orjson" },
+    { name = "pandas" },
+    { name = "protobuf" },
+    { name = "python-dotenv" },
+    { name = "setuptools" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/02/04/9ace30346a8fe2d8e9a047678bb563bc63e1e181d6a583a8a205806a211b/pymilvus-2.6.5.tar.gz", hash = "sha256:08f790acbbb4888f76394daa807c0227efdd744b6d39f3130f39afe77ba17ac6", size = 1365608, upload-time = "2025-12-05T08:59:49.777Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/58/45/c5416f2d64dd8add626a90166d8389a97ebc39c107ea01c15ea57bf3a07f/pymilvus-2.6.5-py3-none-any.whl", hash = "sha256:9e1caddd96361cd41f4e0685b6bd3d99bbaea94c8284b1fef5575bcfd47d7a2f", size = 280832, upload-time = "2025-12-05T08:59:48.016Z" },
+]
+
+[package.optional-dependencies]
+milvus-lite = [
+    { name = "milvus-lite", marker = "sys_platform != 'win32'" },
+]
+model = [
+    { name = "pymilvus-model" },
+]
+
+[[package]]
+name = "pymilvus-model"
+version = "0.3.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "numpy", version = "2.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "onnxruntime" },
+    { name = "protobuf" },
+    { name = "scipy", version = "1.15.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "scipy", version = "1.16.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "transformers" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0c/8f/a8212f3d932d566fdec354b49befa09174b239c8b8ad25a33b798cee393b/pymilvus_model-0.3.2.tar.gz", hash = "sha256:10ab49a989396943e08555b971f85182ddb50da47076e699a157c9a5ff542872", size = 36268, upload-time = "2025-03-31T08:47:45.007Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/5b/ba/b34e3f8c57c453c02daf1a1eff9c4b62a2e89fc10a29bc83fb685155fe14/pymilvus_model-0.3.2-py3-none-any.whl", hash = "sha256:df8a90519a2adc47bd40f37d8c250b0ad0c7aaafc6139b52dc896d5cfda55d35", size = 47699, upload-time = "2025-03-31T08:47:43.372Z" },
 ]
 
 [[package]]

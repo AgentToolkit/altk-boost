@@ -65,6 +65,7 @@ class ReflectionPipeline:
         transform_enabled: Optional[bool] = False,
         runtime_pipeline: Optional[bool] = True,
         use_examples: Optional[bool] = True,
+        skip_static_checks: Optional[bool] = False,
     ):
         self.metrics_client = metrics_client
         if codegen_client is None:
@@ -75,6 +76,7 @@ class ReflectionPipeline:
         self.general_metrics = general_metrics
         self.function_metrics = function_metrics
         self.parameter_metrics = parameter_metrics
+        self.skip_static_checks = skip_static_checks
 
         metrics_definitions = []
 
@@ -159,6 +161,29 @@ class ReflectionPipeline:
             transform_enabled=transform_enabled,
         )
 
+        # 4) Auto-detect if we should skip static checks
+        # Skip if: only tool-spec-free metrics are used and no function/parameter metrics
+        if not self.skip_static_checks:
+            from altk.pre_tool.core.consts import TOOL_SPEC_FREE_METRICS
+
+            # Check if only general metrics with tool-spec-free metrics are active
+            only_general = (
+                gen_defs is not None and fun_defs is None and par_defs is None
+            )
+            if only_general and gen_defs:
+                # Check if all general metrics are tool-spec-free
+                all_tool_spec_free = all(
+                    metric.get("name") in TOOL_SPEC_FREE_METRICS for metric in gen_defs
+                )
+                if all_tool_spec_free:
+                    self._auto_skip_static = True
+                else:
+                    self._auto_skip_static = False
+            else:
+                self._auto_skip_static = False
+        else:
+            self._auto_skip_static = False
+
     @staticmethod
     def static_only(
         inventory: List[ToolSpec],
@@ -237,7 +262,16 @@ class ReflectionPipeline:
         """
         Full sync pipeline: static -> semantic -> assemble PipelineResult.
         """
-        static_res = self.static_only(inventory, call)
+        # Auto-skip static checks if only tool-spec-free metrics and empty inventory
+        should_skip_static = (
+            self.skip_static_checks or self._auto_skip_static
+        ) and not inventory
+
+        if should_skip_static:
+            # Create empty static result when skipping
+            static_res = StaticResult(metrics={}, final_decision=True)
+        else:
+            static_res = self.static_only(inventory, call)
 
         if not static_res.final_decision and not continue_on_static:
             inputs = FunctionCallInput(
@@ -284,7 +318,16 @@ class ReflectionPipeline:
         """
         Full async pipeline: static -> semantic -> assemble PipelineResult.
         """
-        static_res = self.static_only(inventory, call)
+        # Auto-skip static checks if only tool-spec-free metrics and empty inventory
+        should_skip_static = (
+            self.skip_static_checks or self._auto_skip_static
+        ) and not inventory
+
+        if should_skip_static:
+            # Create empty static result when skipping
+            static_res = StaticResult(metrics={}, final_decision=True)
+        else:
+            static_res = self.static_only(inventory, call)
 
         if not static_res.final_decision and not continue_on_static:
             inputs = FunctionCallInput(

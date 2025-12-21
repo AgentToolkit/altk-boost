@@ -370,6 +370,7 @@ class SPARCReflectionComponent(ComponentBase):
     ) -> SPARCReflectionResult:
         """Process the pipeline result into a structured reflection result."""
         issues = []
+        has_errors = False
         decision = SPARCReflectionDecision.APPROVE
 
         # Check static issues
@@ -386,16 +387,30 @@ class SPARCReflectionComponent(ComponentBase):
                         )
                     )
 
-        # Check semantic issues
+        # Check semantic issues and errors
         if pipeline_result.semantic:
-            # Function selection metrics
+            # Function selection metrics - check for errors and issues
             function_selection_issues = False
             if pipeline_result.semantic.function_selection:
                 for (
                     metric_name,
                     metric_result,
                 ) in pipeline_result.semantic.function_selection.metrics.items():
-                    if hasattr(metric_result, "is_issue") and metric_result.is_issue:
+                    # Check for errors first
+                    if hasattr(metric_result, "error") and metric_result.error:
+                        has_errors = True
+                        logger.error(
+                            f"Error in function selection metric '{metric_name}': {metric_result.error}"
+                        )
+                        issues.append(
+                            SPARCReflectionIssue(
+                                issue_type=SPARCReflectionIssueType.ERROR,
+                                metric_name=f"function_selection.{metric_name}",
+                                explanation=f"LLM execution error in function selection metric: {metric_result.error}",
+                                correction=None,
+                            )
+                        )
+                    elif hasattr(metric_result, "is_issue") and metric_result.is_issue:
                         function_selection_issues = True
                         issues.append(
                             SPARCReflectionIssue(
@@ -407,14 +422,29 @@ class SPARCReflectionComponent(ComponentBase):
                                 correction=metric_result.raw_response.get("correction"),
                             )
                         )
+
             if not function_selection_issues:
-                # General metrics
+                # General metrics - check for errors and issues
                 if pipeline_result.semantic.general:
                     for (
                         metric_name,
                         metric_result,
                     ) in pipeline_result.semantic.general.metrics.items():
-                        if (
+                        # Check for errors first
+                        if hasattr(metric_result, "error") and metric_result.error:
+                            has_errors = True
+                            logger.error(
+                                f"Error in general metric '{metric_name}': {metric_result.error}"
+                            )
+                            issues.append(
+                                SPARCReflectionIssue(
+                                    issue_type=SPARCReflectionIssueType.ERROR,
+                                    metric_name=f"general.{metric_name}",
+                                    explanation=f"LLM execution error in general metric: {metric_result.error}",
+                                    correction=None,
+                                )
+                            )
+                        elif (
                             hasattr(metric_result, "is_issue")
                             and metric_result.is_issue
                         ):
@@ -431,14 +461,28 @@ class SPARCReflectionComponent(ComponentBase):
                                 )
                             )
 
-                # Parameter metrics
+                # Parameter metrics - check for errors and issues
                 if pipeline_result.semantic.parameter:
                     for (
                         param_name,
                         param_metrics,
                     ) in pipeline_result.semantic.parameter.items():
                         for metric_name, metric_result in param_metrics.metrics.items():
-                            if (
+                            # Check for errors first
+                            if hasattr(metric_result, "error") and metric_result.error:
+                                has_errors = True
+                                logger.error(
+                                    f"Error in parameter metric '{param_name}.{metric_name}': {metric_result.error}"
+                                )
+                                issues.append(
+                                    SPARCReflectionIssue(
+                                        issue_type=SPARCReflectionIssueType.ERROR,
+                                        metric_name=f"parameter.{param_name}.{metric_name}",
+                                        explanation=f"LLM execution error in parameter metric: {metric_result.error}",
+                                        correction=None,
+                                    )
+                                )
+                            elif (
                                 hasattr(metric_result, "is_issue")
                                 and metric_result.is_issue
                             ):
@@ -455,13 +499,27 @@ class SPARCReflectionComponent(ComponentBase):
                                     )
                                 )
 
-                # Transform results
+                # Transform results - check for errors and corrections
                 if pipeline_result.semantic.transform:
                     for (
                         param_name,
                         param_info,
                     ) in pipeline_result.semantic.transform.items():
-                        if param_info.correction:
+                        # Check for transformation errors
+                        if hasattr(param_info, "error") and param_info.error:
+                            has_errors = True
+                            logger.error(
+                                f"Error in transformation for parameter '{param_name}': {param_info.error}"
+                            )
+                            issues.append(
+                                SPARCReflectionIssue(
+                                    issue_type=SPARCReflectionIssueType.ERROR,
+                                    metric_name=f"transform.{param_name}",
+                                    explanation=f"Transformation error: {param_info.error}",
+                                    correction=None,
+                                )
+                            )
+                        elif param_info.correction:
                             issues.append(
                                 SPARCReflectionIssue(
                                     issue_type=SPARCReflectionIssueType.TRANSFORM,
@@ -475,8 +533,13 @@ class SPARCReflectionComponent(ComponentBase):
                                 )
                             )
 
-        # Determine final decision
-        if issues:
+        # Determine final decision based on errors and issues
+        if has_errors:
+            decision = SPARCReflectionDecision.ERROR
+            logger.warning(
+                f"Pipeline execution resulted in ERROR decision due to {sum(1 for i in issues if i.issue_type == SPARCReflectionIssueType.ERROR)} error(s)"
+            )
+        elif issues:
             decision = SPARCReflectionDecision.REJECT
         else:
             decision = SPARCReflectionDecision.APPROVE

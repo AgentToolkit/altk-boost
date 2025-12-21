@@ -1,7 +1,6 @@
 import json
 import os
 import asyncio
-from langchain_core.messages import HumanMessage, AIMessage
 
 from altk.pre_tool.core import (
     SPARCReflectionRunInput,
@@ -134,10 +133,14 @@ async def run_temperature_conversion_example(middleware: SPARCReflectionComponen
     print("Wrong conversion: Using 75 directly instead of converting 75°F to ~24°C\n")
 
     conversation_context = [
-        HumanMessage(content="Set the thermostat to 75 Fahrenheit in the living room"),
-        AIMessage(
-            content="I'll set the thermostat to 75 Fahrenheit in the living room."
-        ),
+        {
+            "role": "user",
+            "content": "Set the thermostat to 75 Fahrenheit in the living room",
+        },
+        {
+            "role": "assistant",
+            "content": "I'll set the thermostat to 75 Fahrenheit in the living room.",
+        },
     ]
 
     # Incorrect tool call - using 75 directly instead of converting F to C
@@ -174,8 +177,14 @@ async def run_distance_conversion_example(middleware: SPARCReflectionComponent):
     print("Wrong conversion: Using miles/mph values directly\n")
 
     conversation_context = [
-        HumanMessage(content="Calculate travel time for 50 miles at 60 mph"),
-        AIMessage(content="I'll calculate the travel time for 50 miles at 60 mph."),
+        {
+            "role": "user",
+            "content": "Calculate travel time for 50 miles at 60 mph",
+        },
+        {
+            "role": "assistant",
+            "content": "I'll calculate the travel time for 50 miles at 60 mph.",
+        },
     ]
 
     # Incorrect tool call - using miles/mph instead of km/kmh
@@ -211,10 +220,14 @@ async def run_correct_conversion_example(middleware: SPARCReflectionComponent):
     print("Correct conversion: 75°F converted to 24°C\n")
 
     conversation_context = [
-        HumanMessage(content="Set the thermostat to 75 Fahrenheit in the bedroom"),
-        AIMessage(
-            content="I'll set the thermostat to 24 degrees Celsius (75°F) in the bedroom."
-        ),
+        {
+            "role": "user",
+            "content": "Set the thermostat to 75 Fahrenheit in the bedroom",
+        },
+        {
+            "role": "assistant",
+            "content": "I'll set the thermostat to 24 degrees Celsius (75°F) in the bedroom.",
+        },
     ]
 
     # Correct tool call - properly converted F to C

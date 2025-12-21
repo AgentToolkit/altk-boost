@@ -1,8 +1,15 @@
 from typing import List, Tuple, Optional, Dict, Any, Union
-from nestful import SequencingDataset, SequencingData, SequenceStep, Catalog
-from nestful.utils import extract_label, get_token
-from nl2flow.compile.schemas import Step, MemoryItem
-from nl2flow.debug.schemas import SolutionQuality
+
+try:
+    from nestful import SequencingDataset, SequencingData, SequenceStep, Catalog
+    from nestful.utils import extract_label, get_token
+    from nl2flow.compile.schemas import Step, MemoryItem
+    from nl2flow.debug.schemas import SolutionQuality
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from altk.pre_tool.refraction.src.schemas import (
     BatchResults,
     Mapping,

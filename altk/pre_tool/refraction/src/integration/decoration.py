@@ -1,10 +1,24 @@
 from typing import Dict, Any, Optional
-from nl2flow.compile.options import BasicOperations
+
+try:
+    from nl2flow.compile.options import BasicOperations
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from altk.pre_tool.refraction.src.integration import Refractor
 from altk.pre_tool.refraction.src.schemas import DebuggingResult
-from nestful import SequenceStep
-from nestful.memory import resolve_in_memory
-from nestful.utils import get_token, TOKEN
+
+try:
+    from nestful import SequenceStep
+    from nestful.memory import resolve_in_memory
+    from nestful.utils import get_token, TOKEN
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from typing import Callable, TypeVar, ParamSpec, Concatenate
 from functools import wraps
 

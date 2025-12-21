@@ -11,7 +11,7 @@ This stage comes immediately after a user request is received. It prepares the i
 This stage occurs before the prompt is sent to the language model (LLM). It allows for prompt optimization, augmentation, or injection of additional context, etc.
 Unlike the post-request stage, the pre-llm stage can happen multiple times in the agent loop.
 
-ALTK includes one component in this stage: [Spotlight](components/spotlight.md).
+ALTK includes two components in this stage: [Spotlight](components/spotlight.md) and [Retrieval Augmented Thinking](components/rat.md).
 
 ## Reason (Call LLMs)
 In this stage we often call LLMs to "think" or reason about the task or request they have received via a prompt.

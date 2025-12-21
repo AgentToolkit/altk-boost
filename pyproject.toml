@@ -20,7 +20,25 @@ dependencies = [
     "pydantic>=2.0.0",
     "smolagents>=1.21.3",
     "typing-extensions>=4.0.0",
-    "toolguard>=0.1.6"
+    "toolguard>=0.1.6",
+    "tomli==2.2.1",
+    "aiofiles==24.1.0",
+    "black>=25.1.0",
+    "docstring_parser>=0.16",
+    "numpy>=2.2.6",
+    "genson>=1.3.0",
+    "langchain-chroma>=0.1.4",
+    "langchain-community>=0.3.21",
+    "langchain-huggingface>=0.3.0",
+    "llm-sandbox[docker,podman]>=0.2.5",
+    "langchain-text-splitters>=1.0.0",
+    "nltk>=3.9.1",
+    "scipy>=1.15.3",
+    "pytest>=8.2.1",
+    "pytest-json-report>=1.5.0",
+    "pyright>=1.1.406",
+    "datamodel-code-generator>=0.34.0",
+    "mellea~=0.0.6",
 ]
 
 description = "The Agent Lifecycle Toolkit (ALTK) is a library of components to help agent builders improve their agent with minimal integration effort and setup."
@@ -69,14 +87,11 @@ exclude = [
 
 [dependency-groups]
 dev = [
-    "docling>=2.38.1",
     "pre-commit>=4.2.0",
     "pytest>=8.2.1",
     "pytest-asyncio>=0.23.0",
     "pytest-cov>=4.1.0",
     "pytest-mock>=3.14.1",
-    "bertopic>=0.17.3",
-    "scikit-learn>=1.7.1",
     "ruff>=0.13.2",
     "mellea~=0.0.6",
     "mypy>=1.18.2",
@@ -114,44 +129,25 @@ docs = [
 
 build = ["uv~=0.8.22"]
 
-# `build_time` refers to the lifecycle stage and is completely unrelated to the `build` optional group which is used in the CI
-build_time = [
-    "tomli==2.2.1",
-    "aiofiles==24.1.0",
-    "langchain-core>=0.3.72",
-    "black>=25.1.0",
-    "docstring_parser>=0.16",
-    "numpy>=2.2.6",
-]
-
-post_tool = [
-    "genson>=1.3.0",
-    "langchain-chroma>=0.1.4",
-    "langchain-community>=0.3.21",
-    "langchain-huggingface>=0.3.0",
-    "llm-sandbox[docker,podman]>=0.2.5",
-    "langchain-text-splitters>=1.0.0",
-]
-
-pre_llm = [
+spotlight = [
     "torch==2.2.2 ; sys_platform == 'darwin' and platform_machine == 'x86_64'",
     "torch>=2.5.1 ; sys_platform != 'darwin' or platform_machine != 'x86_64'",
     "transformers>=4.53.3",
 ]
 
-pre_response = []
-
-pre_tool = [
+refraction = [
     "nl2flow>=0.1.2; sys_platform != 'win32'",
-    "nltk>=3.9.1",
-    "scipy>=1.15.3",
     "sentence-transformers>=5.0.0",
-    "pytest>=8.2.1",
-    "pytest-json-report>=1.5.0",
-    "pyright>=1.1.406",
-    "datamodel-code-generator>=0.34.0",
-    "mellea~=0.0.6",
-    "nestful-wrapper>=0.1.4",
+    "nestful-wrapper>=0.1.4"
+]
+
+routing = [
+    "pymilvus[milvus-lite,model]>=2.6.2",
+    "pydash>=8.0.5",
+    "bertopic>=0.17.3",
+    "scikit-learn>=1.7.1",
+    "sentence-transformers>=5.0.0",
+    "docling>=2.38.1",
 ]
 
 [[tool.uv.index]]

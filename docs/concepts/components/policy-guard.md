@@ -29,7 +29,7 @@ Experimentally, _Best-of-N_ yields the strongest results with the best repair ra
 The answer is passed to the output guardrail block to enforce policy guardrails.
 
 <p align="center">
-<img src="../../assets/img_policy_guard_architecture.png" width="300">
+<img src="https://raw.githubusercontent.com/AgentToolkit/agent-lifecycle-toolkit/refs/heads/main/docs/assets/img_policy_guard_architecture.png" width="300">
 </p>
 
 ## Results
@@ -38,7 +38,7 @@ We evaluated policy guards by measuring the increase in the policy compliance ra
 We used a derivative of the popular [IFEval](https://huggingface.co/datasets/google/IFEval) dataset, where we treated instructions as policy statements and scaled the number of instructions added to a query up to ten instructions.  We then measured the policy compliance rate as the instruction following (IF) rate without and with policy guards with using various strategies.
 
 <p align="center">
-<img src="../../assets/img_policy_guard_results.png" width="400">
+<img src="https://raw.githubusercontent.com/AgentToolkit/agent-lifecycle-toolkit/refs/heads/main/docs/assets/img_policy_guard_results.png" width="400">
 </p>
 
 In the above figure baseline refers to only adding the instructions to the prompt and Detect+Repair refers to the Batch repairer above.

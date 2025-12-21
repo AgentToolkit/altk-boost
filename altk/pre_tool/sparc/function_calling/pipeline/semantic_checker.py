@@ -41,6 +41,7 @@ from altk.pre_tool.sparc.function_calling import (
     GeneralMetricsPrompt,
     FunctionSelectionPrompt,
     ParameterMetricsPrompt,
+    GeneralMetricsPromptNoSpec,
 )
 
 
@@ -97,6 +98,9 @@ class SemanticChecker:
             )
 
     def _make_adapter(self, apis_specs, tool_call):
+        # Handle empty specs for tool-spec-free metrics
+        if not apis_specs:
+            return OpenAIAdapter([], tool_call)
         first = apis_specs[0]
         if isinstance(first, ToolSpec):
             return OpenAIAdapter(apis_specs, tool_call)
@@ -204,8 +208,10 @@ class SemanticChecker:
         tools_inventory_summary = adapter.get_tools_inventory_summary()
         call_dict = adapter.get_call_dict()
         fn_name = adapter.get_function_name()
-        cur_tool_spec = adapter.get_tool_spec(fn_name)
-        params = self._collect_params(adapter)
+
+        # Handle empty inventory for tool-spec-free metrics
+        cur_tool_spec = adapter.get_tool_spec(fn_name) if apis_specs else {}
+        params = self._collect_params(adapter) if apis_specs else {}
 
         if transform_enabled is not None:
             old_transform_enabled = self.transform_enabled
@@ -213,18 +219,22 @@ class SemanticChecker:
 
         # 2) GENERAL METRICS
         general_results: Optional[SemanticCategoryResult]
-        entries: List[Tuple[GeneralMetricsPrompt, Dict[str, Any]]] = []
+        entries: List[
+            Tuple[
+                Union[GeneralMetricsPrompt, GeneralMetricsPromptNoSpec], Dict[str, Any]
+            ]
+        ] = []
         for prompt in self.general_prompts:
-            entries.append(
-                (
-                    prompt,
-                    {
-                        "conversation_context": context,
-                        "tool_inventory": cur_tool_spec,
-                        "tool_call": call_dict,
-                    },
-                )
-            )
+            # Build kwargs based on whether prompt needs tool spec
+            kwargs = {
+                "conversation_context": context,
+                "tool_call": call_dict,
+            }
+            # Only include tool_inventory if prompt expects it (not tool-spec-free)
+            if isinstance(prompt, GeneralMetricsPrompt):
+                kwargs["tool_inventory"] = cur_tool_spec
+
+            entries.append((prompt, kwargs))
         if entries:
             try:
                 runner = MetricRunner(entries)
@@ -454,8 +464,10 @@ class SemanticChecker:
         tools_inventory_summary = adapter.get_tools_inventory_summary()
         call_dict = adapter.get_call_dict()
         fn_name = adapter.get_function_name()
-        cur_tool_spec = adapter.get_tool_spec(fn_name)
-        params = self._collect_params(adapter)
+
+        # Handle empty inventory for tool-spec-free metrics
+        cur_tool_spec = adapter.get_tool_spec(fn_name) if apis_specs else {}
+        params = self._collect_params(adapter) if apis_specs else {}
 
         # Handle optional override of transform_enabled
         if transform_enabled is not None:
@@ -464,20 +476,24 @@ class SemanticChecker:
 
         # 2) GENERAL METRICS
         general_results: SemanticCategoryResult = {}
-        general_entries: List[Tuple[GeneralMetricsPrompt, Dict[str, Any]]] = []
+        general_entries: List[
+            Tuple[
+                Union[GeneralMetricsPrompt, GeneralMetricsPromptNoSpec], Dict[str, Any]
+            ]
+        ] = []
         general_async_results: List[MetricRunResult] = []
 
         for prompt in self.general_prompts:
-            general_entries.append(
-                (
-                    prompt,
-                    {
-                        "conversation_context": context,
-                        "tool_inventory": cur_tool_spec,
-                        "tool_call": call_dict,
-                    },
-                )
-            )
+            # Build kwargs based on whether prompt needs tool spec
+            kwargs = {
+                "conversation_context": context,
+                "tool_call": call_dict,
+            }
+            # Only include tool_inventory if prompt expects it (not tool-spec-free)
+            if isinstance(prompt, GeneralMetricsPrompt):
+                kwargs["tool_inventory"] = cur_tool_spec
+
+            general_entries.append((prompt, kwargs))
 
         # 3) FUNCTION-SELECTION METRICS
         function_results: SemanticCategoryResult = {}
@@ -532,9 +548,9 @@ class SemanticChecker:
             # Split the results back into categories
             for entry, result in zip(all_entries, async_results):
                 prompt_obj, ctx_dict = entry
-                if isinstance(prompt_obj, GeneralMetricsPrompt) and isinstance(
-                    result, MetricRunResult
-                ):
+                if isinstance(
+                    prompt_obj, (GeneralMetricsPrompt, GeneralMetricsPromptNoSpec)
+                ) and isinstance(result, MetricRunResult):
                     general_async_results.append(result)
                 elif isinstance(prompt_obj, FunctionSelectionPrompt) and isinstance(
                     result, MetricRunResult

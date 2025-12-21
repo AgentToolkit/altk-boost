@@ -1,0 +1,19 @@
+{
+    "subject": "sound",
+    "topic_extractor": {
+        "name": "tfidf_words",
+        "config": {
+            "top_words": 40,
+            "top_words_picked": 10
+        }
+    },
+    "topics_sink": {
+        "name": "altk.pre_llm.routing.retrieval_augmented_thinking.chroma.topic_sink_content_provider.ChromaDBProvider",
+        "config": {
+            "collection": "sound.topics",
+            "instance": {
+                "client": null
+            }
+        }
+    }
+}

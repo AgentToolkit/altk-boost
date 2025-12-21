@@ -66,3 +66,30 @@ For immediately before the agent returns a response to the user
     Guard and enforce policies in LLM responses
   </a>
 </div>
+
+#### Build-Time
+During building of tools and agents
+
+<div class="grid">
+  <a
+    href="https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/build_time/test_case_generation_toolkit/README.md"
+    class="card"
+  >
+    <b> 📚 Test Case Generation</b><br/>
+    Generates the test case values and NL Utterances
+  </a>
+  <a
+    href="https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/build_time/tool_enrichment_toolkit/README.md"
+    class="card"
+  >
+    <b> ️💡 Tool Enrichment</b><br/>
+    Python tool enrichment using the metadata information for improved tool calling and tool input formation
+  </a>
+  <a
+    href="https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/build_time/tool_validation_toolkit/README.md"
+    class="card"
+  >
+    <b> ✅ Tool Validation</b><br/>
+    Validates Python tools by running test cases with a ReAct agent bound to the required tools.
+  </a>
+</div>

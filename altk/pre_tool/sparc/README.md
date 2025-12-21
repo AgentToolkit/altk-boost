@@ -65,7 +65,6 @@ from altk.pre_tool.core import (
 )
 from altk.pre_tool.sparc.sparc import SPARCReflectionComponent
 from altk.core.toolkit import AgentPhase, ComponentConfig
-from langchain_core.messages import HumanMessage, AIMessage
 from altk.core.llm import get_llm
 
 
@@ -115,8 +114,14 @@ tool_specs = [{
 
 # Prepare conversation context
 messages = [
-    HumanMessage(content="Send an email to team@company.com about the meeting"),
-    AIMessage(content="I'll send that email for you.")
+    {
+        "role": "user",
+        "content": "Send an email to team@company.com about the meeting"
+    },
+    {
+        "role": "assistant",
+        "content": "I'll send that email for you."
+    }
 ]
 
 # Tool call to validate (OpenAI format)
@@ -155,13 +160,15 @@ The component expects three main inputs in OpenAI-compatible formats:
 List of messages representing the conversation context:
 
 ```python
-from langchain_core.messages import HumanMessage, AIMessage
-
 messages = [
-    HumanMessage(content="What's the weather in New York?"),
-    AIMessage(content="I'll check the weather for you."),
-    HumanMessage(content="Make sure to use Fahrenheit please"),
-    AIMessage(content="I'll get the weather in New York using Fahrenheit.")
+    {
+        "role": "user",
+        "content": "What's the weather in New York?"
+    },
+    {
+        "role": "assistant",
+        "content": "I'll check the weather for you."
+    },
 ]
 ```
 
@@ -314,6 +321,22 @@ sparc = SPARCReflectionComponent(
 )
 ```
 
+#### `Track.SPEC_FREE` - Semantic Validation without Tool Specifications
+- **LLM Calls**: 1
+- **Validates**: General correctness check (spec-free)
+- **Use Case**: Single-turn or multi-turn conversations, performance-sensitive applications
+- **Performance**: Very fast
+- **Model Required**: Yes
+
+```python
+config = build_config()  # ValidatingLLMClient required
+sparc = SPARCReflectionComponent(
+    config=config,
+    track=Track.SPEC_FREE,
+    execution_mode=SPARCExecutionMode.ASYNC,
+)
+```
+
 #### `Track.TRANSFORMATIONS_ONLY` - Unit/Format Conversion Focus
 - **LLM Calls**: 1 + N (where N = parameters needing transformation, executed in parallel)
 - **Validates**: Units conversion, format transformations
@@ -351,6 +374,9 @@ Each track includes specific validation metrics optimized for different use case
 - **METRIC_FUNCTION_SELECTION_APPROPRIATENESS**: Validates function choice matches user intent
 - **METRIC_AGENTIC_CONSTRAINTS_SATISFACTION**: Validates adherence to agentic conversation constraints and context
 - **Transform enabled**: Unit/format conversions when needed
+
+#### `Track.SPEC_FREE`
+- **METRIC_GENERAL_CONVERSATION_GROUNDED_CORRECTNESS**: Detects incorrect tool calls
 
 #### `Track.TRANSFORMATIONS_ONLY`
 - **Transform enabled**: Focus on unit/format conversions
@@ -396,6 +422,7 @@ For advanced users who need specific combinations of validation metrics, you can
 from llmevalkit.function_calling.consts import (
     METRIC_GENERAL_HALLUCINATION_CHECK,        # Detects hallucinated parameter values
     METRIC_GENERAL_VALUE_FORMAT_ALIGNMENT,     # Validates parameter format requirements
+    METRIC_GENERAL_CONVERSATION_GROUNDED_CORRECTNESS,  # Validate tool call correctness (spec-free)
     METRIC_FUNCTION_SELECTION_APPROPRIATENESS, # Validates function choice matches intent
     METRIC_AGENTIC_CONSTRAINTS_SATISFACTION,   # Validates agentic conversation constraints
     METRIC_PARAMETER_VALUE_FORMAT_ALIGNMENT,   # Validates parameter format requirements
@@ -491,6 +518,7 @@ sparc = SPARCReflectionComponent(
 - **General Metrics**: Applied to the overall tool call context
   - `METRIC_GENERAL_HALLUCINATION_CHECK`: Detects fabricated or hallucinated information
   - `METRIC_GENERAL_VALUE_FORMAT_ALIGNMENT`: Validates parameter format requirements
+  - `METRIC_GENERAL_CONVERSATION_GROUNDED_CORRECTNESS`: Validate tool call correctness (spec-free)
 
 - **Function Metrics**: Applied to function selection and appropriateness
   - `METRIC_FUNCTION_SELECTION_APPROPRIATENESS`: Validates function choice matches user intent
@@ -786,8 +814,6 @@ uv run pytest tests/pre_tool/sparc/units_conversion_test.py
 - **Static Validation Tests**: Schema validation, type checking, constraint violations
 - **Semantic Validation Tests**: Intent alignment, parameter grounding, hallucination detection
 - **Units Conversion Tests**: Temperature, distance, and format transformation validation
-
-
 
 ## License
 Apache 2.0 - see LICENSE file for details.

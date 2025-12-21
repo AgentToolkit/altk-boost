@@ -1,5 +1,11 @@
-from nestful import Catalog, SequencingData, SequenceStep
-from nestful.utils import extract_label, get_token
+try:
+    from nestful import Catalog, SequencingData, SequenceStep
+    from nestful.utils import extract_label, get_token
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
+
 from typing import Dict, List, Any, Optional, Tuple, Union
 from altk.pre_tool.refraction.src.schemas.results import (
     DebuggingResult,
@@ -9,7 +15,13 @@ from altk.pre_tool.refraction.src.main import (
     parse_sequence_input,
     parse_catalog_input,
 )
-from nl2flow.printers.verbalize import comma_separate
+
+try:
+    from nl2flow.printers.verbalize import comma_separate
+except ImportError as err:
+    raise ImportError(
+        'You need to install the refraction dependencies to use this component. Run `pip install "agent-lifecycle-toolkit[refraction]"`'
+    ) from err
 
 
 def generate_prompt(

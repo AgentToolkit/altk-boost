@@ -1,6 +1,5 @@
 import json
 import os
-from langchain_core.messages import HumanMessage, AIMessage
 
 from altk.pre_tool.core import (
     SPARCReflectionRunInput,
@@ -196,8 +195,14 @@ def run_missing_parameters_example(middleware: SPARCReflectionComponent):
     print("Tool call missing required 'subject' and 'body' parameters\n")
 
     conversation_context = [
-        HumanMessage(content="Send an email to john@example.com"),
-        AIMessage(content="I'll send an email to john@example.com"),
+        {
+            "role": "user",
+            "content": "Send an email to john@example.com",
+        },
+        {
+            "role": "assistant",
+            "content": "I'll send an email to john@example.com",
+        },
     ]
 
     # Missing required parameters: subject and body
@@ -232,12 +237,15 @@ def run_invalid_types_example(middleware: SPARCReflectionComponent):
     print(
         "Tool call with incorrect parameter types (string instead of array, number instead of string)\n"
     )
-
     conversation_context = [
-        HumanMessage(
-            content="Schedule a 2-hour meeting with the team tomorrow at 2 PM"
-        ),
-        AIMessage(content="I'll schedule a 2-hour meeting with the team"),
+        {
+            "role": "user",
+            "content": "Schedule a 2-hour meeting with the team tomorrow at 2 PM",
+        },
+        {
+            "role": "assistant",
+            "content": "I'll schedule a 2-hour meeting with the team",
+        },
     ]
 
     # Invalid types: participants should be array, duration_minutes should be integer
@@ -277,8 +285,14 @@ def run_schema_violations_example(middleware: SPARCReflectionComponent):
     )
 
     conversation_context = [
-        HumanMessage(content="Send a high priority email to invalid-email"),
-        AIMessage(content="I'll send a high priority email"),
+        {
+            "role": "user",
+            "content": "Send a high priority email to invalid-email",
+        },
+        {
+            "role": "assistant",
+            "content": "I'll send a high priority email",
+        },
     ]
 
     # Schema violations: invalid email format, invalid priority enum, empty subject
@@ -315,10 +329,14 @@ def run_valid_static_example(middleware: SPARCReflectionComponent):
     print("Tool call with all required parameters and correct types\n")
 
     conversation_context = [
-        HumanMessage(
-            content="Send an email to team@example.com with subject 'Weekly Update'"
-        ),
-        AIMessage(content="I'll send the weekly update email to the team"),
+        {
+            "role": "user",
+            "content": "Send an email to team@example.com with subject 'Weekly Update'",
+        },
+        {
+            "role": "assistant",
+            "content": "I'll send the weekly update email to the team",
+        },
     ]
 
     # Valid tool call

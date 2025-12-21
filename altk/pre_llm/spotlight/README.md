@@ -12,11 +12,15 @@ SpotLight enables users to emphasize important spans within their prompt and ste
 
 
 ## Table of Contents
+- [Installation](#Installation)
 - [When to Use This Component](#when-to-use-this-component)
 - [Quick Start](#quick-start)
 - [License](#license)
 - [Under the Hood](#under-the-hood)
 
+
+## Installation
+Make sure the dependencies for Spotlight are included by running `pip install "agent-lifecycle-toolkit[spotlight]"`.
 
 ## When to Use This Component
 Use Spotlight when your LLM is failing to follow critical instructions in complex prompts. It is an inference-time hook and does not involve any training or changes to model weights.

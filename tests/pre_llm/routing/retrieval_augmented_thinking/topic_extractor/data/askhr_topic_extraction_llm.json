@@ -1,0 +1,32 @@
+{
+    "model_id": "meta-llama/llama-3-3-70b-instruct",
+    "provider": "watsonx",
+    "levels_of_expertise": false,
+    "content_provider": {
+        "name": "altk.routing_toolkit.retrieval_augmented_thinking.topic_extractor.chromadb.ChromaDBProvider",
+        "config": {
+            "collections": [
+                "askhr.offboarding",
+                "askhr.referrals",
+                "askhr.onboarding",
+                "askhr.career",
+                "askhr.employee_concerns",
+                "askhr.corporate_health",
+                "askhr.success_factors"
+            ],
+            "n_docs": 1,
+            "instance": {
+                "db_path": "/Users/diego/chroma"
+            }
+        }
+    },
+    "topics_sink": {
+        "name": "altk.routing_toolkit.retrieval_augmented_thinking.topic_extractor.chromadb.ChromaDBProvider",
+        "config": {
+            "collection": "askhr.topics",
+            "instance": {
+                "db_path": "/tmp/chroma_topics"
+            }
+        }
+    }
+}

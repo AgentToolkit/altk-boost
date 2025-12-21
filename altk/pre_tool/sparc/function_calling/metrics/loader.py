@@ -15,6 +15,7 @@ from pydantic import ValidationError
 from altk.pre_tool.sparc.metrics import Metric, MetricPrompt
 from altk.pre_tool.sparc.function_calling.metrics.function_call.general import (
     GeneralMetricsPrompt,
+    GeneralMetricsPromptNoSpec,
 )
 from altk.pre_tool.sparc.function_calling.metrics.function_selection.function_selection import (
     FunctionSelectionPrompt,
@@ -162,10 +163,20 @@ def load_prompts_from_list(
         except Exception as e:
             raise LoaderError(f"Record {idx} invalid schema: {e}") from e
 
+        # Detect tool-spec-free metrics and use appropriate prompt class
+        metric_name = rec.get("name", "")
+        from altk.pre_tool.core.consts import TOOL_SPEC_FREE_METRICS
+
+        actual_prompt_cls = PromptCls
+        if kind == PromptKind.GENERAL and metric_name in TOOL_SPEC_FREE_METRICS:
+            actual_prompt_cls = GeneralMetricsPromptNoSpec
+
         try:
-            prompt = PromptCls(metric=metric, task_description=rec["task_description"])
+            prompt = actual_prompt_cls(
+                metric=metric, task_description=rec["task_description"]
+            )
         except TypeError:
-            prompt = PromptCls(metric=metric)
+            prompt = actual_prompt_cls(metric=metric)
 
         for ex_idx, ex in enumerate(examples, start=1):
             try:

@@ -1,6 +1,5 @@
 import json
 import os
-from langchain_core.messages import HumanMessage, AIMessage
 import asyncio
 
 from altk.pre_tool.core import (
@@ -238,8 +237,14 @@ async def run_function_misalignment_example(middleware: SPARCReflectionComponent
     print("User asks about weather, but tool call tries to book a flight\n")
 
     conversation_context = [
-        HumanMessage(content="What's the weather like in New York today?"),
-        AIMessage(content="I'll check the weather for you in New York."),
+        {
+            "role": "user",
+            "content": "What's the weather like in New York today?",
+        },
+        {
+            "role": "assistant",
+            "content": "I'll check the weather for you in New York.",
+        },
     ]
 
     # Wrong function selected - booking flight instead of getting weather
@@ -278,9 +283,10 @@ async def run_value_grounding_example(middleware: SPARCReflectionComponent):
     )
 
     conversation_context = [
-        HumanMessage(
-            content="Send an SMS to my mom at +1234567890 saying 'Happy Birthday'"
-        ),
+        {
+            "role": "user",
+            "content": "Send an SMS to my mom at +1234567890 saying 'Happy Birthday'",
+        }
     ]
 
     # Parameter values don't match what user said
@@ -315,8 +321,14 @@ async def run_parameter_hallucination_example(middleware: SPARCReflectionCompone
     print("User asks simple weather question, but tool call adds invented details\n")
 
     conversation_context = [
-        HumanMessage(content="Is it sunny in Miami?"),
-        AIMessage(content="I'll check the current weather in Miami for you."),
+        {
+            "role": "user",
+            "content": "Is it sunny in Miami?",
+        },
+        {
+            "role": "assistant",
+            "content": "I'll check the current weather in Miami for you.",
+        },
     ]
 
     # Tool call adds details not mentioned by user (hallucinated parameters)
@@ -353,12 +365,14 @@ async def run_valid_semantic_example(middleware: SPARCReflectionComponent):
     )
 
     conversation_context = [
-        HumanMessage(
-            content="What's the weather like in Boston today? I prefer Fahrenheit."
-        ),
-        AIMessage(
-            content="I'll check the current weather in Boston with Fahrenheit temperature."
-        ),
+        {
+            "role": "user",
+            "content": "What's the weather like in Boston today? I prefer Fahrenheit.",
+        },
+        {
+            "role": "assistant",
+            "content": "I'll check the current weather in Boston with Fahrenheit temperature.",
+        },
     ]
 
     # Well-aligned function call that matches user intent and preferences

@@ -80,17 +80,21 @@ nav:
       - Usage: usage/index.md
   - Concepts:
     - Lifecycle:
-      - Lifecycle: concepts/lifecycle.md
+      - Lifecycle Stages: concepts/lifecycle.md
     - ALTK components:
       - Summary: concepts/components/summary.md
     - Components:
         - Spotlight: concepts/components/spotlight.md
+        - Retrieval Augmented Thinking: concepts/components/rat.md
         - Refraction: concepts/components/refraction.md
         - SPARC: concepts/components/sparc.md
         - Silent Review: concepts/components/silent-review.md
         - JSON Processor: concepts/components/json-processor.md
         - RAG Repair: concepts/components/rag-repair.md
         - Policy Guard: concepts/components/policy-guard.md
+        - Test Case Generation: concepts/components/test-case-generation.md
+        - Tool Enrichment: concepts/components/tool-enrichment.md
+        - Tool Validation: concepts/components/tool-validation.md
   - Examples:
       Examples: examples/index.md
   - Integrations:

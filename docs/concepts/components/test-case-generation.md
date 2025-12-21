@@ -1,4 +1,4 @@
-# Test Case Generation Toolkit
+# Test Case Generation Component
 
 This component performs Test Case Generation. It first generates the test case values and then generates an NL Utterance that formulates the test case values into a user query for validating robustness of tools and agents.
 
@@ -15,7 +15,7 @@ formats and any internal parameter dependencies. This component is designed to p
 ## Architecture
 The figure below shows the flow of test case generation.
 
-<img src="../../../docs/assets/img_test_case.png" width="60%">
+<img src="https://raw.githubusercontent.com/AgentToolkit/agent-lifecycle-toolkit/refs/heads/main/docs/assets/img_test_case.png" width="50%"/>
 
 ### Interface
 This component expects the following inputs and generates the following output.
