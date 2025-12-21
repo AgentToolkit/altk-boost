@@ -1,7 +1,8 @@
-from typing import List, Optional, Dict, Any
-from pydantic import BaseModel, Field
+from typing import List, Optional, Dict, Any, Union
+from pydantic import BaseModel, Field, ConfigDict
 from enum import Enum
 
+from altk.core.llm import LLMClient
 from altk.core.toolkit import ComponentInput, ComponentOutput
 
 
@@ -90,20 +91,3 @@ class SPARCReflectionRunOutput(PreToolReflectionRunOutput):
     output: SPARCReflectionRunOutputSchema = Field(
         default_factory=lambda: SPARCReflectionRunOutputSchema()
     )
-
-
-class RefractionRunInput(PreToolReflectionRunInput):
-    mappings: Optional[list[Mapping]] = None
-    memory_objects: Optional[dict[str, Any]] = None
-    use_given_operators_only: bool = False
-
-
-class RefractionBuildInput(PreToolReflectionBuildInput):
-    tool_specs: list[dict[str, Any]] | Catalog
-    top_k: int = 5
-    threshold: float = 0.8
-    compute_maps: bool = True
-
-
-class RefractionRunOutput(PreToolReflectionRunOutput):
-    result: Optional[DebuggingResult] = None
