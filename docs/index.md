@@ -26,6 +26,7 @@
 
 ## Community Bulletin
 ### ✅ Highlights
+- **Dec. 23, 2025**: New components: ToolOps, ToolGuard, Routing
 - **Nov. 10, 2025**: ALTK showcases at NY TechXchange Dev Day
 - **Nov. 6, 2025**: ATLK featured at Lausanne TechXchange Dev Day
 - **Oct. 29, 2025**: 🎉 ALTK is live! Check out the launch [blog](https://research.ibm.com/blog/altk-agent-toolkit?previewToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTc2MTc1MTg3MiwiZXhwIjoxNzYyMDExMDcyLCJzdWIiOiI0NTYwIn0.jfBYD6cOFSJXw0ZFPziCtGExsIvlc9uFp433KdO1CDE)
