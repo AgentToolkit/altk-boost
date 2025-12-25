@@ -75,19 +75,20 @@ def work_dir():
 # ---------------------------------------------------------------------------
 
 @pytest.mark.asyncio
-@pytest.mark.skipif(not WATSONX_CREDS_AVAILABLE, reason="WatsonX credentials not set")
+# @pytest.mark.skip(reason="Closed model required")
 async def test_tool_guard_calculator_policy(work_dir: str):
     # Tools to be guarded
     funcs = [divide_tool, add_tool, multiply_tool, subtract_tool, map_kdi_number]
 
     # Configure Mellea session used in ToolGuard LLM
     # see https://docs.mellea.ai/api-reference/core-library/stdlib/mellea-stdlib-session#start-session
-    backend_name = "openai" #"ollama", "hf", "openai", "watsonx", "litellm"
-    model_id = "GCP/claude-4-sonnet"
-    kw_args = {
-        "api_key": os.getenv("TOOLGUARD_GENPY_APIKEY"),
-        "base_url": "https://ete-litellm.bx.cloud9.ibm.com",
-    }
+    backend_name = os.getenv("TOOLGUARD_GENPY_BACKEND_NAME") #"openai" "ollama", "hf", "openai", "watsonx", "litellm"
+    model_id = os.getenv("TOOLGUARD_GENPY_MODEL_ID")
+    kw_args = os.getenv("TOOLGUARD_GENPY_ARGS")
+
+    assert backend_name
+    assert model_id
+    assert kw_args
 
     # Build ToolGuard component
     toolguard_code = ToolGuardCodeComponent(
