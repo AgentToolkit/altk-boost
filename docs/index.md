@@ -2,7 +2,7 @@
     <img alt="Agent Lifecycle Toolkit (ALTK) logo" src="assets/logo.png" height="120">
 </h1>
 
-<h4 align="center">Delivering plug-and-play, framework-agnostic technology to boost agents' performance</h4>
+<h4 align="center">Boost AI agent performance with plug-and-play, framework-agnostic technology</h4>
 
 <div style="text-align: center;">
 
@@ -25,16 +25,18 @@
 
 
 ## Community Bulletin
-### 🔜 What's Ahead
-- **Dec. 1-5, 2025**: Joint demos at AWS re:Ignite
-
-### ✅ Past Highlights
+### ✅ Highlights
+- **Dec. 23, 2025**: New components: ToolOps, ToolGuard, Routing
 - **Nov. 10, 2025**: ALTK showcases at NY TechXchange Dev Day
 - **Nov. 6, 2025**: ATLK featured at Lausanne TechXchange Dev Day
 - **Oct. 29, 2025**: 🎉 ALTK is live! Check out the launch [blog](https://research.ibm.com/blog/altk-agent-toolkit?previewToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTc2MTc1MTg3MiwiZXhwIjoxNzYyMDExMDcyLCJzdWIiOiI0NTYwIn0.jfBYD6cOFSJXw0ZFPziCtGExsIvlc9uFp433KdO1CDE)
 
 ## What is ALTK?
-The Agent Lifecycle Toolkit helps agent builders create better performing agents by easily integrating our components into agent pipelines.
+The Agent Lifecycle Toolkit helps agent builders create better performing agents by addressing key agent errors.
+
+<td align="center">
+<img alt="" src="assets/agent_errors.png" height="120">
+</td>
 
 - *Does your agent not follow instructions?*
 <br> [Spotlight](https://agenttoolkit.github.io/agent-lifecycle-toolkit/concepts/components/spotlight/) emphasizes important spans in prompts to steer LLM attention.

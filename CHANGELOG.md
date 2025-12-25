@@ -2,6 +2,96 @@
 
 <!-- version list -->
 
+## v0.10.0 (2025-12-23)
+
+### Bug Fixes
+
+- Add watsonx_url to test ([#85](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/85),
+  [`c44c150`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/c44c150a4a414c0ffbcecb520321f0b8488b041f))
+
+- Change default schema_field to None in generate methods
+  ([#95](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/95),
+  [`10c48c5`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/10c48c5823cfc97aaf6eb26a2b4d339e54c72f8a))
+
+- Change import in refraction readme
+  ([#94](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/94),
+  [`a7f669d`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/a7f669d15bfb971922e862f4817216c444cacf56))
+
+- Change test to watsonx provider instead of openai
+  ([#94](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/94),
+  [`a7f669d`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/a7f669d15bfb971922e862f4817216c444cacf56))
+
+- JSON Schema snippet generation for parameters - need to be without model_dump()
+  ([#95](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/95),
+  [`10c48c5`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/10c48c5823cfc97aaf6eb26a2b4d339e54c72f8a))
+
+- Langgraph sparc examples ([#94](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/94),
+  [`a7f669d`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/a7f669d15bfb971922e862f4817216c444cacf56))
+
+- Linting issues - unnecessary imports
+  ([#94](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/94),
+  [`a7f669d`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/a7f669d15bfb971922e862f4817216c444cacf56))
+
+- Refraction dependency - when installing altk without refraction sparc and toolguard cannot run as
+  well ([#94](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/94),
+  [`a7f669d`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/a7f669d15bfb971922e862f4817216c444cacf56))
+
+- Ruff format ([#94](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/94),
+  [`a7f669d`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/a7f669d15bfb971922e862f4817216c444cacf56))
+
+### Documentation
+
+- Enhancements ([#70](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/70),
+  [`3bbb983`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/3bbb9836a526fad1b5d03f010841b126f985afa4))
+
+- Fix img urls ([#89](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/89),
+  [`4c5ac60`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/4c5ac6013764afca6e45b036d8343a13d6d53029))
+
+- Update index.md ([#86](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/86),
+  [`13878f3`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/13878f301601bbe313b1252395f945a94774e24f))
+
+- Update mkdocs.yml
+  ([`b6e2b70`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/b6e2b7077ca0071f035eacca768dd06f111268ef))
+
+- Update README.md ([#86](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/86),
+  [`13878f3`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/13878f301601bbe313b1252395f945a94774e24f))
+
+- Update summary.md ([#86](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/86),
+  [`13878f3`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/13878f301601bbe313b1252395f945a94774e24f))
+
+- Update test-case-generation.md
+  ([#86](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/86),
+  [`13878f3`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/13878f301601bbe313b1252395f945a94774e24f))
+
+- Update tool-enrichment.md ([#86](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/86),
+  [`13878f3`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/13878f301601bbe313b1252395f945a94774e24f))
+
+- Update tool-validation.md ([#86](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/86),
+  [`13878f3`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/13878f301601bbe313b1252395f945a94774e24f))
+
+- Updated documentation for Toolops components
+  ([#81](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/81),
+  [`c7a00a9`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/c7a00a94c779d5480deab9e88da264a262f4938e))
+
+- Updated ToolOps components in ALTK website
+  ([#86](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/86),
+  [`13878f3`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/13878f301601bbe313b1252395f945a94774e24f))
+
+### Features
+
+- Add routing toolkit components
+  ([#87](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/87),
+  [`a5ef913`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/a5ef913fee539b0db5f42f00bddb7d78850ad21d))
+
+- Fix dependencies issues, add new metric to sparc and improvements
+  ([#94](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/94),
+  [`a7f669d`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/a7f669d15bfb971922e862f4817216c444cacf56))
+
+- SPARC improvements - addition of new metric (spec-free) and handling errors
+  ([#94](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/94),
+  [`a7f669d`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/a7f669d15bfb971922e862f4817216c444cacf56))
+
+
 ## v0.9.0 (2025-11-27)
 
 

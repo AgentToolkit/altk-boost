@@ -150,7 +150,7 @@ class SemanticChecker:
 
         # Build the "full_spec" JSON Schema snippet for all parameters
         full_spec_json = json.dumps(
-            adapter.get_tool_spec(adapter.get_function_name()).model_dump(),
+            adapter.get_tool_spec(adapter.get_function_name()),
             indent=2,
         )
 
