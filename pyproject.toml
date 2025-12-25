@@ -20,7 +20,7 @@ dependencies = [
     "pydantic>=2.0.0",
     "smolagents>=1.21.3",
     "typing-extensions>=4.0.0",
-    "toolguard>=0.1.6",
+    "toolguard>=0.1.11",
     "tomli==2.2.1",
     "aiofiles==24.1.0",
     "black>=25.1.0",
@@ -34,11 +34,6 @@ dependencies = [
     "langchain-text-splitters>=1.0.0",
     "nltk>=3.9.1",
     "scipy>=1.15.3",
-    "pytest>=8.2.1",
-    "pytest-json-report>=1.5.0",
-    "pyright>=1.1.406",
-    "datamodel-code-generator>=0.34.0",
-    "mellea~=0.0.6",
 ]
 
 description = "The Agent Lifecycle Toolkit (ALTK) is a library of components to help agent builders improve their agent with minimal integration effort and setup."
@@ -133,6 +128,10 @@ spotlight = [
     "torch==2.2.2 ; sys_platform == 'darwin' and platform_machine == 'x86_64'",
     "torch>=2.5.1 ; sys_platform != 'darwin' or platform_machine != 'x86_64'",
     "transformers>=4.53.3",
+]
+
+toolguard = [
+    "toolguard>=0.1.11"
 ]
 
 refraction = [
