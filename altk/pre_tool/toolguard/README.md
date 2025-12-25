@@ -105,6 +105,8 @@ export TOOLGUARD_GENPY_MODEL_ID="GCP/claude-4-sonnet"
 export TOOLGUARD_GENPY_ARGS='{"base_url":"https://your-litellm-endpoint","api_key":"<your key>"}'
 ```
 
+**Important note:** The Code component works best with *closed models* such as [GPT-4o](https://openai.com/index/hello-gpt-4o/), [Gemini](https://deepmind.google/technologies/gemini/), and [Claude](https://www.anthropic.com/claude).
+
 ### Input and Output
 The Component has two phases:
 #### Build phase
