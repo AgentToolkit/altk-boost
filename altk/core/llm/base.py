@@ -176,6 +176,12 @@ class BaseLLMClient(ABC):
         """
 
     @abstractmethod
+    def get_model_id(self) -> str|None:
+        """
+        returns the id of the model. eg: "gpt-5.1", "meta-llama/llama-4-maverick-17b-128e-instruct-fp8", and "claude-4-sonnet"
+        """
+
+    @abstractmethod
     def _register_methods(self) -> None:
         """
         Subclasses register MethodConfig entries by calling:

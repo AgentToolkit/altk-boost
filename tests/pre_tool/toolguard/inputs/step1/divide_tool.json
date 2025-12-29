@@ -1,13 +1,14 @@
 {
-  "policies": [
+  "tool_name": "divide_tool",
+  "policy_items": [
     {
-      "policy_name": "Division by Zero is Not Allowed",
+      "name": "Division by Zero is Not Allowed",
       "description": "The calculator must not allow division by zero. If a user attempts to divide by zero, the operation must be rejected and an appropriate error message should be shown (e.g., 'Error: Division by zero is not allowed.')",
       "references": [
         "The calculator must not allow division by zero. If a user attempts to divide by zero, the operation must be rejected and an appropriate error message should be shown (e.g., 'Error: Division by zero is not allowed.')"
       ],
       "iteration_added": 0,
-      "violating_examples": [
+      "violation_examples": [
         "A user attempts to divide 15 by 0, but the program proceeds with the operation, resulting in either an undefined behavior or a system error instead of an appropriate error message being shown.",
         "The system calculates the result of 42 divided by 0 without any checks, ignoring the divisor being zero and directly providing an undefined or erroneous result.",
         "A user input of 80 divided by 0 is processed and the system returns a zero or a nonsensical number instead of stopping the operation and displaying an error message about division by zero.",

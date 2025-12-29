@@ -3,17 +3,18 @@ from typing import Any, Callable, Dict, List, cast
 from enum import Enum
 from pydantic import BaseModel, Field
 from typing import Set
-from langchain.tools import BaseTool
+from langchain_core.tools import BaseTool
 
 from altk.core.toolkit import ComponentConfig, ComponentInput, AgentPhase, ComponentBase
-from toolguard.data_types import MelleaSessionData
 from toolguard import generate_guards_from_specs, ToolGuardSpec, ToolGuardsCodeGenerationResult, load_toolguards
 from toolguard.runtime import IToolInvoker, ToolGuardsCodeGenerationResult
+
+from altk.pre_tool.toolguard.llm_client import TG_LLMEval
 
 logger = logging.getLogger(__name__)
 
 class ToolGuardCodeComponentConfig(ComponentConfig):
-    llm_config: MelleaSessionData | None = None 
+    pass
 
 class ToolGuardCodeBuildInput(ComponentInput):
     tools: List[Callable] | List[BaseTool] | str
@@ -75,11 +76,12 @@ class ToolGuardCodeComponent(ComponentBase):
 
     async def _abuild(self, data: ToolGuardCodeBuildInput) -> ToolGuardsCodeGenerationResult:
         config = cast(ToolGuardCodeComponentConfig, self.config)
+        llm = TG_LLMEval(config.llm_client)
         return await generate_guards_from_specs(
             tools=data.tools, 
             tool_specs=data.toolguard_specs, 
             work_dir=data.out_dir,
-            llm_data=config.llm_config
+            llm=llm
         )
         
     def _run(self, data: ToolGuardCodeRunInput) -> ToolGuardCodeRunOutput:

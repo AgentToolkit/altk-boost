@@ -1,13 +1,14 @@
 {
-  "policies": [
+  "tool_name": "add_tool",
+  "policy_items": [
     {
-      "policy_name": "Prohibition of Adding Numbers Whose Product Equals 365",
+      "name": "Prohibition of Adding Numbers Whose Product Equals 365",
       "description": "The add_tool must not allow addition of two or more numbers if their multiplication result equals 365. For example, adding 5 + 73 should be disallowed, because 5 * 73 = 365. In such cases, the operation must be rejected with an error like: 'Error: Addition of numbers whose product equals 365 is not allowed.'",
       "references": [
         "The calculator must not allow addition of two or more numbers if their multiplication result equals 365. For example, adding 5 + 73 should be disallowed, because 5 * 73 = 365. In such cases, the operation must be rejected with an error like: 'Error: Addition of numbers whose product equals 365 is not allowed.'"
       ],
       "iteration_added": 0,
-      "violating_examples": [
+      "violation_examples": [
         "A user tries to add 5 and 73. Since 5 * 73 equals 365, this operation should be rejected with an error message: 'Error: Addition of numbers whose product equals 365 is not allowed.'",
         "The user attempts to add two numbers, 1 and 365, using the add_tool. This is a violation because 1 * 365 is also 365 and should be met with an error message.",
         "Adding together the numbers 10 and 36.5 should be disallowed because their product is 365. An error message should be shown to prevent this operation.",

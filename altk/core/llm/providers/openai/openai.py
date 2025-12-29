@@ -77,6 +77,9 @@ class BaseOpenAIClient(LLMClient):
         )
         self._parameter_mapper.set_custom_transform("min_tokens", transform_min_tokens)
 
+    def get_model_id(self) -> str|None:
+        if self._other_kwargs:
+            return self._other_kwargs.get("model")
 
 class BaseValidatingOpenAIClient(ValidatingLLMClient):
     """Base class for validating OpenAI and Azure OpenAI clients with shared parameter mapping"""
@@ -145,6 +148,10 @@ class BaseValidatingOpenAIClient(ValidatingLLMClient):
             "decoding_method", transform_decoding_method
         )
         self._parameter_mapper.set_custom_transform("min_tokens", transform_min_tokens)
+
+    def get_model_id(self) -> str|None:
+        if self._other_kwargs:
+            return self._other_kwargs.get("model")
 
 
 @register_llm("openai.sync")

@@ -12,24 +12,22 @@ This test:
 from datetime import datetime
 import os
 from pathlib import Path
-import shutil
 from typing import Dict, cast
 
 import dotenv
 import pytest
 
+from altk.core.llm.base import BaseLLMClient
 from altk.pre_tool.toolguard import (
     ToolGuardCodeComponent,
     ToolGuardCodeBuildInput,
 )
 from toolguard.data_types import (
-    MelleaSessionData,
     load_tool_policy,
 )
 from toolguard.runtime import (
     ToolFunctionsInvoker,
     ToolGuardsCodeGenerationResult,
-    load_toolguard_code_result,
 )
 from altk.pre_tool.toolguard.toolguard_code_component import (
     ToolGuardCodeComponentConfig,
@@ -51,8 +49,6 @@ from .inputs.tool_functions import (
 # Load environment variables
 dotenv.load_dotenv()
 
-WATSONX_CREDS_AVAILABLE = all([os.getenv("WX_API_KEY"), os.getenv("WX_PROJECT_ID")])
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
@@ -66,39 +62,52 @@ def work_dir():
 
     yield dir_path
 
-    shutil.rmtree(dir_path)
-    print("Temporary work dir removed:", dir_path)
+    # shutil.rmtree(dir_path)
+    # print("Temporary work dir removed:", dir_path)
 
+def get_llm()->BaseLLMClient:
+    # from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClientOutputVal
+    # return WatsonxLLMClientOutputVal(
+    #     model_name="meta-llama/llama-4-maverick-17b-128e-instruct-fp8",
+    #     api_key=os.getenv("WATSONX_API_KEY"),
+    #     project_id = os.getenv("WATSONX_PROJECT_ID"),
+    #     url=os.getenv("WATSONX_URL"),
+    # )
+
+    from altk.core.llm.providers.openai.openai import AsyncAzureOpenAIClientOutputVal
+    return AsyncAzureOpenAIClientOutputVal(
+        model="gpt-4o",
+        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+        base_url=os.getenv("AZURE_API_BASE"),
+        api_version="2024-08-01-preview"
+    )
+
+    # from altk.core.llm.providers.litellm.litellm import LiteLLMClientOutputVal
+    # return LiteLLMClientOutputVal(
+    #     model_name=os.getenv("TOOLGUARD_GENPY_MODEL_ID"),
+    #     api_key=os.getenv("TOOLGUARD_GENPY_MODEL_API_KEY"),
+    #     base_url=os.getenv("TOOLGUARD_GENPY_MODEL_BASE_URL"),
+    # )
+
+    # from altk.core.llm.providers.openai.openai import AsyncOpenAIClient
+    # return AsyncOpenAIClient(
+    #     model=os.getenv("TOOLGUARD_GENPY_MODEL_ID"),
+    #     api_key=os.getenv("TOOLGUARD_GENPY_MODEL_API_KEY"),
+    #     url=os.getenv("TOOLGUARD_GENPY_MODEL_BASE_URL"),
+    # )
 
 # ---------------------------------------------------------------------------
 # Test: ToolGuard verification for the calculator tool set
 # ---------------------------------------------------------------------------
 
 @pytest.mark.asyncio
-# @pytest.mark.skip(reason="Closed model required")
 async def test_tool_guard_calculator_policy(work_dir: str):
     # Tools to be guarded
     funcs = [divide_tool, add_tool, multiply_tool, subtract_tool, map_kdi_number]
 
-    # Configure Mellea session used in ToolGuard LLM
-    # see https://docs.mellea.ai/api-reference/core-library/stdlib/mellea-stdlib-session#start-session
-    backend_name = os.getenv("TOOLGUARD_GENPY_BACKEND_NAME") #"openai" "ollama", "hf", "openai", "watsonx", "litellm"
-    model_id = os.getenv("TOOLGUARD_GENPY_MODEL_ID")
-    kw_args = os.getenv("TOOLGUARD_GENPY_ARGS")
-
-    assert backend_name
-    assert model_id
-    assert kw_args
-
     # Build ToolGuard component
     toolguard_code = ToolGuardCodeComponent(
-        ToolGuardCodeComponentConfig(
-            llm_config=MelleaSessionData(
-                backend_name=backend_name,
-                model_id=model_id,
-                kw_args=kw_args,
-            )
-        )
+        ToolGuardCodeComponentConfig(llm_client=get_llm())
     )
 
     # Load policy JSON files from /step1

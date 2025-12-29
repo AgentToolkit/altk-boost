@@ -127,6 +127,9 @@ class WatsonxLLMClient(LLMClient):
         """
         return ModelInference  # type: ignore
 
+    def get_model_id(self) -> str:
+        return self.model_name # type: ignore
+    
     def _register_methods(self) -> None:
         """
         Register how to call watsonx methods:
@@ -471,6 +474,9 @@ class WatsonxLLMClientOutputVal(ValidatingLLMClient):
         """
         return ModelInference  # type: ignore
 
+    def get_model_id(self) -> str:
+        return self.model_name # type: ignore
+    
     def _register_methods(self) -> None:
         """
         Register how to call watsonx methods for validation:

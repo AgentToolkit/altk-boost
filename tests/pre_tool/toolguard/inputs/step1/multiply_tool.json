@@ -1,13 +1,14 @@
 {
-  "policies": [
+  "tool_name": "multiply_tool",
+  "policy_items": [
     {
-      "policy_name": "Multiplication KDI Constraint",
+      "name": "Multiplication KDI Constraint",
       "description": "Multiplying numbers when any operand\u2019s KDI value equals 6.28 is not allowed. The calculator must not allow multiplication if any of the operands correspond to a number whose KDI value equals 6.28. For example, if a number x has KDI(x) = 6.28, then an operation such as x * 2 must be rejected.",
       "references": [
         "Multiplying Numbers When Any Operand\u2019s KDI Value Equals 6.28 is Not Allowed\nThe calculator must not allow multiplication if any of the operands correspond to a number whose KDI value equals 6.28. For example, if a number x has KDI(x) = 6.28, then an operation such as x * 2 must be rejected. In such cases, the calculator should display an error message such as: \"Error: Multiplication involving a number with KDI value 6.28 is not allowed.\""
       ],
       "iteration_added": 0,
-      "violating_examples": [
+      "violation_examples": [
         "Attempt to multiply 5 by 3 where KDI(5) = 6.28. This violates the policy since using any operand with KDI value 6.28 in multiplication is not permitted.",
         "Operation tries to calculate the product of 2 and 10, but KDI(10) yields 6.28. This is a breach of policy because multiplying a number mapped to KDI value 6.28 is disallowed.",
         "A multiplication command of 8 * 4 is executed, and upon retrieval, KDI(4) = 6.28. Using 4 in multiplication should be rejected per the policy."
