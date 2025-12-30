@@ -54,7 +54,6 @@ llm_client = LLMClient(
     model_name="gpt-4o-2024-08-06",
     custom_llm_provider="azure",
 )
-
 ```
 
 ### Input and Output
@@ -82,29 +81,20 @@ The ToolGuards checks if a planned action complies with the policy. If it violat
 
 ### Component Configuarion
 
-The build time functionality is backed by [Mellea](https://mellea.ai/), which requires parameters aligning to:
-```python
-mellea.MelleaSession.start_session(
-    backend_name=...,
-    model_id=...,
-    backend_kwargs=...    # any additional arguments
-)
+This component expects an LLM client configuarion:
 ```
-The `mellea` session parameters can be provided explicitely, or loaded from environment variables:
+    from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClientOutputVal
+    llm = WatsonxLLMClientOutputVal(
+        model_name="meta-llama/llama-4-maverick-17b-128e-instruct-fp8",
+        api_key=os.getenv("WATSONX_API_KEY"),
+        project_id = os.getenv("WATSONX_PROJECT_ID"),
+        url=os.getenv("WATSONX_URL"),
+    )
 
-| Environment Variable           | Mellea Parameter | Description                                                        |
-| ------------------------------ | ---------------- | ------------------------------------------------------------------ |
-| `TOOLGUARD_GENPY_BACKEND_NAME` | `backend_name`   | Which backend to use (e.g., `openai`, `anthropic`, `vertex`, etc.) |
-| `TOOLGUARD_GENPY_MODEL_ID`     | `model_id`       | Model name / deployment id                                         |
-| `TOOLGUARD_GENPY_ARGS`         | `backend_kwargs` | JSON dict of any additional connection/LLM parameters              |
-
-Example (Claude-4 Sonnet through OpenAI-compatible endpoint):
-```bash
-export TOOLGUARD_GENPY_BACKEND_NAME="openai"
-export TOOLGUARD_GENPY_MODEL_ID="GCP/claude-4-sonnet"
-export TOOLGUARD_GENPY_ARGS='{"base_url":"https://your-litellm-endpoint","api_key":"<your key>"}'
+    toolguard_code = ToolGuardCodeComponent(
+        ToolGuardCodeComponentConfig(llm_client=llm)
+    )
 ```
-
 **Important note:** The Code component works best with *closed models* such as [GPT-4o](https://openai.com/index/hello-gpt-4o/), [Gemini](https://deepmind.google/technologies/gemini/), and [Claude](https://www.anthropic.com/claude).
 
 ### Input and Output
