@@ -66,13 +66,13 @@ def work_dir():
     # print("Temporary work dir removed:", dir_path)
 
 def get_llm()->BaseLLMClient:
-    # from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClientOutputVal
-    # return WatsonxLLMClientOutputVal(
-    #     model_name="meta-llama/llama-4-maverick-17b-128e-instruct-fp8",
-    #     api_key=os.getenv("WATSONX_API_KEY"),
-    #     project_id = os.getenv("WATSONX_PROJECT_ID"),
-    #     url=os.getenv("WATSONX_URL"),
-    # )
+    from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClientOutputVal
+    return WatsonxLLMClientOutputVal(
+        model_name="meta-llama/llama-4-maverick-17b-128e-instruct-fp8",
+        api_key=os.getenv("WATSONX_API_KEY"),
+        project_id = os.getenv("WATSONX_PROJECT_ID"),
+        url=os.getenv("WATSONX_URL"),
+    )
 
     from altk.core.llm.providers.openai.openai import AsyncAzureOpenAIClientOutputVal
     return AsyncAzureOpenAIClientOutputVal(

@@ -1,5 +1,5 @@
 # ToolGuards for Enforcing Agentic Policy Adherence
-An agent lifecycle solution for enforcing business policy adherence in agentic workflows. Enabling this component has demonstrated up to a **20‑point improvement** in end‑to‑end agent accuracy when invoking tools. This work is described in [EMNLP 2025 Towards Enforcing Company Policy Adherence in Agentic Workflows](https://arxiv.org/pdf/2507.16459), and is publiched in [this GitHub library](https://github.com/IBM/toolguard).
+An agent lifecycle solution for enforcing business policy adherence in agentic workflows. Enabling this component has demonstrated up to a **20‑point improvement** in end‑to‑end agent accuracy when invoking tools. This work is described in [EMNLP 2025 Towards Enforcing Company Policy Adherence in Agentic Workflows](https://arxiv.org/pdf/2507.16459), and is publiched in [this GitHub library](https://github.com/AgentToolkit/toolguard).
 
 ## Table of Contents
 - [Overview](#overview)
@@ -81,19 +81,18 @@ The ToolGuards checks if a planned action complies with the policy. If it violat
 
 ### Component Configuarion
 
-This component expects an LLM client configuarion:
+This component expects an LLM client configuarion. 
+Here is an example using a Watsonx LLM client:
 ```
-    from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClientOutputVal
-    llm = WatsonxLLMClientOutputVal(
-        model_name="meta-llama/llama-4-maverick-17b-128e-instruct-fp8",
-        api_key=os.getenv("WATSONX_API_KEY"),
-        project_id = os.getenv("WATSONX_PROJECT_ID"),
-        url=os.getenv("WATSONX_URL"),
-    )
-
-    toolguard_code = ToolGuardCodeComponent(
-        ToolGuardCodeComponentConfig(llm_client=llm)
-    )
+from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClientOutputVal
+llm = WatsonxLLMClientOutputVal(
+    model_name="meta-llama/llama-4-maverick-17b-128e-instruct-fp8",
+    api_key=os.getenv("WATSONX_API_KEY"),
+    project_id = os.getenv("WATSONX_PROJECT_ID"),
+    url=os.getenv("WATSONX_URL"),
+)
+config = ToolGuardCodeComponentConfig(llm_client=llm)
+toolguard_code_component = ToolGuardCodeComponent(config)
 ```
 **Important note:** The Code component works best with *closed models* such as [GPT-4o](https://openai.com/index/hello-gpt-4o/), [Gemini](https://deepmind.google/technologies/gemini/), and [Claude](https://www.anthropic.com/claude).
 
