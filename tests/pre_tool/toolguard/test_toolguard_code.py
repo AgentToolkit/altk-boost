@@ -66,24 +66,24 @@ def work_dir():
     # print("Temporary work dir removed:", dir_path)
 
 def get_llm()->BaseLLMClient:
-    from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClientOutputVal
-    return WatsonxLLMClientOutputVal(
+    from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClient
+    return WatsonxLLMClient(
         model_name="meta-llama/llama-4-maverick-17b-128e-instruct-fp8",
         api_key=os.getenv("WATSONX_API_KEY"),
         project_id = os.getenv("WATSONX_PROJECT_ID"),
         url=os.getenv("WATSONX_URL"),
     )
 
-    from altk.core.llm.providers.openai.openai import AsyncAzureOpenAIClientOutputVal
-    return AsyncAzureOpenAIClientOutputVal(
-        model="gpt-4o",
-        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-        base_url=os.getenv("AZURE_API_BASE"),
-        api_version="2024-08-01-preview"
-    )
+    # from altk.core.llm.providers.openai.openai import AsyncAzureOpenAIClient
+    # return AsyncAzureOpenAIClient(
+    #     model="gpt-4o-2024-08-06",
+    #     api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+    #     azure_endpoint=os.getenv("AZURE_API_BASE"),
+    #     api_version="2024-08-01-preview"
+    # )
 
-    # from altk.core.llm.providers.litellm.litellm import LiteLLMClientOutputVal
-    # return LiteLLMClientOutputVal(
+    # from altk.core.llm.providers.litellm.litellm import LiteLLMClient
+    # return LiteLLMClient(
     #     model_name=os.getenv("TOOLGUARD_GENPY_MODEL_ID"),
     #     api_key=os.getenv("TOOLGUARD_GENPY_MODEL_API_KEY"),
     #     base_url=os.getenv("TOOLGUARD_GENPY_MODEL_BASE_URL"),
@@ -91,6 +91,13 @@ def get_llm()->BaseLLMClient:
 
     # from altk.core.llm.providers.openai.openai import AsyncOpenAIClient
     # return AsyncOpenAIClient(
+    #     model=os.getenv("TOOLGUARD_GENPY_MODEL_ID"),
+    #     api_key=os.getenv("TOOLGUARD_GENPY_MODEL_API_KEY"),
+    #     url=os.getenv("TOOLGUARD_GENPY_MODEL_BASE_URL"),
+    # )
+
+    # from altk.core.llm.providers.openai.openai import AsyncOpenAIClientOutputVal
+    # return AsyncOpenAIClientOutputVal(
     #     model=os.getenv("TOOLGUARD_GENPY_MODEL_ID"),
     #     api_key=os.getenv("TOOLGUARD_GENPY_MODEL_API_KEY"),
     #     url=os.getenv("TOOLGUARD_GENPY_MODEL_BASE_URL"),
