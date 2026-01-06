@@ -1,3 +1,10 @@
+# ensure we use sqlite > 3.35
+__import__("pysqlite3")
+import sys
+
+sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+
+
 from typing import cast
 from dotenv import load_dotenv
 import os

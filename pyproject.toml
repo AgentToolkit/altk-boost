@@ -111,6 +111,7 @@ dev = [
     "types-pyasn1>=0.6.0.20250914",
     "types-regex>=2025.9.18.20250921",
     "types-ujson>=5.10.0.20250822",
+    "pysqlite3-binary==0.5.4.post2 ; sys_platform != 'darwin'"
 ]
 
 [project.optional-dependencies]
