@@ -38,3 +38,6 @@ tests/tool-enrichment/log
 
 **found_plans/
 **cached_mappings.json
+
+**/.mypy_cache
+**/.ruff_cache

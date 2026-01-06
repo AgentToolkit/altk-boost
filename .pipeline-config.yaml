@@ -1,0 +1,252 @@
+# Documentation on available configuration
+# https://cloud.ibm.com/docs/devsecops?topic=devsecops-cd-devsecops-apps-byoa
+# https://cloud.ibm.com/docs/devsecops?topic=devsecops-custom-scripts
+
+version: "2"
+
+tasks:
+  ### CI Pipeline Configuration ###
+  # The ci-pipeline includes the following four configurable tasks:
+  #   * code-checks
+  #   * code-build
+  #   * deploy-checks
+  #   * deploy-release
+  code-checks:
+    runtimeClassName: large
+    include:
+      - dind
+    # code-checks includes five configurable steps:
+    #   * checks-setup
+    #   * detect-secrets
+    #   * compliance-checks
+    #   * peer-review
+    #   * static-scan
+    steps:
+      - name: checks-setup
+        include:
+          - docker-socket
+        image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.61
+        script: |
+          #!/usr/bin/env bash
+
+          if [[ "$PIPELINE_DEBUG" == 1 ]]; then
+            trap env EXIT
+            env
+            set -x
+          fi
+
+          if [[ "$(get_env pipeline_namespace)" == *"pr"* ||  "$(get_env pipeline_namespace)" == *"ci"* ]]; then
+            export CI_DIR="$(get_env pipeline-config-ci-dir "ci")"
+            source $WORKSPACE/
+            source $WORKSPACE/$PIPELINE_CONFIG_REPO_PATH/$CI_DIR/$APP_REPO_NAME/setup.sh
+          fi
+      - name: detect-secrets
+        include:
+          - docker-socket
+      - name: compliance-checks
+        include:
+          - docker-socket
+      - name: static-scan
+        include:
+          - docker-socket
+
+  # Configuration for the code-build task in the ci-pipeline
+  code-build:
+    runtimeClassName: large
+    include:
+      - dind
+    # code-build includes five configurable steps:
+    #   * setup
+    #   * unit-test
+    #   * build-artifact
+    #   * sign-artifact
+    #   * scan-artifact
+    steps:
+      - name: setup
+        include:
+          - docker-socket
+        image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.61
+        script: |
+          #!/usr/bin/env bash
+
+          if [[ "$PIPELINE_DEBUG" == 1 ]]; then
+            trap env EXIT
+            env
+            set -x
+          fi
+
+          if [[ "$(get_env pipeline_namespace)" == *"pr"* ||  "$(get_env pipeline_namespace)" == *"ci"* ]]; then
+            export CI_DIR="$(get_env pipeline-config-ci-dir "ci")"
+            source $WORKSPACE/$PIPELINE_CONFIG_REPO_PATH/$CI_DIR/$APP_REPO_NAME/setup.sh
+          fi
+      - name: unit-test
+        include:
+          - docker-socket
+        onError: continue
+        image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.61
+        script: |
+          #!/usr/bin/env bash
+
+          if [[ "$PIPELINE_DEBUG" == 1 ]]; then
+            trap env EXIT
+            env
+            set -x
+          fi
+
+          echo "Bypassing this stage"
+          exit 0
+      - name: build-artifact
+        include:
+          - docker-socket
+        image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.61
+        script: |
+          #!/usr/bin/env bash
+
+          if [[ "$PIPELINE_DEBUG" == 1 ]]; then
+            trap env EXIT
+            env
+            set -x
+          fi
+
+          echo "Bypassing this stage"
+          exit 0
+      - name: sign-artifact
+        include:
+          - docker-socket
+        image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.61
+        script: |
+          #!/usr/bin/env bash
+
+          if [[ "$PIPELINE_DEBUG" == 1 ]]; then
+            trap env EXIT
+            env
+            set -x
+          fi
+
+          echo "Bypassing this stage"
+          exit 0
+      - name: scan-artifact
+        include:
+          - docker-socket
+        script: |
+          #!/usr/bin/env bash
+
+          if [[ "$PIPELINE_DEBUG" == 1 ]]; then
+            trap env EXIT
+            env
+            set -x
+          fi
+
+          echo "Bypassing this stage"
+          exit 0
+
+  # Configuration for the deploy-checks task in the ci-pipeline
+  deploy-checks:
+    runtimeClassName: large
+    include:
+      - dind
+    # deploy-checks includes three configurable steps:
+    #   * deploy
+    #   * dynamic-scan
+    #   * acceptance-test
+    steps:
+      - name: deploy
+        image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.61
+        script: |
+          #!/usr/bin/env bash
+
+          if [[ "$PIPELINE_DEBUG" == 1 ]]; then
+            trap env EXIT
+            env
+            set -x
+          fi
+
+          echo "Skipping this step..."
+          exit 0
+      - name: dynamic-scan
+        when: 'false'
+      - name: acceptance-test
+        onError: continue
+        image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.61
+        script: |
+          #!/usr/bin/env bash
+
+          if [[ "$PIPELINE_DEBUG" == 1 ]]; then
+            trap env EXIT
+            env
+            set -x
+          fi
+
+          cd
+          export CI_DIR=$(get_env pipeline-config-ci-dir "ci")
+          source $WORKSPACE/$PIPELINE_CONFIG_REPO_PATH/$CI_DIR/$APP_REPO_NAME/acceptance-test.sh
+
+          exit 0
+
+  ### PR Pipeline Configuration ###
+  # The pr-pipeline includes one configurable task: pr-code-checks
+  pr-code-checks:
+    runtimeClassName: large
+    include:
+      - dind
+    # pr-code-checks includes four configurable steps:
+    #   * checks-setup
+    #   * detect-secrets
+    #   * unit-test
+    #   * compliance-checks
+    steps:
+      - name: checks-setup
+        include:
+          - docker-socket
+        image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.61
+        script: |
+          #!/usr/bin/env bash
+
+          if [[ "$PIPELINE_DEBUG" == 1 ]]; then
+            trap env EXIT
+            env
+            set -x
+          fi
+          if [[ "$(get_env pipeline_namespace)" == *"pr"* ||  "$(get_env pipeline_namespace)" == *"ci"* ]]; then
+            export CI_DIR="$(get_env pipeline-config-ci-dir "ci")"
+            source $WORKSPACE/$PIPELINE_CONFIG_REPO_PATH/$CI_DIR/$APP_REPO_NAME/setup.sh
+          fi
+      - name: detect-secrets
+        include:
+          - docker-socket
+      - name: unit-test
+        include:
+          - docker-socket
+        onError: continue
+        image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.61
+        script: |
+          #!/usr/bin/env bash
+
+          if [[ "$PIPELINE_DEBUG" == 1 ]]; then
+            trap env EXIT
+            env
+            set -x
+          fi
+
+          export CI_DIR="$(get_env pipeline-config-ci-dir "ci")"
+          source $WORKSPACE/$PIPELINE_CONFIG_REPO_PATH/$CI_DIR/$APP_REPO_NAME/unit-tests.sh
+
+          exit 0
+      - name: compliance-checks
+        include:
+          - docker-socket
+        image: icr.io/continuous-delivery/pipeline/pipeline-base-ubi:3.61
+        script: |
+          #!/usr/bin/env bash
+
+          if [[ "$PIPELINE_DEBUG" == 1 ]]; then
+            trap env EXIT
+            env
+            set -x
+          fi
+
+          export CI_DIR="$(get_env pipeline-config-ci-dir "ci")"
+          source $WORKSPACE/$PIPELINE_CONFIG_REPO_PATH/$CI_DIR/$APP_REPO_NAME/utils/git-ssh-config-setup.sh
+          source "${COMMONS_PATH}"/compliance-checks/run.sh
+
+          exit 0
