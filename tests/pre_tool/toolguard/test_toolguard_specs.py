@@ -65,20 +65,21 @@ async def test_tool_guard_calculator_policy(out_dir: str):
         correspond to a number whose KDI value equals 6.28.
     """
 
-    # Example alternative LLM:
-    # LLMClient = get_llm("litellm.output_val")
-    # llm_client = LLMClient(
-    #     model_name="gpt-4o-2024-08-06",
-    #     custom_llm_provider="azure",
-    # )
-
-    LLMClient = get_llm("watsonx.output_val")
-    llm_client = LLMClient(
-        model_name="mistralai/mistral-medium-2505",
+    from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClient
+    llm_client = WatsonxLLMClient(
+        model_name="meta-llama/llama-4-maverick-17b-128e-instruct-fp8",
         api_key=os.getenv("WX_API_KEY"),
-        project_id=os.getenv("WX_PROJECT_ID"),
-        url=os.getenv("WX_URL", "https://us-south.ml.cloud.ibm.com"),
+        project_id = os.getenv("WX_PROJECT_ID"),
+        url=os.getenv("WX_URL"),
     )
+
+    # from altk.core.llm.providers.openai.openai import AsyncAzureOpenAIClient
+    # llm_client = AsyncAzureOpenAIClient(
+    #     model="gpt-4o-2024-08-06",
+    #     api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+    #     azure_endpoint=os.getenv("AZURE_API_BASE"),
+    #     api_version="2024-08-01-preview"
+    # )
 
     toolguard_spec = ToolGuardSpecComponent(
         ToolGuardSpecComponentConfig(llm_client=llm_client)

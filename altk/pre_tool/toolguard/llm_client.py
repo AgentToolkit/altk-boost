@@ -1,13 +1,12 @@
 
 from typing import Union, cast
-from altk.core.llm.types import GenerationArgs
-from ...core.llm import ValidatingLLMClient, LLMClient
 from toolguard.llm.tg_litellm import LanguageModelBase
+from altk.core.llm.types import GenerationArgs
+from altk.core.llm import ValidatingLLMClient, LLMClient
 
 
-class TG_LLMEval(LanguageModelBase):
+class TG_LLMClient(LanguageModelBase):
     def __init__(self, llm_client: Union[LLMClient, ValidatingLLMClient]):
-        super().__init__(llm_client.get_model_id()) # type: ignore
         self.llm_client = llm_client
 
     async def generate(self, messages: list[dict]) -> str:

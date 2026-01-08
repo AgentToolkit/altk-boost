@@ -126,9 +126,6 @@ class WatsonxLLMClient(LLMClient):
         Underlying SDK client class for watsonx.ai: ModelInference.
         """
         return ModelInference  # type: ignore
-
-    def get_model_id(self) -> str:
-        return self.model_name # type: ignore
     
     def _register_methods(self) -> None:
         """
@@ -474,9 +471,6 @@ class WatsonxLLMClientOutputVal(ValidatingLLMClient):
         """
         return ModelInference  # type: ignore
 
-    def get_model_id(self) -> str:
-        return self.model_name # type: ignore
-    
     def _register_methods(self) -> None:
         """
         Register how to call watsonx methods for validation:

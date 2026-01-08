@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 from typing import Any, Callable, Dict, List, cast
 from enum import Enum
 from pydantic import BaseModel, Field
@@ -9,7 +10,7 @@ from altk.core.toolkit import ComponentConfig, ComponentInput, AgentPhase, Compo
 from toolguard import generate_guards_from_specs, ToolGuardSpec, ToolGuardsCodeGenerationResult, load_toolguards
 from toolguard.runtime import IToolInvoker, ToolGuardsCodeGenerationResult
 
-from altk.pre_tool.toolguard.llm_client import TG_LLMEval
+from altk.pre_tool.toolguard.llm_client import TG_LLMClient
 
 logger = logging.getLogger(__name__)
 
@@ -19,12 +20,12 @@ class ToolGuardCodeComponentConfig(ComponentConfig):
 class ToolGuardCodeBuildInput(ComponentInput):
     tools: List[Callable] | List[BaseTool] | str
     toolguard_specs: List[ToolGuardSpec]
-    out_dir: str
+    out_dir: str| Path
 
 ToolGuardBuildOutput = ToolGuardsCodeGenerationResult
 
 class ToolGuardCodeRunInput(ComponentInput):
-    generated_guard_dir: str
+    generated_guard_dir: str | Path
     tool_name: str = Field(description="Tool name")
     tool_args: Dict[str, Any] = Field(default={}, description="Tool arguments")
     tool_invoker: IToolInvoker
@@ -76,7 +77,7 @@ class ToolGuardCodeComponent(ComponentBase):
 
     async def _abuild(self, data: ToolGuardCodeBuildInput) -> ToolGuardsCodeGenerationResult:
         config = cast(ToolGuardCodeComponentConfig, self.config)
-        llm = TG_LLMEval(config.llm_client)
+        llm = TG_LLMClient(config.llm_client)
         return await generate_guards_from_specs(
             tools=data.tools, 
             tool_specs=data.toolguard_specs, 

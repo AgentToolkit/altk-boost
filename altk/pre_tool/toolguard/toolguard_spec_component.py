@@ -1,10 +1,11 @@
 import logging
 import os
+from pathlib import Path
 from typing import Callable, List, Set, cast
 from langchain_core.tools import BaseTool
 from pydantic import Field
 
-from altk.pre_tool.toolguard.llm_client import TG_LLMEval
+from altk.pre_tool.toolguard.llm_client import TG_LLMClient
 
 from ...core.toolkit import AgentPhase, ComponentBase, ComponentConfig, ComponentInput
 from toolguard import ToolGuardSpec, generate_guard_specs
@@ -17,7 +18,7 @@ class ToolGuardSpecComponentConfig(ComponentConfig):
 class ToolGuardSpecBuildInput(ComponentInput):
     policy_text: str = Field(description="Text of the policy document file")
     tools: List[Callable] | List[BaseTool] | str
-    out_dir: str
+    out_dir: str| Path
 
 ToolGuardSpecs=List[ToolGuardSpec]
 
@@ -36,11 +37,12 @@ class ToolGuardSpecComponent(ComponentBase):
     async def _abuild(self, data: ToolGuardSpecBuildInput) -> ToolGuardSpecs:
         os.makedirs(data.out_dir, exist_ok=True)
         config = cast(ToolGuardSpecComponentConfig, self.config)
-        llm = TG_LLMEval(config.llm_client)
+        llm = TG_LLMClient(config.llm_client)
         return await generate_guard_specs(
             policy_text=data.policy_text,
             tools=data.tools,
             work_dir=data.out_dir,
-            llm=llm
+            llm=llm,
+            short=True
         )
         

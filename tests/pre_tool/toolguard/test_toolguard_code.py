@@ -23,11 +23,12 @@ from altk.pre_tool.toolguard import (
     ToolGuardCodeBuildInput,
 )
 from toolguard.data_types import (
-    load_tool_policy,
+    load_tool_spec,
 )
 from toolguard.runtime import (
     ToolFunctionsInvoker,
     ToolGuardsCodeGenerationResult,
+    load_toolguard_code_result
 )
 from altk.pre_tool.toolguard.toolguard_code_component import (
     ToolGuardCodeComponentConfig,
@@ -69,9 +70,9 @@ def get_llm()->BaseLLMClient:
     from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClient
     return WatsonxLLMClient(
         model_name="meta-llama/llama-4-maverick-17b-128e-instruct-fp8",
-        api_key=os.getenv("WATSONX_API_KEY"),
-        project_id = os.getenv("WATSONX_PROJECT_ID"),
-        url=os.getenv("WATSONX_URL"),
+        api_key=os.getenv("WX_API_KEY"),
+        project_id = os.getenv("WX_PROJECT_ID"),
+        url=os.getenv("WX_URL"),
     )
 
     # from altk.core.llm.providers.openai.openai import AsyncAzureOpenAIClient
@@ -120,7 +121,7 @@ async def test_tool_guard_calculator_policy(work_dir: str):
     # Load policy JSON files from /step1
     policy_dir = Path(__file__).parent / "inputs" / "step1"
     specs = [
-        load_tool_policy(str(policy_dir / f"{tool.__name__}.json"), tool.__name__)
+        load_tool_spec(str(policy_dir / f"{tool.__name__}.json"))
         for tool in funcs
     ]
 
@@ -134,7 +135,7 @@ async def test_tool_guard_calculator_policy(work_dir: str):
     #Toolguarg code generation
     build_output = cast(ToolGuardsCodeGenerationResult,
                   await toolguard_code.aprocess(input, AgentPhase.BUILDTIME))
-    # output = load_toolguard_code_result(work_dir)
+    # build_output = load_toolguard_code_result("tests/pre_tool/toolguard/outputs/work_XXX")
 
     # Expected guarded tools
     expected_tools = ["multiply_tool", "divide_tool", "add_tool"]
