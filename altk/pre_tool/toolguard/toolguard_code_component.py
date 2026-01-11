@@ -7,8 +7,8 @@ from typing import Set
 from langchain_core.tools import BaseTool
 
 from altk.core.toolkit import ComponentConfig, ComponentInput, AgentPhase, ComponentBase
-from toolguard import generate_guards_from_specs, ToolGuardSpec, ToolGuardsCodeGenerationResult, load_toolguards
-from toolguard.runtime import IToolInvoker, ToolGuardsCodeGenerationResult
+from toolguard.buildtime import generate_guards_from_specs, ToolGuardSpec, ToolGuardsCodeGenerationResult
+from toolguard.runtime import IToolInvoker, load_toolguards, PolicyViolationException
 
 from altk.pre_tool.toolguard.llm_client import TG_LLMClient
 
@@ -90,7 +90,6 @@ class ToolGuardCodeComponent(ComponentBase):
         tool_name = data.tool_name
         tool_params = data.tool_args
         with load_toolguards(code_root_dir) as toolguards:
-            from rt_toolguard.data_types import PolicyViolationException
             try:
                 toolguards.check_toolcall(tool_name, tool_params, data.tool_invoker)
                 return ToolGuardCodeRunOutput()

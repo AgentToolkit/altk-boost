@@ -130,7 +130,7 @@ spotlight = [
 ]
 
 toolguard = [
-    "toolguard>=0.1.18"
+    "toolguard>=0.1.19"
 ]
 
 refraction = [

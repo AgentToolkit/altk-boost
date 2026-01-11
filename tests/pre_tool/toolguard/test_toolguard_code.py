@@ -21,14 +21,11 @@ from altk.core.llm.base import BaseLLMClient
 from altk.pre_tool.toolguard import (
     ToolGuardCodeComponent,
     ToolGuardCodeBuildInput,
-)
-from toolguard.data_types import (
-    load_tool_spec,
+    ToolGuardSpec
 )
 from toolguard.runtime import (
     ToolFunctionsInvoker,
-    ToolGuardsCodeGenerationResult,
-    load_toolguard_code_result
+    ToolGuardsCodeGenerationResult
 )
 from altk.pre_tool.toolguard.toolguard_code_component import (
     ToolGuardCodeComponentConfig,
@@ -121,7 +118,7 @@ async def test_tool_guard_calculator_policy(work_dir: str):
     # Load policy JSON files from /step1
     policy_dir = Path(__file__).parent / "inputs" / "step1"
     specs = [
-        load_tool_spec(str(policy_dir / f"{tool.__name__}.json"))
+        ToolGuardSpec.load(policy_dir / f"{tool.__name__}.json")
         for tool in funcs
     ]
 
