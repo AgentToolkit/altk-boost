@@ -45,7 +45,7 @@ class AutoFromEnvLLMClient(LLMClient):
     @classmethod
     def provider_class(cls) -> Type[Any]:
         raise NotImplementedError
-    
+
     def _register_methods(self) -> None:
         if self._chosen_provider:
             self._chosen_provider._register_methods()

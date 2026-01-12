@@ -1,4 +1,3 @@
-
 from typing import Union, cast
 from toolguard.buildtime.llm.tg_litellm import LanguageModelBase
 from altk.core.llm.types import GenerationArgs
@@ -13,12 +12,11 @@ class TG_LLMClient(LanguageModelBase):
         if isinstance(self.llm_client, ValidatingLLMClient):
             llm_client = cast(ValidatingLLMClient, self.llm_client)
             return await llm_client.generate_async(
-                prompt=messages, 
-                schema=str, 
-                generation_args = GenerationArgs(max_tokens=10000)
+                prompt=messages,
+                schema=str,
+                generation_args=GenerationArgs(max_tokens=10000),
             )
-        
+
         return await self.llm_client.generate_async(
-            prompt=messages,
-            generation_args = GenerationArgs(max_tokens=10000)
-        ) # type: ignore
+            prompt=messages, generation_args=GenerationArgs(max_tokens=10000)
+        )  # type: ignore

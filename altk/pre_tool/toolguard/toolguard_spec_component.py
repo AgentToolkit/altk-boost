@@ -12,27 +12,32 @@ from toolguard.buildtime import ToolGuardSpec, generate_guard_specs
 
 logger = logging.getLogger(__name__)
 
+
 class ToolGuardSpecComponentConfig(ComponentConfig):
     pass
+
 
 class ToolGuardSpecBuildInput(ComponentInput):
     policy_text: str = Field(description="Text of the policy document file")
     tools: List[Callable] | List[BaseTool] | str
-    out_dir: str| Path
+    out_dir: str | Path
 
-ToolGuardSpecs=List[ToolGuardSpec]
+
+ToolGuardSpecs = List[ToolGuardSpec]
+
 
 class ToolGuardSpecComponent(ComponentBase):
-    
-    def __init__(self, config:ToolGuardSpecComponentConfig):
+    def __init__(self, config: ToolGuardSpecComponentConfig):
         super().__init__(config=config)
-        
+
     @classmethod
     def supported_phases(cls) -> Set[AgentPhase]:
         return {AgentPhase.BUILDTIME, AgentPhase.RUNTIME}
 
     def _build(self, data: ToolGuardSpecBuildInput) -> ToolGuardSpecs:
-        raise NotImplementedError("Please use the aprocess() function in an async context")
+        raise NotImplementedError(
+            "Please use the aprocess() function in an async context"
+        )
 
     async def _abuild(self, data: ToolGuardSpecBuildInput) -> ToolGuardSpecs:
         os.makedirs(data.out_dir, exist_ok=True)
@@ -43,6 +48,5 @@ class ToolGuardSpecComponent(ComponentBase):
             tools=data.tools,
             work_dir=data.out_dir,
             llm=llm,
-            short=True
+            short=True,
         )
-        

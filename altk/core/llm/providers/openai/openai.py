@@ -77,6 +77,7 @@ class BaseOpenAIClient(LLMClient):
         )
         self._parameter_mapper.set_custom_transform("min_tokens", transform_min_tokens)
 
+
 class BaseValidatingOpenAIClient(ValidatingLLMClient):
     """Base class for validating OpenAI and Azure OpenAI clients with shared parameter mapping"""
 

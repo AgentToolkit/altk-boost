@@ -21,12 +21,9 @@ from altk.core.llm.base import BaseLLMClient
 from altk.pre_tool.toolguard import (
     ToolGuardCodeComponent,
     ToolGuardCodeBuildInput,
-    ToolGuardSpec
+    ToolGuardSpec,
 )
-from toolguard.runtime import (
-    ToolFunctionsInvoker,
-    ToolGuardsCodeGenerationResult
-)
+from toolguard.runtime import ToolFunctionsInvoker, ToolGuardsCodeGenerationResult
 from altk.pre_tool.toolguard.toolguard_code_component import (
     ToolGuardCodeComponentConfig,
     ToolGuardCodeRunInput,
@@ -51,6 +48,7 @@ dotenv.load_dotenv()
 # Fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture
 def work_dir():
     """Creates a temporary folder for test output and cleans it afterward."""
@@ -63,12 +61,14 @@ def work_dir():
     # shutil.rmtree(dir_path)
     # print("Temporary work dir removed:", dir_path)
 
-def get_llm()->BaseLLMClient:
+
+def get_llm() -> BaseLLMClient:
     from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClient
+
     return WatsonxLLMClient(
         model_name="meta-llama/llama-4-maverick-17b-128e-instruct-fp8",
         api_key=os.getenv("WX_API_KEY"),
-        project_id = os.getenv("WX_PROJECT_ID"),
+        project_id=os.getenv("WX_PROJECT_ID"),
         url=os.getenv("WX_URL"),
     )
 
@@ -101,9 +101,11 @@ def get_llm()->BaseLLMClient:
     #     url=os.getenv("TOOLGUARD_GENPY_MODEL_BASE_URL"),
     # )
 
+
 # ---------------------------------------------------------------------------
 # Test: ToolGuard verification for the calculator tool set
 # ---------------------------------------------------------------------------
+
 
 @pytest.mark.asyncio
 async def test_tool_guard_calculator_policy(work_dir: str):
@@ -117,10 +119,7 @@ async def test_tool_guard_calculator_policy(work_dir: str):
 
     # Load policy JSON files from /step1
     policy_dir = Path(__file__).parent / "inputs" / "step1"
-    specs = [
-        ToolGuardSpec.load(policy_dir / f"{tool.__name__}.json")
-        for tool in funcs
-    ]
+    specs = [ToolGuardSpec.load(policy_dir / f"{tool.__name__}.json") for tool in funcs]
 
     # Prepare build input for guard code generation
     input = ToolGuardCodeBuildInput(
@@ -129,9 +128,11 @@ async def test_tool_guard_calculator_policy(work_dir: str):
         toolguard_specs=specs,
     )
 
-    #Toolguarg code generation
-    build_output = cast(ToolGuardsCodeGenerationResult,
-                  await toolguard_code.aprocess(input, AgentPhase.BUILDTIME))
+    # Toolguarg code generation
+    build_output = cast(
+        ToolGuardsCodeGenerationResult,
+        await toolguard_code.aprocess(input, AgentPhase.BUILDTIME),
+    )
     # build_output = load_toolguard_code_result("tests/pre_tool/toolguard/outputs/work_XXX")
 
     # Expected guarded tools

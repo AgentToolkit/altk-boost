@@ -65,10 +65,11 @@ async def test_tool_guard_calculator_policy(out_dir: str):
     """
 
     from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClient
+
     llm_client = WatsonxLLMClient(
         model_name="meta-llama/llama-4-maverick-17b-128e-instruct-fp8",
         api_key=os.getenv("WX_API_KEY"),
-        project_id = os.getenv("WX_PROJECT_ID"),
+        project_id=os.getenv("WX_PROJECT_ID"),
         url=os.getenv("WX_URL"),
     )
 

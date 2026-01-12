@@ -35,7 +35,7 @@ class LiteLLMClient(LLMClient):
     @classmethod
     def provider_class(cls) -> type:
         return litellm  # type: ignore
-    
+
     def _register_methods(self) -> None:
         """Register LiteLLM methods - only chat and chat_async are supported"""
         self.set_method_config(GenerationMode.CHAT.value, "completion", "messages")
@@ -302,7 +302,7 @@ class LiteLLMClientOutputVal(ValidatingLLMClient):
         Must be callable with no arguments (per LLMClient __init__ logic).
         """
         return litellm  # type: ignore
-    
+
     def _register_methods(self) -> None:
         """
         Register how to call litellm methods - only chat modes are supported:

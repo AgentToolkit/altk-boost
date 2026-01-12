@@ -1,5 +1,6 @@
 from langchain_core.tools import tool
 
+
 @tool()
 def divide_tool(g: float, h: float) -> float:
     """Divides one number by another.
@@ -16,6 +17,7 @@ def divide_tool(g: float, h: float) -> float:
     """
     return g / h
 
+
 @tool()
 def add_tool(a: float, b: float) -> float:
     """Adds two numbers.
@@ -28,6 +30,7 @@ def add_tool(a: float, b: float) -> float:
         float: The sum of a and b.
     """
     return a + b
+
 
 @tool()
 def subtract_tool(a: float, b: float) -> float:
@@ -42,6 +45,7 @@ def subtract_tool(a: float, b: float) -> float:
     """
     return a - b
 
+
 @tool()
 def multiply_tool(a: float, b: float) -> float:
     """Multiplies two numbers.
@@ -55,6 +59,7 @@ def multiply_tool(a: float, b: float) -> float:
     """
     return a * b
 
+
 @tool()
 def map_kdi_number(i: float) -> float:
     """
@@ -62,7 +67,7 @@ def map_kdi_number(i: float) -> float:
 
     Args:
         i (float): The number to map.
-    
+
 
     Returns:
         float: The value of the dki of the given number.

@@ -58,7 +58,7 @@ class CalculatorTools:
 
         Args:
             i (float): The number to map.
-        
+
 
         Returns:
             float: The value of the dki of the given number.

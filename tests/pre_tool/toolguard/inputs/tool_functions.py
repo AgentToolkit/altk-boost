@@ -52,13 +52,14 @@ def multiply_tool(a: float, b: float) -> float:
     """
     return a * b
 
+
 def map_kdi_number(i: float) -> float:
     """
     return the mapping of the numer i to it's kdi value
 
     Args:
         i (float): The number to map.
-    
+
 
     Returns:
         float: The value of the dki of the given number.
