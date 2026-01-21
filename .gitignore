@@ -38,3 +38,4 @@ tests/tool-enrichment/log
 
 **found_plans/
 **cached_mappings.json
+.bob/**
