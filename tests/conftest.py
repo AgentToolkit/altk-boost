@@ -8,7 +8,11 @@ from tests.fixtures.mock_llm import (
     EchoResponseStrategy,
     CallbackResponseStrategy,
 )
-from tests.fixtures.presets import MockPresets
+from tests.fixtures.presets import (
+    SilentReviewPresets,
+    PolicyGuardPresets,
+    ToolCallPresets,
+)
 from tests.fixtures.response_builders import ResponseBuilder
 from altk.core.llm.types import LLMResponse
 
@@ -128,20 +132,8 @@ def mock_llm_custom():
     return _create
 
 
-@pytest.fixture
-def mock_presets():
-    """
-    Access to common mock response presets.
-
-    Provides pre-configured responses for common testing scenarios.
-
-    Example:
-        def test_silent_review(mock_llm_with_responses, mock_presets):
-            mock = mock_llm_with_responses([mock_presets.SILENT_REVIEW_SUCCESS])
-            result = mock.generate("Check this response")
-            assert "ACCOMPLISHED" in result
-    """
-    return MockPresets
+# Note: mock_presets fixture removed - import specific preset classes instead
+# Example: from tests.fixtures.presets import SilentReviewPresets, PolicyGuardPresets
 
 
 @pytest.fixture
@@ -168,7 +160,7 @@ def response_builder():
 
 
 @pytest.fixture
-def mock_llm_for_silent_review(mock_llm_with_responses, mock_presets):
+def mock_llm_for_silent_review(mock_llm_with_responses):
     """
     Pre-configured mock for Silent Review component testing.
 
@@ -180,11 +172,11 @@ def mock_llm_for_silent_review(mock_llm_with_responses, mock_presets):
 
     def _create(outcome: str = "success") -> MockLLMClient:
         if outcome == "success":
-            return mock_llm_with_responses([mock_presets.SILENT_REVIEW_SUCCESS])
+            return mock_llm_with_responses([SilentReviewPresets.SUCCESS])
         elif outcome == "failure":
-            return mock_llm_with_responses([mock_presets.SILENT_REVIEW_FAILURE])
+            return mock_llm_with_responses([SilentReviewPresets.FAILURE])
         elif outcome == "partial":
-            return mock_llm_with_responses([mock_presets.SILENT_REVIEW_PARTIAL])
+            return mock_llm_with_responses([SilentReviewPresets.PARTIAL])
         else:
             raise ValueError(f"Unknown outcome: {outcome}")
 
@@ -192,7 +184,7 @@ def mock_llm_for_silent_review(mock_llm_with_responses, mock_presets):
 
 
 @pytest.fixture
-def mock_llm_for_policy_guard(mock_llm_with_responses, mock_presets):
+def mock_llm_for_policy_guard(mock_llm_with_responses):
     """
     Pre-configured mock for Policy Guard component testing.
 
@@ -204,17 +196,15 @@ def mock_llm_for_policy_guard(mock_llm_with_responses, mock_presets):
 
     def _create(compliance: str = "compliant") -> MockLLMClient:
         if compliance == "compliant":
-            return mock_llm_with_responses([mock_presets.POLICY_COMPLIANT])
+            return mock_llm_with_responses([PolicyGuardPresets.COMPLIANT])
         elif compliance == "sensitive_data":
             return mock_llm_with_responses(
-                [mock_presets.POLICY_VIOLATION_SENSITIVE_DATA]
+                [PolicyGuardPresets.SENSITIVE_DATA_VIOLATION]
             )
         elif compliance == "inappropriate":
-            return mock_llm_with_responses(
-                [mock_presets.POLICY_VIOLATION_INAPPROPRIATE]
-            )
+            return mock_llm_with_responses([PolicyGuardPresets.INAPPROPRIATE_CONTENT])
         elif compliance == "multiple":
-            return mock_llm_with_responses([mock_presets.POLICY_MULTIPLE_VIOLATIONS])
+            return mock_llm_with_responses([PolicyGuardPresets.MULTIPLE_VIOLATIONS])
         else:
             raise ValueError(f"Unknown compliance: {compliance}")
 
@@ -222,7 +212,7 @@ def mock_llm_for_policy_guard(mock_llm_with_responses, mock_presets):
 
 
 @pytest.fixture
-def mock_llm_for_tool_calling(mock_llm_with_responses, mock_presets):
+def mock_llm_for_tool_calling(mock_llm_with_responses):
     """
     Pre-configured mock for tool calling tests.
 
@@ -235,11 +225,11 @@ def mock_llm_for_tool_calling(mock_llm_with_responses, mock_presets):
 
     def _create(tool: str = "weather") -> MockLLMClient:
         tool_map = {
-            "weather": mock_presets.WEATHER_TOOL_CALL,
-            "calculator": mock_presets.CALCULATOR_TOOL_CALL,
-            "search": mock_presets.SEARCH_TOOL_CALL,
-            "database": mock_presets.DATABASE_QUERY_TOOL_CALL,
-            "multiple": mock_presets.MULTIPLE_TOOL_CALLS,
+            "weather": ToolCallPresets.WEATHER_TOOL_CALL,
+            "calculator": ToolCallPresets.CALCULATOR_TOOL_CALL,
+            "search": ToolCallPresets.SEARCH_TOOL_CALL,
+            "database": ToolCallPresets.DATABASE_QUERY,
+            "multiple": ToolCallPresets.MULTIPLE_TOOLS,
         }
         if tool not in tool_map:
             raise ValueError(f"Unknown tool: {tool}")

@@ -43,8 +43,7 @@ class ResponseStrategy(ABC):
         """
         pass
 
-    @abstractmethod
-    def reset(self) -> None:
+    def reset(self) -> None:  # noqa: B027
         """Reset strategy state (optional, for stateful strategies)."""
         pass
 

@@ -5,6 +5,7 @@ import json
 from altk.core.toolkit import AgentPhase, ComponentConfig
 from altk.post_tool.core.toolkit import SilentReviewRunInput, Outcome
 from altk.post_tool.silent_review.silent_review import SilentReviewForJSONDataComponent
+from tests.fixtures.presets import SilentReviewPresets
 
 
 def build_test_input() -> SilentReviewRunInput:
@@ -30,10 +31,10 @@ def build_test_input() -> SilentReviewRunInput:
     )
 
 
-def test_silent_review_success_with_mock(mock_llm_with_responses, mock_presets):
+def test_silent_review_success_with_mock(mock_llm_with_responses):
     """Test silent review with successful outcome using mock LLM."""
     # Arrange
-    mock_llm = mock_llm_with_responses([mock_presets.SILENT_REVIEW_SUCCESS])
+    mock_llm = mock_llm_with_responses([SilentReviewPresets.SUCCESS])
     config = ComponentConfig(llm_client=mock_llm)
     data = build_test_input()
     middleware = SilentReviewForJSONDataComponent(config=config)
@@ -43,14 +44,14 @@ def test_silent_review_success_with_mock(mock_llm_with_responses, mock_presets):
 
     # Assert
     assert result.outcome == Outcome.ACCOMPLISHED
-    assert result.details == json.loads(mock_presets.SILENT_REVIEW_SUCCESS)
+    assert result.details == json.loads(SilentReviewPresets.SUCCESS)
     mock_llm.assert_called_once()
 
 
-def test_silent_review_failure_with_mock(mock_llm_with_responses, mock_presets):
+def test_silent_review_failure_with_mock(mock_llm_with_responses):
     """Test silent review with failure outcome using mock LLM."""
     # Arrange
-    mock_llm = mock_llm_with_responses([mock_presets.SILENT_REVIEW_FAILURE])
+    mock_llm = mock_llm_with_responses([SilentReviewPresets.FAILURE])
     config = ComponentConfig(llm_client=mock_llm)
     data = build_test_input()
     middleware = SilentReviewForJSONDataComponent(config=config)
@@ -60,14 +61,14 @@ def test_silent_review_failure_with_mock(mock_llm_with_responses, mock_presets):
 
     # Assert
     assert result.outcome == Outcome.NOT_ACCOMPLISHED
-    assert result.details == json.loads(mock_presets.SILENT_REVIEW_FAILURE)
+    assert result.details == json.loads(SilentReviewPresets.FAILURE)
     mock_llm.assert_called_once()
 
 
-def test_silent_review_partial_with_mock(mock_llm_with_responses, mock_presets):
+def test_silent_review_partial_with_mock(mock_llm_with_responses):
     """Test silent review with partial outcome using mock LLM."""
     # Arrange
-    mock_llm = mock_llm_with_responses([mock_presets.SILENT_REVIEW_PARTIAL])
+    mock_llm = mock_llm_with_responses([SilentReviewPresets.PARTIAL])
     config = ComponentConfig(llm_client=mock_llm)
     data = build_test_input()
     middleware = SilentReviewForJSONDataComponent(config=config)
@@ -77,14 +78,14 @@ def test_silent_review_partial_with_mock(mock_llm_with_responses, mock_presets):
 
     # Assert
     assert result.outcome == Outcome.PARTIAL_ACCOMPLISH
-    assert result.details == json.loads(mock_presets.SILENT_REVIEW_PARTIAL)
+    assert result.details == json.loads(SilentReviewPresets.PARTIAL)
     mock_llm.assert_called_once()
 
 
-def test_silent_review_verifies_prompt_content(mock_llm, mock_presets):
+def test_silent_review_verifies_prompt_content(mock_llm):
     """Test that silent review passes correct prompt to LLM."""
     # Arrange
-    mock_llm.strategy.responses = [mock_presets.SILENT_REVIEW_SUCCESS]
+    mock_llm.strategy.responses = [SilentReviewPresets.SUCCESS]
     config = ComponentConfig(llm_client=mock_llm)
     data = build_test_input()
     middleware = SilentReviewForJSONDataComponent(config=config)
@@ -102,10 +103,10 @@ def test_silent_review_verifies_prompt_content(mock_llm, mock_presets):
 
 
 @pytest.mark.asyncio
-async def test_silent_review_async_with_mock(mock_llm_with_responses, mock_presets):
+async def test_silent_review_async_with_mock(mock_llm_with_responses):
     """Test async silent review using mock LLM."""
     # Arrange
-    mock_llm = mock_llm_with_responses([mock_presets.SILENT_REVIEW_SUCCESS])
+    mock_llm = mock_llm_with_responses([SilentReviewPresets.SUCCESS])
     config = ComponentConfig(llm_client=mock_llm)
     data = build_test_input()
     middleware = SilentReviewForJSONDataComponent(config=config)
@@ -118,10 +119,10 @@ async def test_silent_review_async_with_mock(mock_llm_with_responses, mock_prese
     mock_llm.assert_called_once()
 
 
-def test_silent_review_with_error_response(mock_llm_with_responses, mock_presets):
+def test_silent_review_with_error_response(mock_llm_with_responses):
     """Test silent review when tool response contains an error."""
     # Arrange
-    error_response = mock_llm_with_responses([mock_presets.SILENT_REVIEW_FAILURE])
+    error_response = mock_llm_with_responses([SilentReviewPresets.FAILURE])
     config = ComponentConfig(llm_client=error_response)
 
     # Create input with error in tool response
@@ -153,14 +154,14 @@ def test_silent_review_with_error_response(mock_llm_with_responses, mock_presets
     assert result.outcome == Outcome.NOT_ACCOMPLISHED
 
 
-def test_silent_review_multiple_calls(mock_llm_with_responses, mock_presets):
+def test_silent_review_multiple_calls(mock_llm_with_responses):
     """Test multiple silent review calls with different outcomes."""
     # Arrange
     mock_llm = mock_llm_with_responses(
         [
-            mock_presets.SILENT_REVIEW_SUCCESS,
-            mock_presets.SILENT_REVIEW_FAILURE,
-            mock_presets.SILENT_REVIEW_SUCCESS,
+            SilentReviewPresets.SUCCESS,
+            SilentReviewPresets.FAILURE,
+            SilentReviewPresets.SUCCESS,
         ]
     )
     config = ComponentConfig(llm_client=mock_llm)
