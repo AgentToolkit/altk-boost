@@ -192,7 +192,7 @@ requires-dist = [
     { name = "sentence-transformers", marker = "extra == 'routing'", specifier = ">=5.0.0" },
     { name = "smolagents", specifier = ">=1.21.3" },
     { name = "tomli", specifier = "==2.2.1" },
-    { name = "toolguard", marker = "extra == 'toolguard'", specifier = ">=0.1.19" },
+    { name = "toolguard", marker = "extra == 'toolguard'", specifier = ">=0.2.4" },
     { name = "torch", marker = "platform_machine == 'x86_64' and sys_platform == 'darwin' and extra == 'spotlight'", specifier = "==2.2.2" },
     { name = "torch", marker = "(platform_machine != 'x86_64' and extra == 'spotlight') or (sys_platform != 'darwin' and extra == 'spotlight')", specifier = ">=2.5.1" },
     { name = "transformers", marker = "extra == 'spotlight'", specifier = ">=4.53.3" },
@@ -3428,7 +3428,7 @@ wheels = [
 
 [[package]]
 name = "mellea"
-version = "0.2.4"
+version = "0.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ansicolors" },
@@ -3452,9 +3452,9 @@ dependencies = [
     { name = "types-tqdm" },
     { name = "uvicorn" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2f/8d/e9032cacc0b5f54236074a8e1a1333813db4f0613baea17e5d815305135b/mellea-0.2.4.tar.gz", hash = "sha256:973a20bf7a3f25a7e85a563d79a166b6bb8a12142d93a46f71df26632362db65", size = 208578, upload-time = "2026-01-08T17:25:40.282Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d5/e6/77f1de051b83e02ec923af3b8b5c7c6e9511a498d2b5b9658211c0985703/mellea-0.3.0.tar.gz", hash = "sha256:6b3e36e9e2a89a8ed4e9a2b3d59e6206865c5db81fa6ec565caec881444c6797", size = 217386, upload-time = "2026-01-21T19:25:25.167Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e0/96/b1482a8aec3419981e7f40eb9f7388a924c3023a77aaf032d39ddbe062ac/mellea-0.2.4-py3-none-any.whl", hash = "sha256:549b1b57f081a5837ea30692075ab29fd224a0600f4fa6da99b56be95b9c1759", size = 308071, upload-time = "2026-01-08T17:25:38.84Z" },
+    { url = "https://files.pythonhosted.org/packages/38/2c/6105b27609ee16c092f54f220fc371f88af19fed5ec4fd78a713cf9e2081/mellea-0.3.0-py3-none-any.whl", hash = "sha256:bb70902a4efeafa5a0a9ae29cc39172d8979cfdf8646a2fc8ad592952cf495e4", size = 317487, upload-time = "2026-01-21T19:25:23.495Z" },
 ]
 
 [[package]]
@@ -4492,7 +4492,7 @@ name = "nvidia-cudnn-cu12"
 version = "9.10.2.21"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-cublas-cu12", marker = "platform_machine != 'x86_64' or sys_platform != 'darwin'" },
+    { name = "nvidia-cublas-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ba/51/e123d997aa098c61d029f76663dedbfb9bc8dcf8c60cbd6adbe42f76d049/nvidia_cudnn_cu12-9.10.2.21-py3-none-manylinux_2_27_x86_64.whl", hash = "sha256:949452be657fa16687d0930933f032835951ef0892b37d2d53824d1a84dc97a8", size = 706758467, upload-time = "2025-06-06T21:54:08.597Z" },
@@ -4503,7 +4503,7 @@ name = "nvidia-cufft-cu12"
 version = "11.3.3.83"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-nvjitlink-cu12", marker = "platform_machine != 'x86_64' or sys_platform != 'darwin'" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/1f/13/ee4e00f30e676b66ae65b4f08cb5bcbb8392c03f54f2d5413ea99a5d1c80/nvidia_cufft_cu12-11.3.3.83-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:4d2dd21ec0b88cf61b62e6b43564355e5222e4a3fb394cac0db101f2dd0d4f74", size = 193118695, upload-time = "2025-03-07T01:45:27.821Z" },
@@ -4530,9 +4530,9 @@ name = "nvidia-cusolver-cu12"
 version = "11.7.3.90"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-cublas-cu12", marker = "platform_machine != 'x86_64' or sys_platform != 'darwin'" },
-    { name = "nvidia-cusparse-cu12", marker = "platform_machine != 'x86_64' or sys_platform != 'darwin'" },
-    { name = "nvidia-nvjitlink-cu12", marker = "platform_machine != 'x86_64' or sys_platform != 'darwin'" },
+    { name = "nvidia-cublas-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
+    { name = "nvidia-cusparse-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/85/48/9a13d2975803e8cf2777d5ed57b87a0b6ca2cc795f9a4f59796a910bfb80/nvidia_cusolver_cu12-11.7.3.90-py3-none-manylinux_2_27_x86_64.whl", hash = "sha256:4376c11ad263152bd50ea295c05370360776f8c3427b30991df774f9fb26c450", size = 267506905, upload-time = "2025-03-07T01:47:16.273Z" },
@@ -4543,7 +4543,7 @@ name = "nvidia-cusparse-cu12"
 version = "12.5.8.93"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-nvjitlink-cu12", marker = "platform_machine != 'x86_64' or sys_platform != 'darwin'" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine != 'aarch64' and sys_platform == 'linux') or (sys_platform != 'darwin' and sys_platform != 'linux')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c2/f5/e1854cb2f2bcd4280c44736c93550cc300ff4b8c95ebe370d0aa7d2b473d/nvidia_cusparse_cu12-12.5.8.93-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:1ec05d76bbbd8b61b06a80e1eaf8cf4959c3d4ce8e711b65ebd0443bb0ebb13b", size = 288216466, upload-time = "2025-03-07T01:48:13.779Z" },
@@ -4603,9 +4603,9 @@ name = "ocrmac"
 version = "1.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "click" },
-    { name = "pillow" },
-    { name = "pyobjc-framework-vision" },
+    { name = "click", marker = "sys_platform == 'darwin'" },
+    { name = "pillow", marker = "sys_platform == 'darwin'" },
+    { name = "pyobjc-framework-vision", marker = "sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/5e/07/3e15ab404f75875c5e48c47163300eb90b7409044d8711fc3aaf52503f2e/ocrmac-1.0.1.tar.gz", hash = "sha256:507fe5e4cbd67b2d03f6729a52bbc11f9d0b58241134eb958a5daafd4b9d93d9", size = 1454317, upload-time = "2026-01-08T16:44:26.412Z" }
 wheels = [
@@ -5965,7 +5965,7 @@ name = "pyobjc-framework-cocoa"
 version = "12.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pyobjc-core" },
+    { name = "pyobjc-core", marker = "sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/02/a3/16ca9a15e77c061a9250afbae2eae26f2e1579eb8ca9462ae2d2c71e1169/pyobjc_framework_cocoa-12.1.tar.gz", hash = "sha256:5556c87db95711b985d5efdaaf01c917ddd41d148b1e52a0c66b1a2e2c5c1640", size = 2772191, upload-time = "2025-11-14T10:13:02.069Z" }
 wheels = [
@@ -5983,8 +5983,8 @@ name = "pyobjc-framework-coreml"
 version = "12.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pyobjc-core" },
-    { name = "pyobjc-framework-cocoa" },
+    { name = "pyobjc-core", marker = "sys_platform == 'darwin'" },
+    { name = "pyobjc-framework-cocoa", marker = "sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/30/2d/baa9ea02cbb1c200683cb7273b69b4bee5070e86f2060b77e6a27c2a9d7e/pyobjc_framework_coreml-12.1.tar.gz", hash = "sha256:0d1a4216891a18775c9e0170d908714c18e4f53f9dc79fb0f5263b2aa81609ba", size = 40465, upload-time = "2025-11-14T10:14:02.265Z" }
 wheels = [
@@ -6002,8 +6002,8 @@ name = "pyobjc-framework-quartz"
 version = "12.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pyobjc-core" },
-    { name = "pyobjc-framework-cocoa" },
+    { name = "pyobjc-core", marker = "sys_platform == 'darwin'" },
+    { name = "pyobjc-framework-cocoa", marker = "sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/94/18/cc59f3d4355c9456fc945eae7fe8797003c4da99212dd531ad1b0de8a0c6/pyobjc_framework_quartz-12.1.tar.gz", hash = "sha256:27f782f3513ac88ec9b6c82d9767eef95a5cf4175ce88a1e5a65875fee799608", size = 3159099, upload-time = "2025-11-14T10:21:24.31Z" }
 wheels = [
@@ -6021,10 +6021,10 @@ name = "pyobjc-framework-vision"
 version = "12.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pyobjc-core" },
-    { name = "pyobjc-framework-cocoa" },
-    { name = "pyobjc-framework-coreml" },
-    { name = "pyobjc-framework-quartz" },
+    { name = "pyobjc-core", marker = "sys_platform == 'darwin'" },
+    { name = "pyobjc-framework-cocoa", marker = "sys_platform == 'darwin'" },
+    { name = "pyobjc-framework-coreml", marker = "sys_platform == 'darwin'" },
+    { name = "pyobjc-framework-quartz", marker = "sys_platform == 'darwin'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/c2/5a/08bb3e278f870443d226c141af14205ff41c0274da1e053b72b11dfc9fb2/pyobjc_framework_vision-12.1.tar.gz", hash = "sha256:a30959100e85dcede3a786c544e621ad6eb65ff6abf85721f805822b8c5fe9b0", size = 59538, upload-time = "2025-11-14T10:23:21.979Z" }
 wheels = [
@@ -7614,7 +7614,7 @@ wheels = [
 
 [[package]]
 name = "toolguard"
-version = "0.1.20"
+version = "0.2.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "datamodel-code-generator" },
@@ -7628,9 +7628,9 @@ dependencies = [
     { name = "pytest-json-report" },
     { name = "smolagents" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/0c/56/595f6b14d7b2284700e36bad656e0312969ba0a63c5be5576fa5362c514f/toolguard-0.1.20.tar.gz", hash = "sha256:71c2a238d489c010a317b09634aeae42bd5a5c22dcbbac44a6d379621ee37347", size = 55466, upload-time = "2026-01-11T15:38:25.164Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a7/52/46e5117bd01267aed8f6fea36f200b248c559b6cfc789aeff89fde3bd3d2/toolguard-0.2.4.tar.gz", hash = "sha256:d2677477b732825c4453fc69dcaffcf00320182ecbf474998030b8fde79d8d01", size = 56164, upload-time = "2026-01-22T16:36:07.134Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6c/1d/ec3f7c34994881c02ed9865bda1564aeef66c86089dd357a5a6d156467f4/toolguard-0.1.20-py3-none-any.whl", hash = "sha256:04c57ad38bed3aa0021e65ca5f14f80cb7366c914df1cb744fa11ff931f53103", size = 86701, upload-time = "2026-01-11T15:38:23.695Z" },
+    { url = "https://files.pythonhosted.org/packages/47/94/5ba7c1c587bd2b83ecf096aaee002f1c5246a4f7677fed5a06df54044cf6/toolguard-0.2.4-py3-none-any.whl", hash = "sha256:00fbe66da50c2859ca383139ad263a2af9b0bfa2900e507816f73c0f58462cdf", size = 86729, upload-time = "2026-01-22T16:36:05.772Z" },
 ]
 
 [[package]]

@@ -62,6 +62,7 @@ def work_dir():
     shutil.rmtree(dir_path)
     # print("Temporary work dir removed:", dir_path)
 
+
 def get_llm() -> BaseLLMClient:
     from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClient
 
@@ -187,23 +188,23 @@ async def test_tool_guard_calculator_policy(work_dir: str):
         assert res.violation.violation_level == ViolationLevel.ERROR
         assert res.violation.user_message
 
-    await asyncio.gather(*[
-        # Valid input cases -----------------------------------------------------
-        assert_complies("divide_tool", {"g": 5, "h": 4}),
-        assert_complies("add_tool", {"a": 5, "b": 4}),
-        assert_complies("subtract_tool", {"a": 5, "b": 4}),
-        assert_complies("multiply_tool", {"a": 5, "b": 4}),
-        assert_complies("map_kdi_number", {"i": 5}),
-
-        # Violation cases -------------------------------------------------------
-        assert_violates("divide_tool", {"g": 5, "h": 0}),
-        assert_violates("add_tool", {"a": 5, "b": 73}),
-        assert_violates("add_tool", {"a": 73, "b": 5}),
-
-        # Violations for multiply_tool based on custom rules
-        assert_violates("multiply_tool", {"a": 2, "b": 73}),
-        assert_violates("multiply_tool", {"a": 22, "b": 2}),
-    ])
+    await asyncio.gather(
+        *[
+            # Valid input cases -----------------------------------------------------
+            assert_complies("divide_tool", {"g": 5, "h": 4}),
+            assert_complies("add_tool", {"a": 5, "b": 4}),
+            assert_complies("subtract_tool", {"a": 5, "b": 4}),
+            assert_complies("multiply_tool", {"a": 5, "b": 4}),
+            assert_complies("map_kdi_number", {"i": 5}),
+            # Violation cases -------------------------------------------------------
+            assert_violates("divide_tool", {"g": 5, "h": 0}),
+            assert_violates("add_tool", {"a": 5, "b": 73}),
+            assert_violates("add_tool", {"a": 73, "b": 5}),
+            # Violations for multiply_tool based on custom rules
+            assert_violates("multiply_tool", {"a": 2, "b": 73}),
+            assert_violates("multiply_tool", {"a": 22, "b": 2}),
+        ]
+    )
 
 
 # ---------------------------------------------------------------------------

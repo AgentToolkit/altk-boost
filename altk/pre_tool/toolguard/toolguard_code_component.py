@@ -98,9 +98,7 @@ class ToolGuardCodeComponent(ComponentBase):
         )
 
     def _run(self, data: ToolGuardCodeRunInput) -> ToolGuardCodeRunOutput:
-        raise NotImplementedError(
-            "Please use the _arun() function in an async context"
-        )
+        raise NotImplementedError("Please use the _arun() function in an async context")
 
     async def _arun(self, data: ToolGuardCodeRunInput) -> ToolGuardCodeRunOutput:
         code_root_dir = data.generated_guard_dir
@@ -108,7 +106,9 @@ class ToolGuardCodeComponent(ComponentBase):
         tool_params = data.tool_args
         with load_toolguards(code_root_dir) as toolguards:
             try:
-                await toolguards.guard_toolcall(tool_name, tool_params, data.tool_invoker)
+                await toolguards.guard_toolcall(
+                    tool_name, tool_params, data.tool_invoker
+                )
                 return ToolGuardCodeRunOutput()
             except PolicyViolationException as e:
                 return ToolGuardCodeRunOutput(
