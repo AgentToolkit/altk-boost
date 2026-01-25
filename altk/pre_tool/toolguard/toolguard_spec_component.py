@@ -7,7 +7,7 @@ from pydantic import Field
 
 from altk.pre_tool.toolguard.llm_client import TG_LLMClient
 
-from ...core.toolkit import AgentPhase, ComponentBase, ComponentConfig, ComponentInput
+from altk.core.toolkit import AgentPhase, ComponentBase, ComponentConfig, ComponentInput
 from toolguard.buildtime import ToolGuardSpec, generate_guard_specs
 
 logger = logging.getLogger(__name__)
