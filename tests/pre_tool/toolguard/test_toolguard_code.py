@@ -12,8 +12,9 @@ This test:
 from datetime import datetime
 import os
 from pathlib import Path
+import shutil
 from typing import Dict, cast
-
+import asyncio
 import dotenv
 import pytest
 
@@ -53,14 +54,13 @@ dotenv.load_dotenv()
 def work_dir():
     """Creates a temporary folder for test output and cleans it afterward."""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    dir_path = str(Path(__file__).parent / "outputs" / f"work_{timestamp}")
+    dir_path = Path(__file__).parent / "outputs" / f"work_{timestamp}"
     print("Temporary work dir created:", dir_path)
 
     yield dir_path
 
-    # shutil.rmtree(dir_path)
+    shutil.rmtree(dir_path)
     # print("Temporary work dir removed:", dir_path)
-
 
 def get_llm() -> BaseLLMClient:
     from altk.core.llm.providers.ibm_watsonx_ai.ibm_watsonx_ai import WatsonxLLMClient
@@ -161,11 +161,11 @@ async def test_tool_guard_calculator_policy(work_dir: str):
 
     tool_invoker = ToolFunctionsInvoker(funcs)
 
-    def call(tool_name: str, args: Dict) -> ToolGuardCodeRunOutput:
+    async def call(tool_name: str, args: Dict) -> ToolGuardCodeRunOutput:
         """Executes a tool through its guard code."""
         return cast(
             ToolGuardCodeRunOutput,
-            toolguard_code.process(
+            await toolguard_code.aprocess(
                 ToolGuardCodeRunInput(
                     generated_guard_dir=build_output.out_dir,
                     tool_name=tool_name,
@@ -176,32 +176,34 @@ async def test_tool_guard_calculator_policy(work_dir: str):
             ),
         )
 
-    def assert_complies(tool_name: str, args: Dict):
+    async def assert_complies(tool_name: str, args: Dict):
         """Asserts that no violation occurs."""
-        assert call(tool_name, args).violation is None
+        assert (await call(tool_name, args)).violation is None
 
-    def assert_violates(tool_name: str, args: Dict):
+    async def assert_violates(tool_name: str, args: Dict):
         """Asserts that a violation occurs with level ERROR."""
-        res = call(tool_name, args)
+        res = await call(tool_name, args)
         assert res.violation
         assert res.violation.violation_level == ViolationLevel.ERROR
         assert res.violation.user_message
 
-    # Valid input cases -----------------------------------------------------
-    assert_complies("divide_tool", {"g": 5, "h": 4})
-    assert_complies("add_tool", {"a": 5, "b": 4})
-    assert_complies("subtract_tool", {"a": 5, "b": 4})
-    assert_complies("multiply_tool", {"a": 5, "b": 4})
-    assert_complies("map_kdi_number", {"i": 5})
+    await asyncio.gather(*[
+        # Valid input cases -----------------------------------------------------
+        assert_complies("divide_tool", {"g": 5, "h": 4}),
+        assert_complies("add_tool", {"a": 5, "b": 4}),
+        assert_complies("subtract_tool", {"a": 5, "b": 4}),
+        assert_complies("multiply_tool", {"a": 5, "b": 4}),
+        assert_complies("map_kdi_number", {"i": 5}),
 
-    # Violation cases -------------------------------------------------------
-    assert_violates("divide_tool", {"g": 5, "h": 0})
-    assert_violates("add_tool", {"a": 5, "b": 73})
-    assert_violates("add_tool", {"a": 73, "b": 5})
+        # Violation cases -------------------------------------------------------
+        assert_violates("divide_tool", {"g": 5, "h": 0}),
+        assert_violates("add_tool", {"a": 5, "b": 73}),
+        assert_violates("add_tool", {"a": 73, "b": 5}),
 
-    # Violations for multiply_tool based on custom rules
-    assert_violates("multiply_tool", {"a": 2, "b": 73})
-    assert_violates("multiply_tool", {"a": 22, "b": 2})
+        # Violations for multiply_tool based on custom rules
+        assert_violates("multiply_tool", {"a": 2, "b": 73}),
+        assert_violates("multiply_tool", {"a": 22, "b": 2}),
+    ])
 
 
 # ---------------------------------------------------------------------------

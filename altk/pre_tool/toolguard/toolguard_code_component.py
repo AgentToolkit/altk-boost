@@ -8,7 +8,7 @@ from langchain_core.tools import BaseTool
 
 from altk.core.toolkit import ComponentConfig, ComponentInput, AgentPhase, ComponentBase
 from toolguard.buildtime import (
-    generate_guards_from_specs,
+    generate_guards_code,
     ToolGuardSpec,
     ToolGuardsCodeGenerationResult,
 )
@@ -90,7 +90,7 @@ class ToolGuardCodeComponent(ComponentBase):
     ) -> ToolGuardsCodeGenerationResult:
         config = cast(ToolGuardCodeComponentConfig, self.config)
         llm = TG_LLMClient(config.llm_client)
-        return await generate_guards_from_specs(
+        return await generate_guards_code(
             tools=data.tools,
             tool_specs=data.toolguard_specs,
             work_dir=data.out_dir,
@@ -98,12 +98,17 @@ class ToolGuardCodeComponent(ComponentBase):
         )
 
     def _run(self, data: ToolGuardCodeRunInput) -> ToolGuardCodeRunOutput:
+        raise NotImplementedError(
+            "Please use the _arun() function in an async context"
+        )
+
+    async def _arun(self, data: ToolGuardCodeRunInput) -> ToolGuardCodeRunOutput:
         code_root_dir = data.generated_guard_dir
         tool_name = data.tool_name
         tool_params = data.tool_args
         with load_toolguards(code_root_dir) as toolguards:
             try:
-                toolguards.check_toolcall(tool_name, tool_params, data.tool_invoker)
+                await toolguards.guard_toolcall(tool_name, tool_params, data.tool_invoker)
                 return ToolGuardCodeRunOutput()
             except PolicyViolationException as e:
                 return ToolGuardCodeRunOutput(
@@ -111,6 +116,3 @@ class ToolGuardCodeComponent(ComponentBase):
                         violation_level=ViolationLevel.ERROR, user_message=str(e)
                     )
                 )
-
-    def _arun(self, data: ToolGuardCodeRunInput) -> ToolGuardCodeRunOutput:
-        return self._run(data)

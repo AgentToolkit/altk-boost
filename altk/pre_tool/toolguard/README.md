@@ -100,7 +100,7 @@ The output of the build phase is a `ToolGuardsCodeGenerationResult` object with:
     * Each `ToolGuardCodeResult` details the name of guard Python file name and the guard function name. It also reference to the generated unit test files.
 
 #### Runtime phase
-A running agent should use the runtime API to check if a tool call complies with the given policy.
+A running agent should use the runtime async API to check if a tool call complies with the given policy.
 The input of the runtime phase is a `ToolGuardCodeRunInput` object:
   * `generated_guard_dir: str | Path`: Path in the local file system where the generated guard Python code (The code that was generated during the build time, described above) is located.
   * `tool_name: str`: The name of the tool that the agent is about to call

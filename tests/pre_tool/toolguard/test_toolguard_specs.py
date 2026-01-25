@@ -36,7 +36,7 @@ def out_dir():
     Create a timestamped directory for test output, then delete it after the test.
     """
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    dir_path = str(Path(__file__).parent / "outputs" / f"work_{timestamp}")
+    dir_path = Path(__file__).parent / "outputs" / f"work_{timestamp}"
 
     print("Temporary work dir created:", dir_path)
     yield dir_path
