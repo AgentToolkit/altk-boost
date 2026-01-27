@@ -26,6 +26,8 @@
 
 ## Community Bulletin
 ### ✅ Highlights
+- **Jan. 29, 2026**: IBM Dev Day: [Towards Reliable AI Agents with Generalist Agents and Agentic Lifecycle Components](https://ibm-devday-platform.bemyapp.com/#/talks/694abe422f9af0b62a4dbcf3)
+- **Jan. 5, 2026**: ToolGuard component added for enforcing business policy adherence
 - **Dec. 23, 2025**: New components: ToolOps, ToolGuard, Routing
 - **Nov. 10, 2025**: ALTK showcases at NY TechXchange Dev Day
 - **Nov. 6, 2025**: ATLK featured at Lausanne TechXchange Dev Day
@@ -46,6 +48,9 @@ The Agent Lifecycle Toolkit helps agent builders create better performing agents
 <br> [Refraction](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/pre_tool/refraction) validates and repairs tool call syntax to prevent execution failures.
 - *Is your agent calling tools with hallucinated arguments or struggling to choose the correct tools in the right order?*
 <br> [SPARC](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/pre_tool/sparc) makes sure tool calls match the tool specifications and request semantics, and are generated correctly based on the conversation.
+- *Is your agent violating business policies when calling tools?*
+<br> [ToolGuard](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/pre_tool/toolguard) enforces business policy adherence in tool calls by generating code that validates policies before execution.
+
 - *Is your agent overwhelmed with large JSON payloads in its context?*
 <br> [JSON Processor](https://github.com/AgentToolkit/agent-lifecycle-toolkit/tree/main/altk/post_tool/code_generation) generates code on the fly to extract relevant data in JSON tool responses.
 - *Is your agent ignoring subtle semantic tool errors?*
