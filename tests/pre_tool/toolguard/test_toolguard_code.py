@@ -123,16 +123,14 @@ async def test_tool_guard_calculator_policy(work_dir: str):
     specs = [ToolGuardSpec.load(policy_dir / f"{tool.__name__}.json") for tool in funcs]
 
     # Prepare build input for guard code generation
-    input = ToolGuardCodeBuildInput(
-        tools=funcs,
-        out_dir=work_dir,
-        toolguard_specs=specs,
+    build_input = ToolGuardCodeBuildInput(
+        tools=funcs, out_dir=work_dir, toolguard_specs=specs, app_name="calc"
     )
 
     # Toolguarg code generation
     build_output = cast(
         ToolGuardsCodeGenerationResult,
-        await toolguard_code.aprocess(input, AgentPhase.BUILDTIME),
+        await toolguard_code.aprocess(build_input, AgentPhase.BUILDTIME),
     )
     # build_output = load_toolguard_code_result("tests/pre_tool/toolguard/outputs/work_XXX")
 
