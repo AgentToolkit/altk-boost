@@ -1,0 +1,2139 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The Agent Lifecycle Toolkit (ALTK) is a library of components to help agent builders improve their agent with minimal integration effort and setup.">
+      
+      
+      
+        <link rel="canonical" href="https://agenttoolkit.github.io/agent-lifecycle-toolkit/concepts/components/refraction/07.-Offline-Analysis/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/logo-32x32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Offline Analysis - Agent Lifecycle Toolkit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config",""),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#offline-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Agent Lifecycle Toolkit" class="md-header__button md-logo" aria-label="Agent Lifecycle Toolkit" data-md-component="logo">
+      
+  <img src="../../../../assets/logo-512x512.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Agent Lifecycle Toolkit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Offline Analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AgentToolkit/agent-lifecycle-toolkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AgentToolkit/agent-lifecycle-toolkit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lifecycle/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../examples/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../integrations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Integrations
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Agent Lifecycle Toolkit" class="md-nav__button md-logo" aria-label="Agent Lifecycle Toolkit" data-md-component="logo">
+      
+  <img src="../../../../assets/logo-512x512.png" alt="logo">
+
+    </a>
+    Agent Lifecycle Toolkit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AgentToolkit/agent-lifecycle-toolkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AgentToolkit/agent-lifecycle-toolkit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../installation/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Installation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../getting_started/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../usage/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Usage
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lifecycle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lifecycle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lifecycle Stages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ALTK components
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ALTK components
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Components
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Components
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spotlight/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spotlight
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrieval Augmented Thinking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Refraction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sparc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPARC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../silent-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Silent Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../json-processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON Processor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rag-repair/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RAG Repair
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policy-guard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Policy Guard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test-case-generation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Case Generation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool-enrichment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool Enrichment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../examples/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../integrations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrations
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integrations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="offline-analysis">Offline Analysis<a class="headerlink" href="#offline-analysis" title="Permanent link">&para;</a></h1>
+<p>So far, we have discussed how to refract on a single tool call or a sequence of tool calls.
+While this is useful at the time of execution, to generate immediate feedback, the output
+of refraction can also be used offline to improve model accuracy or even provide feedback
+to agent builders on where their agent is going wrong.</p>
+<p>Furthermore, we can do things offline that we cannot at runtime: e.g. 1) we can compute
+new metrics based on evaluation criterion (e.g. goodness of sequence with respect to
+the stated goals of a sequence); 2) identify redundant steps; 3) generate aggregate
+statistics on a set of observed calls.</p>
+<blockquote>
+<p><img alt="💡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4a1.svg" title=":bulb:" /> Got ideas for more fun stuff we can measure? Open an issue.</p>
+</blockquote>
+<h1 id="71-offline-basics">7.1 Offline Basics<a class="headerlink" href="#71-offline-basics" title="Permanent link">&para;</a></h1>
+<p>The basic API for running in offline-mode is the same as runtime.
+We already saw this once on the NESTFUL
+data <a href="../06.-Refraction-on-NESTFUL/">here</a>.</p>
+<p>However, the interpretation of the output is different from runtime usage.
+For example, in the following situation, the runtime response
+would be to repair the call(s) and execute by using the corrected
+call API <a href="../02.-The-Refraction-API-%7C-Inputs-and-Outputs/#223-corrected-call-generation">here</a>,
+or send it downstream to a reflector component
+as <a href="../02.-The-Refraction-API-%7C-Inputs-and-Outputs/#224-prompt-generation">illustrated</a> here.
+In offline mode, on the other hand, we need to cache this response
+as feedback to be used later.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>- var5 = TripadvisorSearchHotels(geoId=&quot;$var3.ID$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>?                                              ^
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>+ var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>?                                           ^ +++ ^
+</code></pre></div>
+<h3 id="multiple-fixes">Multiple Fixes<a class="headerlink" href="#multiple-fixes" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>Some of the restriction of runtime usage, such as sub-second response, does
+not apply in the offline mode. So, even on the use cases that overlap with runtime usage,
+we can do more: such as allow for multiple or additional (computationally expensive but
+interesting) fixes, longer sequences, larger catalogs, more mappings, and so on. <img alt="😌" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f60c.svg" title=":relieved:" /></p>
+</blockquote>
+<p>We can generated multiple fixes for the same problem like so:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">refraction.batch_actions</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_all_modes</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">run_all_modes</span><span class="p">(</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">sequence</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Spotify_Scraper_Get_Artist_Overview&quot;</span><span class="p">,</span> <span class="s2">&quot;arguments&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;artistId&quot;</span><span class="p">:</span> <span class="s2">&quot;$var1.id$&quot;</span><span class="p">}}</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="p">],</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">catalog</span><span class="o">=...</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">mappings</span><span class="o">=...</span><span class="p">,</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">memory_objects</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="s2">&quot;var1&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="s2">&quot;artist_id&quot;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">,</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="p">}</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="p">},</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="p">)</span>
+</code></pre></div>
+<p>Here, the reference in the assignment to the parameter <code>artistId</code> is messed up.
+The refraction call will refract the original tool call across different conditions and
+generate multiple possible fixes as feedback. Note in the following:</p>
+<ol>
+<li>The call can be fixed by using the reference <code>$var1.artist_id$</code> from memory instead.</li>
+<li>We can attempt to extract <code>artistId</code> directly from context / user utterance.</li>
+<li>We can make an extra function call <code>Spotify_Scraper_Get_Artist_Overview</code> to get the required information.</li>
+<li>Some of the conditions produce the same fix.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>- var1 = Spotify_Scraper_Get_Artist_Overview(artistId=&quot;$var1.id$&quot;)
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>+ var1 = Spotify_Scraper_Get_Artist_Overview(artistId=&quot;$var1.artist_id$&quot;)
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>?                                                            +++++++
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>- var1 = Spotify_Scraper_Get_Artist_Overview(artistId=&quot;$var1.id$&quot;)
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>+ var10 = Spotify_Scraper_Get_Artist_Overview(artistId=&quot;$var1.artist_id$&quot;)
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>?     +                                                       +++++++
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>+ ask(artistId)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>- var1 = Spotify_Scraper_Get_Artist_Overview(artistId=&quot;$var1.id$&quot;)
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>?                                                       -  ^^
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>+ var1 = Spotify_Scraper_Get_Artist_Overview(artistId=&quot;$artistId$&quot;)
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>?                                                         ^ +++
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>+ ask(artistId)
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>+ var1 = Spotify_Scraper_List_Artist_Albums_Singles(artistId=&quot;$artistId$&quot;)
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  var1 = Spotify_Scraper_Get_Artist_Overview(artistId=&quot;$var1.id$&quot;)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>+ ask(artistId)
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>- var1 = Spotify_Scraper_Get_Artist_Overview(artistId=&quot;$var1.id$&quot;)
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>?                                                       -  ^^
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>+ var1 = Spotify_Scraper_Get_Artist_Overview(artistId=&quot;$artistId$&quot;)
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>?                                                         ^ +++
+</code></pre></div>
+<p>For a set of calls, we can gather these insights into a report.
+More later on this <a href="#report-generation">later</a>.</p>
+<h1 id="72-sequence-level-analysis">7.2 Sequence-Level Analysis<a class="headerlink" href="#72-sequence-level-analysis" title="Permanent link">&para;</a></h1>
+<p>In the offline-mode, we have additional options to play with, to
+decide if a sequence passes the refraction test or not, particularly
+in the context of the goodness of a sequence.</p>
+<p>From the perspective of the AI planning community, a plan
+can take up 3 forms:</p>
+<ol>
+<li><strong>Sound</strong> (it is executable)</li>
+<li><strong>Valid</strong> (it is sound + achieves whatever goals it was supposed to)</li>
+<li><strong>Optimal</strong> (it is valid + the best of valid plans according to some metric)</li>
+</ol>
+<p>The metric in (3) is "least cost" by default, but to move from (1) to
+either of (2) or (3), we need goal annotations.</p>
+<h2 id="721-goal-annotations-for-testing">7.2.1 Goal Annotations for Testing<a class="headerlink" href="#721-goal-annotations-for-testing" title="Permanent link">&para;</a></h2>
+<p>At runtime, we only use the soundness check. This is because we want to allow an
+agent to do what it wants to (agent-knows-best mode), especially since we are not given
+an additional information on what is to be expected from a sequence.</p>
+<p>During offline analysis, we can allow for more stricter checks by allowing for goal specifications.
+This is particularly true if we already have ground truth data to check with or the developer
+is available to annotate their tests for more detailed analysis. For example, you can annotate
+a refraction call with goal annotations as follows:</p>
+<h3 id="operator-goals">Operator Goals<a class="headerlink" href="#operator-goals" title="Permanent link">&para;</a></h3>
+<p>An operator goal is a tool call that must be there
+in the input sequence.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nl2flow.compile.schemas</span><span class="w"> </span><span class="kn">import</span> <span class="n">Step</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">refract</span><span class="p">(</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="o">...</span><span class="p">,</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="n">goals</span><span class="o">=</span><span class="p">[</span><span class="n">Step</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;SkyScrapperFlightSearch&quot;</span><span class="p">)],</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="memory-goals">Memory Goals<a class="headerlink" href="#memory-goals" title="Permanent link">&para;</a></h3>
+<p>A memory goal is a variable that must be there in memory
+after completion of the input sequence.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nl2flow.compile.schemas</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryItem</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">refract</span><span class="p">(</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="o">...</span><span class="p">,</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">goals</span><span class="o">=</span><span class="p">[</span><span class="n">MemoryItem</span><span class="p">(</span><span class="n">item_id</span><span class="o">=</span><span class="s2">&quot;flightId&quot;</span><span class="p">)],</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="step-goals">Step Goals<a class="headerlink" href="#step-goals" title="Permanent link">&para;</a></h3>
+<p>Operator goals can also be (partially or wholly) instantiated to indicate there
+must be a particular tool call in the input trajectory.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">result</span> <span class="o">=</span> <span class="n">refract</span><span class="p">(</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="o">...</span><span class="p">,</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="n">memory_objects</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">goals</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        <span class="n">Step</span><span class="p">(</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SkyScrapperFlightSearch&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>            <span class="n">parameters</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>                <span class="s2">&quot;destinationSkyId&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>                <span class="s2">&quot;destinationEntityId&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>                <span class="s2">&quot;date&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>            <span class="p">],</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>            <span class="n">maps</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>                <span class="s2">&quot;$var2.skyId$&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>                <span class="s2">&quot;$var2.entityId$&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>                <span class="s2">&quot;2024-08-18&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>            <span class="p">],</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>        <span class="p">)</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>    <span class="p">],</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="p">)</span>
+</code></pre></div>
+<p>Once you have goal annotations, you can check how good your plan is with respect to those goals, beyond
+just the soundness check we have been doing so far.</p>
+<h2 id="722-validity">7.2.2 Validity<a class="headerlink" href="#722-validity" title="Permanent link">&para;</a></h2>
+<p>By default, once you specify a goal in the input to refraction,
+it checks for validity.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">result</span> <span class="o">=</span> <span class="n">refract</span><span class="p">(</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="n">sequence</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>        <span class="p">{</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;SkyScrapperSearchAirport&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>            <span class="s2">&quot;arguments&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;New York&quot;</span><span class="p">},</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        <span class="p">},</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        <span class="p">{</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;SkyScrapperSearchAirport&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>            <span class="s2">&quot;arguments&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;San Juan&quot;</span><span class="p">},</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>        <span class="p">},</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>        <span class="p">{</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;SkyScrapperFlightSearch&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>            <span class="s2">&quot;arguments&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>                <span class="s2">&quot;originSkyId&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>                <span class="s2">&quot;destinationSkyId&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>                <span class="s2">&quot;originEntityId&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>                <span class="s2">&quot;destinationEntityId&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>                <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>            <span class="p">},</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>        <span class="p">},</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    <span class="p">],</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>    <span class="n">catalog</span><span class="o">=...</span><span class="p">,</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>    <span class="n">mappings</span><span class="o">=...</span><span class="p">,</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>    <span class="n">goals</span><span class="o">=</span><span class="p">[</span><span class="n">MemoryItem</span><span class="p">(</span><span class="n">item_id</span><span class="o">=</span><span class="s2">&quot;flightId&quot;</span><span class="p">)],</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="p">)</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">report</span><span class="o">.</span><span class="n">determination</span>
+</code></pre></div>
+<h2 id="723-optimality">7.2.3 Optimality<a class="headerlink" href="#723-optimality" title="Permanent link">&para;</a></h2>
+<p>You can also specify an optimality check like this.
+If not goals are specified, the refractor will assume that each
+mentioned tool call must appear at least once.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">result</span> <span class="o">=</span> <span class="n">refract</span><span class="p">(</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="n">tool_calls</span><span class="p">,</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">tools</span><span class="p">,</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="n">goals</span><span class="o">=</span><span class="p">[</span><span class="n">Step</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;concur&quot;</span><span class="p">)],</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="n">report_type</span><span class="o">=</span><span class="n">SolutionQuality</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">,</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">)</span>
+</code></pre></div>
+<p>Consider the following tool calls. The corresponding tool specs
+are <a href="https://github.com/AgentToolkit/agent-lifecycle-toolkit/blob/main/tests/utils/refraction/tools/sample_tool_specs.py">here</a>.
+In the above call, we have required that this be an optimal sequence for the <code>concur</code> call.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>[
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    {
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        &quot;name&quot;: &quot;w3&quot;,
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>        &quot;arguments&quot;: {&quot;email&quot;: &quot;tchakra2@ibm.com&quot;},
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        &quot;label&quot;: &quot;var1&quot;,
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    },
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    {
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        &quot;name&quot;: &quot;author_workbench&quot;,
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        &quot;arguments&quot;: {&quot;id&quot;: &quot;$var1.id$&quot;},
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>        &quot;label&quot;: &quot;var2&quot;,
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    },
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    {
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>        &quot;name&quot;: &quot;hr_bot&quot;,
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>        &quot;arguments&quot;: {&quot;id&quot;: &quot;$var1.id$&quot;, &quot;email&quot;: &quot;tchakra2@ibm.com&quot;},
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>        &quot;label&quot;: &quot;var3&quot;,
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>    },
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>    {
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>        &quot;name&quot;: &quot;concur&quot;,
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>        &quot;arguments&quot;: {
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>            &quot;employee_info&quot;: &quot;$var3.info$&quot;,
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>            &quot;travel_justification&quot;: &quot;$var2.papers$&quot;,
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>        },
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>        &quot;label&quot;: &quot;var4&quot;,
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>    },
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>]
+</code></pre></div>
+<p>Here the <code>hr_bot</code> can be called with a different optional input
+that allows us to reduce one call. In the refracted output shown below,
+the <code>w3</code> call has been removed, and the <code>hr_bot</code> call has been moved
+up. The <code>id</code> from this call is then reused for the call to <code>author_workbench</code>
+that has been moved further down. The final call to <code>concur</code> has been
+adjusted accordingly.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>- var1 = w3(email=&quot;tchakra2@ibm.com&quot;)
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>?    ^   ^^
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>+ var3 = hr_bot(email=&quot;tchakra2@ibm.com&quot;)
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>?    ^   ^^^^^^
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>- var2 = author_workbench(id=&quot;$var1.id$&quot;)
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>?                                 ^
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>+ var2 = author_workbench(id=&quot;$var3.id$&quot;)
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>?                                 ^
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>- var3 = hr_bot(id=&quot;$var1.id$&quot;, email=&quot;tchakra2@ibm.com&quot;)
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>- var4 = concur(employee_info=&quot;$var3.info$&quot;, travel_justification=&quot;$var2.papers$&quot;)
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>?    ^
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>+ var1 = concur(employee_info=&quot;$var3.info$&quot;, travel_justification=&quot;$var2.papers$&quot;)
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>?    ^
+</code></pre></div>
+<h3 id="unnecessary-calls">Unnecessary calls<a class="headerlink" href="#unnecessary-calls" title="Permanent link">&para;</a></h3>
+<p>In the previous example, we saw how the original plan all contributed to the goal but
+was suboptimal. It can also be that the plan has unnecessary steps that do not
+contribute to the goal at all.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">result</span> <span class="o">=</span> <span class="n">refract</span><span class="p">(</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="n">tool_calls</span><span class="p">,</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="n">tools</span><span class="p">,</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="n">goals</span><span class="o">=</span><span class="p">[</span><span class="n">MemoryItem</span><span class="p">(</span><span class="n">item_id</span><span class="o">=</span><span class="s2">&quot;employee_info&quot;</span><span class="p">)],</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="n">report_type</span><span class="o">=</span><span class="n">SolutionQuality</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">,</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="p">)</span>
+</code></pre></div>
+<p>The final step is removed and the call to <code>hr_bot</code> is adjusted to reflect
+that this is enough to achieve this memory goal.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>- var1 = w3(email=&quot;tchakra2@ibm.com&quot;)
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>?    ^   ^^
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>+ var3 = hr_bot(email=&quot;tchakra2@ibm.com&quot;)
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>?    ^   ^^^^^^
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>- var2 = author_workbench(id=&quot;$var1.id$&quot;)
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>- var3 = hr_bot(id=&quot;$var1.id$&quot;, email=&quot;tchakra2@ibm.com&quot;)
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>- var4 = concur(employee_info=&quot;$var3.info$&quot;, travel_justification=&quot;$var2.papers$&quot;)
+</code></pre></div>
+<h3 id="serendipity">Serendipity<a class="headerlink" href="#serendipity" title="Permanent link">&para;</a></h3>
+<p>Finally, the plan will also adjust to serendipitous resolution of the state
+of the world. Consider that we have already executed the <code>hr_bot</code>, then the optimality call
+will again adjust the remaining call accordingly.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">result</span> <span class="o">=</span> <span class="n">refract</span><span class="p">(</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="n">sequence</span><span class="o">=</span><span class="n">tool_calls</span><span class="p">,</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="n">catalog</span><span class="o">=</span><span class="n">tools</span><span class="p">,</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="n">memory_objects</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">213213</span><span class="p">,</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>        <span class="s2">&quot;var1&quot;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>            <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>        <span class="p">},</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>    <span class="p">},</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>    <span class="n">goals</span><span class="o">=</span><span class="p">[</span><span class="n">Step</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;concur&quot;</span><span class="p">)],</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    <span class="n">report_type</span><span class="o">=</span><span class="n">SolutionQuality</span><span class="o">.</span><span class="n">OPTIMAL</span><span class="p">,</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="p">)</span>
+</code></pre></div>
+<p>The refractor now removes the unnecessary call to <code>hr_bot</code>, reassigns the call
+to <code>author_workbench</code> to items already in memory, and adjusts the call
+to <code>concur</code> accordingly.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>- var1 = w3(email=&quot;tchakra2@ibm.com&quot;)
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>- var2 = author_workbench(id=&quot;$var1.id$&quot;)
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>?                              -----
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>+ var2 = author_workbench(id=&quot;$id$&quot;)
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>- var3 = hr_bot(id=&quot;$var1.id$&quot;, email=&quot;tchakra2@ibm.com&quot;)
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>- var4 = concur(employee_info=&quot;$var3.info$&quot;, travel_justification=&quot;$var2.papers$&quot;)
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>?    ^                             ^
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>+ var1 = concur(employee_info=&quot;$var1.info$&quot;, travel_justification=&quot;$var2.papers$&quot;)
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>?    ^                             ^
+</code></pre></div>
+<h1 id="73-compression-vs-refraction">7.3 Compression vs Refraction<a class="headerlink" href="#73-compression-vs-refraction" title="Permanent link">&para;</a></h1>
+<p>One of the interesting aspects of doing post-hoc analysis is
+that we do not have to follow the agent-knowns-best strategy, as mentioned before,
+anymore. Instead, we can look at an entire trajectory and look for stuff
+that need not be there. We call this compression.
+This is in fact one of the modes that trigger internally when we called refraction
+to run on all modes previously; but you can invoke it directly as well.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">refraction</span><span class="w"> </span><span class="kn">import</span> <span class="n">compress</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">compress</span><span class="p">(</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="n">sequence</span><span class="o">=</span><span class="n">sequence</span><span class="p">,</span> <span class="n">catalog</span><span class="o">=...</span><span class="p">,</span> <span class="n">mappings</span><span class="o">=...</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">)</span>
+</code></pre></div>
+<p>Unlikely the refraction call that will preserve and attempt to fix all tool calls
+in a trajectory, the compression call will attempt to remove duplicate, and possibly corrupt, calls.</p>
+<h2 id="thrashing">Thrashing<a class="headerlink" href="#thrashing" title="Permanent link">&para;</a></h2>
+<p>A special case of duplicates is when an agent is stuck in a sequence of bad calls.
+Consider this trajectory in from a ReAct agent trying to solve a NESTFUL task.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>var1 = TripadvisorSearchLocation(query=&quot;Costa Rica&quot;)
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>var2 = TripadvisorSearchHotels(geoId=&quot;$var1.geoId$&quot;, checkIn=&quot;2024-12-01&quot;, checkOut=&quot;2024-12-15&quot;)
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>var3 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>var4 = SkyScrapperSearchAirport(query=&quot;Costa Rica&quot;)
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>var5 = SkyScrapperFlightSearch(originSkyId=&quot;$var3.skyId$&quot;, destinationSkyId=&quot;$var4.skyId$&quot;, date=&quot;2024-12-01&quot;)
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>var6 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>var7 = SkyScrapperFlightSearch(originEntityId=&quot;$var6.entityId$&quot;, destinationSkyId=&quot;$var4.skyId$&quot;, date=&quot;2024-12-01&quot;)
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>var8 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>var9 = SkyScrapperFlightSearch(originSkyId=&quot;$var8.skyId$&quot;, destinationSkyId=&quot;$var4.skyId$&quot;, originEntityId=&quot;$var8.entityId$&quot;, date=&quot;2024-12-01&quot;)
+</code></pre></div>
+<p>There are several things to consider here for the compressor:</p>
+<ul>
+<li>Step producing <code>var4</code> should remain -- multiple correct tool invocations with different instantiation</li>
+<li>Step producing <code>var5</code> should go -- wrong parameters</li>
+<li>Step producing <code>var6</code> should go -- this is a correct call but unnecessarily repeated to support a failed call</li>
+<li>Step producing <code>var7</code> should go -- wrong parameters again, thrashing on wrong call</li>
+<li>Step producing <code>var8</code> should go -- back to thrashing on correct call to support a wrong call</li>
+<li>Step producing <code>var9</code> should go -- but either this or one of the previous wrong invocations needs to be fixed</li>
+</ul>
+<p>The compression call removes all the bad calls and consolidates a single correct call, absent
+in the original trajectory, as shown below. During offline analysis, you can use this to monitor
+thrashing behavior of an agent.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>+ var7 = SkyScrapperSearchAirport(query=&quot;Costa Rica&quot;)
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>  var1 = TripadvisorSearchLocation(query=&quot;Costa Rica&quot;)
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>  var2 = TripadvisorSearchHotels(geoId=&quot;$var1.geoId$&quot;, checkIn=&quot;2024-12-01&quot;, checkOut=&quot;2024-12-15&quot;)
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>  var3 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>+ var4 = SkyScrapperFlightSearch(originSkyId=&quot;$var7.skyId$&quot;, destinationSkyId=&quot;$var3.skyId$&quot;, date=&quot;2024-12-01&quot;, originEntityId=&quot;$var7.entityId$&quot;, destinationEntityId=&quot;$var3.entityId$&quot;)
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>- var4 = SkyScrapperSearchAirport(query=&quot;Costa Rica&quot;)
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>- var5 = SkyScrapperFlightSearch(originSkyId=&quot;$var3.skyId$&quot;, destinationSkyId=&quot;$var4.skyId$&quot;, date=&quot;2024-12-01&quot;)
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>- var6 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>- var7 = SkyScrapperFlightSearch(originEntityId=&quot;$var6.entityId$&quot;, destinationSkyId=&quot;$var4.skyId$&quot;, date=&quot;2024-12-01&quot;)
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>- var8 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>- var9 = SkyScrapperFlightSearch(originSkyId=&quot;$var8.skyId$&quot;, destinationSkyId=&quot;$var4.skyId$&quot;, originEntityId=&quot;$var8.entityId$&quot;, date=&quot;2024-12-01&quot;)
+</code></pre></div>
+<h1 id="75-aggregate-analysis">7.5 Aggregate Analysis<a class="headerlink" href="#75-aggregate-analysis" title="Permanent link">&para;</a></h1>
+<p>With all these pieces in place, we can run aggregate analysis on a bunch
+of trajectories and produce 1) specific feedback per sample for offline improvement of models / agents,
+and 2) aggregate statistics highlighting areas for improvement.</p>
+<h2 id="751-error-tagging">7.5.1 Error Tagging<a class="headerlink" href="#751-error-tagging" title="Permanent link">&para;</a></h2>
+<p>In order to produce aggregate statistics the first step is to tag the errors
+in a tool call (this is done internally but if you ever need to tag elsewhere, you
+can do it like this).</p>
+<h3 id="tagging-a-single-call">Tagging a single call<a class="headerlink" href="#tagging-a-single-call" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nestful</span><span class="w"> </span><span class="kn">import</span> <span class="n">SequenceStep</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nestful.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">tag_sequence_step</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">tool_call</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;TripadvisorSearchHotels&quot;</span><span class="p">,</span> <span class="s2">&quot;arguments&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;geoId&quot;</span><span class="p">:</span> <span class="s2">&quot;$var4.locationId$&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}}</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="n">tagged_call</span> <span class="o">=</span> <span class="n">tag_sequence_step</span><span class="p">(</span><span class="n">SequenceStep</span><span class="p">(</span><span class="o">**</span><span class="n">tool_call</span><span class="p">),</span> <span class="n">ground_truth</span><span class="o">=...</span><span class="p">,</span> <span class="n">memory</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+</code></pre></div>
+<p>To reveal the error tags, inspect <code>tagged_call.errors</code>. Note that some errors might appear in multiple
+forms -- e.g. an assignment to a missing memory item can be counted as a wrong assignment as
+well (but not the other way round).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="p">[</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">WRONG_ASSIGNMENT</span><span class="p">:</span> <span class="s1">&#39;wrong_assignment&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;geoId&#39;</span><span class="p">:</span> <span class="s1">&#39;$var4.locationId$&#39;</span><span class="p">}),</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">MADE_UP_ASSIGNMENT</span><span class="p">:</span> <span class="s1">&#39;made_up_assignment&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="s1">&#39;locationId&#39;</span><span class="p">),</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">MISSING_MEMORY</span><span class="p">:</span> <span class="s1">&#39;missing_memory&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="s1">&#39;$var4.locationId$&#39;</span><span class="p">)</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="p">]</span>
+</code></pre></div>
+<h3 id="tagging-a-sequence-object">Tagging a sequence object<a class="headerlink" href="#tagging-a-sequence-object" title="Permanent link">&para;</a></h3>
+<p>You can also tag an entire sequence together, which will reveal both step-level as well
+as sequence-level diffs.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nestful</span><span class="w"> </span><span class="kn">import</span> <span class="n">SequencingData</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nestful.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">tag_sequence</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="n">tool_calls</span> <span class="o">=</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="n">tagged_sequence</span> <span class="o">=</span> <span class="n">tag_sequence</span><span class="p">(</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>    <span class="n">SequencingData</span><span class="p">(</span><span class="n">output</span><span class="o">=</span><span class="p">[</span><span class="n">SequenceStep</span><span class="p">(</span><span class="o">**</span><span class="n">tool_call</span><span class="p">)</span> <span class="k">for</span> <span class="n">call</span> <span class="ow">in</span> <span class="n">tool_calls</span><span class="p">],</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>    <span class="n">ground_truth</span><span class="o">=...</span><span class="p">,</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>    <span class="n">memory</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>    <span class="n">catalog</span><span class="o">=...</span><span class="p">,</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="p">)</span>
+</code></pre></div>
+<p>To reveal the error tags, inspect <code>tagged_sequence.errors</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="p">[</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">MADE_UP_API</span><span class="p">:</span> <span class="s1">&#39;made_up_api&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="s1">&#39;Tripadvisor_Search_Hotels&#39;</span><span class="p">),</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">NEW_CALL</span><span class="p">:</span> <span class="s1">&#39;new_call&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="s1">&#39;Tripadvisor_Search_Hotels&#39;</span><span class="p">),</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">WRONG_ASSIGNMENT</span><span class="p">:</span> <span class="s1">&#39;wrong_assignment&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="s1">&#39;London&#39;</span><span class="p">}),</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">WRONG_ASSIGNMENT</span><span class="p">:</span> <span class="s1">&#39;wrong_assignment&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="s1">&#39;New York&#39;</span><span class="p">}),</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">MADE_UP_ASSIGNMENT</span><span class="p">:</span> <span class="s1">&#39;made_up_assignment&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="s1">&#39;geoId&#39;</span><span class="p">),</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">MISSING_MEMORY</span><span class="p">:</span> <span class="s1">&#39;missing_memory&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="s1">&#39;$var4.geoId$&#39;</span><span class="p">),</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">WRONG_ASSIGNMENT</span><span class="p">:</span> <span class="s1">&#39;wrong_assignment&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="s1">&#39;London&#39;</span><span class="p">}),</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">WRONG_ASSIGNMENT</span><span class="p">:</span> <span class="s1">&#39;wrong_assignment&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="s1">&#39;New York&#39;</span><span class="p">}),</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">MADE_UP_ASSIGNMENT</span><span class="p">:</span> <span class="s1">&#39;made_up_assignment&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="s1">&#39;geoId&#39;</span><span class="p">),</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>    <span class="n">ErrorTag</span><span class="p">(</span><span class="n">error_type</span><span class="o">=&lt;</span><span class="n">ErrorType</span><span class="o">.</span><span class="n">MISSING_MEMORY</span><span class="p">:</span> <span class="s1">&#39;missing_memory&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="s1">&#39;$var4.geoId$&#39;</span><span class="p">)</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="p">]</span>
+</code></pre></div>
+<h2 id="752-report-generation">7.5.2 Report Generation<a class="headerlink" href="#752-report-generation" title="Permanent link">&para;</a></h2>
+<p>Now we have everything in place to run the offline mode in batch and generate
+a report about the individual and aggregated goodness of the generated trajectories.
+There are multiple outcomes of report:</p>
+<ol>
+<li>For each trajectory, it should identify if errors occurred and of what type,
+and if they were fixable on the spot;</li>
+<li>Quality of the trajectory per their validity/optimality and possibility of compression;</li>
+<li>Aggregated pass/fail/quality statistics the entire dataset; and</li>
+<li>Per API/tool statistics for common failure modes.</li>
+</ol>
+<h3 id="run-as-sequence">Run as sequence<a class="headerlink" href="#run-as-sequence" title="Permanent link">&para;</a></h3>
+<p>The default batch runner rates a trajectory as if it were generated up front.
+Here, <code>data</code> is a list of 3-tuple containing a sequence, its ground truth (optional), and the catalog.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">refraction.batch_actions</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_all_batch</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="n">results</span><span class="p">:</span> <span class="n">BatchResults</span> <span class="o">=</span> <span class="n">run_all_batch</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Validating sequence 7/10
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>  var1 = NewsAPISearchByKeyWord(query=&quot;UK sports news&quot;, language=&quot;en&quot;, region=&quot;GB&quot;)
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>  var2 = RedditTopPostsBySubreddit(subreddit=&quot;sports&quot;, time=&quot;day&quot;)
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>Validating sequence 8/10
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a>  var1 = NewsAPISearchByKeyWord(query=&quot;India politics&quot;, language=&quot;en&quot;, region=&quot;IN&quot;)
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a>  var2 = RedditTopPostsBySubreddit(subreddit=&quot;india&quot;, time=&quot;week&quot;)
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a>
+<a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a>Validating sequence 9/10
+<a id="__codelineno-26-16" name="__codelineno-26-16" href="#__codelineno-26-16"></a>Error generating step predicate: &#39;nlp.extract_topics&#39;
+<a id="__codelineno-26-17" name="__codelineno-26-17" href="#__codelineno-26-17"></a>Error generating step predicate: &#39;nlp.filter_posts&#39;
+<a id="__codelineno-26-18" name="__codelineno-26-18" href="#__codelineno-26-18"></a>
+<a id="__codelineno-26-19" name="__codelineno-26-19" href="#__codelineno-26-19"></a>
+<a id="__codelineno-26-20" name="__codelineno-26-20" href="#__codelineno-26-20"></a>  var1 = NewsAPISearchByKeyWord(query=&quot;2024 US election&quot;)
+<a id="__codelineno-26-21" name="__codelineno-26-21" href="#__codelineno-26-21"></a>- var2 = NLP.extract_topics(text=&quot;$var1.articles$&quot;)
+<a id="__codelineno-26-22" name="__codelineno-26-22" href="#__codelineno-26-22"></a>- var3 = RedditTopPostsBySubreddit(subreddit=&quot;news&quot;, time=&quot;day&quot;, query=&quot;$var2.topics$&quot;)
+<a id="__codelineno-26-23" name="__codelineno-26-23" href="#__codelineno-26-23"></a>?                                                              -----------------------
+<a id="__codelineno-26-24" name="__codelineno-26-24" href="#__codelineno-26-24"></a>
+<a id="__codelineno-26-25" name="__codelineno-26-25" href="#__codelineno-26-25"></a>+ var3 = RedditTopPostsBySubreddit(subreddit=&quot;news&quot;, time=&quot;day&quot;)
+<a id="__codelineno-26-26" name="__codelineno-26-26" href="#__codelineno-26-26"></a>- var4 = NLP.filter_posts(posts=&quot;$var3.posts$&quot;, query=&quot;2024 US election&quot;)
+<a id="__codelineno-26-27" name="__codelineno-26-27" href="#__codelineno-26-27"></a>+ var3 = NewsAPISearchByKeyWord(query=&quot;2024 US election&quot;)
+<a id="__codelineno-26-28" name="__codelineno-26-28" href="#__codelineno-26-28"></a>
+<a id="__codelineno-26-29" name="__codelineno-26-29" href="#__codelineno-26-29"></a>
+<a id="__codelineno-26-30" name="__codelineno-26-30" href="#__codelineno-26-30"></a>Validating sequence 10/10
+<a id="__codelineno-26-31" name="__codelineno-26-31" href="#__codelineno-26-31"></a>
+<a id="__codelineno-26-32" name="__codelineno-26-32" href="#__codelineno-26-32"></a>Average time taken: 3.42 sec
+<a id="__codelineno-26-33" name="__codelineno-26-33" href="#__codelineno-26-33"></a>Success Rate: 6/10
+<a id="__codelineno-26-34" name="__codelineno-26-34" href="#__codelineno-26-34"></a>Compression Rate: 0.11
+<a id="__codelineno-26-35" name="__codelineno-26-35" href="#__codelineno-26-35"></a>Troubled Indices: 0, 1, 3, 8
+<a id="__codelineno-26-36" name="__codelineno-26-36" href="#__codelineno-26-36"></a>
+<a id="__codelineno-26-37" name="__codelineno-26-37" href="#__codelineno-26-37"></a>Time taken: 34.28 secs
+</code></pre></div>
+<h3 id="run-step-by-step">Run step-by-step<a class="headerlink" href="#run-step-by-step" title="Permanent link">&para;</a></h3>
+<p>The above call ran post-hoc refraction on the whole sequence. You can also
+run batch analysis assuming the trajectory generates and executes one step
+at a time. This makes a difference if the output of each step is noisy.
+For example, a repeated tool call might be deemed unnecessary at the trajectory
+level but necessary in hindsight if a tool call failed in the middle.
+You can run the step by step mode like this.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">run_all_batch</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">run_step_by_step</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Agent Lifecycle Toolkit (ALTK) project – <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/AgentToolkit/agent-lifecycle-toolkit/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.tabs.link", "content.code.annotate", "content.code.copy", "content.tooltips", "announce.dismiss", "navigation.footer", "navigation.tabs", "navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

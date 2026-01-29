@@ -1,0 +1,2001 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The Agent Lifecycle Toolkit (ALTK) is a library of components to help agent builders improve their agent with minimal integration effort and setup.">
+      
+      
+      
+        <link rel="canonical" href="https://agenttoolkit.github.io/agent-lifecycle-toolkit/concepts/components/refraction/01.-Refraction-Examples/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/logo-32x32.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Refraction Examples - Agent Lifecycle Toolkit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config",""),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#refraction-examples" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Agent Lifecycle Toolkit" class="md-header__button md-logo" aria-label="Agent Lifecycle Toolkit" data-md-component="logo">
+      
+  <img src="../../../../assets/logo-512x512.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Agent Lifecycle Toolkit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Refraction Examples
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AgentToolkit/agent-lifecycle-toolkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AgentToolkit/agent-lifecycle-toolkit
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../.." class="md-tabs__link">
+          
+  
+  
+    
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../lifecycle/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Concepts
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../examples/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../integrations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Integrations
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Agent Lifecycle Toolkit" class="md-nav__button md-logo" aria-label="Agent Lifecycle Toolkit" data-md-component="logo">
+      
+  <img src="../../../../assets/logo-512x512.png" alt="logo">
+
+    </a>
+    Agent Lifecycle Toolkit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AgentToolkit/agent-lifecycle-toolkit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    AgentToolkit/agent-lifecycle-toolkit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../.." class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Home
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../installation/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Installation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../getting_started/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../usage/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Usage
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Concepts
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lifecycle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lifecycle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../lifecycle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lifecycle Stages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ALTK components
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ALTK components
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Components
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Components
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spotlight/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spotlight
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Retrieval Augmented Thinking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Refraction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sparc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPARC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../silent-review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Silent Review
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../json-processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON Processor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../rag-repair/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RAG Repair
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../policy-guard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Policy Guard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test-case-generation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Case Generation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool-enrichment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool Enrichment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tool-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tool Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../examples/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../integrations/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrations
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integrations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it does
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-doesnt-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What it doesn't do
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="refraction-examples">Refraction Examples<a class="headerlink" href="#refraction-examples" title="Permanent link">&para;</a></h1>
+<p>We started by saying that one of the key ideas for refraction is that
+a large section of issues with tool calls is already identifiable from the specification
+of the tool (and an operating memory in the context of a sequential execution of multiple tools)
+without trying to execute it, or sending it back again to a large model for reflection.</p>
+<p>This means that there are certain things it can do, and there are many things it cannot.
+Depending on your needs, you can make a decision based on the following.</p>
+<h3 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h3>
+<p>If it is in the input spec, we will try to cover it -- we are in the process
+of implementing full coverage. This means common issues with
+parameters, memory references, tool names, etc. as we detail below.</p>
+<ul>
+<li>[x] Made up API</li>
+<li>[x] Wrong label</li>
+<li>[x] Missing label</li>
+<li>[x] Missing input parameter</li>
+<li>[x] Made up input parameter</li>
+<li>[x] Made up input parameter assignment to variable</li>
+<li>[x] Made up input parameter assignment to property</li>
+<li>[x] Made up assignment recovery with ask</li>
+<li>[x] Made up assignment recovery with mapping</li>
+<li>[x] Made up assignment recovery with function call</li>
+<li>[x] Missing step</li>
+<li>[ ] Type mismatch</li>
+<li>[ ] Inadmissible assignments to enum inputs</li>
+<li>[x] Optional items in the parameters</li>
+<li>[x] Ordering of parameters</li>
+<li>[ ] Transformation of parameters</li>
+</ul>
+<h3 id="what-it-doesnt-do">What it doesn't do<a class="headerlink" href="#what-it-doesnt-do" title="Permanent link">&para;</a></h3>
+<p>This also means that we DO NOT at all consider issues with the values assigned to parameters.
+In other words, a mistaken tool call with an issue with, for example, the format of a date string
+assigned to a date input, is out of scope. Only an LLM can fix those issues through a
+traditional reflection approach.</p>
+<h1 id="11-categories-of-errors">1.1 Categories of errors 🐞<a class="headerlink" href="#11-categories-of-errors" title="Permanent link">&para;</a></h1>
+<p>In this page, we will cover some common mistakes in a sequence of API calls (generated from an LLM) and
+the result of refraction on each of them, <strong>in isolation</strong>. The <a href="../04.-Cost-Model-of-Edits/">cost model</a> of the debugging API determines the response when many such errors can encountered simultaneously.</p>
+<p>We will start with the following sequence of API calls and make modifications to illustrate the refraction process.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h3 id="messed-up-api-function-name">Messed up API / function name<a class="headerlink" href="#messed-up-api-function-name" title="Permanent link">&para;</a></h3>
+<p>In this example, the API or function call has been misspelled 🐦. The refractor corrects it to the correct name.
+Note that this is NOT done by computing the closest valid API or function name.
+As explained before, the debugging process is one of optimizing the set of valid tokens. Here, given all the
+parameters mentioned, the least costly edit turns out to be this API that can make use of the other tokens around it.
+As a result, this fix is agnostic to how messed up the wrong token was.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>- var3 = SkyCrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>+ var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<blockquote>
+<p>Note that the fixed sequence is not exactly the same as the starting sequence -- it is in a different order.
+This is because the API calls mentioned in it can occur in a couple of equivalent orders.
+Executing this sequence will produce the same outcome as the original one.</p>
+</blockquote>
+<h3 id="wrong-output-label">Wrong output label<a class="headerlink" href="#wrong-output-label" title="Permanent link">&para;</a></h3>
+<p>Now we have messed up the output label <code>var2</code> to <code>var20</code>. This messes up the following steps as well. For example,
+the assignment of <code>destinationSkyId</code> to <code>$var2.skyId$</code> is inadmissible now. The debugger has injected
+an extra line with the correct output label as a result. Again, from the optimization point of view, this edit
+is not syntactic but is made because this single edit is enough to make all the other tokens valid.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  var20 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>+ var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<blockquote>
+<p>Notice that while introducing the new step, the debugger has also kept the old vestigial step. It's hanging around there
+like an appendicitis. This is because we are interpreting a token as "The output of <code>SkyScrapperSearchAirport</code> was assigned to
+<code>var20</code>" as one to enforce. We may look into ignoring this token in the future.</p>
+</blockquote>
+<h3 id="missing-output-label">Missing output label<a class="headerlink" href="#missing-output-label" title="Permanent link">&para;</a></h3>
+<p>Instead of a wrong label, here we have removed the label altogether. This has the same impact (inadmissible assignments)
+on the remaining sequence as in the previous case. The debugger restores the missing token.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>- SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>+ var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>? +++++++
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h3 id="missing-input-parameter">Missing input parameter<a class="headerlink" href="#missing-input-parameter" title="Permanent link">&para;</a></h3>
+<p>Now we have removed an input (required) parameter from the API call. Notice that the debugger has put it back.
+Notice that it has also introduced a slot-fill for it, instead of the assignment in the original sequence.</p>
+<p>More about such <a href="#12-recovery-patterns">recovery patterns</a> later.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>+ ask(originSkyId)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>- var3 = SkyScrapperFlightSearch(destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>+ var3 = SkyScrapperFlightSearch(originSkyId=originSkyId, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>?                                +++++++++++++++++++++++++
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h3 id="made-up-input-parameter">Made up input parameter<a class="headerlink" href="#made-up-input-parameter" title="Permanent link">&para;</a></h3>
+<p>Similar to the previous example, now we have messed up the name of the parameter instead removing
+it altogether. The effect is the same. Note that, as discussed previously, this is not an edit based on
+the text of the mistake but rather on the tokens required by the underlying API specs. That is
+why a missing parameter and a made-up parameter are almost identical in practice (with <a href="#123-mapping">certain caveats</a> in recovery patterns).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>+ ask(originSkyId)
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>- var3 = SkyScrapperFlightSearch(originalSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>?                                      --      ^^^^ ^^^    --
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>+ var3 = SkyScrapperFlightSearch(originSkyId=originSkyId, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>?                                            ^ ^^^^^
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h3 id="assignment-to-made-up-variable">Assignment to made up variable<a class="headerlink" href="#assignment-to-made-up-variable" title="Permanent link">&para;</a></h3>
+<p>Now we have messed up the variable in the parameter assignment, by changing <code>var2</code> to a non-existent <code>var20</code>.
+The debugger puts it back.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>- var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var20.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>?                                                                                   -
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>+ var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h3 id="assignment-to-made-up-variable-parameter">Assignment to made up variable parameter<a class="headerlink" href="#assignment-to-made-up-variable-parameter" title="Permanent link">&para;</a></h3>
+<p>Now, instead of the variable name being wrong, the assignment of the parameter is being made
+to an invalid field i.e. the output object <code>var2</code> does not contain that field.
+The debugger has identified the issue and recommended a slot-fill for the missing value.
+It could have also mapped to an existing key -- we will study this pattern in more detail
+below among the recovery patterns.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>+ ask(skyayeId)
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>- var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyayeId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>?                                                                             -------        --
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>+ var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=skyayeId, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h3 id="missing-step">Missing step<a class="headerlink" href="#missing-step" title="Permanent link">&para;</a></h3>
+<p>Finally, we have removed an entire step from the original sequence here.
+The debugger has suggested a fix. It happens to be perfect here, but there is a lot of intrigue
+to what this fix may be in practice. There are many things up in the air here:</p>
+<ol>
+<li>
+<p>The debugger does not know that something is missing in the first place. Recall that the debugger here has
+no higher level abstract goal other than to enforce whatever it is given. So whether a new step
+will be suggested at all is dependent on whether there are unrequited tokens in the remaining sequence
+(in this case, <code>$var4.geoId$</code>) and additionally from the optimization point of view, whether it is cheaper
+to just edit out the unrequited tokens instead of introducing a new one.</p>
+</li>
+<li>
+<p>Furthermore, what the assignment of the parameter in the new step is, is also up for debate. It could have been
+"New York" (50-50 chance). While it might be possible to improve upon random assignments in the future,
+In such situations it is advisable to use <a href="#125-defensive-recovery">defensive recovery mechanisms</a> discussed below.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>+ var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>  var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h1 id="12-recovery-patterns">1.2 Recovery Patterns<a class="headerlink" href="#12-recovery-patterns" title="Permanent link">&para;</a></h1>
+<p>So far, we have been concentrating on the individual mistakes made in a sequence of API / function calls.
+Now we will look at the suggestions recommended by the debugger in a bit more detail.</p>
+<h2 id="121-self-contained">1.2.1 Self-contained<a class="headerlink" href="#121-self-contained" title="Permanent link">&para;</a></h2>
+<p>The minimal case is when all the information to fix one or more problematic tokens is there in
+the input sequence itself. Then the recovery pattern is confined to an in-situ fix.
+This is the case with the <a href="#messed-up-api--function-name">first 3 examples above</a>.</p>
+<h2 id="122-slot-filling">1.2.2 Slot-filling<a class="headerlink" href="#122-slot-filling" title="Permanent link">&para;</a></h2>
+<p>A slot-filling response is when there is an issue with assigning a value to a parameter based on the
+available tokens and so the debugger suggests we ask its value from the user. This is the case
+in the <a href="#missing-input-parameter">next 2 examples</a>. Ideally, we want to reuse the existing tokens, so a slot-fill response
+is a less preferred recovery compared to maps and function calls.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>+ ask(originSkyId)
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>- var3 = SkyScrapperFlightSearch(destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>+ var3 = SkyScrapperFlightSearch(originSkyId=originSkyId, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>?                                +++++++++++++++++++++++++
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h2 id="123-mapping">1.2.3 Mapping<a class="headerlink" href="#123-mapping" title="Permanent link">&para;</a></h2>
+<p>A mapping is an assignment of a parameter to a value (e.g. <code>query="London"</code>) or to another variable (e.g. <code>destinationSkyId="$var20.skyId$"</code>).
+A fix involving a mapping can appear in two different forms.</p>
+<h3 id="reusing-existing-maps">Reusing existing maps<a class="headerlink" href="#reusing-existing-maps" title="Permanent link">&para;</a></h3>
+<p>Let's go back to <a href="#assignment-to-made-up-variable">the example</a> of an assignment to a made up variable.
+Here the fix to an invalid assignment has been done based on assignments already available from
+the existing tokens.</p>
+<p>Specifically, <code>var2</code> already exists and the original tokens showed that the
+parameter <code>destinationSkyId</code> can be assigned to <code>skyId</code> -- so all the debugger needs to do is to
+produce a <code>skyId</code> from a call to <code>SkyScrapperSearchAirport</code> (as promised by its API spec) and
+then assign the output of that call to <code>var2</code>. 😌</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>- var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var20.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>?                                                                                   -
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>+ var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h3 id="using-a-new-map">Using a new map<a class="headerlink" href="#using-a-new-map" title="Permanent link">&para;</a></h3>
+<p>We can also ask the debugger to think of new maps if possible, and not ask the user unless possible.
+This is an optional feature and has <a href="../05.-Scaling/#532-scaling-with-the-number-of-maps-with-all-apis">impact on performance</a>.</p>
+<p>Compare the results with that in the <a href="#made-up-input-parameter">same situation</a> in a previous example.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>- var3 = SkyScrapperFlightSearch(originalSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>?                                      --           ^
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>+ var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var2.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>?                                                 ^
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<blockquote>
+<p>As noted previously, currently the debugger picks a valid map at random so this map
+could have (and should have)
+gone to the parameter <code>skyId</code> from <code>var1</code> as well. This might be possible to improve upon.</p>
+<p>This fix is not entirely syntactic. The newly introduced maps are ones that are close to the unrequited variable
+in some text embedding space (computed offline for a given catalog of APIs).</p>
+</blockquote>
+<h2 id="124-function-calls">1.2.4 Function Calls<a class="headerlink" href="#124-function-calls" title="Permanent link">&para;</a></h2>
+<p>Introducing a new map may also involved introducing a new step with an new function call.
+This recovery pattern can appear in two different contexts.</p>
+<h3 id="missing-step_1">Missing step<a class="headerlink" href="#missing-step_1" title="Permanent link">&para;</a></h3>
+<p>We saw this example in the <a href="#missing-step">example above</a> with a missing step. As we discussed previously,
+the debugger does not know that a step is missing. So whether a new step is introduced depends on
+whether introducing new things are preferred over deleting already existing stuff per
+the <a href="../04.-Cost-Model-of-Edits/">cost model</a> being used.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>+ var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>  var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h3 id="enabler-of-a-new-mapping">Enabler of a new mapping<a class="headerlink" href="#enabler-of-a-new-mapping" title="Permanent link">&para;</a></h3>
+<p>A new call is not be confined to missing steps only.
+If a invalid token can be possibly fixed with a different API, e.g. by producing a new variable that can be mapped
+to an existing variable whose assignment token needs to be satisfied, then the debugger will introduce a new
+step if, as in the previous case, introducing new things are preferred over deleting already existing stuff per
+the <a href="../04.-Cost-Model-of-Edits/">cost model</a> being used.</p>
+<p>We have now removed the (required) date parameter and the debugger has introduced a call to acquire the current date.
+This invocation may be dangerous if unsupervised at runtime. This brings us next to the topic of defensive recovery.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>+ var7 = NewsAPISearchByKeyWord()
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>- var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;)
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>+ var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;$var7.date$&quot;)
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>?                                                                                                                                                                    ++++++++++++++++++++
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h2 id="125-defensive-recovery">1.2.5 Defensive Recovery<a class="headerlink" href="#125-defensive-recovery" title="Permanent link">&para;</a></h2>
+<p>In systems that execute on the results of their reasoning, it is advisable to use "defensive execution" where
+the system can confirm certain aspects of its reasoning (in this context, the component of an API call) before
+acting on it. The NL2Flow package offers some off-the-shelf options for defensive execution such as confirming
+newly introduced maps, newly determined variables, and so on, as described <a href="https://github.com/IBM/nl2flow/wiki/13.-Variable-LifeCycle">here</a>.</p>
+<p>We can re-use the same for debugging, as shown below.
+Note that, unlike defensive execution in NL2Flow, here the defensive operations will only show up for extra stuff
+that the debugger has added in.</p>
+<p>This feature is optional and has <a href="../05.-Scaling/#541-defensive-actions">impact on performance</a>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">refract</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">catalog</span><span class="p">,</span> <span class="n">defensive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>Previously, we saw how newly introduced maps may pick the wrong mapping when picking from available maps at random.
+We also saw how a new operator may be introduced that the user may not like. Let's revisit the same situations
+with the defensive guardrails on.</p>
+<h3 id="defense-against-new-mapping">Defense against new mapping<a class="headerlink" href="#defense-against-new-mapping" title="Permanent link">&para;</a></h3>
+<p>Contrast with the <a href="#using-a-new-map">corresponding example</a> above.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>+ confirm(originSkyId=&quot;$var1.skyId$&quot;)
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>- var3 = SkyScrapperFlightSearch(destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>+ var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;2024-08-15&quot;)
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>?                                ++++++++++++++++++++++++++++
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+<h3 id="defense-against-using-information-from-new-operation">Defense against using information from new operation<a class="headerlink" href="#defense-against-using-information-from-new-operation" title="Permanent link">&para;</a></h3>
+<p>Contrast with the <a href="#enabler-of-a-new-mapping">corresponding example</a> above.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>  var1 = SkyScrapperSearchAirport(query=&quot;New York&quot;)
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>  var2 = SkyScrapperSearchAirport(query=&quot;London&quot;)
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>+ var7 = NewsAPISearchByKeyWord()
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>+ confirm(date=&quot;$var7.date$&quot;)
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>- var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;)
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>+ var3 = SkyScrapperFlightSearch(originSkyId=&quot;$var1.skyId$&quot;, destinationSkyId=&quot;$var2.skyId$&quot;, originEntityId=&quot;$var1.entityId$&quot;, destinationEntityId=&quot;$var2.entityId$&quot;, date=&quot;$var7.date$&quot;)
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>?                                                                                                                                                                    ++++++++++++++++++++
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>  var4 = TripadvisorSearchLocation(query=&quot;London&quot;)
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>  var5 = TripadvisorSearchHotels(geoId=&quot;$var4.geoId$&quot;, checkIn=&quot;2024-08-15&quot;, checkOut=&quot;2024-08-18&quot;)
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Agent Lifecycle Toolkit (ALTK) project – <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/AgentToolkit/agent-lifecycle-toolkit/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M202.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M496 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.tabs.link", "content.code.annotate", "content.code.copy", "content.tooltips", "announce.dismiss", "navigation.footer", "navigation.tabs", "navigation.indexes", "navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
