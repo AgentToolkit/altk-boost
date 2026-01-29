@@ -10,13 +10,11 @@ from toolguard.buildtime import (
     ToolGuardSpec,
     generate_guards_code,
 )
-from toolguard.buildtime.buildtime import OpenAPI
-from toolguard.buildtime.data_types import TOOLS
-from toolguard.extra.langchain_to_oas import langchain_tools_to_openapi
 from toolguard.runtime import IToolInvoker, PolicyViolationException, load_toolguards
 
 from altk.core.toolkit import AgentPhase, ComponentBase, ComponentConfig, ComponentInput
 from altk.pre_tool.toolguard.llm_client import TG_LLMClient
+from altk.pre_tool.toolguard.tool_converter import to_tools
 
 logger = logging.getLogger(__name__)
 
@@ -139,29 +137,12 @@ class ToolGuardCodeComponent(ComponentBase):
         config = cast(ToolGuardCodeComponentConfig, self.config)
         llm = TG_LLMClient(config.llm_client)
         return await generate_guards_code(
-            tools=self._to_tools(data.tools),
+            tools=to_tools(data.tools),
             tool_specs=data.toolguard_specs,
             work_dir=data.out_dir,
             llm=llm,
             app_name=data.app_name,
         )
-
-    def _to_tools(self, tools) -> TOOLS:
-        if isinstance(tools, str):
-            try:
-                return OpenAPI.load_from(tools).model_dump()
-            except Exception as e:
-                raise ValueError(f"Invalid OpenAPI spec file: {e}") from e
-
-        elif isinstance(tools, list):
-            if all(isinstance(tool, Callable) for tool in tools):
-                return cast(List[Callable], tools)
-            elif all(isinstance(tool, BaseTool) for tool in tools):
-                return langchain_tools_to_openapi(tools)
-            else:
-                raise ValueError("Invalid tools list")
-
-        raise ValueError("Invalid tools input")
 
     def _run(self, data: ToolGuardCodeRunInput) -> ToolGuardCodeRunOutput:
         raise NotImplementedError("Please use the _arun() function in an async context")
