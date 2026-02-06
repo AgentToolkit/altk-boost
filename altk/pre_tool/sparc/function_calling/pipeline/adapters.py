@@ -56,7 +56,7 @@ class OpenAIAdapter(BaseAdapter):
                 "tool_name": spec.function.name,
                 "tool_description": spec.function.description,
                 "tool_parameters": {
-                    prop_name: prop_d["type"]
+                    prop_name: prop_d.get("type", "object")
                     for prop_name, prop_d in spec.function.parameters.get(
                         "properties", {}
                     ).items()
