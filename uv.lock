@@ -192,7 +192,7 @@ requires-dist = [
     { name = "sentence-transformers", marker = "extra == 'routing'", specifier = ">=5.0.0" },
     { name = "smolagents", specifier = ">=1.21.3" },
     { name = "tomli", specifier = "==2.2.1" },
-    { name = "toolguard", marker = "extra == 'toolguard'", specifier = ">=0.2.7" },
+    { name = "toolguard", marker = "extra == 'toolguard'", specifier = ">=0.2.8" },
     { name = "torch", marker = "platform_machine == 'x86_64' and sys_platform == 'darwin' and extra == 'spotlight'", specifier = "==2.2.2" },
     { name = "torch", marker = "(platform_machine != 'x86_64' and extra == 'spotlight') or (sys_platform != 'darwin' and extra == 'spotlight')", specifier = ">=2.5.1" },
     { name = "transformers", marker = "extra == 'spotlight'", specifier = ">=4.53.3" },
@@ -8228,7 +8228,7 @@ wheels = [
 
 [[package]]
 name = "toolguard"
-version = "0.2.7"
+version = "0.2.8"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "datamodel-code-generator" },
@@ -8245,9 +8245,9 @@ dependencies = [
     { name = "pytest-json-report" },
     { name = "smolagents" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6e/63/1eed08e9b37eb4b9eac3ab72627625c3dc1f440e9476357b1825e6fc9f87/toolguard-0.2.7.tar.gz", hash = "sha256:ab36801c713bb0856fc9f1dba603a432d74dad246183ecb2f77ce2c9d35111fb", size = 58801, upload-time = "2026-01-29T12:56:52.85Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8f/2f/8aec8abf58b51605f293f4963e0aad521e2f5843e20638fda61fdb576737/toolguard-0.2.8.tar.gz", hash = "sha256:92645431cfe2fb3eee0e5fda13f8df72af4803e4de977921cc8942d8e4a776e5", size = 61771, upload-time = "2026-02-08T10:56:32.943Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2c/b1/bac4b88c633ed1b92592be3cda8ec69e8788b04c7782939bc61f22e0f21a/toolguard-0.2.7-py3-none-any.whl", hash = "sha256:2dae78eb700ecb8949c3a68a5a4fb0405285a74a9f8fee0749682e8e9103a0d0", size = 90392, upload-time = "2026-01-29T12:56:51.285Z" },
+    { url = "https://files.pythonhosted.org/packages/51/37/9ac16f178583827ae2c05589566c067e87f995c957097c1f33573751e341/toolguard-0.2.8-py3-none-any.whl", hash = "sha256:1f62a3b9cf456ffe4cd14a2f7f2480dd6c5580a7fb059b3f564e63ebfb7eea2c", size = 94468, upload-time = "2026-02-08T10:56:31.507Z" },
 ]
 
 [[package]]
