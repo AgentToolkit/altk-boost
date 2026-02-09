@@ -1,5 +1,5 @@
 from typing import Union, cast
-from toolguard.buildtime.llm.tg_litellm import LanguageModelBase
+from toolguard.buildtime.llm import LanguageModelBase
 from altk.core.llm.types import GenerationArgs
 from altk.core.llm import ValidatingLLMClient, LLMClient
 
