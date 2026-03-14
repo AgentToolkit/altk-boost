@@ -17,6 +17,12 @@ class BaseSilentReviewComponent(PostToolReflectionComponent):
 
     def _get_review_args(self, data: SilentReviewRunInput) -> tuple:
         assert isinstance(data.messages, list) and len(data.messages) > 0
+        if "data" in data.messages[0]:
+            return (
+                data.messages[0]["data"]["content"],
+                data.tool_spec,
+                data.tool_response,
+            )
         return (data.messages[0]["content"], data.tool_spec, data.tool_response)
 
     def _run(self, data: SilentReviewRunInput) -> SilentReviewRunOutput:  # type: ignore
