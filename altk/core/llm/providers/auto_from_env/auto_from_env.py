@@ -12,7 +12,7 @@ class AutoFromEnvLLMClient(LLMClient):
     Default adapter for ALTK, will determine which provider to use based on environment variables.
 
     Expects the following environment variables to be set:
-        - ALTK_MODEL_NAME: optional, model name, assumes litellm if ALTK_PROVIDER_NAME not set
+        - ALTK_MODEL_NAME: optional, model name, assumes litellm if ALTK_LLM_PROVIDER not set
         - ALTK_LLM_PROVIDER: optional, the corresponding name in the LLMClient registry
     If both are not set, client is set to None
     """
@@ -32,15 +32,15 @@ class AutoFromEnvLLMClient(LLMClient):
             provider_type = get_llm(provider_name)
             init_sig = inspect.signature(provider_type)
             if "model_name" in init_sig.parameters:
-                # make sure provider needs provider in init
+                # check if model_name is required for provider
                 if not self.model_name:
                     raise EnvironmentError(
                         "Missing model name which is required for this provider; please set the 'ALTK_MODEL_NAME' environment variable or instantiate an appropriate LLMClient."
                     )
                 self._chosen_provider = provider_type(model_name=self.model_name)
+                self.model_name_in_generate = True
             else:
                 self._chosen_provider = provider_type()
-                self.model_name_in_generate = True
 
     @classmethod
     def provider_class(cls) -> Type[Any]:

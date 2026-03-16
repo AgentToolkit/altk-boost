@@ -66,8 +66,9 @@ def test_follow_up_detected_by_callback(caplog, llm_client):
                     AIMessage(content="For which year?"),
                 ],
                 user_query="2021",
-                detect_follow_up=lambda messages, user_query: user_query.isdigit()
-                and user_query == "2021",
+                detect_follow_up=lambda messages, user_query: (
+                    user_query.isdigit() and user_query == "2021"
+                ),
             ),
             phase=AgentPhase.RUNTIME,
         )

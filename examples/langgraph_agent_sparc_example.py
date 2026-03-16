@@ -163,9 +163,10 @@ builder.add_node("final_message", final_message_node)
 builder.add_edge(START, "agent")
 builder.add_conditional_edges(
     "agent",
-    lambda state: "tool_pre_hook"
-    if state["messages"][-1].tool_calls
-    else "final_message",
+    lambda state: (
+        "tool_pre_hook" if state["messages"][-1].tool_calls else "final_message"
+    ),
+    {"tool_pre_hook": "tool_pre_hook", "final_message": "final_message"},
 )
 builder.add_conditional_edges(
     "tool_pre_hook",

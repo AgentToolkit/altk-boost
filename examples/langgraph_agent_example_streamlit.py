@@ -9,10 +9,18 @@ Execute this demo with `streamlit run langgraph_agent_example_streamlit.py`
 """
 
 import random
+import warnings
+import json
 
-from langgraph.prebuilt import create_react_agent
+from langchain_anthropic import ChatAnthropic
+from langgraph.graph import StateGraph, START, END
 from langchain_core.tools import tool
 from typing_extensions import Annotated
+from langgraph.prebuilt import ToolNode
+from langchain_core.messages import BaseMessage, HumanMessage
+from langchain_core.messages.base import messages_to_dict
+import operator
+from typing import TypedDict, List
 from langgraph.prebuilt import InjectedState
 import streamlit as st
 
@@ -24,6 +32,7 @@ from altk.core.toolkit import AgentPhase
 
 from dotenv import load_dotenv
 
+warnings.filterwarnings("ignore", category=UserWarning)
 load_dotenv()
 tool_silent_error_raised = False
 silent_error_raised = False
@@ -42,36 +51,83 @@ def get_weather(city: str, state: Annotated[dict, InjectedState]) -> dict[str, s
     else:
         result = {"weather": f"It's sunny and {random.randint(50, 90)}F in {city}!"}
 
+    return result
+
+
+class AgentState(TypedDict):
+    messages: Annotated[List[BaseMessage], operator.add]
+    next: str
+
+
+def post_tool_hook(state: AgentState) -> AgentState:
+    # Creates a post-tool node that reviews for silent errors
     if use_silent_review:
+        global retries
+        tool_response = json.loads(state["messages"][-1].content)
         # Use SilentReview component to check if it's a silent error
         review_input = SilentReviewRunInput(
-            messages=state["messages"], tool_response=result
+            messages=messages_to_dict(state["messages"]), tool_response=tool_response
         )
         reviewer = SilentReviewForJSONDataComponent()
         review_result = reviewer.process(data=review_input, phase=AgentPhase.RUNTIME)
-
         if review_result.outcome == Outcome.NOT_ACCOMPLISHED:
             # Agent should retry tool call if silent error was detected
-            print("Silent error detected, retry the get_weather tool!")
+            print("(ALTK: Silent error detected, retry the get_weather tool!)")
+            retries += 1
             global silent_error_raised
             silent_error_raised = True
-            retries += 1
             return {
-                "weather": "!!! Silent error detected, RETRY the get_weather tool !!!"
+                "next": "agent",
+                "messages": [
+                    HumanMessage(
+                        content="!!! Silent error detected, RETRY the get_weather tool !!!"
+                    )
+                ],
             }
         else:
-            return result
+            return {"next": "final_message"}
     else:
-        return result
+        return {"next": "final_message"}
 
 
-agent = create_react_agent(
-    model="anthropic:claude-sonnet-4-20250514",
-    tools=[get_weather],
-    prompt="You are a helpful weather assistant.",
+def final_message_node(state):
+    return state
+
+
+tools = [get_weather]
+llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm_with_tools = llm.bind_tools(tools, tool_choice="get_weather")
+
+
+def call_model(state: AgentState):
+    messages = state["messages"]
+    response = llm_with_tools.invoke(messages)
+    return {"messages": [response]}
+
+
+# creates agent with pre-tool node that conditionally goes to tool node
+builder = StateGraph(AgentState)
+builder.add_node("agent", call_model)
+builder.add_node("call_tool", ToolNode(tools))
+builder.add_node("post_tool_hook", post_tool_hook)
+builder.add_node("final_message", final_message_node)
+builder.add_edge(START, "agent")
+builder.add_conditional_edges(
+    "agent",
+    lambda state: "call_tool" if state["messages"][-1].tool_calls else "final_message",
+    {"call_tool": "call_tool", "final_message": "final_message"},
 )
+builder.add_edge("call_tool", "post_tool_hook")
+builder.add_conditional_edges(
+    "post_tool_hook",
+    lambda state: state["next"],
+    {"agent": "agent", "final_message": "final_message"},
+)
+builder.add_edge("final_message", END)
+agent = builder.compile()
 
-st.title("ALTK Chatbot example with Silent Review")
+
+st.title("ALTK Chatbot example with Silent Error Review")
 st.markdown(
     "This demo demonstrates using the ALTK to check for silent errors on an agent. The weather service will randomly silently fail. \
             \n- With Silent Error Review, the silent error is detected and then the agent is suggested to retry. \
@@ -89,10 +145,10 @@ if prompt := st.chat_input(
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    st.session_state.messages.append({"role": "user", "content": prompt})
+    st.session_state.messages.append(HumanMessage(content=prompt))
 
     with st.chat_message("assistant"):
-        inputs = {"messages": [("user", prompt)]}
+        inputs = {"messages": [HumanMessage(content=prompt)]}
         result = agent.invoke(inputs)
 
         if tool_silent_error_raised:
