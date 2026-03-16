@@ -2,6 +2,49 @@
 
 <!-- version list -->
 
+## v0.10.1 (2026-03-16)
+
+### Bug Fixes
+
+- Bug in sparc type assignment
+  ([#108](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/108),
+  [`beceaa5`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/beceaa5594cf8a84162c623f454710faef2f4179))
+
+- Toolguard APIs ([#104](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/104),
+  [`a9b90ba`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/a9b90bafc08af98100bc06313ac3120d0bf48e94))
+
+- Toolguard comply with Python 3.10
+  ([#109](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/109),
+  [`c34467f`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/c34467f42bb7788ef251b0e5d3f88a8336bfbfc5))
+
+- Toolguard updates
+  ([`4672cd2`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/4672cd2ac3e624ecab0814a3b0ca9676c89214e8))
+
+- Update milvus-lite and disable associated tests
+  ([#111](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/111),
+  [`64f356d`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/64f356d22be1e9cfe922ac903948910e8dc4989f))
+
+- Update onnxruntime version for py3.10
+  ([#110](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/110),
+  [`187a7ac`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/187a7ac9ab8ef45d0b3e109da23df187698a5f35))
+
+- Update silent review examples
+  ([#110](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/110),
+  [`187a7ac`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/187a7ac9ab8ef45d0b3e109da23df187698a5f35))
+
+### Documentation
+
+- Add ToolGuard component to landing page
+  ([#105](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/105),
+  [`63e94ea`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/63e94ea7fb731c1a1ddc3c93ff94f034bcacb751))
+
+- Update images ([#97](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/97),
+  [`bb2ee3f`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/bb2ee3fea891d811a71389e5d60912ff092ee73e))
+
+- Updates ([#96](https://github.com/AgentToolkit/agent-lifecycle-toolkit/pull/96),
+  [`dd5cec4`](https://github.com/AgentToolkit/agent-lifecycle-toolkit/commit/dd5cec4d560df0003535b47f520973f4242b6806))
+
+
 ## v0.10.0 (2025-12-23)
 
 ### Bug Fixes
