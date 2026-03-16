@@ -28,6 +28,12 @@ from altk.pre_llm.routing.retrieval_augmented_thinking.topic_retriever.topic_ret
 from altk.core.toolkit import AgentPhase
 
 
+pytest.skip(
+    "current milvus tests hang, perhaps due to current milvus-lite",
+    allow_module_level=True,
+)
+
+
 def test_preembedded_topic_loading(tmp_path, caplog):
     caplog.set_level(logging.DEBUG, MilvusProvider.__module__)
     tmp_path.mkdir(exist_ok=True)

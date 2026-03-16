@@ -21,6 +21,11 @@ from altk.pre_llm.routing.retrieval_augmented_thinking.milvus.topic_sink import 
 )
 
 
+pytest.skip(
+    "current tests hang, perhaps due to current milvus-lite", allow_module_level=True
+)
+
+
 def test_topic_retriever_full_text_search(tmp_path: Path, caplog):
     caplog.set_level(logging.DEBUG, MilvusTopicRetriever.__module__)
     caplog.set_level(logging.DEBUG, MilvusProvider.__module__)
