@@ -33,6 +33,7 @@ dependencies = [
     "langchain-text-splitters>=1.0.0",
     "nltk>=3.9.1",
     "scipy>=1.15.3",
+    "onnxruntime>=1.23.2", # last version that supports python3.10
 ]
 
 description = "The Agent Lifecycle Toolkit (ALTK) is a library of components to help agent builders improve their agent with minimal integration effort and setup."
@@ -140,7 +141,6 @@ refraction = [
 
 routing = [
     "pymilvus[milvus-lite,model]>=2.6.2",
-    "onnxruntime>=1.23.2", # last version that supports python3.10
     "milvus-lite>=2.5.2rc1", # necessary due to pkg_resources being removed
     "pydash>=8.0.5",
     "bertopic>=0.17.3",
