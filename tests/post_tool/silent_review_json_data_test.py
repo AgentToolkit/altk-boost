@@ -26,7 +26,7 @@ def build_test_input() -> SilentReviewRunInput:
         },
         tool_response={
             "name": "get_weather",
-            "result": {"city": "NYC", "temperature": "75F", "condition": "Sunny"},
+            "result": {"city": "NYC"},
         },
     )
 
@@ -50,7 +50,7 @@ def test_silent_review_json():
 
     result = middleware.process(data=data, phase=AgentPhase.RUNTIME)
 
-    # the user query is suppposed to mention a city and it doesn't. The fact that we get a response back
+    # the user query is suppposed to mention a temperature and it doesn't. The fact that we get a response back
     # could indicate the presence of a silent error which is why the outcome is 0
     assert result.outcome.value == 0.0
 
@@ -62,6 +62,6 @@ async def test_silent_review_json_async():
     middleware = SilentReviewForJSONDataComponent(config=config)
 
     result = await middleware.aprocess(data=data, phase=AgentPhase.RUNTIME)
-    # the user query is suppposed to mention a city and it doesn't. The fact that we get a response back
+    # the user query is suppposed to mention a temperature and it doesn't. The fact that we get a response back
     # could indicate the presence of a silent error which is why the outcome is 0
     assert result.outcome.value == 0.0
