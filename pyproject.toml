@@ -129,7 +129,7 @@ spotlight = [
 ]
 
 toolguard = [
-    "toolguard>=0.2.7",
+    "toolguard>=0.2.9",
 ]
 
 refraction = [

@@ -1,7 +1,9 @@
 from typing import Union, cast
-from toolguard.buildtime.llm.tg_litellm import LanguageModelBase
+from toolguard.buildtime.llm import LanguageModelBase
 from altk.core.llm.types import GenerationArgs
 from altk.core.llm import ValidatingLLMClient, LLMClient
+
+MAX_TOKENS = 16000  # min of claude4, oss, gpt 4o, ...
 
 
 class TG_LLMClient(LanguageModelBase):
@@ -14,9 +16,9 @@ class TG_LLMClient(LanguageModelBase):
             return await llm_client.generate_async(
                 prompt=messages,
                 schema=str,
-                generation_args=GenerationArgs(max_tokens=10000),
+                generation_args=GenerationArgs(max_tokens=MAX_TOKENS),
             )
 
         return await self.llm_client.generate_async(
-            prompt=messages, generation_args=GenerationArgs(max_tokens=10000)
+            prompt=messages, generation_args=GenerationArgs(max_tokens=MAX_TOKENS)
         )  # type: ignore

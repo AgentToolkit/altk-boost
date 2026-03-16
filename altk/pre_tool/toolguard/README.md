@@ -24,7 +24,7 @@ uv pip install "agent-lifecycle-toolkit[toolguard]"
 ```
 
 ## ToolGuardSpecComponent
-This component gets a set of tools and a policy document and generates multiple ToolGuard specifications, known as `ToolGuardSpec`s. Each specification is attached to a tool, and it declares a precondition that must apply before invoking the tool. The specification has a `name`, `description`, list of `references` to the original policy document, a set of declarative `compliance_examples`, describing test cases that the toolGuard should allow the tool invocation, and `violation_examples`, where the toolGuard should raise an exception.
+This component gets a set of tools and a policy document and generates multiple ToolGuard specifications, known as `ToolGuardSpec`s. Each specification is attached to a tool, and it declares a precondition that must apply before invoking the tool. The specification has a `name`, `description`, list of `references` to the original policy document, a set of declarative `compliance_examples`, describing test cases that the toolGuard should allow the tool invocation, and `violation_examples`, where the toolGuard should raise a PolicyViolationException.
 
 This component supports only a `build` phase. The generated specifications are returned as output, and are also saved to a specified file system directory.
 The specifications are aimed to be used as input into our next component - the `ToolGuardCodeComponent` described below.

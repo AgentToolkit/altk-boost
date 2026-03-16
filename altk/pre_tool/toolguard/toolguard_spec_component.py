@@ -78,5 +78,4 @@ class ToolGuardSpecComponent(ComponentBase):
             tools=to_tools(data.tools),
             work_dir=data.out_dir,
             llm=llm,
-            short=True,
         )
