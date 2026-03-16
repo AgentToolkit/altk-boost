@@ -140,6 +140,7 @@ refraction = [
 
 routing = [
     "pymilvus[milvus-lite,model]>=2.6.2",
+    "onnxruntime>=1.23.2", # last version that supports python3.10
     "milvus-lite>=2.5.2rc1", # necessary due to pkg_resources being removed
     "pydash>=8.0.5",
     "bertopic>=0.17.3",
