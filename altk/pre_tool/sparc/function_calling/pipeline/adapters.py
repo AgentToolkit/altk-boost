@@ -2,12 +2,25 @@ from typing import (
     Any,
     Dict,
     List,
+    Literal,
 )
 
 from altk.pre_tool.sparc.function_calling.pipeline.types import (
     ToolCall,
     ToolSpec,
 )
+
+
+CompactMode = Literal["auto", "never", "always"]
+"""Compact tool-inventory rendering mode.
+
+- ``"auto"`` (default): use compact form (description + parameter name list only)
+  whenever the inventory has ``>= compact_threshold`` tools, otherwise full
+  summary (description + {param_name: type}). Helps when the function-selection
+  prompt would otherwise balloon past the context window.
+- ``"never"``: always use full summary (description + {param_name: type}).
+- ``"always"``: always use compact form regardless of tool count.
+"""
 
 
 # ────────────────────────────────────────────────────────────────────────────────
@@ -41,16 +54,57 @@ class BaseAdapter:
 
 
 class OpenAIAdapter(BaseAdapter):
-    """Adapter for ToolSpec + ToolCall inputs."""
+    """Adapter for ToolSpec + ToolCall inputs.
 
-    def __init__(self, specs: List[ToolSpec], call: ToolCall):
+    Args:
+        specs: the full tool inventory for the current turn.
+        call: the tool call being judged.
+        compact_tool_schema: how to render the function-selection inventory.
+            ``"auto"`` (default) falls back to the compact form once the
+            inventory has ``>= compact_tool_threshold`` tools so the prompt
+            stays tractable when hundreds of tools are available. Single-tool
+            prompts (``get_tool_spec``) and the full dump (``get_tools_inventory``)
+            are unaffected.
+        compact_tool_threshold: tool-count threshold for ``"auto"`` mode
+            (default 20, matching SPARCReflectionConfig default).
+    """
+
+    def __init__(
+        self,
+        specs: List[ToolSpec],
+        call: ToolCall,
+        compact_tool_schema: CompactMode = "auto",
+        compact_tool_threshold: int = 20,
+    ):
         self.specs = specs
         self.call = call
+        self.compact_tool_schema: CompactMode = compact_tool_schema
+        self.compact_tool_threshold = compact_tool_threshold
+
+    def _use_compact_summary(self) -> bool:
+        if self.compact_tool_schema == "always":
+            return True
+        if self.compact_tool_schema == "never":
+            return False
+        return len(self.specs) >= self.compact_tool_threshold
 
     def get_tools_inventory(self) -> List[Dict[str, Any]]:
         return [spec.model_dump() for spec in self.specs]
 
     def get_tools_inventory_summary(self) -> List[Dict[str, Any]]:
+        # Compact form: tool_description + parameter name list only.
+        # Drops type annotations to save tokens when many tools are present.
+        if self._use_compact_summary():
+            return [
+                {
+                    "tool_name": spec.function.name,
+                    "tool_description": spec.function.description,
+                    "tool_parameters": list(
+                        spec.function.parameters.get("properties", {}).keys()
+                    ),
+                }
+                for spec in self.specs
+            ]
         return [
             {
                 "tool_name": spec.function.name,

@@ -90,8 +90,44 @@ class SPARCReflectionConfig(BaseModel):
         description="Whether to include raw reflection pipeline response in output",
     )
 
+    # Tool-inventory rendering (function_selection / agentic_constraints prompts)
+    compact_tool_schema: str = Field(
+        default="auto",
+        description=(
+            "How to render the tool inventory in function-selection prompts: "
+            "'auto' (compact form once len(specs) >= compact_tool_threshold, "
+            "full summary otherwise), 'never' (always full summary: "
+            "description + {param_name: type}), 'always' (always compact: "
+            "description + list of parameter names)."
+        ),
+        pattern="^(auto|never|always)$",
+    )
+    compact_tool_threshold: int = Field(
+        default=20,
+        description=(
+            "Tool-count threshold for compact_tool_schema='auto'. Inventories "
+            "with at least this many tools switch to the compact form."
+        ),
+        ge=1,
+    )
+
     verbose_logging: bool = Field(
         default=False, description="Enable verbose logging for debugging"
+    )
+
+    # Prompt-variant selection: runtime (default, fast prompts, no actionable
+    # recommendations) vs. evaluation-time (heavier prompts that return
+    # unified-diff recommendations with importance scores). Evaluation mode
+    # is meant for post-hoc analysis / prompt improvement feedback, not for
+    # low-latency pre-action reflection.
+    runtime_pipeline: bool = Field(
+        default=True,
+        description=(
+            "If True, load the *_runtime.json metric files (faster, no "
+            "actionable recommendations). If False, load the evaluation-time "
+            "metric files that emit unified-diff recommendations with "
+            "importance scores — useful for offline analysis."
+        ),
     )
 
     class Config:

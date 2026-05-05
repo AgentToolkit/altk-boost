@@ -66,6 +66,8 @@ class ReflectionPipeline:
         runtime_pipeline: Optional[bool] = True,
         use_examples: Optional[bool] = True,
         skip_static_checks: Optional[bool] = False,
+        compact_tool_schema: str = "auto",
+        compact_tool_threshold: int = 20,
     ):
         self.metrics_client = metrics_client
         if codegen_client is None:
@@ -159,6 +161,8 @@ class ReflectionPipeline:
             metrics_client=self.metrics_client,
             codegen_client=self.codegen_client,
             transform_enabled=transform_enabled,
+            compact_tool_schema=compact_tool_schema,
+            compact_tool_threshold=compact_tool_threshold,
         )
 
         # 4) Auto-detect if we should skip static checks

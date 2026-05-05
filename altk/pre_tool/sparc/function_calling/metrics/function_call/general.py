@@ -4,6 +4,7 @@ from altk.pre_tool.sparc.function_calling.metrics.base import (
 )
 
 _general_system = (
+    "{{ common_principles }}\n\n"
     "### Task Description and Role:\n\n"
     "{{ task_description }}\n\n"
     "Your output must conform to the following JSON schema, in the same order as the fields appear in the schema:\n"

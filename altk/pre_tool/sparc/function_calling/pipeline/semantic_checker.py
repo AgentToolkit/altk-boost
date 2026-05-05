@@ -68,6 +68,8 @@ class SemanticChecker:
         parameter_metrics: Optional[List[Dict[str, Any]]] = None,
         codegen_client: Optional[ValidatingLLMClient] = None,
         transform_enabled: Optional[bool] = False,
+        compact_tool_schema: str = "auto",
+        compact_tool_threshold: int = 20,
     ) -> None:
         # Validate clients
         if not isinstance(metrics_client, ValidatingLLMClient):
@@ -75,6 +77,8 @@ class SemanticChecker:
         self.metrics_client = metrics_client
 
         self.transform_enabled = transform_enabled
+        self.compact_tool_schema = compact_tool_schema
+        self.compact_tool_threshold = compact_tool_threshold
         self.codegen_client = codegen_client
         if not codegen_client or not isinstance(codegen_client, ValidatingLLMClient):
             self.codegen_client = metrics_client
@@ -100,10 +104,20 @@ class SemanticChecker:
     def _make_adapter(self, apis_specs, tool_call):
         # Handle empty specs for tool-spec-free metrics
         if not apis_specs:
-            return OpenAIAdapter([], tool_call)
+            return OpenAIAdapter(
+                [],
+                tool_call,
+                compact_tool_schema=self.compact_tool_schema,
+                compact_tool_threshold=self.compact_tool_threshold,
+            )
         first = apis_specs[0]
         if isinstance(first, ToolSpec):
-            return OpenAIAdapter(apis_specs, tool_call)
+            return OpenAIAdapter(
+                apis_specs,
+                tool_call,
+                compact_tool_schema=self.compact_tool_schema,
+                compact_tool_threshold=self.compact_tool_threshold,
+            )
         raise TypeError("Unsupported spec type")
 
     def _collect_params(self, adapter: BaseAdapter) -> Dict[str, Any]:
