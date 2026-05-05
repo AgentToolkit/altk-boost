@@ -17,6 +17,7 @@ Covers:
 from __future__ import annotations
 
 from typing import Any, Dict, List
+from pydantic import ValidationError
 
 import pytest
 
@@ -167,11 +168,11 @@ class TestConfigDefaults:
         assert cfg.compact_tool_threshold == 5
 
     def test_invalid_mode_rejected(self):
-        with pytest.raises(Exception):  # pydantic will raise ValidationError
+        with pytest.raises(ValidationError):  # pydantic will raise ValidationError
             SPARCReflectionConfig(compact_tool_schema="garbage")
 
     def test_invalid_threshold_rejected(self):
-        with pytest.raises(Exception):  # ge=1 constraint
+        with pytest.raises(ValidationError):  # ge=1 constraint
             SPARCReflectionConfig(compact_tool_threshold=0)
 
 
