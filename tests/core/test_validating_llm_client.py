@@ -272,7 +272,7 @@ class TestSafeParse:
         assert c._parse_llm_response(KeyError("missing")) == ""
 
     def test_reasoning_budget_warning_logged(self, caplog):
-        c = _FakeValidating(client=object())
+        _FakeValidating(client=object())
         # A litellm-shaped response: reasoning_content set, finish_reason=length,
         # content missing — the classic reasoning-budget exhaustion pattern.
         raw = {
