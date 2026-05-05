@@ -140,9 +140,9 @@ class TestUnitsConversion:
     def test_correct_conversion_validation(self, middleware, weather_tool_specs):
         """Test that correct unit conversions pass validation."""
 
-        assert (
-            not middleware._initialization_error
-        ), f"Could not initialize transformation pipeline: {middleware._initialization_error}"
+        assert not middleware._initialization_error, (
+            f"Could not initialize transformation pipeline: {middleware._initialization_error}"
+        )
 
         conversation_context = [
             {
@@ -194,9 +194,9 @@ class TestUnitsConversion:
     def test_no_transformation_needed(self, middleware, weather_tool_specs):
         """Test that tool calls not requiring transformation pass validation."""
 
-        assert (
-            not middleware._initialization_error
-        ), f"Could not initialize transformation pipeline: {middleware._initialization_error}"
+        assert not middleware._initialization_error, (
+            f"Could not initialize transformation pipeline: {middleware._initialization_error}"
+        )
 
         conversation_context = [
             {
@@ -252,9 +252,9 @@ class TestUnitsConversion:
     ):
         """Test accuracy of temperature conversion detection with various values."""
 
-        assert (
-            not middleware._initialization_error
-        ), f"Could not initialize transformation pipeline: {middleware._initialization_error}"
+        assert not middleware._initialization_error, (
+            f"Could not initialize transformation pipeline: {middleware._initialization_error}"
+        )
 
         conversation_context = [
             {
@@ -311,9 +311,9 @@ class TestUnitsConversion:
     ):
         """Test that transformation validation can be disabled."""
 
-        assert (
-            not no_transform_middleware._initialization_error
-        ), f"Could not initialize transformation pipeline: {no_transform_middleware._initialization_error}"
+        assert not no_transform_middleware._initialization_error, (
+            f"Could not initialize transformation pipeline: {no_transform_middleware._initialization_error}"
+        )
 
         conversation_context = [
             {"role": "user", "content": "Set thermostat to 75 Fahrenheit"},
@@ -355,9 +355,9 @@ class TestUnitsConversion:
     def test_complex_transformation_scenario(self, middleware):
         """Test complex transformation scenario with multiple unit types."""
 
-        assert (
-            not middleware._initialization_error
-        ), f"Could not initialize transformation pipeline: {middleware._initialization_error}"
+        assert not middleware._initialization_error, (
+            f"Could not initialize transformation pipeline: {middleware._initialization_error}"
+        )
 
         # Tool with multiple unit-sensitive parameters
         complex_tool_specs = [

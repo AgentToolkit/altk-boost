@@ -78,9 +78,9 @@ class TestCompactSchemaModes:
             summary = ad.get_tools_inventory_summary()
             assert len(summary) == len(specs)
             for entry in summary:
-                assert isinstance(
-                    entry["tool_parameters"], dict
-                ), "never mode should emit {param_name: type} dicts"
+                assert isinstance(entry["tool_parameters"], dict), (
+                    "never mode should emit {param_name: type} dicts"
+                )
 
     def test_always_uses_compact_regardless_of_size(
         self, small_inventory, large_inventory
@@ -90,9 +90,9 @@ class TestCompactSchemaModes:
             summary = ad.get_tools_inventory_summary()
             assert len(summary) == len(specs)
             for entry in summary:
-                assert isinstance(
-                    entry["tool_parameters"], list
-                ), "always mode should emit a list of parameter names"
+                assert isinstance(entry["tool_parameters"], list), (
+                    "always mode should emit a list of parameter names"
+                )
 
     def test_auto_stays_full_under_threshold(self, small_inventory):
         # default threshold = 20; 5 tools should stay full

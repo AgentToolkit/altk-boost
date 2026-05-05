@@ -139,8 +139,7 @@ def test_no_benchmark_term_in_shared_prompts(shared_corpus, term):
     lowered_corpus = [(label, text.lower()) for label, text in shared_corpus]
     offenders = [label for label, text in lowered_corpus if term in text]
     assert not offenders, (
-        f"benchmark-specific term {term!r} leaked into shared prompt text: "
-        f"{offenders}"
+        f"benchmark-specific term {term!r} leaked into shared prompt text: {offenders}"
     )
 
 
@@ -164,6 +163,6 @@ def test_mutating_as_rule_keyword_is_gone(shared_corpus):
     # Assert the shouty form is gone from rules.
     pattern = re.compile(r"\bMUTATING\b")
     offenders = [label for label, text in shared_corpus if pattern.search(text)]
-    assert (
-        not offenders
-    ), f"uppercase 'MUTATING' must not appear in shared prompt rules: {offenders}"
+    assert not offenders, (
+        f"uppercase 'MUTATING' must not appear in shared prompt rules: {offenders}"
+    )

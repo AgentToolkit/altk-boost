@@ -657,7 +657,9 @@ def extract_function_names_with_decorators(
                             decorators.append(decorator.func.id)
                         elif isinstance(decorator.func, ast.Attribute):
                             # Handle decorators like @abc.decorator4()
-                            decoratorname = f"{decorator.func.value.id}.{decorator.func.attr}"  # type: ignore
+                            decoratorname = (
+                                f"{decorator.func.value.id}.{decorator.func.attr}"  # type: ignore
+                            )
                             decorators.append(decoratorname)
                     elif isinstance(decorator, ast.Attribute):
                         # Handle decorators like @abc.decorator4 (without parentheses)

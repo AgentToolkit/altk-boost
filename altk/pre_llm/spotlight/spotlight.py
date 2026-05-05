@@ -182,9 +182,9 @@ class SpotLightComponent(ComponentBase):
         elif isinstance(emph_strings[0], str):
             emph_strings = [[s] for s in emph_strings]
 
-        assert len(prompts) == len(
-            emph_strings
-        ), "Mismatch prompts ↔ emphasised strings"
+        assert len(prompts) == len(emph_strings), (
+            "Mismatch prompts ↔ emphasised strings"
+        )
 
         span_ranges_per_sample = []
         for prompt, span_list, offsets in zip(prompts, emph_strings, offset_mappings):
@@ -355,9 +355,9 @@ class SpotLightComponent(ComponentBase):
                     messages, tokenize=False, add_generation_prompt=True
                 )
             ]
-            assert len(emph_strings) == len(
-                chat
-            ), "Need 1:1 mapping between number of prompts and emph_strings per prompt"
+            assert len(emph_strings) == len(chat), (
+                "Need 1:1 mapping between number of prompts and emph_strings per prompt"
+            )
 
             inputs, offset_mappings, tokenized_inp_len = self.tokenize_inputs(
                 chat, self.tokenizer

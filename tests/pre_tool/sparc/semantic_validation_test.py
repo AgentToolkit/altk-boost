@@ -133,9 +133,9 @@ class TestSemanticValidation:
     def test_function_selection_misalignment(self, middleware, multi_domain_tool_specs):
         """Test detection of function selection that doesn't align with user intent."""
 
-        assert (
-            not middleware._initialization_error
-        ), f"Initialization failed: {middleware._initialization_error}"
+        assert not middleware._initialization_error, (
+            f"Initialization failed: {middleware._initialization_error}"
+        )
 
         conversation_context = [
             {"role": "user", "content": "What's the weather like in New York today?"},
@@ -197,9 +197,9 @@ class TestSemanticValidation:
     ):
         """Test detection of parameter values not grounded in conversation context."""
 
-        assert (
-            not middleware._initialization_error
-        ), f"Initialization failed: {middleware._initialization_error}"
+        assert not middleware._initialization_error, (
+            f"Initialization failed: {middleware._initialization_error}"
+        )
 
         conversation_context = [
             {
@@ -247,9 +247,9 @@ class TestSemanticValidation:
     def test_valid_semantic_alignment(self, middleware, multi_domain_tool_specs):
         """Test that semantically valid and well-grounded function calls pass validation."""
 
-        assert (
-            not middleware._initialization_error
-        ), f"Initialization failed: {middleware._initialization_error}"
+        assert not middleware._initialization_error, (
+            f"Initialization failed: {middleware._initialization_error}"
+        )
 
         conversation_context = [
             {
@@ -294,9 +294,9 @@ class TestSemanticValidation:
     def test_complex_conversation_context(self, middleware, multi_domain_tool_specs):
         """Test semantic validation with complex multi-turn conversation."""
         # Setup
-        assert (
-            not middleware._initialization_error
-        ), f"Initialization failed: {middleware._initialization_error}"
+        assert not middleware._initialization_error, (
+            f"Initialization failed: {middleware._initialization_error}"
+        )
 
         # Complex conversation with multiple topics and clarifications
         complex_conversation = [
@@ -343,9 +343,9 @@ class TestSemanticValidation:
     def test_edge_case_empty_conversation(self, middleware, multi_domain_tool_specs):
         """Test handling of edge case with minimal conversation context."""
         # Setup
-        assert (
-            not middleware._initialization_error
-        ), f"Initialization failed: {middleware._initialization_error}"
+        assert not middleware._initialization_error, (
+            f"Initialization failed: {middleware._initialization_error}"
+        )
 
         # Minimal conversation
         minimal_conversation = [{"role": "user", "content": "Weather?"}]

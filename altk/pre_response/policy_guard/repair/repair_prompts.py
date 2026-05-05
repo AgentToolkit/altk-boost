@@ -565,9 +565,9 @@ def priority_repair_prompt(
 def ordered_repair_prompt(
     text: str, policies: list[str], weights: list[float] = None, ranks: list[int] = None
 ) -> str:
-    assert not (
-        weights is None and ranks is None
-    ), "One of weights or ranks must be set. "
+    assert not (weights is None and ranks is None), (
+        "One of weights or ranks must be set. "
+    )
     if weights is not None:
         # Sort from highest to lowest weight
         sorted_policies = [x for _, x in sorted(zip(weights, policies), reverse=True)]

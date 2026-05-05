@@ -69,22 +69,22 @@ class TestEvalSchema:
             item = ar["items"]
             assert item["type"] == "object"
             # Required fields
-            assert set(item.get("required", [])) >= set(
-                REQUIRED_ITEM_KEYS
-            ), f"{path.name}::{m['name']} missing required keys in rec item"
+            assert set(item.get("required", [])) >= set(REQUIRED_ITEM_KEYS), (
+                f"{path.name}::{m['name']} missing required keys in rec item"
+            )
             props = item["properties"]
             # Target must be the closed enum
-            assert (
-                set(props["target"]["enum"]) == ALLOWED_TARGETS
-            ), f"{path.name}::{m['name']} target enum must be exactly {ALLOWED_TARGETS}"
+            assert set(props["target"]["enum"]) == ALLOWED_TARGETS, (
+                f"{path.name}::{m['name']} target enum must be exactly {ALLOWED_TARGETS}"
+            )
             # Importance must be [0, 1]
             assert props["importance"]["minimum"] == 0
             assert props["importance"]["maximum"] == 1
             # No legacy fields (quote / recommendation enum / details) remain
             for legacy in ("quote", "recommendation", "details"):
-                assert (
-                    legacy not in props
-                ), f"{path.name}::{m['name']} legacy field {legacy!r} still in schema"
+                assert legacy not in props, (
+                    f"{path.name}::{m['name']} legacy field {legacy!r} still in schema"
+                )
 
     def test_no_legacy_recommendation_enum_in_schema(self, eval_metrics):
         data, path = eval_metrics
@@ -103,9 +103,9 @@ class TestEvalSchema:
                 "PREREQUISITE_TRACKING",
                 "TOOL_DEPENDENCY_DOCUMENTATION",
             ):
-                assert (
-                    legacy_enum not in blob
-                ), f"{path.name}::{m['name']} still references legacy rec enum {legacy_enum!r}"
+                assert legacy_enum not in blob, (
+                    f"{path.name}::{m['name']} still references legacy rec enum {legacy_enum!r}"
+                )
 
 
 class TestEvalExamples:

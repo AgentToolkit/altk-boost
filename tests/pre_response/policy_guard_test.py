@@ -65,9 +65,9 @@ class TestPolicyGuard:
         for policy, expected, output in zip(
             policies, expected_results, result.policy_outputs
         ):
-            assert (
-                output.compliance == expected
-            ), f"Poicy: {policy} -> expected compliance {expected} didn't match result"
+            assert output.compliance == expected, (
+                f"Poicy: {policy} -> expected compliance {expected} didn't match result"
+            )
 
     # def test_messages(self, tmp_path, llm_client):
     #     config = ComponentConfig(llm_client=llm_client)

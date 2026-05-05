@@ -176,9 +176,7 @@ def enrich(enrichment_config: ToolEnrichmentConfig):
                 else:
                     prompts_dir = prompts_dir + "restofcode_based_prompts/"
 
-            if (
-                enrichment_config.input_details.options.enable_tool_description_enrichment
-            ):
+            if enrichment_config.input_details.options.enable_tool_description_enrichment:
                 prompt_file_template = os.path.join(
                     script_dir, prompts_dir, "toolops_description_via_code.txt"
                 )
@@ -187,9 +185,7 @@ def enrich(enrichment_config: ToolEnrichmentConfig):
                 )
                 result[cnst.TOOL_DESCRIPTION_ENRICHMENT] = generated_description
 
-            if (
-                enrichment_config.input_details.options.enable_tool_return_description_enrichment
-            ):
+            if enrichment_config.input_details.options.enable_tool_return_description_enrichment:
                 prompt_file_template = os.path.join(
                     script_dir, prompts_dir, "toolops_return_description_via_code.txt"
                 )
@@ -266,9 +262,9 @@ def enrich(enrichment_config: ToolEnrichmentConfig):
                         key
                         not in generated_input_examples[cnst.LABEL_ENRICHED_EXAMPLES]
                     ):
-                        generated_input_examples[cnst.LABEL_ENRICHED_EXAMPLES][
-                            key
-                        ] = value
+                        generated_input_examples[cnst.LABEL_ENRICHED_EXAMPLES][key] = (
+                            value
+                        )
 
                 result[cnst.TOOL_EXAMPLES_ENRICHMENT] = generated_input_examples
             # else:
