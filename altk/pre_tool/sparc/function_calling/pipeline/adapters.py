@@ -10,7 +10,6 @@ from altk.pre_tool.sparc.function_calling.pipeline.types import (
     ToolSpec,
 )
 
-
 CompactMode = Literal["auto", "never", "always"]
 """Compact tool-inventory rendering mode.
 

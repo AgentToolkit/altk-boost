@@ -428,7 +428,9 @@ class SPARCReflectionComponent(ComponentBase):
             rationale = item.get("rationale") or item.get("details") or ""
             importance_raw = item.get("importance")
             try:
-                importance = float(importance_raw) if importance_raw is not None else 0.5
+                importance = (
+                    float(importance_raw) if importance_raw is not None else 0.5
+                )
             except (TypeError, ValueError):
                 importance = 0.5
             # Clamp into [0, 1].
@@ -516,7 +518,9 @@ class SPARCReflectionComponent(ComponentBase):
                                 correction=metric_result.raw_response.get("correction"),
                                 output_value=self._rubric_score(metric_result),
                                 confidence=self._rubric_confidence(metric_result),
-                                recommendations=self._extract_recommendations(metric_result),
+                                recommendations=self._extract_recommendations(
+                                    metric_result
+                                ),
                             )
                         )
                     # Always record the rubric score (issue or not) so the
@@ -565,7 +569,9 @@ class SPARCReflectionComponent(ComponentBase):
                                     ),
                                     output_value=self._rubric_score(metric_result),
                                     confidence=self._rubric_confidence(metric_result),
-                                    recommendations=self._extract_recommendations(metric_result),
+                                    recommendations=self._extract_recommendations(
+                                        metric_result
+                                    ),
                                 )
                             )
                         s = self._rubric_score(metric_result)
@@ -609,14 +615,20 @@ class SPARCReflectionComponent(ComponentBase):
                                             "correction"
                                         ),
                                         output_value=self._rubric_score(metric_result),
-                                        confidence=self._rubric_confidence(metric_result),
-                                        recommendations=self._extract_recommendations(metric_result),
+                                        confidence=self._rubric_confidence(
+                                            metric_result
+                                        ),
+                                        recommendations=self._extract_recommendations(
+                                            metric_result
+                                        ),
                                     )
                                 )
                             s = self._rubric_score(metric_result)
                             if s is not None:
                                 per_metric_scores.append(s)
-                            all_recs.extend(self._extract_recommendations(metric_result))
+                            all_recs.extend(
+                                self._extract_recommendations(metric_result)
+                            )
 
                 # Transform results - check for errors and corrections
                 if pipeline_result.semantic.transform:

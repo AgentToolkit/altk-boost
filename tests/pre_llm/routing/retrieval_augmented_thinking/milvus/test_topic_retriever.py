@@ -20,7 +20,6 @@ from altk.pre_llm.routing.retrieval_augmented_thinking.milvus.topic_sink import 
     MilvusProvider,
 )
 
-
 pytest.skip(
     "current tests hang, perhaps due to current milvus-lite", allow_module_level=True
 )

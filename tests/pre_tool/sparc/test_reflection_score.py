@@ -23,11 +23,16 @@ from altk.pre_tool.core.types import (
 from altk.pre_tool.sparc.sparc import SPARCReflectionComponent
 
 
-def _metric(is_issue: bool, output: float | None, confidence: float = 0.9, error: str = ""):
-    raw = {"output": output, "confidence": confidence, "explanation": "e", "correction": None}
-    return SimpleNamespace(
-        is_issue=is_issue, raw_response=raw, error=error
-    )
+def _metric(
+    is_issue: bool, output: float | None, confidence: float = 0.9, error: str = ""
+):
+    raw = {
+        "output": output,
+        "confidence": confidence,
+        "explanation": "e",
+        "correction": None,
+    }
+    return SimpleNamespace(is_issue=is_issue, raw_response=raw, error=error)
 
 
 class _PipelineResult(SimpleNamespace):
@@ -110,12 +115,16 @@ def _build_component():
     return _BareComponent()
 
 
-def _pipeline(general=None, function_selection=None, parameter=None, transform=None, static=None):
+def _pipeline(
+    general=None, function_selection=None, parameter=None, transform=None, static=None
+):
     """Build a PipelineResult-shaped SimpleNamespace."""
     return _PipelineResult(
         static=static,
         semantic=SimpleNamespace(
-            general=SimpleNamespace(metrics=general or {}) if general is not None else None,
+            general=(
+                SimpleNamespace(metrics=general or {}) if general is not None else None
+            ),
             function_selection=(
                 SimpleNamespace(metrics=function_selection or {})
                 if function_selection is not None
@@ -250,9 +259,7 @@ class TestRecommendationExtraction:
         comp = _build_component()
         bad = _metric_with_recs(True, 2.0, [self.GOOD_REC])
         ok = _metric_with_recs(False, 5.0, [self.PARAM_REC])
-        result = comp._process_pipeline_result(
-            _pipeline(general={"g1": bad, "g2": ok})
-        )
+        result = comp._process_pipeline_result(_pipeline(general={"g1": bad, "g2": ok}))
         assert len(result.all_recommendations) == 2
 
     def test_malformed_rec_is_dropped(self):

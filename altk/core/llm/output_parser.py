@@ -73,7 +73,11 @@ def json_schema_to_pydantic_model(
         prop_schema: Dict[str, Any],
     ) -> Type[T]:
         def _lookup(t: str) -> Type:
-            return _map_object_for_prop(prop_schema) if t == "object" else type_mapping.get(t, Any)
+            return (
+                _map_object_for_prop(prop_schema)
+                if t == "object"
+                else type_mapping.get(t, Any)
+            )
 
         if isinstance(type_def, list):
             python_types = [_lookup(t) for t in type_def]
@@ -222,13 +226,10 @@ class ValidatingLLMClient(BaseLLMClient, ABC):
                     _msg = getattr(c0, "message", None) or (
                         c0.get("message", {}) if isinstance(c0, dict) else {}
                     )
-                    _reasoning = (
-                        getattr(_msg, "reasoning_content", None)
-                        or (
-                            _msg.get("reasoning_content")
-                            if isinstance(_msg, dict)
-                            else None
-                        )
+                    _reasoning = getattr(_msg, "reasoning_content", None) or (
+                        _msg.get("reasoning_content")
+                        if isinstance(_msg, dict)
+                        else None
                     )
                     _finish = getattr(c0, "finish_reason", None) or (
                         c0.get("finish_reason") if isinstance(c0, dict) else None

@@ -148,9 +148,9 @@ class TestStaticValidation:
     ):
         """Test detection of missing required parameters."""
 
-        assert not middleware._initialization_error, (
-            f"Initialization failed: {middleware._initialization_error}"
-        )
+        assert (
+            not middleware._initialization_error
+        ), f"Initialization failed: {middleware._initialization_error}"
 
         # Test missing required parameters
         missing_params_call = {
@@ -198,9 +198,9 @@ class TestStaticValidation:
     def test_invalid_parameter_types(self, middleware, meeting_tool_specs):
         """Test detection of invalid parameter types."""
 
-        assert not middleware._initialization_error, (
-            f"Initialization failed: {middleware._initialization_error}"
-        )
+        assert (
+            not middleware._initialization_error
+        ), f"Initialization failed: {middleware._initialization_error}"
 
         conversation = [
             {
@@ -255,9 +255,9 @@ class TestStaticValidation:
     def test_schema_constraint_violations(self, middleware, email_tool_specs):
         """Test detection of schema constraint violations."""
 
-        assert not middleware._initialization_error, (
-            f"Initialization failed: {middleware._initialization_error}"
-        )
+        assert (
+            not middleware._initialization_error
+        ), f"Initialization failed: {middleware._initialization_error}"
 
         conversation = [
             {"role": "user", "content": "Send a high priority email to invalid-email"},
@@ -306,9 +306,9 @@ class TestStaticValidation:
     def test_valid_static_structure(self, middleware, email_tool_specs):
         """Test that valid structure passes static validation."""
 
-        assert not middleware._initialization_error, (
-            f"Initialization failed: {middleware._initialization_error}"
-        )
+        assert (
+            not middleware._initialization_error
+        ), f"Initialization failed: {middleware._initialization_error}"
 
         conversation = [
             {
@@ -360,9 +360,9 @@ class TestStaticValidation:
     ):
         """Test handling of malformed JSON in tool call arguments."""
 
-        assert not middleware._initialization_error, (
-            f"Initialization failed: {middleware._initialization_error}"
-        )
+        assert (
+            not middleware._initialization_error
+        ), f"Initialization failed: {middleware._initialization_error}"
 
         # Malformed JSON in arguments
         malformed_call = {

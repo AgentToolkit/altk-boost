@@ -5,7 +5,6 @@ from pydantic import BaseModel
 from altk.core.llm import get_llm, GenerationMode
 from altk.core.llm.types import GenerationArgs
 
-
 # ──────────────────────────────────────────────────────────────────────────────
 # 1. Define schemas for structured output
 # ──────────────────────────────────────────────────────────────────────────────

@@ -25,7 +25,9 @@ class TestMultiExtractSystem:
 
     def test_has_evidence_priority_ordering(self):
         flat = _flat(tp.MULTI_EXTRACT_UNITS_SYSTEM)
-        assert "system prompt > tool outputs > user messages > assistant messages" in flat
+        assert (
+            "system prompt > tool outputs > user messages > assistant messages" in flat
+        )
 
     def test_has_under_specified_grounding_rule(self):
         flat = _flat(tp.MULTI_EXTRACT_UNITS_SYSTEM)

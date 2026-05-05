@@ -34,7 +34,9 @@ def _make_spec(name: str, params: List[str]) -> ToolSpec:
                 "description": f"desc of {name}",
                 "parameters": {
                     "type": "object",
-                    "properties": {p: {"type": "string", "description": p} for p in params},
+                    "properties": {
+                        p: {"type": "string", "description": p} for p in params
+                    },
                     "required": [],
                 },
             },
@@ -44,7 +46,11 @@ def _make_spec(name: str, params: List[str]) -> ToolSpec:
 
 def _call() -> ToolCall:
     return ToolCall.model_validate(
-        {"id": "c", "type": "function", "function": {"name": "tool_0", "arguments": "{}"}}
+        {
+            "id": "c",
+            "type": "function",
+            "function": {"name": "tool_0", "arguments": "{}"},
+        }
     )
 
 
@@ -64,25 +70,29 @@ def large_inventory() -> List[ToolSpec]:
 
 
 class TestCompactSchemaModes:
-    def test_never_keeps_full_summary_regardless_of_size(self, small_inventory, large_inventory):
+    def test_never_keeps_full_summary_regardless_of_size(
+        self, small_inventory, large_inventory
+    ):
         for specs in (small_inventory, large_inventory):
             ad = OpenAIAdapter(specs, _call(), compact_tool_schema="never")
             summary = ad.get_tools_inventory_summary()
             assert len(summary) == len(specs)
             for entry in summary:
-                assert isinstance(entry["tool_parameters"], dict), (
-                    "never mode should emit {param_name: type} dicts"
-                )
+                assert isinstance(
+                    entry["tool_parameters"], dict
+                ), "never mode should emit {param_name: type} dicts"
 
-    def test_always_uses_compact_regardless_of_size(self, small_inventory, large_inventory):
+    def test_always_uses_compact_regardless_of_size(
+        self, small_inventory, large_inventory
+    ):
         for specs in (small_inventory, large_inventory):
             ad = OpenAIAdapter(specs, _call(), compact_tool_schema="always")
             summary = ad.get_tools_inventory_summary()
             assert len(summary) == len(specs)
             for entry in summary:
-                assert isinstance(entry["tool_parameters"], list), (
-                    "always mode should emit a list of parameter names"
-                )
+                assert isinstance(
+                    entry["tool_parameters"], list
+                ), "always mode should emit a list of parameter names"
 
     def test_auto_stays_full_under_threshold(self, small_inventory):
         # default threshold = 20; 5 tools should stay full
@@ -150,7 +160,9 @@ class TestConfigDefaults:
         assert cfg.compact_tool_threshold == 20
 
     def test_config_override(self):
-        cfg = SPARCReflectionConfig(compact_tool_schema="always", compact_tool_threshold=5)
+        cfg = SPARCReflectionConfig(
+            compact_tool_schema="always", compact_tool_threshold=5
+        )
         assert cfg.compact_tool_schema == "always"
         assert cfg.compact_tool_threshold == 5
 

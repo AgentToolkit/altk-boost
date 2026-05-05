@@ -23,10 +23,11 @@ from pathlib import Path
 
 import pytest
 
-
 ROOT = Path(__file__).resolve().parents[3] / "altk/pre_tool/sparc/function_calling"
 RUNTIME_GENERAL = ROOT / "metrics/function_call/general_metrics_runtime.json"
-RUNTIME_FUNCSEL = ROOT / "metrics/function_selection/function_selection_metrics_runtime.json"
+RUNTIME_FUNCSEL = (
+    ROOT / "metrics/function_selection/function_selection_metrics_runtime.json"
+)
 RUNTIME_PARAM = ROOT / "metrics/parameter/parameter_metrics_runtime.json"
 EVAL_GENERAL = ROOT / "metrics/function_call/general_metrics.json"
 EVAL_FUNCSEL = ROOT / "metrics/function_selection/function_selection_metrics.json"
@@ -83,7 +84,9 @@ def _system_prompt_constants_from_transformation() -> str:
     examples — concrete demonstrations are expected to be specific and
     are exempt from the domain-leak blocklist.
     """
-    from altk.pre_tool.sparc.function_calling.pipeline import transformation_prompts as tp
+    from altk.pre_tool.sparc.function_calling.pipeline import (
+        transformation_prompts as tp,
+    )
 
     parts = []
     for name in ("MULTI_EXTRACT_UNITS_SYSTEM", "GENERATE_CODE_SYSTEM"):
@@ -123,7 +126,10 @@ def shared_corpus() -> list[tuple[str, str]]:
             blobs.append((f"{path.name}[{i}]", td))
     blobs.append(("common_principles.COMMON_PRINCIPLES", _common_principles_text()))
     blobs.append(
-        ("transformation_prompts.*_SYSTEM", _system_prompt_constants_from_transformation())
+        (
+            "transformation_prompts.*_SYSTEM",
+            _system_prompt_constants_from_transformation(),
+        )
     )
     return blobs
 
@@ -158,6 +164,6 @@ def test_mutating_as_rule_keyword_is_gone(shared_corpus):
     # Assert the shouty form is gone from rules.
     pattern = re.compile(r"\bMUTATING\b")
     offenders = [label for label, text in shared_corpus if pattern.search(text)]
-    assert not offenders, (
-        f"uppercase 'MUTATING' must not appear in shared prompt rules: {offenders}"
-    )
+    assert (
+        not offenders
+    ), f"uppercase 'MUTATING' must not appear in shared prompt rules: {offenders}"

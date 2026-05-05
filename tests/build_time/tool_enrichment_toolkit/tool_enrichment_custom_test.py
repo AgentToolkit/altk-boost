@@ -28,8 +28,7 @@ def test_tool_enrichment_with_toolkit_interface():
         PythonToolEnrichConfig,
     )
 
-    tool_enrich_input = PythonToolEnrichBuildInput(
-        python_tool='''import requests
+    tool_enrich_input = PythonToolEnrichBuildInput(python_tool='''import requests
 from typing import Optional, Dict, Any
 from langchain_core.tools import tool
 from model_utils import load_github_token
@@ -49,8 +48,7 @@ def listIssues(owner: str, repo: str, requestBody: Optional[Dict[str, Any]] = No
 
     response = requests.get(url, headers=headers, params=requestBody or {})
     response.raise_for_status()
-    return response.json()'''
-    )
+    return response.json()''')
     config = PythonToolEnrichConfig(
         llm_client=get_llm_client_obj(model_name="mistralai/mistral-medium-2505"),
         gen_mode=GenerationMode.TEXT,

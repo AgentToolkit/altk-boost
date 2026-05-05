@@ -234,7 +234,9 @@ def all_testcase_postprocess(
                                                 "operation"
                                             ][operation_type][param_type][
                                                 specific_param
-                                            ]["type"]
+                                            ][
+                                                "type"
+                                            ]
                                             param_found_flag = True
                                             break
                                     if param_found_flag:

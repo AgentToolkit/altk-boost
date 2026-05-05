@@ -375,15 +375,13 @@ You must enclose the re-written response in <START_OF_REWRITE> <END_OF_REWRITE> 
 """
 )
 
-mapreduce_guideline_response_template = Template(
-    """
+mapreduce_guideline_response_template = Template("""
 <START_OF_PER_GUIDELINE_RESPONSE>
 Guideline: ${guideline}
 
 Response: ${response}
 <END_OF_PER_GUIDELINE_RESPONSE>
-"""
-)
+""")
 
 
 def simple_single_repair_prompt(model_id: str, text: str, policy: str) -> str:
@@ -567,9 +565,9 @@ def priority_repair_prompt(
 def ordered_repair_prompt(
     text: str, policies: list[str], weights: list[float] = None, ranks: list[int] = None
 ) -> str:
-    assert not (weights is None and ranks is None), (
-        "One of weights or ranks must be set. "
-    )
+    assert not (
+        weights is None and ranks is None
+    ), "One of weights or ranks must be set. "
     if weights is not None:
         # Sort from highest to lowest weight
         sorted_policies = [x for _, x in sorted(zip(weights, policies), reverse=True)]

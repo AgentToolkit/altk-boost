@@ -399,8 +399,7 @@ generated_code_example1 = (
     "    return int(transformed_value)\n"
 )
 
-transformation_eval_example1 = (
-    """
+transformation_eval_example1 = """
 ### Example 1:
 
 TRANSFORMATION SUMMARY: Convert a date string with the format 'month day, year' to a unix timestamp, e.g., 'December 1st, 2024' converted to a unix timestamp.
@@ -411,12 +410,7 @@ EXAMPLE FORMAT OF TRANSFORMED VALUE: '1322697600'
 TRANSFORMED TYPE: int
 
 RESPONSE:
-{{"""
-    + '"generated_code": "'
-    + generated_code_example1
-    + '"'
-    + """}}"""
-)
+{{""" + '"generated_code": "' + generated_code_example1 + '"' + """}}"""
 
 generated_code_example2 = (
     "def transformation_code(input_value: str) -> float:\n"
@@ -445,8 +439,7 @@ generated_code_example2 = (
     "    return float(transformed_value.strip())\n"
 )
 
-transformation_eval_example2 = (
-    """
+transformation_eval_example2 = """
 ### Example 2:
 
 TRANSFORMATION SUMMARY: Convert a string in milliseconds to seconds, e.g., '1000' (milliseconds) divided by 1000 to be in seconds.
@@ -457,12 +450,7 @@ EXAMPLE FORMAT OF TRANSFORMED VALUE: '10'
 TRANSFORMED TYPE: float
 
 RESPONSE:
-{{"""
-    + '"generated_code": "'
-    + generated_code_example2
-    + '"'
-    + """}}"""
-)
+{{""" + '"generated_code": "' + generated_code_example2 + '"' + """}}"""
 
 generated_code_example3 = (
     "def transformation_code(input_value: str) -> list[float]:\n"
@@ -497,8 +485,7 @@ generated_code_example3 = (
     "    return [float(transformed_value)]\n"
 )
 
-transformation_eval_example3 = (
-    """
+transformation_eval_example3 = """
 ### Example 3:
 
 TRANSFORMATION SUMMARY: Convert a temperature string in Celsius to Kelvin, e.g., '25' (Celsius) added 273.15 to be in Kelvin.
@@ -509,12 +496,7 @@ EXAMPLE FORMAT OF TRANSFORMED VALUE: '[35]'
 TRANSFORMED TYPE: list
 
 RESPONSE:
-{{"""
-    + '"generated_code": "'
-    + generated_code_example3
-    + '"'
-    + """}}"""
-)
+{{""" + '"generated_code": "' + generated_code_example3 + '"' + """}}"""
 
 transformation_eval_example4 = """
 ### Unsupported Transformation Example:

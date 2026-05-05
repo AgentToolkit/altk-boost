@@ -44,18 +44,18 @@ class PythonToolOpsEnrichment:
     ):
         options = {}
         options["tool_enrichment"] = {}
-        options["tool_enrichment"]["enable_tool_description_enrichment"] = (
-            enable_tool_description_enrichment
-        )
-        options["tool_enrichment"]["enable_tool_parameter_description_enrichment"] = (
-            enable_tool_parameter_description_enrichment
-        )
-        options["tool_enrichment"]["enable_tool_return_description_enrichment"] = (
-            enable_tool_return_description_enrichment
-        )
-        options["tool_enrichment"]["enable_tool_example_enrichment"] = (
-            enable_tool_example_enrichment
-        )
+        options["tool_enrichment"][
+            "enable_tool_description_enrichment"
+        ] = enable_tool_description_enrichment
+        options["tool_enrichment"][
+            "enable_tool_parameter_description_enrichment"
+        ] = enable_tool_parameter_description_enrichment
+        options["tool_enrichment"][
+            "enable_tool_return_description_enrichment"
+        ] = enable_tool_return_description_enrichment
+        options["tool_enrichment"][
+            "enable_tool_example_enrichment"
+        ] = enable_tool_example_enrichment
         return await self.do_enrichment(
             input_file_contents=python_tool_str, options=options
         )

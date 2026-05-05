@@ -22,8 +22,7 @@ def get_llm_client_obj(model_name="mistralai/mistral-medium-2505"):
 
 
 def test_case_generation_with_toolkit_interface():
-    test_case_gen_input = TestCaseGenBuildInput(
-        python_tool_str='''import requests
+    test_case_gen_input = TestCaseGenBuildInput(python_tool_str='''import requests
 from typing import Optional, Dict, Any
 from langchain_core.tools import tool
 from model_utils import load_github_token
@@ -43,8 +42,7 @@ def listIssues(owner: str, repo: str, requestBody: Optional[Dict[str, Any]] = No
 
     response = requests.get(url, headers=headers, params=requestBody or {})
     response.raise_for_status()
-    return response.json()'''
-    )
+    return response.json()''')
     config = TestCaseGenConfig(
         llm_client=get_llm_client_obj(model_name="mistralai/mistral-medium-2505"),
         gen_mode=GenerationMode.TEXT,

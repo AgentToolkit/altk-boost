@@ -7,7 +7,6 @@ from altk.pre_tool.refraction.src.schemas import Mapping
 
 import json
 
-
 F = TypeVar("F", bound=Callable[..., Any])
 
 

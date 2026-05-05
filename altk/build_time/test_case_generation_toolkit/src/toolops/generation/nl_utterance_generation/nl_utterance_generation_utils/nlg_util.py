@@ -9,8 +9,7 @@ logger = logging.getLogger(
 )
 
 
-preamble = (
-    'Given an API specification and an input payload, along with a sample utterance, your task as an expert user is to \
+preamble = 'Given an API specification and an input payload, along with a sample utterance, your task as an expert user is to \
 create multiple, distinct human-like sentences that convey the same information accurately. Each paraphrased sentence \
 should:\n\n1. Maintain Fluency: Ensure the sentences are natural and conversational, avoiding robotic or overly formal \
 language.\n   - Good Example: "Can you book a flight from Delhi to NYC on the 15th of July?"\n   - Bad Example: \
@@ -20,7 +19,6 @@ omissions, additions, or errors.\n\n3. Preserve IDs: Do not modify, replace, or 
 booking IDs, transaction IDs, etc.). Use them exactly as provided in the user utterance.\n\n4. No Introductory Text: Do not \
 include lines like “Here are the paraphrases” or similar — output only the paraphrased sentences.\n\nPlease generate the paraphrased \
 sentences based on the following\n\n API specification:'
-)
 
 
 def is_invalid_utterance(utterance):

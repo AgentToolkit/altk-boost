@@ -27,7 +27,6 @@ from altk.pre_tool.refraction.src.schemas.results import (
     PromptType,
 )
 
-
 logger = logging.getLogger(__name__)
 
 

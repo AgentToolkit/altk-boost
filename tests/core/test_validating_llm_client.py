@@ -29,7 +29,6 @@ from altk.core.llm.output_parser import (
     relax_freeform_object_schema,
 )
 
-
 # ---------------------------------------------------------------------------
 # Dummy client used throughout — no actual LLM call.
 # ---------------------------------------------------------------------------
@@ -192,18 +191,14 @@ class TestValidatorRelaxation:
             c._validate('{"a": "{\\"k\\": 1}"}', self._schema)
 
     def test_relaxed_accepts_json_string_for_object_field(self):
-        c = _FakeValidating(
-            free_form_object_as_str=True, client=object()
-        )
+        c = _FakeValidating(free_form_object_as_str=True, client=object())
         # The LLM returned {"a": "<string representation of object>"} — still
         # valid with relaxed schema.
         got = c._validate('{"a": "arbitrary JSON-ish"}', self._schema)
         assert got == {"a": "arbitrary JSON-ish"}
 
     def test_relaxed_still_accepts_normal_object(self):
-        c = _FakeValidating(
-            free_form_object_as_str=True, client=object()
-        )
+        c = _FakeValidating(free_form_object_as_str=True, client=object())
         assert c._validate('{"a": {"k": 1}}', self._schema) == {"a": {"k": 1}}
 
 
@@ -237,7 +232,9 @@ class TestDefaultGenerationKwargs:
             default_generation_kwargs={"max_tokens": 123, "temperature": 0.0},
             client=object(),
         )
-        c.generate([], schema={"type": "object", "properties": {"a": {"type": "string"}}})
+        c.generate(
+            [], schema={"type": "object", "properties": {"a": {"type": "string"}}}
+        )
         obs = observed[-1]
         assert obs["max_tokens"] == 123
         assert obs["temperature"] == 0.0
@@ -286,6 +283,7 @@ class TestSafeParse:
                 }
             ]
         }
+
         # Wrap raw in a class whose attribute-access fails, forcing ValueError.
         class _FailingParse:
             def __init__(self, payload):

@@ -1,6 +1,5 @@
 import logging
 
-
 logger = logging.getLogger(__name__)
 # import built-in TopicRetriever implementations to force their registering
 try:

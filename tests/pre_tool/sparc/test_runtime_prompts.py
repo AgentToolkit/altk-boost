@@ -31,8 +31,9 @@ from altk.pre_tool.sparc.function_calling.metrics.loader import (
     load_prompts_from_list,
 )
 
-
-ROOT = Path(__file__).resolve().parents[3] / "altk/pre_tool/sparc/function_calling/metrics"
+ROOT = (
+    Path(__file__).resolve().parents[3] / "altk/pre_tool/sparc/function_calling/metrics"
+)
 GENERAL_JSON = ROOT / "function_call/general_metrics_runtime.json"
 FUNCSEL_JSON = ROOT / "function_selection/function_selection_metrics_runtime.json"
 PARAM_JSON = ROOT / "parameter/parameter_metrics_runtime.json"
@@ -108,9 +109,7 @@ class TestRuntimeJsonStructure:
 # ---------------------------------------------------------------------------
 
 
-MID_TRAJ_ANCHORS = (
-    "trajectory",  # "one step in an ongoing trajectory" etc.
-)
+MID_TRAJ_ANCHORS = ("trajectory",)  # "one step in an ongoing trajectory" etc.
 
 REDUNDANCY_ANCHORS = (
     "SAME function name AND",  # "SAME function name AND SAME arguments" — anywhere
@@ -135,9 +134,7 @@ OPTIONAL_PARAM_ANCHORS = (
     "required",
 )
 
-EVIDENCE_ANCHORS = (
-    "evidence",  # either "evidence-based" or "explicit evidence"
-)
+EVIDENCE_ANCHORS = ("evidence",)  # either "evidence-based" or "explicit evidence"
 
 
 def _contains_all(text: str, anchors: Iterable[str]) -> bool:
@@ -251,7 +248,9 @@ class TestCommonPrinciplesBlock:
         assert "Confirmation Scope" not in common
         # Guardrail: the old domain-leaky prefix enumeration stays gone.
         for banned in ("get_*", "find_*", "search_*", "MUTATING"):
-            assert banned not in common, f"{banned!r} must not appear in common_principles"
+            assert (
+                banned not in common
+            ), f"{banned!r} must not appear in common_principles"
 
     def test_stringency_moved_out_of_common(self, common):
         # Stringency is metric-class-specific and now lives on each
@@ -275,12 +274,12 @@ class TestPromptSizeIsBounded:
 
     def test_general(self, general_metrics):
         for name, m in general_metrics.items():
-            assert len(m["task_description"]) < self.MAX_CHARS, (
-                f"{name} task_description too long ({len(m['task_description'])} chars)"
-            )
+            assert (
+                len(m["task_description"]) < self.MAX_CHARS
+            ), f"{name} task_description too long ({len(m['task_description'])} chars)"
 
     def test_funcsel(self, funcsel_metrics):
         for name, m in funcsel_metrics.items():
-            assert len(m["task_description"]) < self.MAX_CHARS, (
-                f"{name} task_description too long ({len(m['task_description'])} chars)"
-            )
+            assert (
+                len(m["task_description"]) < self.MAX_CHARS
+            ), f"{name} task_description too long ({len(m['task_description'])} chars)"
