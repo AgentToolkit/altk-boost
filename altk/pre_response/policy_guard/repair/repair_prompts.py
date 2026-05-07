@@ -375,15 +375,13 @@ You must enclose the re-written response in <START_OF_REWRITE> <END_OF_REWRITE> 
 """
 )
 
-mapreduce_guideline_response_template = Template(
-    """
+mapreduce_guideline_response_template = Template("""
 <START_OF_PER_GUIDELINE_RESPONSE>
 Guideline: ${guideline}
 
 Response: ${response}
 <END_OF_PER_GUIDELINE_RESPONSE>
-"""
-)
+""")
 
 
 def simple_single_repair_prompt(model_id: str, text: str, policy: str) -> str:

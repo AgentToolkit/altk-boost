@@ -162,6 +162,9 @@ class SPARCReflectionComponent(ComponentBase):
                     general_metrics=self._config.general_metrics,
                     function_metrics=self._config.function_metrics,
                     parameter_metrics=self._config.parameter_metrics,
+                    compact_tool_schema=self._config.compact_tool_schema,
+                    compact_tool_threshold=self._config.compact_tool_threshold,
+                    runtime_pipeline=self._config.runtime_pipeline,
                 )
                 logger.info("Reflection pipeline initialized successfully")
 
@@ -365,6 +368,92 @@ class SPARCReflectionComponent(ComponentBase):
             transform_enabled=self._config.transform_enabled,
         )
 
+    @staticmethod
+    def _rubric_score(metric_result) -> Optional[float]:
+        """Extract the integer 1-5 rubric ``output`` from a semantic metric result.
+
+        Returns ``None`` when the metric errored or didn't produce a numeric
+        output (e.g. raw_response missing, non-coercible)."""
+        raw = getattr(metric_result, "raw_response", None)
+        if not isinstance(raw, dict):
+            return None
+        val = raw.get("output")
+        try:
+            return float(val) if val is not None else None
+        except (TypeError, ValueError):
+            return None
+
+    @staticmethod
+    def _rubric_confidence(metric_result) -> Optional[float]:
+        raw = getattr(metric_result, "raw_response", None)
+        if not isinstance(raw, dict):
+            return None
+        val = raw.get("confidence")
+        try:
+            return float(val) if val is not None else None
+        except (TypeError, ValueError):
+            return None
+
+    @staticmethod
+    def _extract_recommendations(metric_result):
+        """Pull ``actionable_recommendations`` from a metric's LLM output.
+
+        Only populated in evaluation-time mode — runtime metric JSONs do
+        not require the field and the model will omit it. Returns a list
+        of ``SPARCRecommendation`` (empty when absent or malformed).
+        """
+        from altk.pre_tool.core.types import (
+            SPARCRecommendation,
+            SPARCRecommendationTarget,
+        )
+
+        raw = getattr(metric_result, "raw_response", None)
+        if not isinstance(raw, dict):
+            return []
+        recs = raw.get("actionable_recommendations")
+        if not isinstance(recs, list):
+            return []
+
+        out = []
+        for item in recs:
+            if not isinstance(item, dict):
+                continue
+            # Normalize target enum — accept case variants defensively.
+            target_raw = item.get("target")
+            try:
+                target = SPARCRecommendationTarget(str(target_raw).lower())
+            except (ValueError, AttributeError):
+                continue
+            diff = item.get("diff") or item.get("quote") or ""
+            rationale = item.get("rationale") or item.get("details") or ""
+            importance_raw = item.get("importance")
+            try:
+                importance = (
+                    float(importance_raw) if importance_raw is not None else 0.5
+                )
+            except (TypeError, ValueError):
+                importance = 0.5
+            # Clamp into [0, 1].
+            importance = max(0.0, min(1.0, importance))
+            if not diff.strip():
+                # Skip empty diffs — they are not actionable.
+                continue
+            try:
+                out.append(
+                    SPARCRecommendation(
+                        target=target,
+                        tool_name=item.get("tool_name"),
+                        parameter_name=item.get("parameter_name"),
+                        diff=diff,
+                        rationale=rationale,
+                        importance=importance,
+                    )
+                )
+            except Exception as exc:
+                logger.debug(f"Dropping malformed recommendation: {exc}")
+                continue
+        return out
+
     def _process_pipeline_result(
         self, pipeline_result: PipelineResult
     ) -> SPARCReflectionResult:
@@ -372,6 +461,13 @@ class SPARCReflectionComponent(ComponentBase):
         issues = []
         has_errors = False
         decision = SPARCReflectionDecision.APPROVE
+        # 1-5 rubric scores collected across every semantic metric that produced
+        # a numeric output, used to compute an aggregate rubric score later.
+        per_metric_scores: List[float] = []
+        # Flat collection of recommendations across every semantic metric that
+        # emits them (evaluation-time mode only). Runtime metrics return an
+        # empty list here.
+        all_recs: List = []
 
         # Check static issues
         if pipeline_result.static and not pipeline_result.static.final_decision:
@@ -420,8 +516,21 @@ class SPARCReflectionComponent(ComponentBase):
                                     "explanation", ""
                                 ),
                                 correction=metric_result.raw_response.get("correction"),
+                                output_value=self._rubric_score(metric_result),
+                                confidence=self._rubric_confidence(metric_result),
+                                recommendations=self._extract_recommendations(
+                                    metric_result
+                                ),
                             )
                         )
+                    # Always record the rubric score (issue or not) so the
+                    # aggregate reflects judge confidence, not only rejections.
+                    s = self._rubric_score(metric_result)
+                    if s is not None:
+                        per_metric_scores.append(s)
+                    # Always harvest recommendations too — the LLM may flag
+                    # prompt/spec gaps even on a pass-grade call.
+                    all_recs.extend(self._extract_recommendations(metric_result))
 
             if not function_selection_issues:
                 # General metrics - check for errors and issues
@@ -458,8 +567,17 @@ class SPARCReflectionComponent(ComponentBase):
                                     correction=metric_result.raw_response.get(
                                         "correction"
                                     ),
+                                    output_value=self._rubric_score(metric_result),
+                                    confidence=self._rubric_confidence(metric_result),
+                                    recommendations=self._extract_recommendations(
+                                        metric_result
+                                    ),
                                 )
                             )
+                        s = self._rubric_score(metric_result)
+                        if s is not None:
+                            per_metric_scores.append(s)
+                        all_recs.extend(self._extract_recommendations(metric_result))
 
                 # Parameter metrics - check for errors and issues
                 if pipeline_result.semantic.parameter:
@@ -496,8 +614,21 @@ class SPARCReflectionComponent(ComponentBase):
                                         correction=metric_result.raw_response.get(
                                             "correction"
                                         ),
+                                        output_value=self._rubric_score(metric_result),
+                                        confidence=self._rubric_confidence(
+                                            metric_result
+                                        ),
+                                        recommendations=self._extract_recommendations(
+                                            metric_result
+                                        ),
                                     )
                                 )
+                            s = self._rubric_score(metric_result)
+                            if s is not None:
+                                per_metric_scores.append(s)
+                            all_recs.extend(
+                                self._extract_recommendations(metric_result)
+                            )
 
                 # Transform results - check for errors and corrections
                 if pipeline_result.semantic.transform:
@@ -544,7 +675,15 @@ class SPARCReflectionComponent(ComponentBase):
         else:
             decision = SPARCReflectionDecision.APPROVE
 
+        aggregate_score: Optional[float] = (
+            sum(per_metric_scores) / len(per_metric_scores)
+            if per_metric_scores
+            else None
+        )
+
         return SPARCReflectionResult(
             decision=decision,
             issues=issues,
+            score=aggregate_score,
+            all_recommendations=all_recs,
         )

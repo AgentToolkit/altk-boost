@@ -28,7 +28,8 @@ def create_adherence_check_report(results: list[dict]) -> dict:
 class TaskJudge:
     def __init__(self, config: ComponentConfig):
         self.config = config
-        self.task_completion_prompt = Template("""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+        self.task_completion_prompt = Template(
+            """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
         You are a grader whose job is to determine if a response is a valid response to a query. Your score should be "Yes" or "No". If a response is ambiguous your score should be "Yes". The score should only be "No" if the response is definitely not a valid response.<|eot_id|>
         <|start_header_id|>user<|end_header_id|>
 
@@ -47,7 +48,8 @@ class TaskJudge:
         }
 
         Return ONLY one JSON object, nothing else. Do not include any additional text or explanations outside the JSON object.<|eot_id|>
-        <|start_header_id|>assistant<|end_header_id|>""")
+        <|start_header_id|>assistant<|end_header_id|>"""
+        )
 
     def check_task_completion(self, task: str, response: str):
         prompt = self.task_completion_prompt.safe_substitute(

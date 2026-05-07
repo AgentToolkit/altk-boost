@@ -8,7 +8,6 @@ from altk.pre_tool.refraction.src.prompt_template import (
     generate_prompt,
 )
 
-
 __all__ = [
     "refract",
     "refract_sequence_object",

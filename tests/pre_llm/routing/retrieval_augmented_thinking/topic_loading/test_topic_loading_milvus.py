@@ -27,7 +27,6 @@ from altk.pre_llm.routing.retrieval_augmented_thinking.topic_retriever.topic_ret
 )
 from altk.core.toolkit import AgentPhase
 
-
 pytest.skip(
     "current milvus tests hang, perhaps due to current milvus-lite",
     allow_module_level=True,

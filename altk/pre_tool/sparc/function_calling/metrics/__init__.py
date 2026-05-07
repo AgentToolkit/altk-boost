@@ -19,7 +19,6 @@ from altk.pre_tool.sparc.function_calling.metrics.parameter import (
     get_parameter_metrics_prompt,
 )
 
-
 __all__ = [
     "get_general_metrics_prompt",
     "GeneralMetricsPrompt",

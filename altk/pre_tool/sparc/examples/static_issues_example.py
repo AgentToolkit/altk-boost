@@ -12,7 +12,6 @@ from altk.pre_tool.sparc import (
 from altk.core.toolkit import AgentPhase, ComponentConfig
 from altk.core.llm import get_llm
 
-
 # Example tool specifications
 EMAIL_TOOL_SPECS = [
     {

@@ -13,7 +13,6 @@ from altk.pre_llm.routing.retrieval_augmented_thinking.topic_extractor.topic_ext
     run_topic_extractions,
 )
 
-
 logger = logging.getLogger(__name__)
 
 

@@ -4,7 +4,6 @@ from pydantic import BaseModel, Field
 
 from altk.core.toolkit import ComponentInput, ComponentOutput
 
-
 ######### Policy Guard Middleware Interfaces ##############
 
 

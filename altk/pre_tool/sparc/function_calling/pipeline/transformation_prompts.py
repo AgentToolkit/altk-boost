@@ -102,7 +102,9 @@ def build_multi_extract_units_schema(params: List[str]) -> Dict[str, Any]:
 MULTI_EXTRACT_UNITS_SYSTEM: str = """\
 You are an expert in natural language understanding and API specifications.
 Given:
-  1. A user context (natural-language instructions).
+  1. A user context (natural-language instructions). The context may include
+     a system prompt that anchors temporal references — e.g. a current
+     date, current year, or timezone. Treat those anchors as ground truth.
   2. A JSON Schema snippet that describes **all** parameters the tool expects.
   3. A list of all parameter names.
 
@@ -114,6 +116,37 @@ Your task:
     - The "spec_units_or_format" defined or implied by the JSON Schema (type/description).
       (If none, return an empty string `""`.)
     - A brief "transformation_summary" describing how to convert `user_value` to `spec_units_or_format`.
+
+Grounding rules (apply before flagging a mismatch):
+  - Evidence priority when sources disagree:
+    system prompt > tool outputs > user messages > assistant messages.
+  - If the user supplies an under-specified value — one missing a
+    component such as a year, region, unit, or scale — and a
+    higher-priority source (system prompt, prior tool output) fixes
+    that missing component, COMPLETE the value from the anchor BEFORE
+    reporting `user_value`. The grounded value is a valid canonical
+    form; `transformation_summary` remains empty because no
+    code-level conversion is needed — only contextual completion.
+    In this case, also set `user_units_or_format` to match the
+    REPORTED grounded form (the value you actually emit as
+    `user_value`), NOT the user's colloquial phrasing — otherwise
+    downstream code generation will attempt a format conversion that
+    is not needed and will fail.
+  - If the user's value already matches the spec's units/format after
+    grounding, leave `transformation_summary` empty. Only populate
+    `transformation_summary` when a genuine conversion (unit change,
+    encoding change, reformatting) is required.
+  - Transformation is for VALUE-PRESERVING conversions only
+    (unit, encoding, format, pattern). If the agent's serialized
+    value and the user-stated value differ in substance (e.g.
+    different points, different dates, different identifiers)
+    rather than in representation, return an empty
+    `transformation_summary`. Semantic mismatches belong to the
+    grounding metrics, not a code-generation transformation.
+  - When evidence across sources is ambiguous or the value cannot be
+    confidently extracted, return empty strings rather than guessing.
+    A conservative no-op is preferable to a spurious "needs
+    transformation" verdict.
 
 Respond with exactly one JSON object whose keys are the parameter names,
 and whose values are objects with "user_value", "user_units_or_format", and "spec_units_or_format".
@@ -246,6 +279,38 @@ Examples (multi-parameter):
           "transformation_summary":"Convert megabytes to bytes by multiplying by 1024^2 - e.g., 100 MB multiplied by 1024^2 to be in bytes."
         }}
       }}
+
+4) Context: [{{"role":"system", "content":"The current year is 2024. All dates default to 2024 unless the user states otherwise."}},
+  {{"role":"user", "content":"Book me a flight on May 20."}},
+  {{"role":"assistant", "content":"{{\"id\":\"tool_call_4\",\"type\":\"function\",\"function\":{{\"name\":\"book_flight\",\"arguments\":{{\"date\":\"2024-05-20\"}}}}}}"}}]
+   Full Spec:
+   {{
+    "name": "book_flight",
+    "description": "Book a flight on a given date.",
+    "parameters": {{
+     "type": "object",
+     "properties": {{
+       "date": {{
+         "type": "string",
+         "format": "date",
+         "description": "Flight date in YYYY-MM-DD"
+       }}
+     }},
+     "required": ["date"]
+    }}
+   }}
+   Parameter names: "date"
+   -> {{
+        "date": {{
+          "user_units_or_format":"yyyy-mm-dd",
+          "user_value":"2024-05-20",
+          "spec_units_or_format":"yyyy-mm-dd",
+          "transformation_summary":""
+        }}
+      }}
+   (The user said "May 20" without a year; the system prompt anchors the
+   current year to 2024, so the grounded user_value is 2024-05-20 and no
+   transformation is needed.)
 
 Context:
 {context}

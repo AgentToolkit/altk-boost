@@ -5,7 +5,6 @@ from json import loads, JSONDecodeError
 from nestful.utils import get_token
 from langchain_core.tools import BaseTool
 
-
 PROMPT_TEMPLATE = Template("""
 You are an expert in correcting tool calls. You are given a set of available tools, a query and an incorrect tool call that was meant to satisfy the query.
 

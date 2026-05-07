@@ -22,7 +22,6 @@ from altk.pre_response.policy_guard.core.toolkit import (
     PolicyDetectorInput,
 )
 
-
 BATCH_REPAIR_NAME = "batch_policy_llm_repairer"
 ITERATIVE_REPAIR_NAME = "iterative_llm_repairer"
 RETRY_REPAIR_NAME = "retry_llm_repairer"

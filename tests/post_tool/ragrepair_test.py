@@ -15,7 +15,6 @@ from altk.post_tool.core.toolkit import (
     RAGRepairBuildInput,
 )
 
-
 load_dotenv()
 
 

@@ -18,7 +18,6 @@ from altk.pre_llm.routing.follow_up_detection.core.toolkit import (
 )
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 
-
 logger = logging.getLogger(__name__)
 
 FOLLOW_UP_PROMPT = [

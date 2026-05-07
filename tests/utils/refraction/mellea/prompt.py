@@ -1,7 +1,6 @@
 from typing import Dict, List, Any
 from jinja2 import Template
 
-
 PROMPT_TEMPLATE = """
 You are an expert in tool calling.
 You are given a user query, a set of available tools, and the current working memory.
