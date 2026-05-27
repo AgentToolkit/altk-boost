@@ -131,3 +131,26 @@ For individual model usage, please refer to the model licenses in the original p
 
 ## Contributors
 Thanks to all of our contributors who make this project possible. Special thanks to the Global Agentic Middleware team in IBM Research for all the contributions from the many different teams and people.
+
+## Paper and Citation
+For more information, please see our [accepted paper from the Demonstration Track in CAIS2026](https://arxiv.org/abs/2603.15473).
+
+If you want to cite that paper or this work, please use this reference:
+```bibtex
+@inproceedings{10.1145/3786335.3813206,
+    author = {Wright, Zidane and Tsay, Jason and Murthi, Anupama and Elhadad, Osher and Del Rio, Diego and Goyal, Saurabh and Kate, Kiran and Laredo, Jim A. and Lazar, Koren and Muthusamy, Vinod and Rizk, Yara},
+    title = {Agent Lifecycle Toolkit (ALTK): Reusable Middleware Components for Robust AI Agents},
+    year = {2026},
+    isbn = {9798400724152},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3786335.3813206},
+    doi = {10.1145/3786335.3813206},
+    booktitle = {Proceedings of the ACM Conference on AI and Agentic Systems},
+    pages = {1340–1344},
+    numpages = {5},
+    keywords = {AI Systems, AI Agents, Agentic Middleware},
+    series = {CAIS '26}
+}
+```
+
